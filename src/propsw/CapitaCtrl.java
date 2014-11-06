@@ -1,83 +1,109 @@
 //Autor: Marcos Pérez
 package propsw;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CapitaCtrl {
-	private ArrayList<Capita> ContCap; //hashtable?
 	
-	public ArrayList<Capita> get_capitans(){
+	//Contenidor de capitans
+	private HashMap<String,Capita> ContCap;
+	
+	//id del capita que ha iniciat la sessio
+	private String idCap = "";
+	
+	
+	public CapitaCtrl(){
+		this.ContCap = new HashMap<String,Capita>();
+	}
+	
+	public void login(int id, String s){
+		//pre:
+		//post: si id i string son valids: idCap ens indica el capita que ha fet login
+	}
+	
+	public HashMap<String,Capita> get_capitans(){
 		//pre:
 		//post: Es retorna ContCap
 		return this.ContCap;
 	}
 	
-	public void associar_galaxia(int idcap, Galaxia g){
-		//pre: idcap es una id valida i g és una galaxia vàlida i les dades son consistents
-		//post: g es associada a la galaxia del capita amb id idcap
+	public boolean afegir_capita(){
+		//pre:
+		//post: s'ha afegit un nou capita a ContCap
 	}
 	
-	public void exportar_galaxia(int idcap){
-		//pre: idcap es una id valida
+	
+	public boolean crear_galaxia(){
+		//pre: 
+		//post: capita.gal = new Galaxia() 
+	}
+	
+	public boolean importar_galaxia(String s){
+		//pre: s correspond a l'string d'un fitxer de text amb les dades a inicialitzar
+		//post:	s'ha importat 
+	}
+	
+	public boolean exportar_galaxia(){
+		//pre: 
 		//post:	gal és exportada a un fitxer de text
 	}
 	
-	public void esborrar_galaxia(int idcap){
-		//pre: idcap es una id valida
-		//post: el contingut de gal és esborrat
+	public boolean esborrar_galaxia(){
+		//pre:
+		//post: el contingut de capita.gal és esborrat
 	}
 	
-	public void consultar_galaxia(int idcap){
-		//pre: idcap es una id valida
+	public void consultar_galaxia(){
+		//pre: 
 		//post:	es llista tota la informació de la galaxia del capita amb idcap
 	}
 	
+	public void importar_rebels(String s){
+		/*pre:  idcap es una id valida
+		*		cr és un conjunt de de rebels consistents amb les dades que hi ha a Capita.ContReb
+		*		El capita es el que es correspon amb idcap
+		*/
 	
-	public void afegir_rebel(int idcap, Rebel r){
-		//pre: idcap es una id valida i r és un Rebel vàlid
+		//post: S'inserten a Capita.ContReb els rebels que hi ha al fitxer de text
+	}
+	
+	public boolean afegir_rebel(Rebel r){
+		//pre: r és un Rebel vàlid
 		//post: r és insertat al contenido de rebels del capita amb id idcap
 	}
 	
-	public void esborrar_rebel(int idcap, int idreb){
-		//pre: idcap i idreb son ids valides
+	public void esborrar_rebel(String idreb){
+		//pre: idreb es ids valides
 		//post: r és esborrat del ContReb del capita amb id idcap
 	}
 	
-	public void llistar_rebels(int idcap){
+	public boolean llistar_rebels(){
 		//pre: 
 		//post: Es llisten tots els rebels que estan a ContReb
 		
 	}
 	
-	public void importar_rebels(int idcap, ArrayList<Rebels> cr){
-		/*pre:  idcap es una id valida
-		*		cr és un conjunt de de rebels consistents amb les dades que hi ha a Capita.ContReb
-		*		El capita es el que es correspon amb idcap
-		*/		
 	
-		//post: S'inserten a Capita.ContReb els rebels que hi ha cr
-	}
-	
-	public void exportar_rebels(){
+	public boolean exportar_rebels(){
 		//pre: 
 		//post: S'exporten a un arxiu txt totes les dades dels rebels a ContReb
 	}	
 	
-	public void executar_exode(){
+	
+	public boolean executar_exode(){
 		//pre:
-		//post:  
+		//post: S'executa un èxode
 	}
 	
-	public void generar_informe(int idcap){
-		//pre: hi ha èxodes per aquell capita i idcap es valid
+	public boolean generar_informe(){
+		//pre: 
 		//post: es genera un informe amb les dades de la darrera execució de l'èxode per aquell capita
 		
 	}
 	
-	public void visualitzar_recorregut(int idcap){
-		//pre: idcap es valid i existeix com a minim un èxode i no hi ha cap coll d'ampolla
-		//post: es llisten tots els rebels i 
+	public void visualitzar_recorregut(Rebel r){
+		//pre:
+		//post: Es mostra la última ruta realitzada per un rebel r
 	}
-
-		
+	
 }

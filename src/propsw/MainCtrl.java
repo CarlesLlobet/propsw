@@ -2,7 +2,11 @@ package propsw;
 
 public class MainCtrl {
 	
-	private CapitaCtrl caps;
+	//Controlador dels capitans
+	private CapitaCtrl caps = new CapitaCtrl();
+	
+	//indica si la sessio ha estat iniciada com a capita o rebel
+	private boolean capita = false;
 	
 	private void gestio_galaxies(){
 		//pre: login com a capita 
@@ -34,8 +38,24 @@ public class MainCtrl {
 		//post: mostra la ruta assignada per al rebel que ha iniciat la sessio
 	}
 	
+
+	public void reiniciar_sistema(){
+		//pre:login com a capita
+		//post: S'esborrent totes les dades del sistema
+
+	}
+	
+	public void login(){
+		//pre:
+		/*post: si no hi ha cap capita definit al sistema: es registra un nou capita
+		 *		si ja hi ha un o més capitans: es realitza el login
+		 */	
+
+	}
+	
 	public static void main(String[] args) {
 		//S'encarrega de gestionar el login i mitjançant les funcions privades, permet a l'usuari
 		//indicar quines tasques vol realitzar
 	}	
+	
 }
