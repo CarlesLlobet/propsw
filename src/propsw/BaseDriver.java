@@ -33,30 +33,27 @@ public class BaseDriver {
         int op = Integer.parseInt(br.readLine());
 		
 		while (op != 0) {
-			
 			switch(op) 
 			{
 				case 1:
         			System.out.println("El id de la base es: " + b.getId().toString());
         			break;
 				case 2:
-					System.out.println("El nom de la base es: " + b.getNom());
+					String nom = b.getNom();
+					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
+					else System.out.println("La base no té cap nom assignat");
 					break;
 				case 3:
 					System.out.println("Introdueix el nou nom per a la base: ");
-					String nom = br.readLine();
-					b.setNom(nom);
+					String n = br.readLine();
+					b.setNom(n);
 					break;
 				default:
 					System.out.println("No existeix aquesta opció");
 					break;
 			}
-			
 			menu();
 			op = Integer.parseInt(br.readLine());
 		}
-		
-		
-		
 	}
 }

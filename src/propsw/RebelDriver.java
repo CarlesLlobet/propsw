@@ -43,7 +43,9 @@ public class RebelDriver {
         			System.out.println("El id del rebel és: " + r.getId().toString());
         			break;
 				case 2:
-					System.out.println("El nom del rebel es: " + r.getNom());
+					String n = r.getNom();
+					if (n != null) System.out.println("El nom del rebel es: " + n);
+					else System.out.println("El rebel no té cap nom assignat");
 					break;
 				case 3:
 					ArrayList<Exode> ex = r.getExodes();
@@ -57,8 +59,8 @@ public class RebelDriver {
 
 					break;
 				case 5:
-					Exode ee = new Exode();
-					r.insertarExode(ee);
+					Exode e = new Exode();
+					r.insertarExode(e);
 					System.out.println("S'ha insertat un nou exode ");
 					break;
 				default:

@@ -56,29 +56,32 @@ public class CapitaDriver {
 					System.out.println("El id del capità és : " + c.getId());
 					break;
 				case 4:
-					System.out.println("El nom del capità és: " + c.getNom());
+					String n = c.getNom();
+					if (n != null) System.out.println("El nom del capità és: " + n);
+					else System.out.println("El capità no té cap nom assignat");
 					break;
 				case 5:
 					//AFEGIR CONTENIDOR REBELS
 					HashMap<String,Rebel> cr = new HashMap<String,Rebel>();
 					c.setRebels(cr);
-					System.out.println("S'ha sobreescrit el contenidor de rebels " );
+					System.out.println("S'ha sobreescrit el contenidor de rebels" );
 					break;
 				case 6:
 					//CONSULTAR CONTENIDOR REBELS
-					System.out.println("Es consulta el contenidor de rebels: ");
 					HashMap<String,Rebel> c1 = c.getRebels();
+					System.out.println("S'ha consultat el contenidor de rebels");
 					break;
 				case 7:
 					//ASSOCIAR GALAXIA
 					Galaxia g = new Galaxia();
+					System.out.println("El id de la galaxia g es " + g.getId().toString());
 					c.setGalaxia(g);
-					System.out.println("S'ha sobreescrit la galaxia");
+					System.out.println("S'ha creat una galaxia amb id :" + g.getId().toString() + " i s'ha assignat al capità");
 					break;
 				case 8:
 					//CONSULTAR GALAXIA
-					System.out.println("Es consulta la galaxia : ");
 					Galaxia g1 = c.getGalaxia();
+					System.out.println("S'ha consultat la galaxia amb id : " + g1.getId().toString());
 					break;
 				default:
 					System.out.println("No existeix aquesta opció");

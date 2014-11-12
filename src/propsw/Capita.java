@@ -10,21 +10,25 @@ public class Capita {
 	private String id;
 	private String pass = "admin";
 	private Galaxia gal;
-	private String nom = "";
+	private String nom;
 	private HashMap<String,Rebel> ContReb;
 	
 	public Capita(){
 		++cont;
 		this.id = cont.toString();
+		this.nom = null;
 		this.ContReb = new HashMap<String,Rebel>();
+		this.gal = new Galaxia();
 	}
 	
-	public Capita(String Nom){
+	public Capita(String nom){
 		//pre: id es únic
 		//post: Es crea un capitá per defecte amb id: cont i contrasenya: admin
 		++cont;
 		this.id = cont.toString();
+		this.nom = nom;
 		this.ContReb = new HashMap<String,Rebel>();
+		this.gal = new Galaxia();
 	}
 	
 	

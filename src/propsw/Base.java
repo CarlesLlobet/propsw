@@ -16,7 +16,7 @@ public class Base {
 	public Base(){
 		++cont;
 		id=new Integer(cont);
-		nom=new String();
+		nom= null;
 	}
 	
 	public Base(int id,String nom){

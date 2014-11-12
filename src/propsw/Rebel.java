@@ -13,7 +13,7 @@ public class Rebel {
 		++cont;
 		this.id = cont.toString();
 		this.exodes = new ArrayList<Exode>();
-		this.nom = "";
+		this.nom = null;
 	}
 	
 	public Rebel(String nom){

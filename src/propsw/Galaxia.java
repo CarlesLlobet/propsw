@@ -11,4 +11,7 @@ public class Galaxia {
 		this.id = cont.toString();
 	}
 	
+	public String getId(){
+		return this.id;
+	}
 }
