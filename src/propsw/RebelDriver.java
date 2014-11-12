@@ -48,8 +48,14 @@ public class RebelDriver {
 					else System.out.println("El rebel no té cap nom assignat");
 					break;
 				case 3:
-					ArrayList<Exode> ex = r.getExodes();
-					System.out.println("S'han consultat els exodes del rebel: ");
+					ArrayList<String> ex = r.getExodes();
+					if (ex.size() > 0) {
+						System.out.println("Els exodes del rebel son: ");
+						for(int i = 0; i < ex.size(); ++i){
+							System.out.println("Exode " + ex.get(i));
+						}
+					}
+					else System.out.println("El rebel no té cap èxode assignat");
 					break;
 				case 4:
 					System.out.println("Escriu el nom del rebel: ");
@@ -59,9 +65,11 @@ public class RebelDriver {
 
 					break;
 				case 5:
-					Exode e = new Exode();
-					r.insertarExode(e);
-					System.out.println("S'ha insertat un nou exode ");
+					System.out.println("Escriu la id de l'exode a guardar: ");
+					String idExode = br.readLine();
+					boolean b = r.insertarExode(idExode);
+					if (b) System.out.println("S'ha insertat un nou exode amb id " + idExode);
+					else System.out.println("Ja existeix un exode amb id: " + idExode);
 					break;
 				default:
 					System.out.println("No existeix aquesta opció");
