@@ -1,6 +1,9 @@
+package propsw;
+
 
 
 import java.lang.String;
+import java.util.ArrayList;
 
 public class ExodeControlador extends GalaxiaControlador {
 	public void execucio(String idExode, int tipusExec) {

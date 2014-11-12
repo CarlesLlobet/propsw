@@ -1,13 +1,15 @@
 package propsw;
 
+import java.util.ArrayList;
+
 
 public class Exode {
 	public int idBaseInici;
 	public ArrayList<Rebel> rebels;
 	public int camins;
 	public int destins;
-	public Graf grafResidual;
-	public Graf grafInicial;
+	public Graf<Base> grafResidual;
+	public Graf<Base> grafInicial;
 	public int flow;
 	public static Integer cont = 0;
 	public double cost;

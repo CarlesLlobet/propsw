@@ -3,7 +3,7 @@ package propsw;
 public class MainCtrl {
 	
 	//Controlador dels capitans
-	private CapitaCtrl caps = new CapitaCtrl();
+	private CapitaControlador caps = new CapitaControlador();
 	
 	//indica si la sessio ha estat iniciada com a capita o rebel
 	private boolean capita = false;

@@ -1,4 +1,4 @@
-
+package propsw;
 
 import java.lang.String;
 
@@ -42,7 +42,7 @@ public class GalaxiaControlador extends CapitaControlador {
 		return false;
 	}
 
-	public Aresta getAdjacencia(int from, int to) {
+	public Graf.Aresta getAdjacencia(int from, int to) {
 		return null;
 	}
 }

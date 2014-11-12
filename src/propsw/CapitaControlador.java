@@ -1,6 +1,8 @@
+package propsw;
 
 
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CapitaControlador {
