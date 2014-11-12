@@ -8,36 +8,35 @@ package propsw;
 public class Base {
 	
 	//Paràmetres privats
+	private static Integer cont = 0;
 	private Integer id;
 	private String nom;
 	
 	//Constructors
 	public Base(){
-		id=new Integer(-1);
+		++cont;
+		id=new Integer(cont);
 		nom=new String();
 	}
 	
 	public Base(int id,String nom){
-		this.id=new Integer(id);
+		++cont;
+		this.id=new Integer(cont);
 		this.nom=nom;
 	}
 	
 	//Getters
-	public Integer getBaseId(){
+	public Integer getId(){
 		return this.id;
 	}
 	
-	//Setters
-	public boolean setBaseId(int nouId){
-		/*El comprobar si l'id ja existeix s'ha de fer des de la classe Galaxia, 
-		 * que tindrà el hashmap amb totes les bases
-		 */
-		this.id=nouId;
-		return true;
+	public String getNom(){
+		return this.nom;
 	}
 	
-	public void setBaseNom(String nouNom){
-		this.nom=nouNom;
+	//Setters
+	public boolean setNom(String nom){
+		this.nom=nom;
+		return true;
 	}
-
 }
