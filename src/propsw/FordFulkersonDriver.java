@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-public class FordFoulkersonDriver {
+public class FordFulkersonDriver {
 
 	/**
 	 * El driver de mostra d'utilització de la clase i permet testejar el funcionament de la classe.
@@ -43,7 +43,7 @@ public class FordFoulkersonDriver {
 		graf.conectarNodes(4, 5, 2, 5.0);
 		
 		//Es crea l'objecte FordFoulkerson
-		FordFoulkerson<String> algoritme = new FordFoulkerson<String>();		
+		FordFulkerson<String> algoritme = new FordFulkerson<String>();		
 		
 		// S'executa el algoritme de MaxFlow que retorna el graf residual
 		Graf<String> grafResidual = algoritme.findMaxFlow(graf,0,5);
@@ -86,7 +86,7 @@ public class FordFoulkersonDriver {
 		}
 		
 		//Executem l'algoritme
-		algoritme = new FordFoulkerson<String>();
+		algoritme = new FordFulkerson<String>();
 		grafResidual = algoritme.findMaxFlow(graf,0,5);
 		//Just després d'executar l'algoritme si es crida al mètode getMaxFlow() retornarà
 		//el MaxFlow de la última execució del algoritme. 

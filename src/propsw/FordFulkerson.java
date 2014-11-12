@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 //@autor Toni Martínez
 
-public class FordFoulkerson<T> {	
+public class FordFulkerson<T> {	
 	
 	
 	protected Graf<T> g;
@@ -18,6 +18,10 @@ public class FordFoulkerson<T> {
 	
 	public void FordFulkerson(int nodeInicial, int nodeDesti, Graf<T> graf){
 		this.s = nodeInicial;
+		this.t = nodeDesti;
+		this.g = graf;
+		this.maxFlow = 0;
+		
 	}
 	
 	
