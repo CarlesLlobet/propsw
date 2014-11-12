@@ -7,12 +7,12 @@ public class Rebel {
 	private static Integer cont = 0;
 	private String id;
 	private String nom;
-	private ArrayList<Exode> exodes;
+	private ArrayList<String> exodes;
 	
 	public Rebel(){
 		++cont;
 		this.id = cont.toString();
-		this.exodes = new ArrayList<Exode>();
+		this.exodes = new ArrayList<String>();
 		this.nom = null;
 	}
 	
@@ -20,7 +20,7 @@ public class Rebel {
 		++cont;
 		this.id = cont.toString();
 		this.nom = nom;
-		this.exodes = new ArrayList<Exode>();
+		this.exodes = new ArrayList<String>();
 	}
 	
 	//GETTERS
@@ -42,8 +42,8 @@ public class Rebel {
 		return true;
 	}
 	
-	public boolean insertarExode(Exode e){
-		this.exodes.add(e);
+	public boolean insertarExode(String id){
+		this.exodes.add(id);
 		return true;
 	}
 	
