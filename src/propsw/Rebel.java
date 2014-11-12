@@ -9,6 +9,15 @@ public class Rebel {
 	private String nom;
 	private ArrayList<String> exodes;
 	
+	private boolean checkIdEx(String idEx){
+		//retorna true si es pot insertar, si no false
+		//Els ids dels exodes sera unics, per a la prova del RebelDriver s'ha afegit aquest metode
+		//per a comprovar aquesta unicitat
+		if (exodes.contains(idEx)) return false;
+		else return true;
+	}
+	
+	
 	public Rebel(){
 		++cont;
 		this.id = cont.toString();
@@ -32,7 +41,7 @@ public class Rebel {
 		return this.nom;
 	}
 	
-	public ArrayList<Exode> getExodes(){
+	public ArrayList<String> getExodes(){
 		return this.exodes;
 	}
 	
@@ -43,8 +52,11 @@ public class Rebel {
 	}
 	
 	public boolean insertarExode(String id){
-		this.exodes.add(id);
-		return true;
+		if (checkIdEx(id)){
+			this.exodes.add(id);
+			return true;
+		}
+		else return false;
 	}
 	
 	
