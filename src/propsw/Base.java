@@ -5,6 +5,8 @@
 
 package propsw;
 
+import java.io.IOException;
+
 public class Base {
 	
 	//Paràmetres privats
@@ -13,12 +15,14 @@ public class Base {
 	private String nom;
 	
 	//Constructors
-	public Base(){
+	public Base(Galaxia g) throws IOException{
 		
 		id=new Integer(cont);
 		
 		nom= null;
 		
+		g.afegirBase(this);
+		g.afegirNode(this);
 		++cont;
 	}
 	
