@@ -19,7 +19,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	}
 
 	public Integer getIniciExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getBaseInici(); //Exode.getBaseInici() no existeix
+		return super.getGalaxia().getExode(idExode).getIdBaseInici(); //Exode.getBaseInici() no existeix
 	}
 
 	public ArrayList<Integer> getRebels(String idExode) {

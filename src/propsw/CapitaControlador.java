@@ -4,7 +4,7 @@ package propsw;
 
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 
 public class CapitaControlador {
