@@ -102,7 +102,7 @@ public class Exode {
 
 
 	public ArrayList<String> getCaminsRebel(String idRebel) {
-		
+		 
 	}
 	
 	// Executa el FF-DFS i emplena la variable camins assignant un camí a cada rebel assignat a l'exode.
