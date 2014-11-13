@@ -36,28 +36,28 @@ public class ExodeControlador extends GalaxiaControlador {
 	}
 
 	public Integer getFlowExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getFlow(); ////Exode.getFlow() no existeix
+		return getGalaxia().getExode(idExode).getFlow(); ////Exode.getFlow() no existeix
 	}
 
 	public double getCostExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getCost(); //Exode.getCost() no existeix
+		return getGalaxia().getExode(idExode).getCost(); //Exode.getCost() no existeix
 	}
 
 	public ArrayList<Integer> getAmpollaExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getAmpolla();
+		return getGalaxia().getExode(idExode).getAmpolla();
 	}
 
 	public boolean afegirRebel(String idExode, String idRebel, Integer idBaseDesti) {
 		super.getRebel(idRebel).insertarExode(idExode);
-		return super.getGalaxia().getExode(idExode).afegirRebel(idRebel, idBaseDesti);   //a Exode.afegirRebel(idR) li falta ...(idR, -> idBD <-)
+		return getGalaxia().getExode(idExode).afegirRebel(idRebel, idBaseDesti);   //a Exode.afegirRebel(idR) li falta ...(idR, -> idBD <-)
 	}
 
 	public boolean modificarRebel(String idExode, String idRebel, Integer idBaseDesti) {
-		return super.getGalaxia().getExode(idExode).setRebel(idRebel, idBaseDesti);  //Exode.setRebel(idR, idBD) no existeix
+		return getGalaxia().getExode(idExode).setRebel(idRebel, idBaseDesti);  //Exode.setRebel(idR, idBD) no existeix
 	}
 
 	public boolean treureRebel(String idExode, String idRebel) {
-		super.getRebel(idRebel).esborrarExode(idExode);           //Rebel.borrarExode() no existeix
-		return super.getGalaxia().getExode(idExode).borrarRebel(idRebel);
+		getRebel(idRebel).esborrarExode(idExode);           //Rebel.borrarExode() no existeix
+		return getGalaxia().getExode(idExode).borrarRebel(idRebel);
 	}
 }
