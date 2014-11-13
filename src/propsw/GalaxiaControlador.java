@@ -116,7 +116,7 @@ public class GalaxiaControlador extends CapitaControlador {
 		getGalaxia().setFlujoAresta(idAresta,fluxe);
 		}
 		catch(IOException e){
-			throw new IOException("Exception: No existeix l'id de l'aresta")
+			throw new IOException("Exception: No existeix l'id de l'aresta");
 		}
 		return aresta;
 	}
