@@ -16,20 +16,19 @@ public class Base {
 	
 	//Constructors
 	public Base(Galaxia g) throws IOException{
-		
 		id=new Integer(cont);
-		
 		nom= null;
-		
-		g.afegirBase(this);
+		g.addBase(this);
 		g.afegirNode(this);
 		++cont;
 	}
 	
-	public Base(int id,String nom){
+	public Base(String nom, Galaxia g) throws IOException{
+		this.id = new Integer(cont);
+		this.nom = nom;
+		g.afegirBase(this);
+		g.afegirNode(this);
 		++cont;
-		this.id=new Integer(cont);
-		this.nom=nom;
 	}
 	
 	//Getters

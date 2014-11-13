@@ -24,8 +24,9 @@ public class BaseDriver {
 	
 	public static void main(String[] args) throws IOException {
 		//Es crea una base buida
-		Base b = new Base();
-	
+		Capita c = new Capita();
+		Base b = new Base(c.getGalaxia());
+		
 		InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader (isr);
         intro();

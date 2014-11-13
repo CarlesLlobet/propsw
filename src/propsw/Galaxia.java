@@ -39,15 +39,13 @@ public class Galaxia extends Graf<Base>{
 		public Galaxia(String s){
 			
 		}
-		
-		
+
 		//Retorna el MaxFlow en el graph actual de bases de la Galaxia. 
 		//Se li passa per parametre l'objecte èxode al cual se li assignará 
 		//el fluxe.
 		public int getMaxFlow(Exode e) {
 			//aqui s'ha de cridar: e.getMaxFlow ja que exode conte la classe FF
 		}
-		
 		
 		//Mètodes de control de les coleccions
 		
@@ -88,26 +86,17 @@ public class Galaxia extends Graf<Base>{
 			return b;
 		}
 
+		public HashMap<String,Exode> getExodesHash(){
+			return this.exodes;
+		}
+		
+		public HashMap<String,Exode> getBaseHash(){
+			return this.exodes;
+		}
 		
 		public ArrayList<String> getExodes(){
 			return new ArrayList<String>(exodes.keySet());
 		}
 		
-		//Adaptar mètodes de la classe graph per el nostre ús. (Classe template <T> serà classe Base)
-		public void afegirBase( Base node ) throws IOException{
-			afegirNode(node);
-		};
-		
-		public void substituirBase (Integer id, Base node){
-			substituirNode(id,node);
-		};
-		
-		public Integer getNodeBaseId( Base node ){
-			return getNodeId(node);
-		};
-		
-		public Base getNodeBase(Integer id){
-			return getNode(id);
-		};
 
 }
