@@ -2,36 +2,37 @@ package propsw;
 
 
 
+import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
 
 public class ExodeControlador extends GalaxiaControlador {
-	public void execucio(String idExode, Integer tipusExec) {
+	public void execucio(String idExode, Integer tipusExec) throws IOException {
 		if (tipusExec == 0){
-			super.getGalaxia().getExode(idExode).execucioBFS();
+			getGalaxia().getExode(idExode).execucioBFS();
 		}
 		else if (tipusExec == 1){
-			super.getGalaxia().getExode(idExode).execucioDFS();
+			getGalaxia().getExode(idExode).execucioDFS();
 		}
 		else if (tipusExec == 2){
-			super.getGalaxia().getExode(idExode);.execucioDijkstra();
+			getGalaxia().getExode(idExode).execucioDijkstra();
 		}
 	}
 
 	public Integer getIniciExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getIdBaseInici(); //Exode.getBaseInici() no existeix
+		return getGalaxia().getExode(idExode).getIdBaseInici(); //Exode.getBaseInici() no existeix
 	}
 
 	public ArrayList<Integer> getRebels(String idExode) {
-		return super.getGalaxia().getExode(idExode).getRebels(); //Exode.getRebels() no existeix
+		return getGalaxia().getExode(idExode).getRebels(); //Exode.getRebels() no existeix
 	}
 
 	public Integer getRebelsSize(String idExode) {
-		return super.getGalaxia().getExode(idExode).getRebels().size();
+		return getGalaxia().getExode(idExode).getRebels().size();
 	}
 
 	public ArrayList<Integer> getCamiRebelExode(String idExode, String idRebel) {
-		return super.getGalaxia().getExode(idExode).getCamiRebel(idRebel); //Exode.getCamiRebel(idR) no existeix
+		return getGalaxia().getExode(idExode).getCamiRebel(idRebel); //Exode.getCamiRebel(idR) no existeix
 	}
 
 	public Integer getFlowExode(String idExode) {
@@ -56,7 +57,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	}
 
 	public boolean treureRebel(String idExode, String idRebel) {
-		super.getRebel(idRebel).borrarExode(idExode);           //Rebel.borrarExode() no existeix
+		super.getRebel(idRebel).esborrarExode(idExode);           //Rebel.borrarExode() no existeix
 		return super.getGalaxia().getExode(idExode).borrarRebel(idRebel);
 	}
 }
