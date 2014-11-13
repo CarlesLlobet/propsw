@@ -1,48 +1,123 @@
-package propsw;
+/*
+ * Autor: Marc Ronquillo
+ * Grup 44 - 9.1
+ */ 
 
+package propsw;
+import java.io.*;
 import java.lang.String;
+import java.util.Iterator;
+import java.util.Map;
+import com.google.gson.*;
 
 public class GalaxiaControlador extends CapitaControlador {
-	public Galaxia importarGalaxia(String str) {
-		return null;
+	
+	
+	//Constructor
+	public GalaxiaControlador(){
+	}
+	
+	//Crear Galàxia sense arguments i amb arguments
+	public Galaxia CrearGalaxia() {
+		Galaxia g=new Galaxia();
+		return g;
+	}
+	
+	public Galaxia Importar(String str) {
+		Galaxia galOut=new Galaxia();
+		Gson gson= new Gson();
+		galOut=gson.fromJson(str, Galaxia.class);
+		return galOut;
+	}
+	
+	public String Exportar() {
+		 Gson gson = new Gson();
+		 String galExport=gson.toJson(getGalaxia());
+		 return galExport;
 	}
 
-	public Galaxia crearGalaxia() {
-		return null;
-	}
-
+	//Es resetejen tots els camps de galaxia
 	public Galaxia reset() {
-		return null;
+		getGalaxia().exodes.clear();
+		getGalaxia().bases.clear();
+		getGalaxia().algoritme=null;
+		
+		return getGalaxia();
 	}
 
-	public String exportar() {
-		return null;
-	}
-
-	public void afegirBase(int idBase, String nom) {
+	public void afegirBase(String nom) {
+		Base newBase=new Base(nom);
+		getGalaxia().addBase(newBase);
 	}
 
 	public boolean esborrarBase(int idBase) {
-		return false;
+		
+		if(getGalaxia().bases.containsKey(idBase)){
+			getGalaxia().bases.remove(idBase);
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public boolean modificarBase(int idBase, String nom) {
-		return false;
+		
+		if(getGalaxia().bases.containsKey(idBase)){
+			getGalaxia.bases.put(idBase,nom);
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
+	//Crea un string amb un llistat del id i el nom de totes les bases de la galàxia
 	public String llistarBases() {
-		return null;
+		String str=new String();
+		
+		for (Map.Entry<String, Base> entry : getGalaxia().bases.entrySet()) {
+		    str+=entry.getKey()+"\t"+toString(getGalaxia().getNodeBaseId(entry.getValue()))+"\n";
+		}
+		return str;
 	}
 
+	//Crea una aresta entre dues bases especificades pel seu id
 	public boolean crearAdjacencia(int from, int to, int capacitat, double cost) {
-		return false;
+		try{
+		getGalaxia().conectarNodes(from,to,capacitat,cost);
+		}
+		catch(IOException e){
+			return false;
+		}
+		return true;
 	}
 
 	public boolean eliminarAdjacencia(int from, int to) {
-		return false;
+		try{
+			getGalaxia().removeAresta(from,to);
+		}
+		catch(IOException e){
+			return false;
+		}
+		return true;
 	}
 
-	public Graf.Aresta getAdjacencia(int from, int to) {
-		return null;
+	//Genera un objecte Aresta, l'omple amb els valors de les seves variables corresponents i el retorna
+	public Galaxia.Aresta getAdjacencia(int from, int to) {
+		
+		try{
+		int idAresta=getGalaxia().getIDAresta(from,to);
+		int capacitat=getGalaxia().getCapacidadAresta(idAresta);
+		double cost=getGalaxia().getCosteAresta(idAresta);
+		int fluxe=getGalaxia().getFlujoAresta(idAresta);
+		
+		getGalaxia().Aresta aresta= new getGalaxia().Aresta(capacitat,cost);
+		getGalaxia().setFlujoAresta(idAresta,fluxe);
+		}
+		catch(IOException e){
+			throw new IOException("Exception: No existeix l'id de l'aresta");
+		}
+		return aresta;
 	}
 }
