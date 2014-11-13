@@ -23,7 +23,7 @@ public class ExodeControlador extends GalaxiaControlador {
 		return getGalaxia().getExode(idExode).getIdBaseInici(); //Exode.getBaseInici() no existeix
 	}
 
-	public ArrayList<Integer> getRebels(String idExode) {
+	public ArrayList<String> getRebels(String idExode) {
 		return getGalaxia().getExode(idExode).getRebels(); //Exode.getRebels() no existeix
 	}
 
@@ -53,7 +53,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	}
 
 	public boolean modificarRebel(String idExode, String idRebel, Integer idBaseDesti) {
-		return getGalaxia().getExode(idExode).setRebel(idRebel, idBaseDesti);  //Exode.setRebel(idR, idBD) no existeix
+		return getGalaxia().getExode(idExode).modificarRebel(idRebel, idBaseDesti);  //Exode.modificarRebel(idR, idBD) no existeix
 	}
 
 	public boolean treureRebel(String idExode, String idRebel) {
