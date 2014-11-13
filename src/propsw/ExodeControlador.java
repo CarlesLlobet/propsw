@@ -52,8 +52,8 @@ public class ExodeControlador extends GalaxiaControlador {
 		return getGalaxia().getExode(idExode).afegirRebel(idRebel, idBaseDesti);   //a Exode.afegirRebel(idR) li falta ...(idR, -> idBD <-)
 	}
 
-	public boolean modificarRebel(String idExode, String idRebel, Integer idBaseDesti) {
-		return getGalaxia().getExode(idExode).modificarRebel(idRebel, idBaseDesti);  //Exode.modificarRebel(idR, idBD) no existeix
+	public void modificarRebel(String idExode, String idRebel, Integer idBaseDesti) {
+		getGalaxia().getExode(idExode).modificarRebel(idRebel, idBaseDesti);  //Exode.modificarRebel(idR, idBD) no existeix
 	}
 
 	public boolean treureRebel(String idExode, String idRebel) {
