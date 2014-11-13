@@ -10,11 +10,9 @@ public class Rebel {
 	private ArrayList<String> exodes;
 	
 	private boolean checkIdEx(String idEx){
-		//retorna true si es pot insertar, si no false
-		//Els ids dels exodes sera unics, per a la prova del RebelDriver s'ha afegit aquest metode
-		//per a comprovar aquesta unicitat
-		if (exodes.contains(idEx)) return false;
-		else return true;
+		//retorna true si existeix un exode a l'arraylist, false altrament
+		if (exodes.contains(idEx))  return true;
+		else return false;
 	}
 	
 	
@@ -52,13 +50,19 @@ public class Rebel {
 	}
 	
 	public boolean insertarExode(String id){
-		if (checkIdEx(id)){
+		if (checkIdEx(id) == false){
+			System.out.println("Insertat exode: " + id);
 			this.exodes.add(id);
 			return true;
 		}
 		else return false;
 	}
 	
-	
-	
+	public boolean esborrarExode(String id){
+		if (checkIdEx(id)){
+			this.exodes.remove(id);
+			return true;
+		}
+		else return false;
+	}	
 }

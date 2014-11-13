@@ -23,6 +23,7 @@ public class RebelDriver {
         System.out.println("3) Consultar els exodes del rebel");
         System.out.println("4) Modificar nom del rebel");
         System.out.println("5) Insertar un nou exode");
+        System.out.println("6) Esborrar exode");
         System.out.println("0) exit");
 	}
 	
@@ -36,7 +37,6 @@ public class RebelDriver {
         int op = Integer.parseInt(br.readLine());
 		
 		while (op != 0) {
-			
 			switch(op) 
 			{
 				case 1:
@@ -71,11 +71,17 @@ public class RebelDriver {
 					if (b) System.out.println("S'ha insertat un nou exode amb id " + idExode);
 					else System.out.println("Ja existeix un exode amb id: " + idExode);
 					break;
+				case 6:
+					System.out.println("Escriu la id de l'exode a esborrar: ");
+					String idExode2 = br.readLine();
+					boolean b2 = r.esborrarExode(idExode2);
+					if (b2) System.out.println("S'ha esborrat l'exode amb id " + idExode2);
+					else System.out.println("No existeix cap exode amb id: " + idExode2);
+					break;
 				default:
 					System.out.println("No existeix aquesta opció");
 					break;
 			}
-			
 			menu();
 			op = Integer.parseInt(br.readLine());
 		}
