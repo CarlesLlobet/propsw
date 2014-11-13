@@ -1,6 +1,7 @@
 //@author: Marcos Pérez
 package propsw;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Galaxia extends Graf<Base>{
@@ -75,6 +76,10 @@ public class Galaxia extends Graf<Base>{
 			return b;
 		}
 
+		
+		public ArrayList<String> getExodes(){
+			return new ArrayList<String>(exodes.keySet());
+		}
 		
 		//Adaptar mètodes de la classe graph per el nostre ús. (Classe template <T> serà classe Base)
 		public void afegirBase( Base node ){
