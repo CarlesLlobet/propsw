@@ -5,13 +5,13 @@ import java.util.HashMap;
 
 
 public class Exode {
-	private int idBaseInici;
+	private Integer idBaseInici;
 	private ArrayList<Rebel> rebels;
 	private HashMap<String,ArrayList<Integer>> camins;
 	private HashMap<String,Integer> destins;
 	private Graf<Base> grafResidual;
 	private Graf<Base> grafInicial;
-	private int flow;
+	private Integer flow;
 	private static Integer cont = 0;
 	private double cost;
 	private boolean actualitzat;
@@ -32,30 +32,37 @@ public class Exode {
 
 	public void execucioDijkstra() {
 	}
-
-	public void execucioDFS() {
+//necessito idRebel?
+	public void execucioDFS(String idRebel) {
+		grafResidual = findMaxFlow(grafInicial, idBaseInici, destins.get(idRebel)) //?
+		
 	}
 
 	public void execucioBFS() {
 	}
 
-	public boolean afegirRebel(String idRebel) {
+	public boolean afegirRebel(String idRebel, Integer idBaseDesti) {
+		destins.put(idRebel, idBaseDesti);
+		
+		//que retorna el boolea? es el actualitzat? si es que si, quan l'actualitzem? al tocar el graf?
 		return false;
 	}
 	
 	public void modificarRebel(String idRebel,Integer idBaseDesti) {
 		destins.put(idRebel, idBaseDesti);
 	}
-
+//provarla
 	public boolean borrarRebel(String idRebel) {
+		destins.remove(idRebel);
 		return false;
 	}
 
 	public ArrayList<Integer> getAmpolla() {
+		//retornara el conjunt d'arestes que fa coll d'ampolla
 		return null;
 	}
 	
-	// Getters i setters COMPROBAR QUINS NECESITO I QUINS NO
+	// Getters i setters
 	
 	public Integer getidBaseInici() {
 		return idBaseInici;	
