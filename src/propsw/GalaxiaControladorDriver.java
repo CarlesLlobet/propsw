@@ -34,6 +34,8 @@ public class GalaxiaControladorDriver {
 	public static void main(String[] args) throws IOException {
 	//Es crea una galaxia buida
 	Galaxia gal=new Galaxia();
+	Capita.setGalaxia(gal);
+	GalaxiaControlador
 	InputStreamReader isr = new InputStreamReader(System.in);
 	BufferedReader br = new BufferedReader (isr);
 	intro();
