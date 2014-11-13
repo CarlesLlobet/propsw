@@ -1,3 +1,5 @@
+//Autor: Albert Tost
+
 package propsw;
 
 import java.util.ArrayList;
