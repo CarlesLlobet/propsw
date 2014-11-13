@@ -18,7 +18,7 @@ public class Capita {
 		this.id = cont.toString();
 		this.nom = null;
 		this.ContReb = new HashMap<String,Rebel>();
-		this.gal = new Galaxia();
+		this.gal = new Galaxia(this);
 	}
 	
 	public Capita(String nom){
@@ -28,7 +28,7 @@ public class Capita {
 		this.id = cont.toString();
 		this.nom = nom;
 		this.ContReb = new HashMap<String,Rebel>();
-		this.gal = new Galaxia();
+		this.gal = new Galaxia(this);
 	}
 	
 	

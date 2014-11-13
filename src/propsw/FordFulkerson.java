@@ -15,15 +15,23 @@ public class FordFulkerson<T> {
 	protected int t;
 	protected int maxFlow;
 	
+	//Afegides per donar informació extra. Del MaxFlow calculat per cada camí el fluxe enviat
+	protected ArrayList<Pair<Integer,ArrayList<Integer>>> caminos;
 	
-	public void FordFulkerson(int nodeInicial, int nodeDesti, Graf<T> graf){
+	
+	public FordFulkerson(int nodeInicial, int nodeDesti, Graf<T> graf){
 		this.s = nodeInicial;
 		this.t = nodeDesti;
 		this.g = graf;
 		this.maxFlow = 0;
+		caminos = new ArrayList<Pair<Integer,ArrayList<Integer>>>();
 		
 	}
 	
+	public FordFulkerson(){
+		this.maxFlow = 0;
+		caminos = new ArrayList<Pair<Integer,ArrayList<Integer>>>();
+	}
 	
 	//Variable d'ùs intern pel mètode dameCamino amb la implementació DFS
 	private boolean[] visited;
@@ -32,6 +40,7 @@ public class FordFulkerson<T> {
 		this.g = graf;
 		this.s = init;
 		this.t = desti;
+		caminos = new ArrayList<Pair<Integer,ArrayList<Integer>>>();
 		ArrayList<Integer> camino= new ArrayList<Integer>();
 		do{
 			visited = new boolean[graf.getNSize()];
@@ -97,6 +106,9 @@ public class FordFulkerson<T> {
 		caminoLength = camino.size();
 		//Calculamos el máximo flujo que puede pasar por el camino.
 		maxflowCamino = computaMaxFlowCamino(camino, graf);
+		
+		//Añadimos el camino y su maxFlow en la variable caminos
+		caminos.add(new Pair<Integer, ArrayList<Integer>>(maxflowCamino,camino));
 		
 		//Para cada arista del camino
 		for (int k = 0; k < caminoLength -1; k++) {
@@ -216,6 +228,12 @@ public class FordFulkerson<T> {
 	
 	public void setGrafInicial(Graf<T> gInicial){
 		g = gInicial;
-	};
+	}
+
+	public ArrayList<Pair<Integer, ArrayList<Integer>>> getCaminos() {
+		return caminos;
+	}
+	
+	
 
 }

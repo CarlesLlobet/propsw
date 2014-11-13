@@ -1,6 +1,7 @@
 //@author: Marcos Pérez
 package propsw;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,16 +11,26 @@ public class Galaxia extends Graf<Base>{
 	
 	private HashMap<String,Exode> exodes;
 	private HashMap<Integer,Base> bases;
+	private Capita capita;
 	
 	//Constructor inicialitza les variables buides	
-		public Galaxia(){
+		public Galaxia(Capita c){
 			++cont;
 			this.id = cont.toString();
 			this.exodes = new HashMap<String,Exode>();
 			this.bases = new HashMap<Integer,Base>();
+			capita = c;
 			
 		}
 	
+		public Capita getCapita() {
+			return capita;
+		}
+
+		public void setCapita(Capita capita) {
+			this.capita = capita;
+		}
+
 		public String getId(){
 			return this.id;
 		}
@@ -42,7 +53,8 @@ public class Galaxia extends Graf<Base>{
 		
 		//Afegeix un èxode a la galaxia
 		public boolean addExode(Exode e){
-			this.exodes.put(e.getId(), e)
+			this.exodes.put(e.getIdExode(), e);
+			return true;
 			//operacio getId() a la classe exode
 		}
 		
@@ -82,7 +94,7 @@ public class Galaxia extends Graf<Base>{
 		}
 		
 		//Adaptar mètodes de la classe graph per el nostre ús. (Classe template <T> serà classe Base)
-		public void afegirBase( Base node ){
+		public void afegirBase( Base node ) throws IOException{
 			afegirNode(node);
 		};
 		

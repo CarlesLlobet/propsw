@@ -14,9 +14,12 @@ public class Base {
 	
 	//Constructors
 	public Base(){
-		++cont;
+		
 		id=new Integer(cont);
+		
 		nom= null;
+		
+		++cont;
 	}
 	
 	public Base(int id,String nom){
