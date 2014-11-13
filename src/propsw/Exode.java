@@ -72,7 +72,7 @@ public class Exode {
 		ff = new FFDijkstra<Base>();
 		
 		// Hem de unir els destins amb el sumidero en el graf inicial
-		Base b = new Base();
+		Base b = new Base(galaxia);
 		
 		grafResidual = grafInicial; 
 		grafResidual.afegirNode(b);
@@ -101,12 +101,16 @@ public class Exode {
 	}
 
 
+	public ArrayList<String> getCaminsRebel(String idRebel) {
+		
+	}
+	
 	// Executa el FF-DFS i emplena la variable camins assignant un camí a cada rebel assignat a l'exode.
 	public void execucioDFS() throws IOException {
 		ff = new FordFulkerson<Base>();
 		
 		// Hem de unir els destins amb el sumidero en el graf inicial
-		Base b = new Base();
+		Base b = new Base(galaxia);
 		
 		grafResidual = grafInicial; 
 		grafResidual.afegirNode(b);
@@ -157,15 +161,6 @@ public class Exode {
 			}
 		}
 	}
-
-	public FordFulkerson<Base> getFf() {
-		return ff;
-	}
-
-
-	public String getIdExode(){
-		return idExode;
-	}
 	
 	
 	public void execucioBFS() throws IOException {
@@ -173,7 +168,7 @@ public class Exode {
 		ff = new EdmondsKarp<Base>(flow, flow, grafInicial);
 		
 		// Hem de unir els destins amb el sumidero en el graf inicial
-		Base b = new Base();
+		Base b = new Base(galaxia);
 		
 		grafResidual = grafInicial; 
 		grafResidual.afegirNode(b);
@@ -228,6 +223,14 @@ public class Exode {
 	}
 	
 	// Getters i setters
+	
+	public FordFulkerson<Base> getFf() {
+		return ff;
+	}
+
+	public String getIdExode(){
+		return idExode;
+	}
 	
 	public Integer getIdBaseInici() {
 		return idBaseInici;	
