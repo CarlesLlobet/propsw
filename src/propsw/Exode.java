@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class Exode {
 	private Integer idBaseInici;
-	private ArrayList<Rebel> rebels;
+	private ArrayList<String> rebels;
 	private HashMap<String,ArrayList<Integer>> camins;
 	private HashMap<String,Integer> destins;
 	private Graf<Base> grafResidual;
@@ -67,8 +67,29 @@ public class Exode {
 		return toReturn;
 	}
 
-	public void execucioDijkstra() {
+	public void execucioDijkstra() throws IOException {
 		//TODO execucioDijkstra falta importar codi del altre grup.
+		ff = new FFDijkstra<Base>();
+		
+		// Hem de unir els destins amb el sumidero en el graf inicial
+		Base b = new Base(galaxia);
+		
+		grafResidual = grafInicial; 
+		grafResidual.afegirNode(b);
+		
+		HashMap<Integer,Integer> destinsResum = getDestinsResum(); 
+		
+		ArrayList<Integer> dests = new ArrayList<Integer>(destinsResum.keySet());
+		int sizeDests = dests.size();
+		for (int i = 0; i < sizeDests; i++){
+			//LA CAPACITAT DE LA ARESTA QUE VA AL SUMIDERO ES EL NUMERO DE REBELS QUE VAN A AQUELL DESTÍ!!!!!!!
+			grafResidual.conectarNodes(dests.get(i), b.getId(), destinsResum.get(dests.get(i)), Double.MIN_VALUE);
+		}
+		
+		
+		grafResidual = ff.findMaxFlow(grafResidual, idBaseInici, b.getId());
+		flow = ff.getMaxFlow();
+		generaCamins(ff.getCaminos());
 	}
 	
 	
@@ -80,6 +101,10 @@ public class Exode {
 	}
 
 
+	public ArrayList<String> getCaminsRebel(String idRebel) {
+		 
+	}
+	
 	// Executa el FF-DFS i emplena la variable camins assignant un camí a cada rebel assignat a l'exode.
 	public void execucioDFS() throws IOException {
 		ff = new FordFulkerson<Base>();
@@ -131,24 +156,37 @@ public class Exode {
 				idRebel = rebels.next();
 				if(destins.get(idRebel)==destino && maxFlowCamino>0){
 					camins.put(idRebel, camino);
-					maxFlowCamino--;					//Decrementem el maxFlow d'aquest camí pk ja li hem assignat un rebel
+					maxFlowCamino--;	//Decrementem el maxFlow d'aquest camí pk ja li hem assignat un rebel
 				}
 			}
 		}
 	}
-
-	public FordFulkerson<Base> getFf() {
-		return ff;
-	}
-
-
-	public String getIdExode(){
-		return idExode;
-	}
 	
 	
-	public void execucioBFS() {
+	public void execucioBFS() throws IOException {
 		//TODO execucioBFS Importar codi de laltre grup
+		ff = new EdmondsKarp<Base>(flow, flow, grafInicial);
+		
+		// Hem de unir els destins amb el sumidero en el graf inicial
+		Base b = new Base(galaxia);
+		
+		grafResidual = grafInicial; 
+		grafResidual.afegirNode(b);
+		
+		HashMap<Integer,Integer> destinsResum = getDestinsResum(); 
+		
+		ArrayList<Integer> dests = new ArrayList<Integer>(destinsResum.keySet());
+		int sizeDests = dests.size();
+		for (int i = 0; i < sizeDests; i++){
+			//LA CAPACITAT DE LA ARESTA QUE VA AL SUMIDERO ES EL NUMERO DE REBELS QUE VAN A AQUELL DESTÍ!!!!!!!
+			grafResidual.conectarNodes(dests.get(i), b.getId(), destinsResum.get(dests.get(i)), Double.MIN_VALUE);
+		}
+		
+		
+		grafResidual = ff.findMaxFlow(grafResidual, idBaseInici, b.getId());
+		flow = ff.getMaxFlow();
+		generaCamins(ff.getCaminos());
+		
 	}
 	
 	//S'afegeix un rebel a l'exode només si aquest forma part de la tropa del capità
@@ -186,6 +224,14 @@ public class Exode {
 	
 	// Getters i setters
 	
+	public FordFulkerson<Base> getFf() {
+		return ff;
+	}
+
+	public String getIdExode(){
+		return idExode;
+	}
+	
 	public Integer getIdBaseInici() {
 		return idBaseInici;	
 	}
@@ -194,11 +240,11 @@ public class Exode {
 		this.idBaseInici = idBaseInici;
 	}
 
-	public ArrayList<Rebel> getRebels() {
+	public ArrayList<String> getRebels() {
 		return rebels;
 	}
 
-	public void setRebels(ArrayList<Rebel> rebels) {
+	public void setRebels(ArrayList<String> rebels) {
 		this.rebels = rebels;
 	}
 
