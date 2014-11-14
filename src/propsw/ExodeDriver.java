@@ -20,6 +20,7 @@ public class ExodeDriver {
 		System.out.println("Opcions:");
         System.out.println("1) Consultar destins");
         System.out.println("2) Execucio algoritme amb Dijkstra"); 
+        // retornar graf residual: string s = grafresidual.print matriu i systemout de string s
         System.out.println("3) Execucio algoritme amb DFS");
         System.out.println("4) Execucio algoritme amb BFS");
         System.out.println("5) Afegir Rebel");
