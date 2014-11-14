@@ -1,7 +1,5 @@
 package propsw;
 
-
-
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;

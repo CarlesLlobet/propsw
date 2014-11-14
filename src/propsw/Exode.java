@@ -3,6 +3,7 @@
 package propsw;
 
 import java.io.IOException;
+import java.net.IDN;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -69,27 +70,6 @@ public class Exode {
 
 	public void execucioDijkstra() throws IOException {
 		//TODO execucioDijkstra falta importar codi del altre grup.
-		ff = new FFDijkstra<Base>();
-		
-		// Hem de unir els destins amb el sumidero en el graf inicial
-		Base b = new Base(galaxia);
-		
-		grafResidual = grafInicial; 
-		grafResidual.afegirNode(b);
-		
-		HashMap<Integer,Integer> destinsResum = getDestinsResum(); 
-		
-		ArrayList<Integer> dests = new ArrayList<Integer>(destinsResum.keySet());
-		int sizeDests = dests.size();
-		for (int i = 0; i < sizeDests; i++){
-			//LA CAPACITAT DE LA ARESTA QUE VA AL SUMIDERO ES EL NUMERO DE REBELS QUE VAN A AQUELL DESTÍ!!!!!!!
-			grafResidual.conectarNodes(dests.get(i), b.getId(), destinsResum.get(dests.get(i)), Double.MIN_VALUE);
-		}
-		
-		
-		grafResidual = ff.findMaxFlow(grafResidual, idBaseInici, b.getId());
-		flow = ff.getMaxFlow();
-		generaCamins(ff.getCaminos());
 	}
 	
 	
@@ -102,91 +82,88 @@ public class Exode {
 
 
 	public ArrayList<String> getCaminsRebel(String idRebel) {
-		 
+		 //TODO
+		return new ArrayList<String>();
 	}
 	
 	// Executa el FF-DFS i emplena la variable camins assignant un camí a cada rebel assignat a l'exode.
 	public void execucioDFS() throws IOException {
 		ff = new FordFulkerson<Base>();
-		
+		camins = new HashMap<String, ArrayList<Integer>>();				//Reinicialitzem el mapa de camins  perque farem una nova execució
 		// Hem de unir els destins amb el sumidero en el graf inicial
 		Base b = new Base(galaxia);
-		
-		grafResidual = grafInicial; 
-		grafResidual.afegirNode(b);
-		
-		HashMap<Integer,Integer> destinsResum = getDestinsResum(); 
-		
+		grafResidual = grafInicial;
+		HashMap<Integer,Integer> destinsResum = getDestinsResum();
 		ArrayList<Integer> dests = new ArrayList<Integer>(destinsResum.keySet());
 		int sizeDests = dests.size();
 		for (int i = 0; i < sizeDests; i++){
 			//LA CAPACITAT DE LA ARESTA QUE VA AL SUMIDERO ES EL NUMERO DE REBELS QUE VAN A AQUELL DESTÍ!!!!!!!
 			grafResidual.conectarNodes(dests.get(i), b.getId(), destinsResum.get(dests.get(i)), Double.MIN_VALUE);
 		}
-		
-		
 		grafResidual = ff.findMaxFlow(grafResidual, idBaseInici, b.getId());
-		flow = ff.getMaxFlow();
-		generaCamins(ff.getCaminos());
+		flow = ff.getMaxFlow();					//El numero de rebels que arriben als seus destins.
+		//Surten "n=flow" rebels de l'origen ....
+		generaCamins(grafResidual,idBaseInici, new ArrayList<Integer>(), flow);			//El post-processament del graf residual
+	}
+
+	//Donat un graf residual, recursivament, el va recorrent desde el node inicial fins al sumidero 
+	//en funció del fluxe assignat a cada aresta i al final del recorregut assigna 
+	//camins als rebels en funció del fluxe resultant.
+	private void generaCamins(Graf<Base> g, int idBase, ArrayList<Integer> camino, int numRebels) throws IOException {
+		ArrayList<Integer> newCamino = new ArrayList<Integer>(camino);
+		newCamino.add(idBase);
+		ArrayList<Integer> nodesOut = g.getOutNodes(idBase);
+		int size = nodesOut.size();
+		boolean b = false;
+		for (Integer integer : nodesOut) {
+			if(g.getFlujoAresta(g.getIDAresta(idBase,integer))>0)b=true;			//S'activa a true només si té com a minim un flux positiu en cualsevol aresta.
+		}
+		if(size<=0 || !b){
+			//Si no té arestes de sortida vol dir que hem arribat al sumidero. Assignem el camí a
+			//"n=numRebels" que encara no tinguin assignat cap camí
+			assignaRebels(newCamino,numRebels);
+			return;
+		}
+		int i = 0, fHelp, flujo = Integer.MAX_VALUE;
+		while (i < size && numRebels>0) {
+			//Donada una base uns rebels marxaràn cap a unes bases y uns altres cap a unes altres,
+			//En funció del flux que ha calculat el graf residual per cada aresta de sortida de la base.
+			fHelp = g.getFlujoAresta(g.getIDAresta(idBase, nodesOut.get(i)));			//No tenemos en cuenta las restroarestas
+			if(fHelp>0){
+				flujo = Math.min(numRebels, fHelp);
+				if(flujo>0){
+					generaCamins(g,nodesOut.get(i),newCamino,flujo);
+					g.setFlujoAresta(g.getIDAresta(idBase, nodesOut.get(i)), g.getFlujoAresta(g.getIDAresta(idBase, nodesOut.get(i)))-flujo);
+				}
+				numRebels = numRebels-flujo;
+			}
+			i++;
+		}
+	}
+	
+	
+	
+	//Assigna el cami als rebels que tenen el destí igual que la penultima posició del array camino
+	//(la última es el sumidero). Només assigna camins a rebels que no tenen encara cap
+	//camí assignat.
+	private void assignaRebels(ArrayList<Integer> camino, int numRebels) {
+		Iterator<String> it = destins.keySet().iterator();
+		camino.remove(camino.size()-1);
+		while(it.hasNext() && numRebels>0){
+			String idRebel =it.next();
+			//Només si encara queden rebels per assignar, si el destí es coincident 
+			//i si el rebel encara no té assignat encara cap camí
+			if(numRebels>0 && destins.get(idRebel) == camino.get(camino.size()-1) && !camins.containsKey(idRebel)){
+				camins.put(idRebel, camino);
+				numRebels--;
+			}
+		}
 		
 	}
 
-	//Donat un llistat de camins amb el seu flow màxim que se li pot assignar, quest mètode 
-	//emplena la variable camins que assigna a cada rebel el seu camí en l'èxode.
-	private void generaCamins(ArrayList<Pair<Integer, ArrayList<Integer>>> caminos) {
-		 
-		int size = caminos.size();
-		int maxFlowCamino;
-		ArrayList<Integer> camino;
-		int destino;
-		for (int i = 0; i < size; i++) {
-			maxFlowCamino = caminos.get(i).getX();
-			camino = caminos.get(i).getY();
-			camino.remove(camino.size()-1);							//Eliminem el sumidero que es una base que hem utilitzat per fer el càlcul del maxFlow
-			destino = camino.get(camino.size()-1);			
-			
-			
-			Iterator<String> rebels = destins.keySet().iterator();
-			String idRebel = "";
-			
-			//Recorrem el hashMap de destins i anem buscant rebels que tenien assignat aquell destí.
-			//Per cada un que trobem li assignem el cami i el guardem en la variable camins, sempre i quan
-			//el nombre de rebels trobats per aquell destí sigui menor al maxFlowCamino assignat per aquell camí. 
-			while(rebels.hasNext() && maxFlowCamino>0){
-				idRebel = rebels.next();
-				if(destins.get(idRebel)==destino && maxFlowCamino>0){
-					camins.put(idRebel, camino);
-					maxFlowCamino--;	//Decrementem el maxFlow d'aquest camí pk ja li hem assignat un rebel
-				}
-			}
-		}
-	}
-	
-	
+
 	public void execucioBFS() throws IOException {
 		//TODO execucioBFS Importar codi de laltre grup
-		ff = new EdmondsKarp<Base>(flow, flow, grafInicial);
-		
-		// Hem de unir els destins amb el sumidero en el graf inicial
-		Base b = new Base(galaxia);
-		
-		grafResidual = grafInicial; 
-		grafResidual.afegirNode(b);
-		
-		HashMap<Integer,Integer> destinsResum = getDestinsResum(); 
-		
-		ArrayList<Integer> dests = new ArrayList<Integer>(destinsResum.keySet());
-		int sizeDests = dests.size();
-		for (int i = 0; i < sizeDests; i++){
-			//LA CAPACITAT DE LA ARESTA QUE VA AL SUMIDERO ES EL NUMERO DE REBELS QUE VAN A AQUELL DESTÍ!!!!!!!
-			grafResidual.conectarNodes(dests.get(i), b.getId(), destinsResum.get(dests.get(i)), Double.MIN_VALUE);
-		}
-		
-		
-		grafResidual = ff.findMaxFlow(grafResidual, idBaseInici, b.getId());
-		flow = ff.getMaxFlow();
-		generaCamins(ff.getCaminos());
-		
 	}
 	
 	//S'afegeix un rebel a l'exode només si aquest forma part de la tropa del capità

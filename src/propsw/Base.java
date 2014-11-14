@@ -18,6 +18,7 @@ public class Base {
 	public Base(Galaxia g) throws IOException{
 		id=new Integer(cont);
 		nom= null;
+		//TODO (Conflicte Base-Id vs Node-Id)aixo funciona sempre i quan no es borri una base un cop creades varies i despres s'afegeixi un altre
 		g.addBase(this);
 		g.afegirNode(this);
 		++cont;
@@ -26,7 +27,7 @@ public class Base {
 	public Base(String nom, Galaxia g) throws IOException{
 		this.id = new Integer(cont);
 		this.nom = nom;
-		g.afegirBase(this);
+		g.addBase(this);
 		g.afegirNode(this);
 		++cont;
 	}

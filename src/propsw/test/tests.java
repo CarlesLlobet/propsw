@@ -22,12 +22,12 @@ public class tests {
 		Capita c = cControl.getCapita();
 		System.out.println(c.getNom()+" està connectat...");
 		Galaxia g = cControl.getGalaxia();
-		g.afegirBase(new Base());
-		g.afegirBase(new Base());
-		g.afegirBase(new Base());
-		g.afegirBase(new Base());
-		g.afegirBase(new Base());
-		g.afegirBase(new Base());
+		new Base(g);
+		new Base(g);
+		new Base(g);
+		new Base(g);
+		new Base(g);
+		new Base(g);
 		
 		g.conectarNodes(0, 1, 5, 5.0);
 		g.conectarNodes(0, 2, 7, 5.0);
@@ -62,7 +62,7 @@ public class tests {
 		e.afegirRebel(idRebel9, 3);
 		
 		e.afegirRebel(idRebel1, 4);
-		e.afegirRebel(idRebel7, 4);
+		e.afegirRebel(idRebel7, 4);		//No arriba correcte!
 		e.afegirRebel(idRebel6, 4);
 		e.afegirRebel(idRebel4, 4);
 		e.afegirRebel(idRebel5, 4);
