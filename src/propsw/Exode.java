@@ -85,7 +85,7 @@ public class Exode {
 		ff = new FordFulkerson<Base>();
 		
 		// Hem de unir els destins amb el sumidero en el graf inicial
-		Base b = new Base();
+		Base b = new Base(galaxia);
 		
 		grafResidual = grafInicial; 
 		grafResidual.afegirNode(b);
