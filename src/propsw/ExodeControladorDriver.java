@@ -24,7 +24,7 @@ public class ExodeControladorDriver {
         System.out.println("4) Consultar quina es la base inicial de l'exode");
         System.out.println("5) Consultar cuants rebels participen a l'exode");
         System.out.println("6) Consultar quins rebels participen a l'exode");
-        System.out.println("7) Consultar el cami d'un rebel en particular");
+        System.out.println("7) Consultar els camins dels rebels");    
         System.out.println("8) Consultar quin es el flow de l'exode");
         System.out.println("9) Consultar quin es el cost de l'exode");
         System.out.println("10) Consultar a on esta el coll d'ampolla (nomes si el resultat de la Opcio 8 > Opcio 5)");
@@ -41,18 +41,28 @@ public class ExodeControladorDriver {
 	
 	
 	public static void main(String[] args) throws IOException {
-		//Es crea una base buida
 		ExodeControlador c = new ExodeControlador();
-		c.login(null, null);
-		for (Integer i = 0; i < 10; ++i){
-			c.getGalaxia().addBase(new Base (c.getGalaxia()));
-			c.crearRebel(i.toString());
-		}
-		for (Integer i = 0; i < 9; ++i){
-			c.getGalaxia().conectarNodes(i,i+1,3,3.0);
-		}
-		c.crearExode(5);
+		c.login("foo", "foooooo");
+	//	Capita cc = c.getCapita();
+	//	Galaxia g = c.getGalaxia();
+		new Base(c.getGalaxia());
+		new Base(c.getGalaxia());
+		new Base(c.getGalaxia());
+		new Base(c.getGalaxia());
+		new Base(c.getGalaxia());
+		new Base(c.getGalaxia());
+		
+		c.getGalaxia().conectarNodes(0, 1, 5, 5.0);
+		c.getGalaxia().conectarNodes(0, 2, 7, 5.0);
+		c.getGalaxia().conectarNodes(1, 3, 2, 5.0);
+		c.getGalaxia().conectarNodes(1, 2, 1, 5.0);
+		c.getGalaxia().conectarNodes(2, 3, 9, 5.0);
+		c.getGalaxia().conectarNodes(2, 4, 4, 5.0);
+		c.getGalaxia().conectarNodes(2, 5, 3, 5.0);
+		c.getGalaxia().conectarNodes(4, 3, 2, 5.0);
 
+
+		String idExode = c.crearExode(0);
 		
 		InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader (isr);
@@ -63,68 +73,68 @@ public class ExodeControladorDriver {
 		while (op != 0) {
 			switch(op) 
 			{
-				case 1:
-					c.execucio("0", 0);
+				case 1: //Executar
+					c.execucio(idExode, 0);
 					break;
-				case 2:
-					c.execucio("0", 1);
+					
+				case 2: // Executar
+					c.execucio(idExode, 1);
 					break;
-				case 3:
-					c.execucio("0", 2);
+					
+				case 3: // Executar
+					c.execucio(idExode, 2);
 					break;
+					
 				case 4:
-					Integer r = c.getIniciExode("0");
-					System.out.println("La base "+ r.toString() +" es el punt de partida de l'exode");
+					System.out.println("La base "+ c.getIniciExode(idExode) +" es el punt de partida de l'exode");
 					break;
-				case 5:
-					Integer xaxi = c.getRebelsSize("0");
-					System.out.println("Participen "+ xaxi.toString() +" rebels a l'exode");
+					
+				case 5: //Consultar nombre rebels de l'exode
+					System.out.println("Participen "+ c.getRebelsSize(idExode) +" rebels a l'exode");
 					break;
-				case 6:
-					ArrayList<String> rebout;
-					rebout = c.getRebels("0");
-					System.out.println("Els seguents rebels participen a l'exode:");
-					for (Integer i = 0; i < rebout.size(); ++i){
-						System.out.println(rebout.get(i));	
-					}
+					
+				case 6: //Consultar els rebels de l'exode
+					System.out.println(c.getRebelsExode(idExode));
 					break;
-				case 7:
-					System.out.println("introdueix la id del rebel:");
-					ArrayList<Integer> cam = c.getCamiRebelExode("0", br.readLine());
-					for (Integer i = 0; i < cam.size(); ++i){
-						System.out.println(cam.get(i));
-					}
+					
+				case 7: //Consultar els camins dels rebels de l'exode
+					System.out.println("Camins dels rebels: "+c.getCaminsExode(idExode));
 					break;
-				case 8:
-					System.out.println("Han arribat " +c.getFlowExode("0")+ " al seu desti");
+					
+				case 8: //Consultar el flow de l'exode
+					System.out.println("Han arribat " +c.getFlowExode(idExode)+ " al seu desti");
 					break;
-				case 9:
-					System.out.println("El cost total de l'exode es de: " +c.getCostExode("0"));
+					
+				case 9: //Consultar el cost de l'exode
+					System.out.println("El cost total de l'exode es de: " +c.getCostExode(idExode));
 					break;
-				case 10:
-					System.out.println("Les seguents bases formen el coll d'ampolla:");
-					ArrayList<Integer> coll = c.getAmpollaExode("0");
-					for (Integer i = 0; i < coll.size(); ++i){
-						System.out.println(coll.get(i));
-					}
+					
+				case 10: //Consultar el coll d'ampolla
+					ArrayList<Integer> coll = c.getAmpollaExode(idExode);
+					if (coll.size() <= 0)System.out.println("NO tenim coll d'ampolla");
+					else System.out.println("Les seguents bases formen el coll d'ampolla: " + coll);
 					break;
-				case 11:
-					System.out.println("introdueix la id del rebel que vols afegir:");
-					String idR = br.readLine();
+					
+				case 11: //afegir un rebel a l'exode
+					String idR = c.crearRebel("Rebel0");
+					System.out.println("El rebel amb id: "+ idR +" S'afegira, ");
 					System.out.println("introdueix la base de desti del rebel:");
-					c.afegirRebel("0", idR, Integer.parseInt(br.readLine()));
+					c.afegirRebelExode(idExode, idR, Integer.parseInt(br.readLine()));
 					break;
-				case 12:
+					
+				case 12: //modificar un rebel de l'exode
 					System.out.println("introdueix la id del rebel que vols modificar:");
 					String idRm = br.readLine();
 					System.out.println("introdueix la nova base de desti del rebel:");
-					c.afegirRebel("0", idRm, Integer.parseInt(br.readLine()));
+					c.modificarRebelExode(idExode, idRm, Integer.parseInt(br.readLine()));
 					break;
-				case 13:
+					
+				case 13: //Treure rebel de l'exode
 					System.out.println("introdueix la id del rebel que vols treure:");
 					String idRd = br.readLine();
-					c.treureRebel("0", idRd);
+					c.treureRebelExode(idExode, idRd);
 					break;
+					
 				default:
 					System.out.println("No existeix aquesta opci�");
 					break;
