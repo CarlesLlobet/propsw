@@ -154,10 +154,12 @@ public class GalaxiaControlador extends CapitaControlador {
 		return aresta;
 	}
 	
+	@Override
 	public Galaxia getGalaxia(){
 		return capiControl.getGalaxia();
 	}
 	
+	@Override
 	public Capita getCapita(){
 		return capiControl.getCapita();
 	}

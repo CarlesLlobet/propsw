@@ -90,8 +90,8 @@ public class Galaxia extends Graf<Base>{
 			return this.exodes;
 		}
 		
-		public HashMap<String,Exode> getBaseHash(){
-			return this.exodes;
+		public HashMap<Integer,Base> getBaseHash(){
+			return this.bases;
 		}
 		
 		public ArrayList<String> getExodes(){
