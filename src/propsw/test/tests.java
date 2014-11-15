@@ -71,7 +71,7 @@ public class tests {
 		e.afegirRebel(idRebel8, 5);
 		e.afegirRebel(idRebel3, 5);
 		
-		e.execucioDFS();
+		e.execucioBFS();
 		
 		System.out.println(e.getFf().printMatrix(g));
 		

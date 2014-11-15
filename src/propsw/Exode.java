@@ -24,9 +24,6 @@ public class Exode {
 	private FordFulkerson<Base> ff;
 	private ArrayList<Integer[]> collsAmpolla;
 	
-
-	
-	
 	public Exode(Galaxia g){
 		++cont;
 		this.idExode = cont.toString();
@@ -45,7 +42,6 @@ public class Exode {
 	
 	//Retorna un hashMap amb key = idBase (cada un dels destíns) i value = numero de rebels que van a aquell destí 
 	public HashMap<Integer,Integer> getDestinsResum() {
-		
 		//Cada rebel té un destí assignat. Es fa una llista 
 		//dels diferents destins sense repeticions
 		HashMap<Integer,Integer> toReturn = new HashMap<Integer, Integer>();
@@ -67,7 +63,8 @@ public class Exode {
 	}
 
 	public void execucioDijkstra() throws IOException {
-		//TODO execucioDijkstra falta importar codi del altre grup.
+		ff = new FFDijkstra<Base>(idBaseInici,2,galaxia);
+		execucio();
 	}
 	
 	
@@ -87,8 +84,13 @@ public class Exode {
 	// Executa el FF-DFS i emplena la variable camins assignant un camí a cada rebel assignat a l'exode.
 	public void execucioDFS() throws IOException {
 		ff = new FordFulkerson<Base>();
+		execucio();
+	}
+	
+	
+	private void execucio() throws IOException{
 		camins = new HashMap<String, ArrayList<Integer>>();				//Reinicialitzem el mapa de camins  perque farem una nova execució
-		collsAmpolla = new ArrayList<Integer[]>();					//Reinicialitzem els colls d'ampolla perque fem una nova execució de l'algoritme
+		collsAmpolla = new ArrayList<Integer[]>();						//Reinicialitzem els colls d'ampolla perque fem una nova execució de l'algoritme
 		// Hem de unir els destins amb el sumidero en el graf inicial
 		Base b = new Base(galaxia);
 		grafResidual = grafInicial;
@@ -169,7 +171,8 @@ public class Exode {
 
 
 	public void execucioBFS() throws IOException {
-		//TODO execucioBFS Importar codi de laltre grup
+		ff = new EdmondsKarp<Base>(idBaseInici, 2, galaxia);
+		execucio();
 	}
 	
 	//S'afegeix un rebel a l'exode només si aquest forma part de la tropa del capità
@@ -199,12 +202,6 @@ public class Exode {
 		return (r!=null);
 	}
 
-	public ArrayList<Integer> getAmpolla() {
-		//retornara el conjunt d'arestes que fa coll d'ampolla
-		//TODO a fer el metode per detectar colls d'ampolla
-		return null;
-	}
-	
 	// Getters i setters
 	
 	public FordFulkerson<Base> getFf() {

@@ -54,13 +54,13 @@ public class FordFulkerson<T> {
 			//S'obté el camí d'acord al graf en funció de l'algoritme (DFS,BFS o Dijkstra).
 			camino = dameCamino(graf);
 			this.s = init;		//Es necesari perque el metode dameCamino es recursiu i utilitza aquesta variable.
-			if(camino != null){
+			if(camino != null && camino.size()>0){
 				//Es computa el graf residual. S'actualitzen les capacitats i el flux de cada aresta. 
 				//S'afegeixen les "retro-arestes".
 				computaGrafResidual(camino,graf);
 			}
 			
-		}while(camino != null);
+		}while(camino != null && camino.size()>0);
 		
 		//Es calcula el maxFlow
 		this.maxFlow = 0;
