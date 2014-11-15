@@ -4,6 +4,8 @@ package propsw;
 import java.util.ArrayList;
 
 public class Rebel {
+	
+
 	private static Integer cont = 0;
 	private String id;
 	private String nom;
@@ -65,4 +67,10 @@ public class Rebel {
 		}
 		else return false;
 	}	
+	
+	@Override
+	public String toString() {
+
+		return id+"\t-\t"+nom;
+	}
 }

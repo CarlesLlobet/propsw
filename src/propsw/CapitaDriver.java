@@ -73,7 +73,7 @@ public class CapitaDriver {
 					break;
 				case 7:
 					//ASSOCIAR GALAXIA
-					Galaxia g = new Galaxia();
+					Galaxia g = new Galaxia(c);
 					System.out.println("El id de la galaxia g es " + g.getId().toString());
 					c.setGalaxia(g);
 					System.out.println("S'ha creat una galaxia amb id :" + g.getId().toString() + " i s'ha assignat al capità");

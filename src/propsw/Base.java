@@ -46,4 +46,12 @@ public class Base {
 		this.nom=nom;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return id+"\t-\t"+nom;
+	}
+	
+	
 }

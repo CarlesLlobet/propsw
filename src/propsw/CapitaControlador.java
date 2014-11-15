@@ -2,6 +2,7 @@ package propsw;
 
 //@author Toni Martínez
 
+import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
 
@@ -79,7 +80,7 @@ public class CapitaControlador {
 
 	
 	//Crear un exode a la galaxia que conté el capità que ha iniciat la sessió
-	public String crearExode(int idBaseInici) {
+	public String crearExode(int idBaseInici) throws IOException {
 		Exode e = new Exode(getGalaxia());
 		e.setIdBaseInici(idBaseInici); 								//Posem la base d'inici, on comença l'èxode
 		getGalaxia().addExode(e);									//Assignem l'èxode a la galaxia del capità que ha inicat sessió
@@ -87,7 +88,7 @@ public class CapitaControlador {
 	}
 
 	//Crear un exode a la galaxia que conté un capità en concret
-	public String crearExode(int idBaseInici, String idCapita) {
+	public String crearExode(int idBaseInici, String idCapita) throws IOException {
 		Exode e = new Exode(getGalaxia());
 		e.setIdBaseInici(idBaseInici); 									//Posem la base d'inici, on comença l'èxode
 		getGalaxia(idCapita).addExode(e);								//Assignem l'èxode a la galaxia del capità.
@@ -180,5 +181,19 @@ public class CapitaControlador {
 	//Retorna l'objecte Capita del capita que ha inicat la sessió.
 	public Capita getCapita() {
 		return contCap.getCapita(idCap);
+	}
+	//Retorna un false si no existeix el rebel amb el idRebel passat
+	public boolean modificaRebel(String nom, String idRebel){
+		Rebel r = getCapita().getRebels().get(idRebel);
+		if(r!=null){
+			r.setNom(nom);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public void logOut(){
+		idCap=null;
 	}
 }

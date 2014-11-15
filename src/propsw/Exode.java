@@ -31,6 +31,8 @@ public class Exode {
 		galaxia = g;
 		destins = new HashMap<String, Integer>();
 		camins = new HashMap<String, ArrayList<Integer>>();
+		collsAmpolla = new HashMap<Integer, ArrayList<Integer[]>>();
+		rebels = new ArrayList<String>();
 	}
 	
 	//Retorna un HashMap amb key=idRebel i value = idBase (Destí assignat al Rebel)
@@ -223,9 +225,15 @@ public class Exode {
 	public Integer getIdBaseInici() {
 		return idBaseInici;	
 	}
-
-	public void setIdBaseInici(Integer idBaseInici) {
-		this.idBaseInici = idBaseInici;
+	//Retorna false si la base no existeix dins de la galaxia.
+	public boolean setIdBaseInici(Integer idBaseInici) throws IOException {
+		Base r = galaxia.getNode(idBaseInici);
+		if(r!=null){
+			this.idBaseInici = idBaseInici;
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public ArrayList<String> getRebels() {
