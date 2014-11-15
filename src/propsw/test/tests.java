@@ -2,6 +2,8 @@ package propsw.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import propsw.*;
 
@@ -54,9 +56,6 @@ public class tests {
 		
 		String idExode = cControl.crearExode(0);
 		Exode e = g.getExode(idExode);
-		
-		
-		
 
 		e.afegirRebel(idRebel0, 3);
 		e.afegirRebel(idRebel2, 3);
@@ -78,10 +77,32 @@ public class tests {
 		System.out.println("MaxFlow: "+e.getFlow());
 		System.out.println("Caminos de los rebeldes: "+e.getCamins());
 		System.out.println("Aristas que hacen cuello de botella: ");
-		ArrayList<Integer[]> arr = e.getCollsAmpolla();
-		for (Integer[] integers : arr) {
-			System.out.println(integers[0]+","+integers[1]);
+		HashMap<Integer, ArrayList<Integer[]>> arr = e.getCollsAmpolla();
+		Iterator<Integer> itArr = arr.keySet().iterator();
+		while(itArr.hasNext()){
+			
+			Integer i = itArr.next();
+			System.out.println("Para los rebeldes que iban a la base "+i);
+			ArrayList<Integer[]> lista =  arr.get(i);
+			for (Integer[] integers : lista) {
+				System.out.println(integers[0]+","+integers[1]);
+			}
 		}
+		System.out.println("GET AMPOLLA");
+		ArrayList<Integer> idArestes = e.getAmpolla();
+		for (Integer integer : idArestes) {
+			System.out.println("IdAresta: "+integer);
+		}
+		
+		System.out.println("GET AMPOLLA ID Bases");
+		ArrayList<Integer[]> idArestesBases = e.getAmpollaIdBases();
+		for (Integer[] integer : idArestesBases) {
+			System.out.println(integer[0]+","+integer[1]);
+		}
+		
+		
+		System.out.println(e.getFf().printMatrix(e.getGrafInicial()));
+		
 		
 	}
 	

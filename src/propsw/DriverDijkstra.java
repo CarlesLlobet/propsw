@@ -1,3 +1,5 @@
+package propsw;
+
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -5,8 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import domain.FFDijkstra;
-import domain.Graf;
+
 
 
 public class DriverDijkstra {

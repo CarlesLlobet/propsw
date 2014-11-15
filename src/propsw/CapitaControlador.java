@@ -139,10 +139,10 @@ public class CapitaControlador {
 		//Per a cada rebel se li elimina el exode si el tenia assignat
 		Exode e = getGalaxia().getExode(idExode);
 		if(e!=null){
-			ArrayList<Rebel> laTropa = e.getRebels();
+			ArrayList<String> laTropa = e.getRebels();
 			int size = getGalaxia().getExode(idExode).getRebels().size();
 			for (int i = 0; i < size; i++) {
-				laTropa.get(i).getExodes().remove(idExode);							
+				getCapita().getRebels().get(laTropa.get(i)).getExodes().remove(idExode);
 			}
 			
 			getGalaxia().removeExode(idExode);								//Eliminem l'exode de la galaxia del capita que ha iniciat la sessió
@@ -160,13 +160,12 @@ public class CapitaControlador {
 		//Per a cada rebel se li elimina el exode si el tenia assignat
 		Exode e = getGalaxia(idCapita).getExode(idExode);
 		if(e!=null){
-			ArrayList<Rebel> laTropa = e.getRebels();
+			ArrayList<String> laTropa = e.getRebels();
 			int size = getGalaxia(idCapita).getExode(idExode).getRebels().size();
 			for (int i = 0; i < size; i++) {
-				laTropa.get(i).getExodes().remove(idExode);						
+				getCapita(idCapita).getRebels().get(laTropa.get(i)).getExodes().remove(idExode);
 			}
-			
-			getGalaxia().removeExode(idExode);								//Eliminem l'exode de la galaxia del capita que ha iniciat la sessió
+			getGalaxia(idCapita).removeExode(idExode);								//Eliminem l'exode de la galaxia del capita que ha iniciat la sessió
 			return true;
 		}else{
 			return false;
