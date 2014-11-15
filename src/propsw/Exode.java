@@ -61,7 +61,7 @@ public class Exode {
 		}
 		return toReturn;
 	}
-
+	//Execucio de l'algoritme Dijsktra
 	public void execucioDijkstra() throws IOException {
 		ff = new FFDijkstra<Base>(idBaseInici,2,galaxia);
 		execucio();
@@ -169,7 +169,7 @@ public class Exode {
 		}
 	}
 
-
+	//Execucio de l'algoritme EdmondKarp
 	public void execucioBFS() throws IOException {
 		ff = new EdmondsKarp<Base>(idBaseInici, 2, galaxia);
 		execucio();

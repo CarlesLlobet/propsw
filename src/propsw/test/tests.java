@@ -63,7 +63,7 @@ public class tests {
 		e.afegirRebel(idRebel9, 3);
 		
 		e.afegirRebel(idRebel1, 4);
-		e.afegirRebel(idRebel7, 4);		//No arriba correcte!
+		e.afegirRebel(idRebel7, 4);		
 		e.afegirRebel(idRebel6, 4);
 		e.afegirRebel(idRebel4, 4);
 		e.afegirRebel(idRebel5, 4);
@@ -71,7 +71,7 @@ public class tests {
 		e.afegirRebel(idRebel8, 5);
 		e.afegirRebel(idRebel3, 5);
 		
-		e.execucioBFS();
+		e.execucioBFS();				//Canvia al tipus d'execució que vulguis
 		
 		System.out.println(e.getFf().printMatrix(g));
 		
