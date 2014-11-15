@@ -3,6 +3,7 @@ package propsw;
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ExodeControlador extends GalaxiaControlador {
 	public void execucio(String idExode, Integer tipusExec) throws IOException {
@@ -21,16 +22,16 @@ public class ExodeControlador extends GalaxiaControlador {
 		return getGalaxia().getExode(idExode).getIdBaseInici(); //Exode.getBaseInici() no existeix
 	}
 
-	public ArrayList<String> getRebels(String idExode) {
-		return getGalaxia().getExode(idExode).getRebels(); //Exode.getRebels() no existeix
+	public HashMap<String, Integer> getRebelsExode(String idExode) {
+		return getGalaxia().getExode(idExode).getDestinsRebels(); //Exode.getRebels() no existeix
 	}
 
 	public Integer getRebelsSize(String idExode) {
-		return getGalaxia().getExode(idExode).getRebels().size();
+		return getGalaxia().getExode(idExode).getCamins().size();
 	}
 
-	public ArrayList<Integer> getCamiRebelExode(String idExode, String idRebel) {
-		return getGalaxia().getExode(idExode).getCamiRebel(idRebel); //Exode.getCamiRebel(idR) no existeix
+	public HashMap<String, ArrayList<Integer>> getCaminsExode(String idExode) {
+		return getGalaxia().getExode(idExode).getCamins(); //Exode.getCamiRebel(idR) no existeix
 	}
 
 	public Integer getFlowExode(String idExode) {
@@ -45,16 +46,16 @@ public class ExodeControlador extends GalaxiaControlador {
 		return getGalaxia().getExode(idExode).getAmpolla();
 	}
 
-	public boolean afegirRebel(String idExode, String idRebel, Integer idBaseDesti) {
+	public boolean afegirRebelExode(String idExode, String idRebel, Integer idBaseDesti) {
 		super.getRebel(idRebel).insertarExode(idExode);
 		return getGalaxia().getExode(idExode).afegirRebel(idRebel, idBaseDesti);   //a Exode.afegirRebel(idR) li falta ...(idR, -> idBD <-)
 	}
 
-	public void modificarRebel(String idExode, String idRebel, Integer idBaseDesti) {
+	public void modificarRebelExode(String idExode, String idRebel, Integer idBaseDesti) {
 		getGalaxia().getExode(idExode).modificarRebel(idRebel, idBaseDesti);  //Exode.modificarRebel(idR, idBD) no existeix
 	}
 
-	public boolean treureRebel(String idExode, String idRebel) {
+	public boolean treureRebelExode(String idExode, String idRebel) {
 		getRebel(idRebel).esborrarExode(idExode);           //Rebel.borrarExode() no existeix
 		return getGalaxia().getExode(idExode).borrarRebel(idRebel);
 	}
