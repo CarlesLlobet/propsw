@@ -27,7 +27,7 @@ public class ExodeDriver {
         System.out.println("6) Modificar Rebel");
         System.out.println("7) Borrar Rebel");
         System.out.println("8) Consultar colls d'Ampolla");
-        System.out.println("9) Borrar Rebel");
+        System.out.println("9) Consultar identificador d'exode");
         System.out.println("10) Consultar identificador de la base d'inici");
         System.out.println("11) Modificar identificador de la base d'inici");
         System.out.println("12) Consultar rebels");
@@ -41,7 +41,7 @@ public class ExodeDriver {
 	
 	public static void main(String[] args) throws IOException {
 		//Es crea un Exode
-		Exode b = new Exode();
+		Exode e = new Exode(null);
 	
 		InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader (isr);
@@ -53,57 +53,57 @@ public class ExodeDriver {
 			switch(op) 
 			{
 				case 1:
-        			System.out.println("El id de la base es: " + b.getId().toString());
+        			System.out.println("Els destins dels rebels son: " + e.getDestinsRebels().toString());
         			break;
-				case 2:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+				case 2: //com ferlo
+					FFDijkstra<String> algoritme = new FFDijkstra<String>();
+					Graf<String> graf = new Graf<String>();
+					execucioBFS();
+					 // com feru
+					System.out.println("Graf residual desprŽs d'executar FF amb Dijkstra: " + grafR);
 					break;
-				case 3:
-					System.out.println("Introdueix el nou nom per a la base: ");
-					String n = br.readLine();
-					b.setNom(n);
+				case 3: //com ferlo
+					FordFulkerson<String> algoritme1 = new FordFulkerson<String>();
+					Graf<String> graf1 = new Graf<String>();
+					Graf<String> grafResidual = algoritme1.findMaxFlow(graf1,0,5);
+					String grafR1 = algoritme1.printMatrix(grafResidual); // com feru
+					System.out.println("Graf residual desprŽs d'executar FF amb DFS: " + grafR1);
 					break;
-				case 4:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+				case 4://com ferlo
+					Graf<String> grafR = ff.printMatrix(grafResidual);
+					System.out.println("Graf residual desprŽs d'executar FF amb BFS: " + grafR);
 					break;
 				case 5:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					Boolean afegit;
+					afegit = e.afegirRebel("25", 6);
+					if (afegit) System.out.println("S'ha afegit el rebel");
+					else System.out.println("No s'ha afegit el rebel");
 					break;
 				case 6:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					e.modificarRebel("25", 9);
 					break;
 				case 7:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					Boolean borrat;
+					borrat = e.borrarRebel("25");
+					if (borrat) System.out.println("S'ha borrat el rebel");
+					else System.out.println("El rebel no existia");
 					break;
-				case 8:
+				case 8://falta fer
 					String nom = b.getNom();
 					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
 					else System.out.println("La base no té cap nom assignat");
 					break;
 				case 9:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					String identificadorExode = e.getIdExode();
+					System.out.println("L'identificador de l'exode es: " + identificadorExode);
 					break;
 				case 10:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					Integer identificadorBaseInici = e.getIdBaseInici();
+					System.out.println("L'identificador de la base d'inici es: " + identificadorBaseInici);
 					break;
 				case 11:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					e.setIdBaseInici(2);
+					System.out.println("He cambiat la nova base d'inici a: " + e.getIdBaseInici());
 					break;
 				case 12:
 					String nom = b.getNom();
