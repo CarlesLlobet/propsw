@@ -90,7 +90,7 @@ public class ExodeControladorDriver {
 					break;
 					
 				case 5: //Consultar nombre rebels de l'exode
-					System.out.println("Participen "+ c.getRebelsSize(idExode) +" rebels a l'exode");
+					System.out.println("Participen "+ c.getRebelsSize(idExode) +" rebels a l'exode " + idExode);
 					break;
 					
 				case 6: //Consultar els rebels de l'exode
