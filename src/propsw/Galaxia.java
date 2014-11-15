@@ -1,7 +1,6 @@
 //@author: Marcos Pérez
 package propsw;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,6 +44,7 @@ public class Galaxia extends Graf<Base>{
 		//el fluxe.
 		public int getMaxFlow(Exode e) {
 			//aqui s'ha de cridar: e.getMaxFlow ja que exode conte la classe FF
+			return e.getFlow();
 		}
 		
 		//Mètodes de control de les coleccions

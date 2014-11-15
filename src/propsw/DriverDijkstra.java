@@ -1,10 +1,13 @@
-package Drivers;
+package propsw;
 
-import java.util.*;
-import java.io.*;
 
-import Domain.Graf;
-import Domain.FFDijkstra;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
 
 
 public class DriverDijkstra {
@@ -77,7 +80,7 @@ public class DriverDijkstra {
 					break;
 				
 				case 3:
-					FFDijkstra dijk = new FFDijkstra(0, g.getNSize()-1, g);
+					FFDijkstra<Integer> dijk = new FFDijkstra<Integer>(0, g.getNSize()-1, g);
 					ArrayList<Integer> camino = new ArrayList<Integer>();
 					try {
 						camino = dijk.dameCamino(g);

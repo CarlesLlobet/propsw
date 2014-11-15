@@ -42,7 +42,7 @@ public class ExodeControlador extends GalaxiaControlador {
 		return getGalaxia().getExode(idExode).getCost(); //Exode.getCost() no existeix
 	}
 
-	public ArrayList<Integer> getAmpollaExode(String idExode) {
+	public ArrayList<Integer> getAmpollaExode(String idExode) throws IOException {
 		return getGalaxia().getExode(idExode).getAmpolla();
 	}
 
