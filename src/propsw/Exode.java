@@ -3,7 +3,6 @@
 package propsw;
 
 import java.io.IOException;
-import java.net.IDN;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,7 +22,7 @@ public class Exode {
 	private boolean actualitzat;
 	private String idExode;
 	private FordFulkerson<Base> ff;
-	
+	private ArrayList<Integer[]> collsAmpolla;
 	
 
 	
@@ -33,7 +32,6 @@ public class Exode {
 		this.idExode = cont.toString();
 		grafInicial = g;
 		galaxia = g;
-		
 		destins = new HashMap<String, Integer>();
 		camins = new HashMap<String, ArrayList<Integer>>();
 	}
@@ -90,6 +88,7 @@ public class Exode {
 	public void execucioDFS() throws IOException {
 		ff = new FordFulkerson<Base>();
 		camins = new HashMap<String, ArrayList<Integer>>();				//Reinicialitzem el mapa de camins  perque farem una nova execució
+		collsAmpolla = new ArrayList<Integer[]>();					//Reinicialitzem els colls d'ampolla perque fem una nova execució de l'algoritme
 		// Hem de unir els destins amb el sumidero en el graf inicial
 		Base b = new Base(galaxia);
 		grafResidual = grafInicial;
@@ -108,7 +107,7 @@ public class Exode {
 
 	//Donat un graf residual, recursivament, el va recorrent desde el node inicial fins al sumidero 
 	//en funció del fluxe assignat a cada aresta i al final del recorregut assigna 
-	//camins als rebels en funció del fluxe resultant.
+	//camins als rebels en funció del fluxe resultant i del destí que tenien assignat.
 	private void generaCamins(Graf<Base> g, int idBase, ArrayList<Integer> camino, int numRebels) throws IOException {
 		ArrayList<Integer> newCamino = new ArrayList<Integer>(camino);
 		newCamino.add(idBase);
@@ -121,7 +120,7 @@ public class Exode {
 		if(size<=0 || !b){
 			//Si no té arestes de sortida vol dir que hem arribat al sumidero. Assignem el camí a
 			//"n=numRebels" que encara no tinguin assignat cap camí
-			assignaRebels(newCamino,numRebels);
+			assignaRebels(newCamino,numRebels,g);
 			return;
 		}
 		int i = 0, fHelp, flujo = Integer.MAX_VALUE;
@@ -133,7 +132,7 @@ public class Exode {
 				flujo = Math.min(numRebels, fHelp);
 				if(flujo>0){
 					generaCamins(g,nodesOut.get(i),newCamino,flujo);
-					g.setFlujoAresta(g.getIDAresta(idBase, nodesOut.get(i)), g.getFlujoAresta(g.getIDAresta(idBase, nodesOut.get(i)))-flujo);
+					g.setFlujoAresta(g.getIDAresta(idBase, nodesOut.get(i)), g.getFlujoAresta(g.getIDAresta(idBase, nodesOut.get(i)))-flujo);			//Actualizamos el flujo para marcar que pasamos por la arista. Asi en otra rama de la recursividad aseguramos que no pasen mas rebeldes por esta arista que los que marca realmente el flujo.
 				}
 				numRebels = numRebels-flujo;
 			}
@@ -145,10 +144,18 @@ public class Exode {
 	
 	//Assigna el cami als rebels que tenen el destí igual que la penultima posició del array camino
 	//(la última es el sumidero). Només assigna camins a rebels que no tenen encara cap
-	//camí assignat.
-	private void assignaRebels(ArrayList<Integer> camino, int numRebels) {
+	//camí assignat. 
+	private void assignaRebels(ArrayList<Integer> camino, int numRebels, Graf<Base> g) throws IOException {
 		Iterator<String> it = destins.keySet().iterator();
 		camino.remove(camino.size()-1);
+		for (int i = 0; i < camino.size()-1; i++) {
+			if(g.getCapacidadAresta(g.getIDAresta(camino.get(i),camino.get(i+1)))<=0){
+				Integer[] aresta = new Integer[2];
+				aresta[0] = camino.get(i);
+				aresta[1] = camino.get(i+1);
+				collsAmpolla.add(aresta);
+			}
+		}
 		while(it.hasNext() && numRebels>0){
 			String idRebel =it.next();
 			//Només si encara queden rebels per assignar, si el destí es coincident 
@@ -158,7 +165,6 @@ public class Exode {
 				numRebels--;
 			}
 		}
-		
 	}
 
 
@@ -240,5 +246,15 @@ public class Exode {
 	public void setFlow(Integer flow) {
 		this.flow = flow;
 	}
+	
+	public boolean isActualitzat() {
+		return actualitzat;
+	}
 
+	public ArrayList<Integer[]> getCollsAmpolla() {
+		return collsAmpolla;
+	}
+
+	
+	
 }

@@ -1,6 +1,7 @@
 package propsw.test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import propsw.*;
 
@@ -76,6 +77,11 @@ public class tests {
 		
 		System.out.println("MaxFlow: "+e.getFlow());
 		System.out.println("Caminos de los rebeldes: "+e.getCamins());
+		System.out.println("Aristas que hacen cuello de botella: ");
+		ArrayList<Integer[]> arr = e.getCollsAmpolla();
+		for (Integer[] integers : arr) {
+			System.out.println(integers[0]+","+integers[1]);
+		}
 		
 	}
 	
