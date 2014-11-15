@@ -5,6 +5,8 @@ package propsw;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ExodeDriver {
 	
@@ -31,7 +33,7 @@ public class ExodeDriver {
         System.out.println("10) Consultar identificador de la base d'inici");
         System.out.println("11) Modificar identificador de la base d'inici");
         System.out.println("12) Consultar rebels");
-        System.out.println("13) Modificar rebels");
+        System.out.println("13) ");//alguna funcio
         System.out.println("14) Consultar cost");
         System.out.println("15) Modificar cost");
         System.out.println("16) Consultar flow");
@@ -74,58 +76,62 @@ public class ExodeDriver {
 					System.out.println("Graf residual desprŽs d'executar FF amb BFS: " + grafR);
 					break;
 				case 5:
-					Boolean afegit;
-					afegit = e.afegirRebel("25", 6);
+					System.out.println("Indica el idRebel que vols afegir: ");
+					Integer idRebelConversio = Integer.parseInt(br.readLine());
+					String idRebelAfegir = Integer.toString(idRebelConversio);
+					System.out.println("Indica el idBaseDesti del idRebel que vols afegir: ");
+					Integer idBaseAfegir = Integer.parseInt(br.readLine());
+					Boolean afegit = e.afegirRebel(idRebelAfegir, idBaseAfegir);
 					if (afegit) System.out.println("S'ha afegit el rebel");
 					else System.out.println("No s'ha afegit el rebel");
 					break;
 				case 6:
-					e.modificarRebel("25", 9);
+					System.out.println("Indica el idRebel que vols modificar: ");
+					Integer idRebelModConversio = Integer.parseInt(br.readLine());
+					String idRebelModificar = Integer.toString(idRebelModConversio);
+					System.out.println("Indica el idBaseDesti del idRebel que vols afegir: ");
+					Integer idBaseModificar = Integer.parseInt(br.readLine());
+					e.modificarRebel(idRebelModificar, idBaseModificar);
+					System.out.println("Comprobar que s'ha modificat be: " + e.getRebels());
 					break;
 				case 7:
-					Boolean borrat;
-					borrat = e.borrarRebel("25");
+					System.out.println("Indica el rebel que vols borrar: ");
+					Integer rebelBorrarConversio = Integer.parseInt(br.readLine());
+					String rebelBorrar = Integer.toString(rebelBorrarConversio);
+					Boolean borrat = e.borrarRebel(rebelBorrar);
 					if (borrat) System.out.println("S'ha borrat el rebel");
 					else System.out.println("El rebel no existia");
 					break;
-				case 8://falta fer
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+				case 8:
+					System.out.println("Els colls d'ampolla son: " + e.getCollsAmpolla());
 					break;
 				case 9:
-					String identificadorExode = e.getIdExode();
-					System.out.println("L'identificador de l'exode es: " + identificadorExode);
+					System.out.println("L'identificador de l'exode es: " + e.getIdExode());
 					break;
 				case 10:
-					Integer identificadorBaseInici = e.getIdBaseInici();
-					System.out.println("L'identificador de la base d'inici es: " + identificadorBaseInici);
+					System.out.println("L'identificador de la base d'inici es: " + e.getIdBaseInici());
 					break;
 				case 11:
-					e.setIdBaseInici(2);
+					System.out.println("Indica la base que vols modificar: ");
+					Integer baseMod = Integer.parseInt(br.readLine());
+					e.setIdBaseInici(baseMod);
 					System.out.println("He cambiat la nova base d'inici a: " + e.getIdBaseInici());
 					break;
 				case 12:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					System.out.println("Els rebels d'aquest exode son: " + e.getRebels());
 					break;
 				case 13:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					
 					break;
 				case 14:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					System.out.println("El cost es: " + e.getCost());
 					break;
 				case 15:
-					String nom = b.getNom();
-					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
-					else System.out.println("La base no té cap nom assignat");
+					System.out.println("Indica el coste que quieres modificar: ");
+					Double coste = Double.parseDouble(br.readLine());
+					e.setCost(coste);
 					break;
-				case 16:
+				case 16://FALTA A PARTIR DAQUI
 					String nom = b.getNom();
 					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
 					else System.out.println("La base no té cap nom assignat");
