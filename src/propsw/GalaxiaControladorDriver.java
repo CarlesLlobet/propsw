@@ -25,6 +25,7 @@ public class GalaxiaControladorDriver {
 	System.out.println("8) Modificar els valors d'una adjacència");
 	System.out.println("9) Eliminar una adjacència");
 	System.out.println("10) Obtenir una adjacència");
+	System.out.println("11) Llistar Èxodes");
 	//System.out.println("11) Login");
 	System.out.println("0) exit");
 	}
@@ -34,6 +35,7 @@ public class GalaxiaControladorDriver {
 	//Es crea una instància de classe Galaxia
 	
 	GalaxiaControlador gControl=new GalaxiaControlador();
+	gControl.login("a","b");
 	
 	InputStreamReader isr = new InputStreamReader(System.in);
 	BufferedReader br = new BufferedReader (isr);
@@ -76,30 +78,39 @@ public class GalaxiaControladorDriver {
 			case 4:
 					System.out.println("Introdueix la ID de la base que es vol eliminar: ");
 					s = br.readLine();
-					i=Integer.valueOf(s);
-					if(gControl.deleteBase(i)){
-						System.out.println("La base s'ha eliminat correctament.");
+					int a=Integer.parseInt(s);
+					
+					try{
+					gControl.deleteBase(a);
 					}
-					else{
-						System.out.println("HI ha hagut algun problema eliminant la base demanada.");
+					catch(IOException e){
+					
+						System.out.println(e);
 					}
+					
 					break;
 			case 5:
 					System.out.println("Introdueix la ID de la base a modificar:");
 					s = br.readLine();
-					i=Integer.valueOf(s);
+					int p=Integer.parseInt(s);
 					System.out.println("Introdueix el nou nom:");
 					s = br.readLine();
-					if(gControl.setBase(i, s)){
-						System.out.println("S'ha editat la Base correctament.");
+					try {
+					gControl.setBase(p, s);
 					}
-					else{
-						System.out.println("Hi ha hagut algun problema editant la Base.");
+					catch(IOException e){
+						System.out.println(e);
 					}
+					
 					break;
 			case 6:
 					System.out.println("Bases existents:");
+					try{
 					System.out.println(gControl.listBases());
+					}
+					catch(IOException e){
+						System.out.println(e);
+					}
 					break;
 			case 7:
 					System.out.println("Introdueix l'ID de la Base A (inici tram)");
@@ -184,6 +195,10 @@ public class GalaxiaControladorDriver {
 					catch(IOException e){
 						System.out.println(e);
 					}
+					break;
+			case 11:
+					System.out.println("Èxodes existents:");
+					System.out.println(gControl.listExodes());
 					break;
 				
 			default:
