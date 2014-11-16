@@ -5,6 +5,7 @@
 
 package propsw;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,15 +14,18 @@ public class Galaxia extends Graf<Base>{
 	private String id;
 	
 	private HashMap<String,Exode> exodes;
-	private HashMap<Integer,Base> bases;
 	private Capita capita;
+	
+	private boolean checkExode(String id){
+		//retorna true si hi ha un exode amb aquesta id, false altrament
+		return exodes.containsKey(id);
+	}
 	
 	//Constructor inicialitza les variables buides	
 		public Galaxia(Capita c){
 			++cont;
 			this.id = cont.toString();
 			this.exodes = new HashMap<String,Exode>();
-			this.bases = new HashMap<Integer,Base>();
 			capita = c;
 			
 		}
@@ -30,6 +34,7 @@ public class Galaxia extends Graf<Base>{
 			return capita;
 		}
 
+		//Possiblement prescindible?
 		public void setCapita(Capita capita) {
 			this.capita = capita;
 		}
@@ -38,17 +43,7 @@ public class Galaxia extends Graf<Base>{
 			return this.id;
 		}
 
-		//Retorna el MaxFlow en el graph actual de bases de la Galaxia. 
-		//Se li passa per parametre l'objecte èxode al cual se li assignará 
-		//el fluxe.
-		public int getMaxFlow(Exode e) {
-			//aqui s'ha de cridar: e.getMaxFlow ja que exode conte la classe FF
-			return e.getFlow();
-		}
-		
-		//Mètodes de control de les coleccions
-
-		
+		//Mètodes de control de les coleccions		
 		//Afegeix un èxode a la galaxia
 		public boolean addExode(Exode e){
 			this.exodes.put(e.getIdExode(), e);
@@ -62,41 +57,48 @@ public class Galaxia extends Graf<Base>{
 		}
 
 		//Elimina un èxode abans guardat en la galaxia que té assignat el ID en especial. Retorna el Exode eliminat
-		public Exode removeExode(String s) {
-			Exode e = this.exodes.get(s);
-			this.exodes.remove(s);
-			return e;
+		public Exode removeExode(String s) throws IOException{
+			if(! checkExode(s)) 
+	    		throw new IOException("El exode no existeix.");
+			else {
+				Exode e = this.exodes.get(s);
+				this.exodes.remove(s);
+				return e;
+			}
 		}
-		
-		//Afegeix una Base a la galaxia
-		public boolean addBase(Base e){
-			this.bases.put(e.getId(),e);
-			return true;
-		}
-		
-		//Retorna una Base abans guardada en la galaxia que té assignada el ID en especial
-		public Base getBase(String s){
-			return this.bases.get(s);
+	
+		//Elimina una Base abans guardat en la galaxia que té assignat el ID en especial. Retorna la Base eliminada
+		public Base removeBase(int id) throws IOException{
+			Base b = getNode(id);
+			removeNode(id);
+			return b;
 		}
 
-		//Elimina una Base abans guardat en la galaxia que té assignat el ID en especial. Retorna la Base eliminada
-		public Base removeBase(String s){
-			Base b = this.bases.get(s);
-			this.bases.remove(s);
-			return b;
+		
+		//Retorna una Base abans guardada en la galaxia que té assignada el ID en especial
+		public Base getBase(int id) throws IOException{
+			return this.getNode(id);
+		}
+
+		public int getBaseId(Base b) throws IOException{
+			return getNodeId(b);
 		}
 
 		public HashMap<String,Exode> getExodesHash(){
 			return this.exodes;
 		}
 		
-		public HashMap<Integer,Base> getBaseHash(){
-			return this.bases;
+		public ArrayList<Base> getBaseArray() throws IOException{
+			ArrayList<Base> ab = new ArrayList<Base>();
+			for (int i =0 ; i < this.getNSize(); ++i){
+				ab.add(i,this.getNode(i));
+			}
+			return ab;
 		}
 		
 		public ArrayList<String> getExodes(){
 			return new ArrayList<String>(exodes.keySet());
 		}
-		
 
+		
 }

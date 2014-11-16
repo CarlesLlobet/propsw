@@ -21,10 +21,9 @@ public class BaseDriver {
 	private static void menu()
 	{
 		System.out.println("Opcions:");
-        System.out.println("1) Consultar id de la base");
-        System.out.println("2) Consultar nom de la base"); 
-        System.out.println("3) Modificar nom de la base");
-        System.out.println("4) Escriure informació de la base");
+        System.out.println("1) Consultar nom de la base"); 
+        System.out.println("2) Modificar nom de la base");
+        System.out.println("3) Escriure informació de la base");
         System.out.println("0) exit");
 	}
 	
@@ -43,20 +42,17 @@ public class BaseDriver {
 			switch(op) 
 			{
 				case 1:
-        			System.out.println("El id de la base es: " + b.getId().toString());
-        			break;
-				case 2:
 					String nom = b.getNom();
 					if (nom != null) System.out.println("El nom de la base es: " + b.getNom());
 					else System.out.println("La base no té cap nom assignat");
 					break;
-				case 3:
+				case 2:
 					System.out.println("Introdueix el nou nom per a la base: ");
 					String n = br.readLine();
 					b.setNom(n);
 					break;
-				case 4:
-					System.out.println("ID " + "\t-\t" + "NOM");
+				case 3:
+					System.out.println("NOM");
 					System.out.println(b);
 					break;
 				default:
