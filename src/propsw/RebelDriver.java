@@ -1,5 +1,5 @@
 /*
- * Autor: Marcos Pérez
+ * @Author: Marcos Pérez Rubio
  * Grup 44 - 9.1
  */
 

@@ -1,7 +1,8 @@
 /*
- * Autor:Marcos Pérez
+ * @Author: Marcos Pérez Rubio
  * Grup 44 - 9.1
  */
+
 
 package propsw;
 
@@ -9,33 +10,57 @@ import java.io.IOException;
 
 public class Base {
 	
-	//Paràmetres privats
-
+	//Nom de la base
 	private String nom = null;
+	
+	//Galaxia a la qual esta associada la base
 	private Galaxia g;
 	
-	//Constructors
+	/**
+	 * Constructor d'un objecte Capita.
+	 * @param g Galaxia a la que pertany
+	 */
 	public Base(Galaxia g) throws IOException{
 		this.g = g;
 		g.afegirNode(this);
 	}
-	
+
+	/**
+	 * Constructor d'un objecte Capita.
+	 * @param nom Nom de la base
+	 * @param g Galaxia a la que pertany
+	 * @throws IOException
+	 */
 	public Base(String nom, Galaxia g) throws IOException{
 		this.nom = nom;
 		this.g = g;
 		g.afegirNode(this);
 	}
 	
+
+	/**
+	 * Consulta el nom de la base.
+	 * @return Retorna el nom de la base
+	 */
 	public String getNom(){
 		return this.nom;
 	}
 	
-	//Setters
+
+	/**
+	 * Canvia el nom de la base
+	 * @param nom Nom de la base
+	 */
 	public boolean setNom(String nom){
 		this.nom=nom;
 		return true;
 	}
 
+
+	/**
+	 * Prepara un string amb la informacio de la base
+	 * @return Retorna un string que correspon a la informacio de la base.
+	 */
 	@Override
 	public String toString() {
 		String res = new String();
@@ -48,6 +73,11 @@ public class Base {
 		return res;
 	}
 	
+	/**
+	 * Consulta la id de la base
+	 * @return Retorna la id de la base
+	 * @throws IOException
+	 */
 	public int getId() throws IOException{
 		int toRet=-1;
 		for (int i = 0; i < g.getNSize(); i++) {
