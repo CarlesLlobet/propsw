@@ -135,7 +135,7 @@ public class CapitaControlador {
 
 	//Elimina l' èxode de la galaxia del capita que ha iniciat la sessió i actualitza el llistat  
 	//de exodes de cada rebel que estaba assignat a l'èxode.
-	public boolean eliminarExode(String idExode) {
+	public boolean eliminarExode(String idExode) throws IOException {
 		
 		//Per a cada rebel se li elimina el exode si el tenia assignat
 		Exode e = getGalaxia().getExode(idExode);
@@ -156,7 +156,7 @@ public class CapitaControlador {
 	
 	//Elimina l' èxode de la galaxia del capita que ha iniciat la sessió i actualitza el llistat 
 	//de exodes de cada rebel que estaba assignat a l'èxode.
-	public boolean eliminarExode(String idExode, String idCapita) {
+	public boolean eliminarExode(String idExode, String idCapita) throws IOException {
 		
 		//Per a cada rebel se li elimina el exode si el tenia assignat
 		Exode e = getGalaxia(idCapita).getExode(idExode);

@@ -65,6 +65,7 @@ public class Exode {
 	public void execucioDijkstra() throws IOException {
 		ff = new FFDijkstra<Base>(idBaseInici,2,galaxia);
 		execucio();
+		
 	}
 	
 	
@@ -89,6 +90,7 @@ public class Exode {
 	
 	
 	private void execucio() throws IOException{
+		cost = 0;
 		camins = new HashMap<String, ArrayList<Integer>>();				//Reinicialitzem el mapa de camins  perque farem una nova execució
 		collsAmpolla = new HashMap<Integer, ArrayList<Integer[]>>();	//Reinicialitzem els colls d'ampolla perque fem una nova execució de l'algoritme
 		// Hem de unir els destins amb el sumidero en el graf inicial
@@ -146,10 +148,11 @@ public class Exode {
 	
 	//Assigna el cami als rebels que tenen el destí igual que la penultima posició del array camino
 	//(la última es el sumidero). Només assigna camins a rebels que no tenen encara cap
-	//camí assignat. 
+	//camí assignat....
 	private void assignaRebels(ArrayList<Integer> camino, int numRebels, Graf<Base> g, HashMap<Integer, Integer> destinsResum) throws IOException {
 		Iterator<String> it = destins.keySet().iterator();
 		camino.remove(camino.size()-1);
+		//Es computen el colls d'ampolla
 		for (int i = 0; i < camino.size()-1; i++) {
 			if(g.getCapacidadAresta(g.getIDAresta(camino.get(i),camino.get(i+1)))<=0){
 				Integer[] aresta = new Integer[2];
@@ -160,6 +163,8 @@ public class Exode {
 				collsAmpollaDesti.add(aresta);
 				collsAmpolla.put(camino.get(camino.size()-1),collsAmpollaDesti);
 			}
+			//Computem la suma dels costs de tots els rebels que passen per aquell camí.
+			cost =cost + g.getCosteAresta(g.getIDAresta(camino.get(i),camino.get(i+1)))*numRebels;
 		}
 		while(it.hasNext() && numRebels>0){
 			String idRebel =it.next();
