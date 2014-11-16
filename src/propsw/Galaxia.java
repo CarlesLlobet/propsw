@@ -42,6 +42,28 @@ public class Galaxia extends Graf<Base>{
 		public String getId(){
 			return this.id;
 		}
+		
+		public Graf<Base> getCopiaGraf() throws IOException{
+			Graf<Base> toReturn = new Graf<Base>();
+			//Afegim els nodes en el graf Copia
+			for (int j = 0; j < this.getNSize(); j++) {
+				toReturn.afegirNode(this.getNode(j));
+			}
+			
+			//Connectem els nodes
+			for (int j = 0; j < this.getNSize(); j++) {
+				ArrayList<Integer> al = this.getOutNodes(j);
+				for (Integer integer : al) {
+					int idAresta = getIDAresta(j, integer);
+					//Posem mateix capacitat mateix cost i mateix fluxe
+					toReturn.conectarNodes(j, integer, getCapacidadAresta(idAresta), getCosteAresta(idAresta));
+					toReturn.setFlujoAresta(toReturn.getIDAresta(j, integer), getFlujoAresta(idAresta));
+				}
+			}
+			
+			
+			return toReturn;
+		}
 
 		//Mètodes de control de les coleccions		
 		//Afegeix un èxode a la galaxia

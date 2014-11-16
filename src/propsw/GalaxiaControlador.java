@@ -6,6 +6,7 @@
 package propsw;
 import java.io.*;
 import java.lang.String;
+import java.util.ArrayList;
 
 public class GalaxiaControlador extends CapitaControlador {
 	
@@ -14,8 +15,7 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * Constructor d'un objecte GalaxiaControlador.
 	 */
 	public GalaxiaControlador(){
-//		capiControl=new CapitaControlador();
-//		capiControl.login("a", "b");
+		
 		super();
 	}
 	
@@ -47,24 +47,18 @@ public class GalaxiaControlador extends CapitaControlador {
 	 */
 	public void addBase(String nom) throws IOException{
 		Base newBase=new Base(nom,getGalaxia());
-		getGalaxia().addBase(newBase);
 	}
 
 	/**
 	 * S'esborra la base amb la id indicada al paràmetre
 	 * @param idBase id de la Base a esborrar
 	 * @return Booleà que indica si l'identificador de la base es correspon amb una base existent.
+	 * @throws IOException si id no existeix
 	 */
-	public boolean deleteBase(Integer idBase) {
+	public void deleteBase(int idBase) throws IOException{
 		
-		String idStr=idBase.toString();
-		if(getGalaxia().getBase(idStr)!=null){
-			getGalaxia().removeBase(idStr);
-			return true;
-		}
-		else{
-			return false;
-		}
+			getGalaxia().removeBase(idBase);
+		
 	}
 
 	/**
@@ -72,27 +66,24 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * @param idBase identificador de la Base a editar
 	 * @param nom Nou nom que prendrà la base
 	 * @return Booleà que indica si l'identificador de la base es correspon amb una base existent.
+	 * @throws IOException si id no existeix
 	 */
-	public boolean setBase(Integer idBase, String nom) {
+	public void setBase(int idBase, String nom) throws IOException{
 		
-		String str=idBase.toString();
+			getGalaxia().getBase(idBase).setNom(nom);
 		
-		if(getGalaxia().getBase(str)!=null){
-			getGalaxia().getBase(str).setNom(nom);
-			return true;
-		}
-		else{
-			return false;
-		}
 	}
 
 	/**
 	 * Llistat de totes les bases de la Galàxia
 	 * @return String que conté l'id i el nom de totes les bases de la Galàxia actual.
+	 * @throws IOException si id no existeix
 	 */
-	public String listBases() {
+	public String listBases() throws IOException{
+		
 		String str;
-		str=getGalaxia().getBaseHash().toString();
+		ArrayList <Base> bases=getGalaxia().getBaseArray();
+		str=bases.toString();
 		return str;
 	}
 
@@ -102,7 +93,7 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacència.
 	 * @param capacitat Valor de capacitat que prendrà 
 	 * @param cost
-	 * @throws IOException
+	 * @throws IOException si id no existeix
 	 */
 	public void createAdjacency(int from, int to, int capacitat, double cost) throws IOException{
 		
@@ -115,7 +106,7 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacència.
 	 * @param capacitat Valor actualitzat de capacitat del tram
 	 * @param cost valor actualitzat de cost del tram 
-	 * @throws IOException
+	 * @throws IOException si id no existeix
 	 */
 	public void setAdjacency(int from, int to, int capacitat, double cost)throws IOException{
 		
@@ -127,7 +118,7 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * S'elimina un tram entre dues bases.
 	 * @param from identificador de la Base de la qual ha de partir l'adjacència.
 	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacència.
-	 * @throws IOException
+	 * @throws IOException si id no existeix
 	 */
 	public void deleteAdjacencia(int from, int to) throws IOException{
 		
@@ -139,7 +130,7 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * @param from identificador de la Base de la qual ha de partir l'adjacència.
 	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacència.
 	 * @return objecte aresta demanat
-	 * @throws IOException
+	 * @throws IOException si id no existeix
 	 */
 	public Galaxia.Aresta getAdjacency(int from, int to) throws IOException {
 		
@@ -154,13 +145,13 @@ public class GalaxiaControlador extends CapitaControlador {
 		return aresta;
 	}
 	
-//	@Override
-//	public Galaxia getGalaxia(){
-//		return capiControl.getGalaxia();
-//	}
-//	
-//	@Override
-//	public Capita getCapita(){
-//		return capiControl.getCapita();
-//	}
+	/**
+	 * Llista els exodes existents per la Galàxia
+	 * @return un string amb els ids dels èxodes
+	 */
+	public String listExodes(){
+		String sRet=getGalaxia().getExodes().toString();
+		return sRet;
+	}
+	
 }
