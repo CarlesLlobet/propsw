@@ -12,10 +12,12 @@ public class Base {
 	//Paràmetres privats
 
 	private String nom;
+	private Galaxia g;
 	
 	//Constructors
 	public Base(Galaxia g) throws IOException{
 		nom= null;
+		this.g = g;
 		g.afegirNode(this);
 	}
 	
@@ -40,5 +42,14 @@ public class Base {
 		return nom;
 	}
 	
+	public int getId() throws IOException{
+		int toRet=-1;
+		for (int i = 0; i < g.getNSize(); i++) {
+			if(g.getNode(i)==this){
+				toRet = i;
+			}
+		}
+		return toRet;
+	}
 	
 }

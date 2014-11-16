@@ -50,6 +50,9 @@ public class ExodeDriver {
 	
 	public static void main(String[] args) throws IOException {
 		//Es crea un Exode
+		
+		
+		
 		Exode e = new Exode(null);
 	
 		InputStreamReader isr = new InputStreamReader(System.in);
