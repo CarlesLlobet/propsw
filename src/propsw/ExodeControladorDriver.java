@@ -1,3 +1,7 @@
+/*
+ * @Author: Arnau Bennassar Formenti
+ * Grup 44 - 9.1
+ */ 
 
 package propsw;
 
@@ -5,8 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+
 
 public class ExodeControladorDriver {
 	
@@ -37,22 +40,19 @@ public class ExodeControladorDriver {
         System.out.println("0) exit");
 	}
 	
-	
-	
-	
 	public static void main(String[] args) throws IOException {
+	//INICIALITZACIONS NECESARIES PER PROVAR LA CLASE
 		ExodeControlador c = new ExodeControlador();
+	//es crea el capita
 		c.login("foo", "foooooo");
-	//	Capita cc = c.getCapita();
-	//	Galaxia g = c.getGalaxia();
+	//s'afegeixen 6 bases
 		new Base(c.getGalaxia());
 		new Base(c.getGalaxia());
 		new Base(c.getGalaxia());
 		new Base(c.getGalaxia());
 		new Base(c.getGalaxia());
 		new Base(c.getGalaxia());
-	
-		
+	//es crean conexions entre les anteriors bases
 		c.getGalaxia().conectarNodes(0, 1, 5, 5.0);
 		c.getGalaxia().conectarNodes(0, 2, 7, 5.0);
 		c.getGalaxia().conectarNodes(1, 3, 2, 5.0);
@@ -61,9 +61,9 @@ public class ExodeControladorDriver {
 		c.getGalaxia().conectarNodes(2, 4, 4, 5.0);
 		c.getGalaxia().conectarNodes(2, 5, 3, 5.0);
 		c.getGalaxia().conectarNodes(4, 3, 2, 5.0);
-
+	//es crea l'exode, amb base inicial 0
 		String idExode = c.crearExode(0);
-
+	//
 		
 		InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader (isr);
@@ -73,19 +73,19 @@ public class ExodeControladorDriver {
         while (op != 0) {
 			switch(op) 
 			{
-				case 1: //Executar
+				case 1: //Executar BFS
 					c.execucio(idExode, 0);
 					break;
 					
-				case 2: // Executar
+				case 2: // Executar DFS
 					c.execucio(idExode, 1);
 					break;
 					
-				case 3: // Executar
+				case 3: // Executar Dijkstra
 					c.execucio(idExode, 2);
 					break;
 					
-				case 4:
+				case 4://Consultar base inicial
 					System.out.println("La base "+ c.getIniciExode(idExode) +" es el punt de partida de l'exode");
 					break;
 					
@@ -94,9 +94,9 @@ public class ExodeControladorDriver {
 					break;
 					
 				case 6: //Consultar els rebels de l'exode
-					System.out.println("S'indica idRebel = BaseDesti"+c.getRebelsExode(idExode));
+					System.out.println("S'indica idRebel = BaseDesti \n"+c.getRebelsExode(idExode));
 					break;
-					
+				
 				case 7: //Consultar els camins dels rebels de l'exode
 					System.out.println("Camins dels rebels: "+c.getCaminsExode(idExode));
 					break;
