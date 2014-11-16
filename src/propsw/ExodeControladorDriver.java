@@ -18,6 +18,17 @@ public class ExodeControladorDriver {
 		System.out.println("------------------------");
         System.out.println("|    Driver de ExodeControlador    |");
         System.out.println("------------------------");
+        System.out.println("\nEl driver fa servir una galaxia fixe \n");
+        System.out.println("Aquesta galaxia esta formada per 6 bases,");
+        System.out.println("\namb les seguents adjacencies:  (idBase from, idBase to, capacitat, cost) \n");
+        System.out.println("(0, 1, 5, 5.0) \n");
+        System.out.println("(0, 2, 7, 5.0) \n");
+        System.out.println("(1, 3, 2, 5.0) \n");
+        System.out.println("(1, 2, 1, 5.0) \n");
+        System.out.println("(2, 3, 9, 5.0) \n");
+        System.out.println("(2, 4, 4, 5.0) \n");
+        System.out.println("(2, 5, 3, 5.0) \n");
+        System.out.println("(4, 3, 2, 5.0) \n");
 	}
 
 	private static void menu()
