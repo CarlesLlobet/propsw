@@ -10,10 +10,10 @@ import java.util.Iterator;
 
 public class Exode {
 	private Integer idBaseInici;
-	private ArrayList<String> rebels;
 	private HashMap<String,ArrayList<Integer>> camins;
 	private HashMap<String,Integer> destins;
-	private Graf<Base> grafResidual;
+	private Graf<Base> grafResidualPostProces;
+	private Graf<Base> grafResidualPreProces;
 	private Graf<Base> grafInicial;
 	private Galaxia galaxia;
 	private Integer flow;
@@ -24,15 +24,15 @@ public class Exode {
 	private FordFulkerson<Base> ff;
 	private HashMap<Integer,ArrayList<Integer[]>> collsAmpolla;
 	
-	public Exode(Galaxia g){
+	public Exode(Galaxia g) throws IOException{
 		++cont;
 		this.idExode = cont.toString();
-		grafInicial = g;
+		grafInicial = g.getCopiaGraf();
 		galaxia = g;
 		destins = new HashMap<String, Integer>();
 		camins = new HashMap<String, ArrayList<Integer>>();
 		collsAmpolla = new HashMap<Integer, ArrayList<Integer[]>>();
-		rebels = new ArrayList<String>();
+		
 	}
 	
 	//Retorna un HashMap amb key=idRebel i value = idBase (Destí assignat al Rebel)
@@ -75,12 +75,6 @@ public class Exode {
 	public HashMap<String, ArrayList<Integer>> getCamins() {
 		return camins;
 	}
-
-
-	public ArrayList<String> getCaminsRebel(String idRebel) {
-		 //TODO
-		return new ArrayList<String>();
-	}
 	
 	// Executa el FF-DFS i emplena la variable camins assignant un camí a cada rebel assignat a l'exode.
 	public void execucioDFS() throws IOException {
@@ -95,18 +89,21 @@ public class Exode {
 		collsAmpolla = new HashMap<Integer, ArrayList<Integer[]>>();	//Reinicialitzem els colls d'ampolla perque fem una nova execució de l'algoritme
 		// Hem de unir els destins amb el sumidero en el graf inicial
 		Base b = new Base(galaxia);
-		grafResidual =  grafInicial;									//TODO: es passa la referencia i no la copia!! Aixo fara que al acabar la execucuó el graf inicial sigui el graf final
+		grafResidualPostProces =  galaxia.getCopiaGraf();									//TODO: es passa la referencia i no la copia!! Aixo fara que al acabar la execucuó el graf inicial sigui el graf final
 		HashMap<Integer,Integer> destinsResum = getDestinsResum();
 		ArrayList<Integer> dests = new ArrayList<Integer>(destinsResum.keySet());
 		int sizeDests = dests.size();
 		for (int i = 0; i < sizeDests; i++){
 			//LA CAPACITAT DE LA ARESTA QUE VA AL SUMIDERO ES EL NUMERO DE REBELS QUE VAN A AQUELL DESTÍ!!!!!!!
-			grafResidual.conectarNodes(dests.get(i), b.getId(), destinsResum.get(dests.get(i)), Double.MIN_VALUE);
+			grafResidualPostProces.conectarNodes(dests.get(i), b.getId(), destinsResum.get(dests.get(i)), Double.MIN_VALUE);
 		}
-		grafResidual = ff.findMaxFlow(grafResidual, idBaseInici, b.getId());
+		grafResidualPostProces = ff.findMaxFlow(grafResidualPostProces, idBaseInici, b.getId());
 		flow = ff.getMaxFlow();					//El numero de rebels que arriben als seus destins.
+		grafResidualPreProces = galaxia.getCopiaGraf(grafResidualPostProces);
 		//Surten "n=flow" rebels de l'origen ....
-		generaCamins(grafResidual,idBaseInici, new ArrayList<Integer>(), flow, destinsResum);			//El post-processament del graf residual
+		generaCamins(grafResidualPostProces,idBaseInici, new ArrayList<Integer>(), flow, destinsResum);			//El post-processament del graf residual
+		galaxia.removeNode(b.getId());
+		actualitzat = true;
 	}
 
 	//Donat un graf residual, recursivament, el va recorrent desde el node inicial fins al sumidero 
@@ -242,28 +239,22 @@ public class Exode {
 	}
 
 	public ArrayList<String> getRebels() {
-		return rebels;
+		return new ArrayList<String>(destins.keySet());
 	}
 
-	public void setRebels(ArrayList<String> rebels) {
-		this.rebels = rebels;
-	}
+	
 
 	public Double getCost() {
 		return cost;
 	}
 
-	public void setCost(Double cost) {
-		this.cost = cost;
-	}
+
 	
 	public Integer getFlow() {
 		return flow;
 	}
 	
-	public void setFlow(Integer flow) {
-		this.flow = flow;
-	}
+
 	
 	public boolean isActualitzat() {
 		return actualitzat;
@@ -314,6 +305,11 @@ public class Exode {
 	public Galaxia getGalaxia() {
 		return galaxia;
 	}
+
+	public Graf<Base> getGrafResidual() {
+		return grafResidualPreProces;
+	}
+	
 	
 	
 	

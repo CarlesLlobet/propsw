@@ -43,6 +43,29 @@ public class Galaxia extends Graf<Base>{
 			return this.id;
 		}
 		
+		public Graf<Base> getCopiaGraf(Graf<Base> bG) throws IOException{
+			Graf<Base> toReturn = new Graf<Base>();
+			//Afegim els nodes en el graf Copia
+			for (int j = 0; j < bG.getNSize(); j++) {
+				toReturn.afegirNode(bG.getNode(j));
+			}
+			
+			//Connectem els nodes
+			for (int j = 0; j < bG.getNSize(); j++) {
+				ArrayList<Integer> al = bG.getOutNodes(j);
+				for (Integer integer : al) {
+					int idAresta = bG.getIDAresta(j, integer);
+					//Posem mateix capacitat mateix cost i mateix fluxe
+					toReturn.conectarNodes(j, integer, bG.getCapacidadAresta(idAresta), bG.getCosteAresta(idAresta));
+					toReturn.setFlujoAresta(toReturn.getIDAresta(j, integer), bG.getFlujoAresta(idAresta));
+				}
+			}
+			
+			
+			return toReturn;
+		}
+		
+		
 		public Graf<Base> getCopiaGraf() throws IOException{
 			Graf<Base> toReturn = new Graf<Base>();
 			//Afegim els nodes en el graf Copia
