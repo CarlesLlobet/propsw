@@ -70,7 +70,7 @@ public class tests {
 		e.afegirRebel(idRebel8, 5);
 		e.afegirRebel(idRebel3, 5);
 		
-		e.execucioBFS();				//Canvia al tipus d'execuci� que vulguis
+		e.execucioDijkstra();				//Canvia al tipus d'execuci� que vulguis
 		
 		System.out.println(e.getFf().printMatrix(g));
 		
