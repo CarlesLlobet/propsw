@@ -14,9 +14,9 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * Constructor d'un objecte GalaxiaControlador.
 	 */
 	public GalaxiaControlador(){
-		capiControl=new CapitaControlador();
-		capiControl.login("a", "b");
-		
+//		capiControl=new CapitaControlador();
+//		capiControl.login("a", "b");
+		super();
 	}
 	
 	/**
@@ -154,13 +154,13 @@ public class GalaxiaControlador extends CapitaControlador {
 		return aresta;
 	}
 	
-	@Override
-	public Galaxia getGalaxia(){
-		return capiControl.getGalaxia();
-	}
-	
-	@Override
-	public Capita getCapita(){
-		return capiControl.getCapita();
-	}
+//	@Override
+//	public Galaxia getGalaxia(){
+//		return capiControl.getGalaxia();
+//	}
+//	
+//	@Override
+//	public Capita getCapita(){
+//		return capiControl.getCapita();
+//	}
 }
