@@ -1,4 +1,8 @@
-//@author: Marcos Pérez
+/*
+ * Autor: Marcos Pérez
+ * Grup 44 - 9.1
+ */
+
 package propsw;
 
 import java.util.ArrayList;
@@ -33,11 +37,6 @@ public class Galaxia extends Graf<Base>{
 		public String getId(){
 			return this.id;
 		}
-		
-		//Constructor inicialitza les variables desde un String (Fitxer de text)
-		public Galaxia(String s){
-			
-		}
 
 		//Retorna el MaxFlow en el graph actual de bases de la Galaxia. 
 		//Se li passa per parametre l'objecte èxode al cual se li assignará 
@@ -48,6 +47,7 @@ public class Galaxia extends Graf<Base>{
 		}
 		
 		//Mètodes de control de les coleccions
+
 		
 		//Afegeix un èxode a la galaxia
 		public boolean addExode(Exode e){

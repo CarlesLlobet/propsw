@@ -1,4 +1,7 @@
-//@Author: Marcos Pérez
+/*
+ * Autor: Marcos Pérez
+ * Grup 44 - 9.1
+ */
 package propsw;
 
 import java.io.BufferedReader;
@@ -61,25 +64,21 @@ public class CapitaDriver {
 					else System.out.println("El capità no té cap nom assignat");
 					break;
 				case 5:
-					//AFEGIR CONTENIDOR REBELS
 					HashMap<String,Rebel> cr = new HashMap<String,Rebel>();
 					c.setRebels(cr);
 					System.out.println("S'ha sobreescrit el contenidor de rebels" );
 					break;
 				case 6:
-					//CONSULTAR CONTENIDOR REBELS
 					HashMap<String,Rebel> c1 = c.getRebels();
 					System.out.println("S'ha consultat el contenidor de rebels");
 					break;
 				case 7:
-					//ASSOCIAR GALAXIA
 					Galaxia g = new Galaxia(c);
 					System.out.println("El id de la galaxia g es " + g.getId().toString());
 					c.setGalaxia(g);
 					System.out.println("S'ha creat una galaxia amb id :" + g.getId().toString() + " i s'ha assignat al capità");
 					break;
 				case 8:
-					//CONSULTAR GALAXIA
 					Galaxia g1 = c.getGalaxia();
 					System.out.println("S'ha consultat la galaxia amb id : " + g1.getId().toString());
 					break;

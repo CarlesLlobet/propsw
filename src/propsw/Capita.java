@@ -1,5 +1,7 @@
-//@Autor: Marcos Pérez
-
+/*
+ * Autor: Marcos Pérez
+ * Grup 44 - 9.1
+ */
 package propsw;
 
 import java.util.HashMap;
@@ -46,7 +48,6 @@ public class Capita {
 	}
 
 	
-	//cal?
 	public boolean setRebels(HashMap<String,Rebel> cr){
 		//pre: Les dades a cr són consistents amb les que hi ha a ContReb
 		//post: cr s'inserta a ContReb
@@ -62,8 +63,6 @@ public class Capita {
 	}
 		
 	//GETTERS
-	
-	
 	public String getId(){
 		//pre: 
 		//post: es retorna l'id del capita
@@ -71,17 +70,17 @@ public class Capita {
 	}
 	
 	public String getNom(){
+		//pre: 
+		//post: es retorna el nom del capita
 		return this.nom;
 	}
 	
 	
-	//cal?
 	public HashMap<String,Rebel> getRebels(){
 		//pre:
 		//post: Es retorna el hashmap ContReb
 		return this.ContReb;
 	}
-	
 	
 	
 	public Galaxia getGalaxia(){

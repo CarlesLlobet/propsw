@@ -1,3 +1,8 @@
+/*
+ * Autor: Marcos Pérez
+ * Grup 44 - 9.1
+ */
+
 package propsw;
 
 import java.io.BufferedReader;
@@ -19,6 +24,7 @@ public class BaseDriver {
         System.out.println("1) Consultar id de la base");
         System.out.println("2) Consultar nom de la base"); 
         System.out.println("3) Modificar nom de la base");
+        System.out.println("4) Escriure informació de la base");
         System.out.println("0) exit");
 	}
 	
@@ -48,6 +54,10 @@ public class BaseDriver {
 					System.out.println("Introdueix el nou nom per a la base: ");
 					String n = br.readLine();
 					b.setNom(n);
+					break;
+				case 4:
+					System.out.println("ID " + "\t-\t" + "NOM");
+					System.out.println(b);
 					break;
 				default:
 					System.out.println("No existeix aquesta opció");

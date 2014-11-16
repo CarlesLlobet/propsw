@@ -1,4 +1,8 @@
-//@Author: Marcos Pérez
+/*
+ * Autor: Marcos Pérez
+ * Grup 44 - 9.1
+ */
+
 package propsw;
 
 import java.util.ArrayList;

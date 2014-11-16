@@ -49,7 +49,7 @@ public class Base {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub+
 		return id+"\t-\t"+nom;
 	}
 	

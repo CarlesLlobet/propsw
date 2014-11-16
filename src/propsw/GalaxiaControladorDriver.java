@@ -8,9 +8,9 @@ public class GalaxiaControladorDriver {
 	
 	private static void intro()
 	{
-	System.out.println("------------------------");
+	System.out.println("------------------------------------");
 	System.out.println("| Driver de Controlador de Galaxia |");
-	System.out.println("------------------------");
+	System.out.println("------------------------------------");
 	}
 	private static void menu()
 	{

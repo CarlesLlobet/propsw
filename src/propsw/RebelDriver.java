@@ -1,4 +1,8 @@
-//@author: Marcos Pérez
+/*
+ * Autor: Marcos Pérez
+ * Grup 44 - 9.1
+ */
+
 package propsw;
 
 import java.io.BufferedReader;
@@ -24,6 +28,7 @@ public class RebelDriver {
         System.out.println("4) Modificar nom del rebel");
         System.out.println("5) Insertar un nou exode");
         System.out.println("6) Esborrar exode");
+        System.out.println("7) Escriure informació rebel");
         System.out.println("0) exit");
 	}
 	
@@ -77,6 +82,10 @@ public class RebelDriver {
 					boolean b2 = r.esborrarExode(idExode2);
 					if (b2) System.out.println("S'ha esborrat l'exode amb id " + idExode2);
 					else System.out.println("No existeix cap exode amb id: " + idExode2);
+					break;
+				case 7:
+					System.out.println("ID " + "\t-\t" + "NOM");
+					System.out.println(r);
 					break;
 				default:
 					System.out.println("No existeix aquesta opció");
