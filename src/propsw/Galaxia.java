@@ -74,7 +74,6 @@ public class Galaxia extends Graf<Base>{
 			return b;
 		}
 
-		
 		//Retorna una Base abans guardada en la galaxia que té assignada el ID en especial
 		public Base getBase(int id) throws IOException{
 			return this.getNode(id);
