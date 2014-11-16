@@ -10,19 +10,19 @@ import java.util.Collections;
 
 /**
  *
- * @author Mingjian 
+ * @author Mingjian Chen
  */
  public class EdmondsKarp<T> extends FordFulkerson<T>
  {
 
- 	// nombre de nodes
  	private ArrayList<ArrayList<Integer>> camins;
  	private HashMap<Integer, Integer> fromNode;
 
  	/**
- 	 *
- 	 *
- 	 *
+ 	 * Constructor de EdmondsKarp
+ 	 * @param nodeInicial l'id de node inicial(sink)
+ 	 * @param nodeDesti l'id de node desti(tail)
+ 	 * @param graf el graf de tipus T
  	 */
  	public EdmondsKarp(Integer nodeInicial, Integer nodeDesti, Graf<T> graf)
  	{
@@ -32,8 +32,10 @@ import java.util.Collections;
  	}
 
  	/**
- 	 *
- 	 *
+ 	 * Donat un graf i un enter, s'obte un conjunt de camins per tal que hi hagi un maxflow de n
+ 	 * @param graf el graf de tipus T
+ 	 * @param n el nombre n, ha de ser major que 0
+ 	 * @return Un arraylist de arraylist de enters
  	 *
  	 */
  	public ArrayList<ArrayList<Integer>> retorna_camins(Graf<T> graf, Integer n) throws IOException
@@ -45,18 +47,13 @@ import java.util.Collections;
  		ArrayList<Integer> cami = new ArrayList<Integer>();
  		
  		Integer sumFlow = 0;
- 		while(((cami = dameCamino(graf)).size() != 0)  && sumFlow < n)
- 		{
- 			
- 	
+ 		while(((cami = dameCamino(graf)) != null)  && sumFlow <= n)
+ 		{			
  			Integer mfc = maxFlowCurrent(graf, fromNode);
- 	
  			if(mfc <= n)
  			{
  				camins.add(cami);
- 			
  				sumFlow += mfc;
- 	
  			}
  		}
 
@@ -64,8 +61,10 @@ import java.util.Collections;
  	}
 
  	/**
- 	 *
- 	 *
+ 	 * La funció que calcula el maxFlow actual del graf
+ 	 * @param graf el graf de tipus T
+ 	 * @param fromNode un Hashmap de Integer i Integer per saber el node padre de cada node
+ 	 * @return un enter que es el maxFlow present
  	 */
  	private Integer maxFlowCurrent(Graf<T> graf, HashMap<Integer, Integer> fromNode) throws IOException
  	{
@@ -78,43 +77,35 @@ import java.util.Collections;
 
  		for (Integer v = t; v != s; v = fromNode.get(v))
         {
-   
             u = fromNode.get(v);
-      
             idArestaUV = graf.getIDAresta(u, v);
-
             capacitatUV = graf.getCapacidadAresta(idArestaUV);
-         
             path_flow = Math.min(path_flow, capacitatUV);
         }
  		
 
-
         for (Integer v = t; v != s; v = fromNode.get(v))
         {
-        	
             u = fromNode.get(v);
-           
             idArestaUV = graf.getIDAresta(u, v);
-           
+
             capacitatUV = graf.getCapacidadAresta(idArestaUV);
-      
+
             capacitatUV -= path_flow;
             cost = graf.getCosteAresta(idArestaUV);
             graf.substituirAresta(idArestaUV, capacitatUV, cost);
-  
         }
 
         maxFlow += path_flow;
-        //System.out.println("maxFlow = " + maxFlow + "\n");
         return path_flow;
 
  	}
 
  	/**
- 	 * 
- 	 *
- 	 *
+ 	 * La funcio BFS per buscar un cami de s fins a t, aquesta funcio sobreescriu la mateixa funcio de
+ 	 * la classe FordFulkerson
+ 	 * @param graf un graf de tipus T.
+ 	 * @return un arraylist de enters que passa de s a t. 
  	 *
  	 */
  	@Override
@@ -123,9 +114,8 @@ import java.util.Collections;
 
 
  		Integer V = graf.getNSize();
- 		//System.out.println("V = " +  V);
  		boolean visited[] = new boolean[V];
- 		ArrayList<Integer> path = new ArrayList<Integer>();
+ 		ArrayList<Integer> path;
  		
  		//create a queue, enqueue the vertex and mark the vertex as visited
  		Queue<Integer> queue = new LinkedList<Integer>();
@@ -137,8 +127,9 @@ import java.util.Collections;
  			//remove the vertex at the head
  			Integer head = queue.poll();
  			visited[head] = true;
- 
+
  			if(head == t) found = true;
+ 			
  			else 
  			{
 	 			ArrayList<Integer> outArray = new ArrayList<Integer>();
@@ -146,47 +137,41 @@ import java.util.Collections;
 	 			outArray = graf.getOutNodes(head);
 	 			for(Integer i = 0; i < outArray.size(); ++i)
 	 			{
-	 	
+	 				
 	 				if(! visited[outArray.get(i)])
 	 				{
 		 			
 		 				Integer idEdge = graf.getIDAresta(head, outArray.get(i));
-		 				
-		 				Integer flux = graf.getFlujoAresta(idEdge);
-		 			
 		 				Integer capacity = graf.getCapacidadAresta(idEdge);
-		 				
-		 				if((capacity > 0) && (flux < capacity))
+
+		 				if(capacity > 0)
 		 				{
-		 					
 		 					if(head == s) fromNode.put(outArray.get(i), s);
 		 					else fromNode.put(outArray.get(i), head);
-		 					
 		 					queue.add(outArray.get(i));
-		 					
 		 				}
 		 			}
 	 			}
 	 		}
  		}
 
+
  		if(found)
  		{
  			// empezamos a mirar por tail
+ 			path = new ArrayList<Integer>();
  			Integer aux = t;
- 		
+
  			path.add(aux);
 	 		while(fromNode.get(aux) != -1)
 	 		{
-	 			
+	 			Integer aux_ = aux;
 	 			aux = fromNode.get(aux); // obtiene el hijo
 	 			path.add(aux);
-	 	
 	 		}
-
-	 		Collections.reverse(path);
-	 		
+	 		Collections.reverse(path);	
 	 	}
+	 	else path = null;
 	 	return path;
  	}
 
