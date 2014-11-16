@@ -1,5 +1,5 @@
 /*
- * Autor: Marc Ronquillo
+ * Autor:Marcos Pérez
  * Grup 44 - 9.1
  */
 
@@ -11,18 +11,18 @@ public class Base {
 	
 	//Paràmetres privats
 
-	private String nom;
+	private String nom = null;
 	private Galaxia g;
 	
 	//Constructors
 	public Base(Galaxia g) throws IOException{
-		nom= null;
 		this.g = g;
 		g.afegirNode(this);
 	}
 	
 	public Base(String nom, Galaxia g) throws IOException{
 		this.nom = nom;
+		this.g = g;
 		g.afegirNode(this);
 	}
 	
@@ -38,8 +38,14 @@ public class Base {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub+
-		return nom;
+		String res = new String();
+		try {
+			 res = nom + "\t-\t" + Integer.toString(getId());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	public int getId() throws IOException{

@@ -22,20 +22,21 @@ public class BaseDriver {
 	{
 		System.out.println("Opcions:");
         System.out.println("1) Consultar nom de la base"); 
-        System.out.println("2) Modificar nom de la base");
-        System.out.println("3) Escriure informació de la base");
+        System.out.println("2) Consultar el id de la base");
+        System.out.println("3) Modificar nom de la base");
+        System.out.println("4) Escriure informació de la base");
         System.out.println("0) exit");
 	}
 	
 	public static void main(String[] args) throws IOException {
-		//Es crea una base buida
 		Capita c = new Capita();
-		Base b = new Base(c.getGalaxia());
+		Base b = new Base("Aargonar",c.getGalaxia());
 		
 		InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader (isr);
         intro();
         menu();
+		
         int op = Integer.parseInt(br.readLine());
 		
 		while (op != 0) {
@@ -47,13 +48,17 @@ public class BaseDriver {
 					else System.out.println("La base no té cap nom assignat");
 					break;
 				case 2:
+					int id = b.getId();
+					System.out.println("El id de la base es: " + Integer.toString(id));
+					break;
+				case 3:
 					System.out.println("Introdueix el nou nom per a la base: ");
 					String n = br.readLine();
 					b.setNom(n);
 					break;
-				case 3:
-					System.out.println("NOM");
-					System.out.println(b);
+				case 4:
+					System.out.println("NOM" +"\t-\t " +"ID");
+					System.out.println(b);					
 					break;
 				default:
 					System.out.println("No existeix aquesta opció");
