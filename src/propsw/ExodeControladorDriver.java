@@ -1,9 +1,12 @@
+
 package propsw;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class ExodeControladorDriver {
 	
@@ -37,9 +40,6 @@ public class ExodeControladorDriver {
 	
 	
 	
-	
-	
-	
 	public static void main(String[] args) throws IOException {
 		ExodeControlador c = new ExodeControlador();
 		c.login("foo", "foooooo");
@@ -51,6 +51,7 @@ public class ExodeControladorDriver {
 		new Base(c.getGalaxia());
 		new Base(c.getGalaxia());
 		new Base(c.getGalaxia());
+	
 		
 		c.getGalaxia().conectarNodes(0, 1, 5, 5.0);
 		c.getGalaxia().conectarNodes(0, 2, 7, 5.0);
@@ -61,16 +62,15 @@ public class ExodeControladorDriver {
 		c.getGalaxia().conectarNodes(2, 5, 3, 5.0);
 		c.getGalaxia().conectarNodes(4, 3, 2, 5.0);
 
-
 		String idExode = c.crearExode(0);
+
 		
 		InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader (isr);
         intro();
         menu();
         int op = Integer.parseInt(br.readLine());
-		
-		while (op != 0) {
+        while (op != 0) {
 			switch(op) 
 			{
 				case 1: //Executar
@@ -94,7 +94,7 @@ public class ExodeControladorDriver {
 					break;
 					
 				case 6: //Consultar els rebels de l'exode
-					System.out.println(c.getRebelsExode(idExode));
+					System.out.println("S'indica idRebel = BaseDesti"+c.getRebelsExode(idExode));
 					break;
 					
 				case 7: //Consultar els camins dels rebels de l'exode
@@ -120,6 +120,7 @@ public class ExodeControladorDriver {
 					System.out.println("El rebel amb id: "+ idR +" S'afegira, ");
 					System.out.println("introdueix la base de desti del rebel:");
 					c.afegirRebelExode(idExode, idR, Integer.parseInt(br.readLine()));
+					
 					break;
 					
 				case 12: //modificar un rebel de l'exode

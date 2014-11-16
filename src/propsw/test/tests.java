@@ -23,7 +23,7 @@ public class tests {
 		CapitaControlador cControl = new CapitaControlador();
 		cControl.login("foo", "foooooo");
 		Capita c = cControl.getCapita();
-		System.out.println(c.getNom()+" està connectat...");
+		System.out.println(c.getNom()+" estï¿½ connectat...");
 		Galaxia g = cControl.getGalaxia();
 		new Base(g);
 		new Base(g);
@@ -70,7 +70,7 @@ public class tests {
 		e.afegirRebel(idRebel8, 5);
 		e.afegirRebel(idRebel3, 5);
 		
-		e.execucioBFS();				//Canvia al tipus d'execució que vulguis
+		e.execucioBFS();				//Canvia al tipus d'execuciï¿½ que vulguis
 		
 		System.out.println(e.getFf().printMatrix(g));
 		
