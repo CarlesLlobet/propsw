@@ -123,7 +123,7 @@ public class ExodeControladorDriver {
 				case 10: //Consultar el coll d'ampolla
 					ArrayList<Integer> coll = c.getAmpollaExode(idExode);
 					if (coll.size() <= 0)System.out.println("NO tenim coll d'ampolla");
-					else System.out.println("Les seguents bases formen el coll d'ampolla: " + coll);
+					else System.out.println("Les seguents arestes formen el coll d'ampolla: " + coll);
 					break;
 					
 				case 11: //afegir un rebel a l'exode
