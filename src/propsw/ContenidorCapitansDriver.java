@@ -1,4 +1,8 @@
-//@Author: Marcos Pérez
+/*
+ * @Author: Marcos Pérez Rubio
+ * Grup 44 - 9.1
+ */
+
 package propsw;
 
 import java.io.BufferedReader;
@@ -32,7 +36,6 @@ public class ContenidorCapitansDriver {
         int op = Integer.parseInt(br.readLine());
 		
 		while (op != 0) {
-			
 			switch(op) 
 			{
 				case 1:
@@ -61,9 +64,6 @@ public class ContenidorCapitansDriver {
 			
 			menu();
 			op = Integer.parseInt(br.readLine());
-		}
-		
-		
-		 
+		}	 
 	}
 }

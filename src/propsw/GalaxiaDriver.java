@@ -1,5 +1,5 @@
 /*
- * Autor: Marcos Pérez
+ * @Author: Marcos Pérez Rubio
  * Grup 44 - 9.1
  */
 
@@ -138,13 +138,5 @@ public class GalaxiaDriver {
         	menu();
 			op = Integer.parseInt(br.readLine());
         }
-        /*
-         * 
-         *         System.out.println("8) Consultar la id d'una base de la galaxia");
-        System.out.println("9) Consultar tots els exodes de la galaxia");
-        System.out.println("10) Consultar les ids de tots els exodes de la galaxia");
-        System.out.println("11) Consultar les bases de la galaxia");
-        System.out.println("0) exit");
-         */
 	}
 }
