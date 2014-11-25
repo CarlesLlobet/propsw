@@ -3,11 +3,14 @@
 package propsw;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class ExodeDriver {
 	
@@ -47,21 +50,9 @@ public class ExodeDriver {
 		
 		Galaxia g = new Galaxia(new Capita());
 		
-		new Base("Arkania 0",g);
-		new Base("Arkania 1",g);
-		new Base("Arkania 2",g);
-		new Base("Arkania 3",g);
-		new Base("Arkania 4",g);
-		new Base("Arkania 5",g);
+		llegeixFitxerTest(g);
 		
-		g.conectarNodes(0, 1, 5, 5.0);
-		g.conectarNodes(0, 2, 7, 5.0);
-		g.conectarNodes(1, 3, 2, 5.0);
-		g.conectarNodes(1, 2, 1, 5.0);
-		g.conectarNodes(2, 3, 9, 5.0);
-		g.conectarNodes(2, 4, 4, 5.0);
-		g.conectarNodes(2, 5, 3, 5.0);
-		g.conectarNodes(4, 3, 2, 5.0);
+		
 		
 		
 		
@@ -92,18 +83,18 @@ public class ExodeDriver {
 		//Es posa una base d'inici
 		e.setIdBaseInici(0);
 
-		e.afegirRebel(rebel0.getId(), 3);
-		e.afegirRebel(rebel2.getId(), 3);
-		e.afegirRebel(rebel9.getId(), 3);
-		
-		e.afegirRebel(rebel1.getId(), 4);
-		e.afegirRebel(rebel7.getId(), 4);		
-		e.afegirRebel(rebel6.getId(), 4);
-		e.afegirRebel(rebel4.getId(), 4);
-		e.afegirRebel(rebel5.getId(), 4);
-		
-		e.afegirRebel(rebel8.getId(), 5);
-		e.afegirRebel(rebel3.getId(), 5);
+//		e.afegirRebel(rebel0.getId(), 3);
+//		e.afegirRebel(rebel2.getId(), 3);
+//		e.afegirRebel(rebel9.getId(), 3);
+//		
+//		e.afegirRebel(rebel1.getId(), 4);
+//		e.afegirRebel(rebel7.getId(), 4);		
+//		e.afegirRebel(rebel6.getId(), 4);
+//		e.afegirRebel(rebel4.getId(), 4);
+//		e.afegirRebel(rebel5.getId(), 4);
+//		
+//		e.afegirRebel(rebel8.getId(), 5);
+//		e.afegirRebel(rebel3.getId(), 5);
 			
 	
 		InputStreamReader isr = new InputStreamReader(System.in);
@@ -181,6 +172,7 @@ public class ExodeDriver {
 						System.out.println(g.getNode(i));
 					}
 					Rebel r = new Rebel("RebelX");
+					g.getCapita().getRebels().put(r.getId(), r);
 					System.out.println("Indica el idBaseDesti del idRebel que vols afegir: ");
 					Integer idBaseAfegir = Integer.parseInt(br.readLine());
 					Boolean afegit = e.afegirRebel(r.getId(), idBaseAfegir);
@@ -251,5 +243,39 @@ public class ExodeDriver {
 			menu();
 			op = Integer.parseInt(br.readLine());
 		}
+	}
+
+	private static void llegeixFitxerTest(Galaxia g) throws IOException {
+		//Ejecucion del fichero test.ff del mismo directorio donde esta la classe FordFoulkerson
+				Scanner s = new Scanner(new File("test.exode"));
+				String line = "";
+				String[] nums;
+				
+				int from = 0;
+				int capacitat = 0;
+				
+				//El graf tindrà tants nodes com linies tingui el fitxer. (La matriu ha de ser per força sempre una matriu
+				//quadrada!).
+				while(s.hasNextLine()){
+					s.nextLine();
+					new Base("Arkania "+from,g);
+					from++;
+				}
+				from =0;
+				s = new Scanner(new File("test.ff"));
+				//Construim les connexions del graf
+				while(s.hasNextLine()){
+					line = s.nextLine();
+					nums = line.split("\\t");
+					for (int i = 0; i < nums.length; i++) {
+						if(!nums[i].equalsIgnoreCase("0")){
+							capacitat = Integer.parseInt(nums[i]);
+							
+							g.conectarNodes(from, i, capacitat, 5.0);
+						}
+					}
+					from++;
+				}
+		
 	}
 }
