@@ -87,7 +87,7 @@ public class FordFulkersonDriver {
 		
 		//Executem l'algoritme
 		algoritme = new FordFulkerson<String>();
-		grafResidual = algoritme.findMaxFlow(graf,0,5);
+		grafResidual = algoritme.findMaxFlow(graf,0,from-1);
 		//Just després d'executar l'algoritme si es crida al mètode getMaxFlow() retornarà
 		//el MaxFlow de la última execució del algoritme. 
 		System.out.println("MaxFlow: "+algoritme.getMaxFlow());
