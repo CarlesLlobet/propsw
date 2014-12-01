@@ -21,6 +21,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.CardLayout;
+import java.awt.BorderLayout;
 
 public class Ventana extends JFrame {
 
@@ -28,8 +30,7 @@ public class Ventana extends JFrame {
 	 * Create the frame.
 	 */
 	public Ventana(){
-		setTitle("Gestor");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 793, 499);
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		
 	}
 }

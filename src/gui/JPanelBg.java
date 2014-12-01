@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 abstract public class JPanelBg extends JPanel{
     private Image fondo= null;
+   
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);

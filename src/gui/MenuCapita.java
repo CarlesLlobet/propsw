@@ -3,6 +3,8 @@ package gui;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ContainerAdapter;
@@ -17,23 +19,22 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-public class Menu extends JPanelBg {
+public class MenuCapita extends JPanelBg {
 	
 	private JComboBox<String> box;
 	private JButton btnAcceder;
 	private JButton btnNewButton;
+	private MenuCapita view;
 	/**
 	 * Create the panel.
 	 */
-	public Menu() {
+	public MenuCapita() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setImage("/images/bg.jpg");
         
         box = new JComboBox<String>();
         box.setRequestFocusEnabled(false);
-        box.setFocusCycleRoot(true);
         box.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        box.setFocusTraversalPolicyProvider(true);
         box.setMaximumRowCount(10);
         box.addItem("Gestionar rebeldes");
         box.addItem("Gestionar galaxia");
@@ -55,8 +56,6 @@ public class Menu extends JPanelBg {
         
         btnAcceder = new JButton("Acceder");
         btnAcceder.setRequestFocusEnabled(false);
-        btnAcceder.setFocusCycleRoot(true);
-        btnAcceder.setFocusTraversalPolicyProvider(true);
         btnAcceder.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnAcceder.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(btnAcceder);
@@ -70,23 +69,19 @@ public class Menu extends JPanelBg {
         
         btnNewButton = new JButton("Cerrar sesión");
         btnNewButton.setRequestFocusEnabled(false);
-        btnNewButton.setFocusCycleRoot(true);
-        btnNewButton.setFocusTraversalPolicyProvider(true);
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         verticalBox.add(btnNewButton);
         
         Component verticalStrut_1 = Box.createVerticalStrut(20);
         verticalBox.add(verticalStrut_1);
-        btnNewButton.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent e) {
-        		Login l = new Login();
-        		Principal.loadView(l);
-        		destroyPanel();
-        	}
-        });
-        
-	}
 
+        btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Principal.removeMenuCapita();
+				Principal.loadLogin();
+			}
+		});
+        view = this;
+	}
 }
