@@ -7,9 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-public class JPanelBg extends JPanel{
+abstract public class JPanelBg extends JPanel{
     private Image fondo= null;
-    
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);

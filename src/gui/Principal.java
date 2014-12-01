@@ -22,7 +22,7 @@ public class Principal {
 		prepareGUI();
 	}
 
-	public static void loadView(JComponent j){
+	public static void loadView(JPanelBg j){
 		//Sempre que es cridi a loadview, caldra cridar al destroyPanel del component que crida.
 		System.out.println("Cambiamos al componente por parametro");
 		window.add(j);

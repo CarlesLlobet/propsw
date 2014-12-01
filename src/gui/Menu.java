@@ -30,6 +30,8 @@ public class Menu extends JPanelBg {
         setImage("/images/bg.jpg");
         
         box = new JComboBox<String>();
+        box.setRequestFocusEnabled(false);
+        box.setFocusCycleRoot(true);
         box.setFont(new Font("Tahoma", Font.PLAIN, 14));
         box.setFocusTraversalPolicyProvider(true);
         box.setMaximumRowCount(10);
@@ -52,6 +54,9 @@ public class Menu extends JPanelBg {
         add(verticalStrut);
         
         btnAcceder = new JButton("Acceder");
+        btnAcceder.setRequestFocusEnabled(false);
+        btnAcceder.setFocusCycleRoot(true);
+        btnAcceder.setFocusTraversalPolicyProvider(true);
         btnAcceder.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnAcceder.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(btnAcceder);
@@ -64,6 +69,9 @@ public class Menu extends JPanelBg {
         add(verticalBox);
         
         btnNewButton = new JButton("Cerrar sesión");
+        btnNewButton.setRequestFocusEnabled(false);
+        btnNewButton.setFocusCycleRoot(true);
+        btnNewButton.setFocusTraversalPolicyProvider(true);
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         verticalBox.add(btnNewButton);
@@ -79,6 +87,6 @@ public class Menu extends JPanelBg {
         	}
         });
         
-        box.requestFocusInWindow();
 	}
+
 }

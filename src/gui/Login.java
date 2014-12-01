@@ -119,6 +119,5 @@ public class Login extends JPanelBg{
 		this.add(verticalGlue_3);
 		
 		}
-	
 
 }
