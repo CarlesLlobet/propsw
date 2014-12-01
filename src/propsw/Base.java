@@ -67,7 +67,6 @@ public class Base {
 		try {
 			 res = nom + "\t-\t" + Integer.toString(getId());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
