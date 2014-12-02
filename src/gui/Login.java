@@ -3,32 +3,29 @@ package gui;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 
 public class Login extends JPanelBg{
 
 	private JButton button;
 	private JTextField user;
 	private JPasswordField pass;
-	private Login view;
+	
 	public Login() {
-		view = this;
+		invalidate();
 		setBounds(100, 100, 793, 499);
 		setFocusTraversalPolicyProvider(true);
 		setAutoscrolls(true);
@@ -82,10 +79,20 @@ public class Login extends JPanelBg{
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("MENU CAPITAN");
-				Principal.removeView(view);
+				Principal.removeLogin();
 				Principal.loadMenuCapita();
 			}
 		});
+		
+		KeyboardFocusManager.getCurrentKeyboardFocusManager()
+		  .addKeyEventDispatcher(new KeyEventDispatcher() {
+		      @Override
+		      public boolean dispatchKeyEvent(KeyEvent e) {
+		        System.out.println("TECLADO EN LOGIN");
+		        return false;
+		      }
+		});
+		
 		button.setSelected(true);
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
@@ -93,9 +100,9 @@ public class Login extends JPanelBg{
 		button.setMinimumSize(new Dimension(100, 23));
 		button.setMaximumSize(new Dimension(100, 23));
 		this.add(button);
-		button.requestFocus();
 		Component verticalGlue_3 = Box.createVerticalGlue();
 		this.add(verticalGlue_3);
 		Principal.getWindow().getRootPane().setDefaultButton(button);
+		user.requestFocus();
 	}
 }

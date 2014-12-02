@@ -3,6 +3,8 @@ package gui;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -11,6 +13,7 @@ import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -67,6 +70,16 @@ public class MenuCapita extends JPanelBg {
         verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(verticalBox);
         
+		
+		KeyboardFocusManager.getCurrentKeyboardFocusManager()
+		  .addKeyEventDispatcher(new KeyEventDispatcher() {
+		      @Override
+		      public boolean dispatchKeyEvent(KeyEvent e) {
+		        System.out.println("TECLADO EN MENUCAPITAN");
+		        return false;
+		      }
+		});
+        
         btnNewButton = new JButton("Cerrar sesión");
         btnNewButton.setRequestFocusEnabled(false);
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -83,5 +96,6 @@ public class MenuCapita extends JPanelBg {
 			}
 		});
         view = this;
+        validate();
 	}
 }
