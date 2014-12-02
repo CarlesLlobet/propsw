@@ -3,6 +3,7 @@ package gui;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 
 public class Ventana extends JFrame {
 
@@ -17,7 +18,5 @@ public class Ventana extends JFrame {
 		int a = (int)w - (int)w/2;
 		int b = (int)h - (int)h/2;
 		setBounds(a, b, (int)w, (int)h);
-		getContentPane().setLayout(new BorderLayout(0, 0));
-		
 	}
 }

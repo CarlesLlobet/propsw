@@ -27,7 +27,6 @@ public class MenuCapita extends JPanelBg {
 	private JComboBox<String> box;
 	private JButton btnAcceder;
 	private JButton btnNewButton;
-	private MenuCapita view;
 	/**
 	 * Create the panel.
 	 */
@@ -75,7 +74,7 @@ public class MenuCapita extends JPanelBg {
 		  .addKeyEventDispatcher(new KeyEventDispatcher() {
 		      @Override
 		      public boolean dispatchKeyEvent(KeyEvent e) {
-		        System.out.println("TECLADO EN MENUCAPITAN");
+		    	if (isVisible()) System.out.println("TECLADO EN MENUCAPITAN");
 		        return false;
 		      }
 		});
@@ -91,11 +90,10 @@ public class MenuCapita extends JPanelBg {
 
         btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Principal.removeMenuCapita();
+				//Principal.removeMenuCapita();
+				System.out.println("To login");
 				Principal.loadLogin();
 			}
 		});
-        view = this;
-        validate();
 	}
 }

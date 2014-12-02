@@ -1,56 +1,49 @@
 package gui;
 
+import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Menu;
+
+import javax.swing.JPanel;
 
 public class Principal {
 	/**
 	 * Launch the application.
 	 */
 	
+	//contenedores
 	private static Ventana window = new Ventana();
-	private static Login l;
-	private static MenuCapita mc;
-	
-	private static void checks(){
-		window.setVisible(true);
+	private static JPanel container = new JPanel();
+	private static CardLayout card = new CardLayout();
+		
+	private static void init(){
+			container.setLayout(card);
+			
+			//Carreguem les vistes
+			container.add(new Login(), "login");
+			container.add(new MenuCapita(), "menucap");
+			
+			//Configurem la finestra
+			window.add(container);
+			card.show(container,"login");
+			window.setVisible(true);
 	}
 
-	
 	
 	public static void main(String[] args) {
-		loadLogin();		
+		init();
 	}
 	
-
 	public static void loadLogin(){
-		l = new Login();
-		window.add(l);
-		checks();
+		//Creem una nova instancia, ja que sempre necessitarem partir desde 0
+		container.add(new Login(),"login");
+		card.show(container,"login");
 	}
-
-	public static void removeLogin(){
-		window.remove(l);
-		checks();
-	}
-
+	
 	public static void loadMenuCapita(){
-		mc = new MenuCapita();
-		window.add(mc);
-		checks();
+		container.add(new MenuCapita(),"menucap");
+		card.show(container,"menucap");
 	}
-	
-	public static void removeMenuCapita(){
-		mc.invalidate();
-		window.remove(mc);
-		checks();
-	}
-
-	public static void removeView(Component c){
-		System.out.println("Remove view : "+ c.getName() + "focus estaba en " + window.getFocusOwner().getName());
-		window.remove(c);
-		checks();
-	}
-	
 	
 	public static Ventana getWindow(){
 		return window;

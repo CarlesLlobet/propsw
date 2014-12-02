@@ -79,7 +79,6 @@ public class Login extends JPanelBg{
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("MENU CAPITAN");
-				Principal.removeLogin();
 				Principal.loadMenuCapita();
 			}
 		});
@@ -88,7 +87,9 @@ public class Login extends JPanelBg{
 		  .addKeyEventDispatcher(new KeyEventDispatcher() {
 		      @Override
 		      public boolean dispatchKeyEvent(KeyEvent e) {
-		        System.out.println("TECLADO EN LOGIN");
+		    	//AMB EL ISVISIBLE CONTROLEM SI ES LA VISTA CARREGADA I PER TANT EL TECLAT NOMES REACCIONA PER ELLA.
+		        if (isVisible()) System.out.println("TECLADO EN LOGIN");
+		        //Principal.close();
 		        return false;
 		      }
 		});
@@ -102,7 +103,5 @@ public class Login extends JPanelBg{
 		this.add(button);
 		Component verticalGlue_3 = Box.createVerticalGlue();
 		this.add(verticalGlue_3);
-		Principal.getWindow().getRootPane().setDefaultButton(button);
-		user.requestFocus();
 	}
 }
