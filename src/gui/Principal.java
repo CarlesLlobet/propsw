@@ -2,9 +2,9 @@ package gui;
 
 import java.awt.CardLayout;
 import java.awt.Component;
-import java.awt.Menu;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Principal {
 	/**
@@ -21,7 +21,6 @@ public class Principal {
 			
 			//Carreguem les vistes
 			container.add(new Login(), "login");
-			container.add(new MenuCapita(), "menucap");
 			
 			//Configurem la finestra
 			window.add(container);
@@ -36,16 +35,33 @@ public class Principal {
 	
 	public static void loadLogin(){
 		//Creem una nova instancia, ja que sempre necessitarem partir desde 0
-		container.add(new Login(),"login");
+		Login l = new Login();
+		container.add(l,"login");
 		card.show(container,"login");
+		window.setVisible(true);
+		l.focus();
+	}
+	
+	public static void removeView(Component c){
+		container.remove(c);
 	}
 	
 	public static void loadMenuCapita(){
-		container.add(new MenuCapita(),"menucap");
+		MenuCapita mc = new MenuCapita();
+		container.add(mc,"menucap");
 		card.show(container,"menucap");
+		window.setVisible(true);
+		mc.focus();
 	}
 	
 	public static Ventana getWindow(){
 		return window;
+	}
+	
+	public static void llistarcomponents(){
+		Component[] comp = container.getComponents();
+		for (int i = 0; i < comp.length; ++i){
+			System.out.println("Component : " + i + comp[i].toString());
+		}	
 	}
 }

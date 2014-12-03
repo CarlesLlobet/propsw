@@ -1,18 +1,22 @@
 package gui;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -23,6 +27,8 @@ public class Login extends JPanelBg{
 	private JButton button;
 	private JTextField user;
 	private JPasswordField pass;
+	//Aquest atribut ens permet obtenir una referencia a la vista per eliminarla.
+	//private Login view;
 	
 	public Login() {
 		invalidate();
@@ -79,7 +85,21 @@ public class Login extends JPanelBg{
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("MENU CAPITAN");
-				Principal.loadMenuCapita();
+				String us = user.getText();
+				String pa = String.valueOf(pass.getPassword());
+				if (us.equals("admin") && pa.equals("admin")){
+					deleteView();
+					Principal.loadMenuCapita();
+				}
+				else if (us.equals("")){
+					JOptionPane.showMessageDialog(Principal.getWindow(), "Introduce un usuario.");
+				}
+				else if (pa == ""){
+					JOptionPane.showMessageDialog(Principal.getWindow(), "Introduce una contraseña");
+				}
+				else {
+					JOptionPane.showMessageDialog(Principal.getWindow(), "Usuario o contraseña incorrectos");
+				}
 			}
 		});
 		
@@ -88,6 +108,7 @@ public class Login extends JPanelBg{
 		      @Override
 		      public boolean dispatchKeyEvent(KeyEvent e) {
 		    	//AMB EL ISVISIBLE CONTROLEM SI ES LA VISTA CARREGADA I PER TANT EL TECLAT NOMES REACCIONA PER ELLA.
+		    	if (e.getKeyCode() == 27) System.exit(0);
 		        if (isVisible()) System.out.println("TECLADO EN LOGIN");
 		        //Principal.close();
 		        return false;
@@ -103,5 +124,10 @@ public class Login extends JPanelBg{
 		this.add(button);
 		Component verticalGlue_3 = Box.createVerticalGlue();
 		this.add(verticalGlue_3);
+	}
+	
+	public void focus(){
+		//Aquesta funcio ens serveix per a establir a quin objecte s'ha de fer focus al carregar la vista
+		user.requestFocusInWindow();
 	}
 }

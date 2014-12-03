@@ -19,5 +19,9 @@ abstract public class JPanelBg extends JPanel{
     public void setImage(String image){
         fondo=new ImageIcon(getClass().getResource(image)).getImage();
      }
-        
+    
+    protected void deleteView(){
+    	Principal.removeView(this);
+    }
+    
  }

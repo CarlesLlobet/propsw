@@ -27,12 +27,14 @@ public class MenuCapita extends JPanelBg {
 	private JComboBox<String> box;
 	private JButton btnAcceder;
 	private JButton btnNewButton;
+	//private MenuCapita view;
 	/**
 	 * Create the panel.
 	 */
 	public MenuCapita() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setImage("/images/bg.jpg");
+        System.out.println("CREADO MENU CAPITAN");
         
         box = new JComboBox<String>();
         box.setRequestFocusEnabled(false);
@@ -57,6 +59,11 @@ public class MenuCapita extends JPanelBg {
         add(verticalStrut);
         
         btnAcceder = new JButton("Acceder");
+        btnAcceder.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		Principal.llistarcomponents();
+        	}
+        });
         btnAcceder.setRequestFocusEnabled(false);
         btnAcceder.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnAcceder.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -92,8 +99,15 @@ public class MenuCapita extends JPanelBg {
 			public void actionPerformed(ActionEvent arg0) {
 				//Principal.removeMenuCapita();
 				System.out.println("To login");
+				//Principal.removeView(view);
+				deleteView();
 				Principal.loadLogin();
 			}
 		});
+        //view = this;
+	}
+	
+	public void focus(){
+		box.requestFocusInWindow();
 	}
 }
