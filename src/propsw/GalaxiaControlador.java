@@ -8,15 +8,15 @@ import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
 
-public class GalaxiaControlador extends CapitaControlador {
+public class GalaxiaControlador{
 	
 	CapitaControlador capiControl;
+	
 	/**
 	 * Constructor d'un objecte GalaxiaControlador.
 	 */
 	public GalaxiaControlador(){
 		
-		super();
 	}
 	
 	/**
@@ -24,6 +24,7 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * @return Objecte Galaxia instanciat
 	 */
 	public Galaxia createGalaxia() {
+		new CapitaControlador();
 		Galaxia g=new Galaxia(getCapita());
 		return g;
 	}
@@ -46,7 +47,7 @@ public class GalaxiaControlador extends CapitaControlador {
 	 * @throws IOException
 	 */
 	public void addBase(String nom) throws IOException{
-		Base newBase=new Base(nom,getGalaxia());
+		new Base(nom,getGalaxia());
 	}
 
 	/**
@@ -152,6 +153,20 @@ public class GalaxiaControlador extends CapitaControlador {
 	public String listExodes(){
 		String sRet=getGalaxia().getExodes().toString();
 		return sRet;
+	}
+	
+	/**
+	 * @Override
+	 */
+	public Galaxia getGalaxia(){
+		return capiControl.getGalaxia();
+	}
+	
+	/**
+	 * @Override
+	 */
+	public Capita getCapita(){
+		return capiControl.getCapita();
 	}
 	
 }
