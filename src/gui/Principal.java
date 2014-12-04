@@ -15,7 +15,8 @@ public class Principal {
 	private static Ventana window = new Ventana();
 	private static JPanel container = new JPanel();
 	private static CardLayout card = new CardLayout();
-		
+ 
+	
 	private static void init(){
 			container.setLayout(card);
 			
