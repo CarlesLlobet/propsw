@@ -15,8 +15,8 @@ public class GalaxiaControlador{
 	/**
 	 * Constructor d'un objecte GalaxiaControlador.
 	 */
-	public GalaxiaControlador(){
-		
+	public GalaxiaControlador(CapitaControlador capi){
+		capiControl=capi;
 	}
 	
 	/**
@@ -155,16 +155,12 @@ public class GalaxiaControlador{
 		return sRet;
 	}
 	
-	/**
-	 * @Override
-	 */
+	
 	public Galaxia getGalaxia(){
 		return capiControl.getGalaxia();
 	}
 	
-	/**
-	 * @Override
-	 */
+	 
 	public Capita getCapita(){
 		return capiControl.getCapita();
 	}
