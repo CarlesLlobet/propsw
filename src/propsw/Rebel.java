@@ -6,9 +6,10 @@
 
 package propsw;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Rebel {
+public class Rebel implements Serializable{
 	
 	//Contador que s'utilitza per assignar una id al rebel
 	private static Integer cont = 0;

@@ -6,10 +6,11 @@
 package propsw;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Galaxia extends Graf<Base>{
+public class Galaxia extends Graf<Base> implements Serializable{
 
 	//Contador que s'utilitza per assignar la id de la galaxia
 	private static Integer cont = 0;
