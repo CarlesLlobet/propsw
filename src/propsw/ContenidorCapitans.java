@@ -7,9 +7,11 @@ package propsw;
 
 import java.util.HashMap;
 
+
 public class ContenidorCapitans {
 	//HashMap que conte els capitans
-	private HashMap<String, Capita> contCap ;
+	private static HashMap<String, Capita> contCap ;
+	
 
 	/**
 	 * Comprova si existeix un capita amb l'id del parametre
@@ -26,6 +28,14 @@ public class ContenidorCapitans {
 	 */
 	public ContenidorCapitans(){
 		this.contCap = new HashMap<String,Capita>();
+	}
+	
+	/**
+	 * Constructor que no inicialitza el contenidor.
+	 * @param a sense ús.
+	 */
+	public ContenidorCapitans(boolean a){
+		
 	}
 	
 	/**
@@ -63,4 +73,14 @@ public class ContenidorCapitans {
 		}
 		else return null;
 	}
+	
+	/**
+	 * Mètode per accedir al contenidor.
+	 * @return contenidor de capitans.
+	 */
+	public HashMap<String,Capita> getHashContenidor(){
+		return contCap;
+	}
+	
+	
 }

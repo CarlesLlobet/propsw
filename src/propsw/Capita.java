@@ -5,9 +5,10 @@
 
 package propsw;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Capita {
+public class Capita implements Serializable{
 	//Contador que s'utiltiza per assignar la id al capita
 	private static Integer cont = 0;
 	

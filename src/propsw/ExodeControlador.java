@@ -10,13 +10,13 @@ import java.lang.String;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ExodeControlador extends GalaxiaControlador {
-	
+public class ExodeControlador{
+	CapitaControlador capi;
 	/**
 	 * Constructor d'un objecte ExodeControlador.
 	 */
-	public ExodeControlador(){
-		super();
+	public ExodeControlador(CapitaControlador cc){
+		capi = cc;
 	}
 	
 	/**
@@ -26,13 +26,13 @@ public class ExodeControlador extends GalaxiaControlador {
 	 */
 	public void execucio(String idExode, Integer tipusExec) throws IOException {
 		if (tipusExec == 0){
-			super.getGalaxia().getExode(idExode).execucioBFS();
+			capi.getGalaxia().getExode(idExode).execucioBFS();
 		}
 		else if (tipusExec == 1){
-			super.getGalaxia().getExode(idExode).execucioDFS();
+			capi.getGalaxia().getExode(idExode).execucioDFS();
 		}
 		else if (tipusExec == 2){
-			super.getGalaxia().getExode(idExode).execucioDijkstra();
+			capi.getGalaxia().getExode(idExode).execucioDijkstra();
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @return Retorna la id de la base de inici de l'exode
 	 */
 	public Integer getIniciExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getIdBaseInici(); 
+		return capi.getGalaxia().getExode(idExode).getIdBaseInici(); 
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @return Retorna per a cada rebel la id de la base que te asignada com a desti
 	 */
 	public HashMap<String, Integer> getRebelsExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getDestinsRebels(); 
+		return capi.getGalaxia().getExode(idExode).getDestinsRebels(); 
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @return Retorna nombre de rebels que participen a l'exode
      */
 	public Integer getRebelsSize(String idExode) {
-		return super.getGalaxia().getExode(idExode).getDestinsRebels().size();
+		return capi.getGalaxia().getExode(idExode).getDestinsRebels().size();
 	}
 	
 	/**
@@ -69,7 +69,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @return Retorna els camins (llista de id's de base) de cada rebel
 	 */
 	public HashMap<String, ArrayList<Integer>> getCaminsExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getCamins(); 
+		return capi.getGalaxia().getExode(idExode).getCamins(); 
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @return Retorna el flow de l'exode
 	 */
 	public Integer getFlowExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getFlow(); 
+		return capi.getGalaxia().getExode(idExode).getFlow(); 
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @return Retorna el cost total de fer l'exode
 	 */
 	public double getCostExode(String idExode) {
-		return super.getGalaxia().getExode(idExode).getCost(); 
+		return capi.getGalaxia().getExode(idExode).getCost(); 
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @throws IOException
 	 */
 	public ArrayList<Integer> getAmpollaExode(String idExode) throws IOException {
-		return super.getGalaxia().getExode(idExode).getAmpolla();
+		return capi.getGalaxia().getExode(idExode).getAmpolla();
 	}
 	
 	/**
@@ -108,8 +108,8 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @return retorna cert si s'esborra satisfactoriament el Rebel de l'exode, fals altrament
 	 */
 	public boolean afegirRebelExode(String idExode, String idRebel, Integer idBaseDesti) {
-		getRebel(idRebel).insertarExode(idExode);
-		return super.getGalaxia().getExode(idExode).afegirRebel(idRebel, idBaseDesti);   
+		capi.getRebel(idRebel).insertarExode(idExode);
+		return capi.getGalaxia().getExode(idExode).afegirRebel(idRebel, idBaseDesti);   
 	}
 	
 	/**
@@ -119,7 +119,7 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @param idBaseDesti: identificador de la nova base a la cual a d'intentar arribar el rebel 
 	 */
 	public void modificarRebelExode(String idExode, String idRebel, Integer idBaseDesti) {
-		super.getGalaxia().getExode(idExode).modificarRebel(idRebel, idBaseDesti); 
+		capi.getGalaxia().getExode(idExode).modificarRebel(idRebel, idBaseDesti); 
 	}
 	
 	/**
@@ -129,8 +129,8 @@ public class ExodeControlador extends GalaxiaControlador {
 	 * @return retorna cert si s'esborra satisfactoriament el Rebel de l'exode, fals altrament 
 	 */
 	public boolean treureRebelExode(String idExode, String idRebel) {
-		getRebel(idRebel).esborrarExode(idExode);           
-		return super.getGalaxia().getExode(idExode).borrarRebel(idRebel);
+		capi.getRebel(idRebel).esborrarExode(idExode);           
+		return capi.getGalaxia().getExode(idExode).borrarRebel(idRebel);
 	}
 
 }

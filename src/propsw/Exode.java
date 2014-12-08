@@ -5,12 +5,13 @@
 package propsw;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 
-public class Exode {
+public class Exode implements Serializable{
 	private Integer idBaseInici;
 	private HashMap<String,ArrayList<Integer>> camins;
 	private HashMap<String,Integer> destins;

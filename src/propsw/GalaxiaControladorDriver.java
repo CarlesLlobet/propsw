@@ -33,9 +33,10 @@ public class GalaxiaControladorDriver {
 	
 	//Es crea un capità a través de la galàxia del qual es faràn totes les operacions
 	//Es crea una instància de classe Galaxia
+	CapitaControlador capi=new CapitaControlador();
 	
-	GalaxiaControlador gControl=new GalaxiaControlador();
-	gControl.login("a","b");
+	GalaxiaControlador gControl=new GalaxiaControlador(capi);
+	capi.login("a","b");
 	
 	InputStreamReader isr = new InputStreamReader(System.in);
 	BufferedReader br = new BufferedReader (isr);

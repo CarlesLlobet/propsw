@@ -99,12 +99,10 @@ public class MenuCapita extends JPanelBg {
 			public void actionPerformed(ActionEvent arg0) {
 				//Principal.removeMenuCapita();
 				System.out.println("To login");
-				//Principal.removeView(view);
 				deleteView();
 				Principal.loadLogin();
 			}
 		});
-        //view = this;
 	}
 	
 	public void focus(){
