@@ -1,10 +1,11 @@
 package propsw;
 
-//@author Toni Martínez
+//@author Toni Martï¿½nez
 
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 
@@ -20,22 +21,35 @@ public class CapitaControlador {
 		contCap = new ContenidorCapitans();
 	}
 	
-	//Métode per implementar de moment implementació trivial
-	//Ha de chekejar si el username i el password pertanyen a un capità. Aquesta
-	//informació estarà en un fitxer. Per fer aquesta implementació es necessita
-	//tenir accés a la capa de dades que no està implementada en aquesta versió.
-	public void login(String nom, String password) {
-		Capita c = new Capita("Luke Skywalker");
-		contCap.addCapita(c);
-		idCap = c.getId();
+	//Mï¿½tode per implementar de moment implementaciï¿½ trivial
+	//Ha de chekejar si el username i el password pertanyen a un capitï¿½. Aquesta
+	//informaciï¿½ estarï¿½ en un fitxer. Per fer aquesta implementaciï¿½ es necessita
+	//tenir accï¿½s a la capa de dades que no estï¿½ implementada en aquesta versiï¿½.
+	//Ultima versió: El metode busca de tots els capitans que hi ha en el contenidor capitans
+	//busca un d'ells que coincideixi nom i password.
+	//Si existeix aleshores retorna el objecte capita, sino retorna un null.
+	public Capita login(String nom, String password) {
+		Capita c = null;		
+		Iterator<String> str = ContenidorCapitans.getHashContenidor().keySet().iterator();
+		String h = "";
+		boolean found = false;
+		while(str.hasNext()&&!found){
+			h = str.next();
+			c = ContenidorCapitans.getHashContenidor().get(h);
+			if(c.getNom().equals(nom)==false || c.getPassword().equals(password)==false){
+				c = null;
+				found = true;
+			}			
+		}		
+		return c;
 	}
 
 	
-	//Get galaxia d'un capità en concret.
+	//Get galaxia d'un capitï¿½ en concret.
 	public Galaxia getGalaxia(String idCapita) {
 		return contCap.getCapita(idCapita).getGalaxia();
 	}
-	//Get galaxia del capità que ha iniciat sessió
+	//Get galaxia del capitï¿½ que ha iniciat sessiï¿½
 	public Galaxia getGalaxia() {
 		return contCap.getCapita(idCap).getGalaxia();
 	}
@@ -45,61 +59,61 @@ public class CapitaControlador {
 		return new ArrayList<Rebel>(contCap.getCapita(idCapita).getRebels().values());
 	}
 	
-	//Llista tots els rebels que estan sota les ordres del capita que ha iniciat la sessió
+	//Llista tots els rebels que estan sota les ordres del capita que ha iniciat la sessiï¿½
 	public ArrayList<Rebel> llistarRebels() {
 		return new ArrayList<Rebel>(contCap.getCapita(idCap).getRebels().values());
 	}
 
-	//Crear un rebel a les ordres del capita que ha iniciat sessió
+	//Crear un rebel a les ordres del capita que ha iniciat sessiï¿½
 	public String crearRebel(String nomRebel) {
 		Rebel r = new Rebel(nomRebel);
 		contCap.getCapita(idCap).getRebels().put(r.getId(), r);
 		return r.getId();
 	}
 	
-	//Crear un rebel a les ordres d'un capità
+	//Crear un rebel a les ordres d'un capitï¿½
 	public String crearRebel(String nomRebel, String idCapita) {
 		Rebel r = new Rebel(nomRebel);
 		contCap.getCapita(idCapita).getRebels().put(r.getId(), r);
 		return r.getId();
 	}
 
-	//Retorna l'objecte Rebel a les ordres del capità que ha iniciat sessió
-	//que té el idRebel passat per parametre. Retorna null si aquell rebel no existeix
-	//o si que existeix pero no està a les ordres del capita que ha iniciat la sessió.
+	//Retorna l'objecte Rebel a les ordres del capitï¿½ que ha iniciat sessiï¿½
+	//que tï¿½ el idRebel passat per parametre. Retorna null si aquell rebel no existeix
+	//o si que existeix pero no estï¿½ a les ordres del capita que ha iniciat la sessiï¿½.
 	public Rebel getRebel(String idRebel) {
 		return contCap.getCapita(idCap).getRebels().get(idRebel);
 	}
 	
-	//Retorna l'objecte Rebel a les ordres del capità que ha iniciat sessió
-	//que té el idRebel passat per parametre. Retorna null si aquell rebel no existeix
-	//o si que existeix pero no està a les ordres del capita que ha iniciat la sessió.
+	//Retorna l'objecte Rebel a les ordres del capitï¿½ que ha iniciat sessiï¿½
+	//que tï¿½ el idRebel passat per parametre. Retorna null si aquell rebel no existeix
+	//o si que existeix pero no estï¿½ a les ordres del capita que ha iniciat la sessiï¿½.
 	public Rebel getRebel(String idRebel, String idCapita) {
 		return contCap.getCapita(idCap).getRebels().get(idRebel);
 	}
 
 	
-	//Crear un exode a la galaxia que conté el capità que ha iniciat la sessió
+	//Crear un exode a la galaxia que contï¿½ el capitï¿½ que ha iniciat la sessiï¿½
 	public String crearExode(int idBaseInici) throws IOException {
 		Exode e = new Exode(getGalaxia());
-		e.setIdBaseInici(idBaseInici); 								//Posem la base d'inici, on comença l'èxode
-		getGalaxia().addExode(e);									//Assignem l'èxode a la galaxia del capità que ha inicat sessió
+		e.setIdBaseInici(idBaseInici); 								//Posem la base d'inici, on comenï¿½a l'ï¿½xode
+		getGalaxia().addExode(e);									//Assignem l'ï¿½xode a la galaxia del capitï¿½ que ha inicat sessiï¿½
 		return e.getIdExode();
 	}
 
-	//Crear un exode a la galaxia que conté un capità en concret
+	//Crear un exode a la galaxia que contï¿½ un capitï¿½ en concret
 	public String crearExode(int idBaseInici, String idCapita) throws IOException {
 		Exode e = new Exode(getGalaxia());
-		e.setIdBaseInici(idBaseInici); 									//Posem la base d'inici, on comença l'èxode
-		getGalaxia(idCapita).addExode(e);								//Assignem l'èxode a la galaxia del capità.
+		e.setIdBaseInici(idBaseInici); 									//Posem la base d'inici, on comenï¿½a l'ï¿½xode
+		getGalaxia(idCapita).addExode(e);								//Assignem l'ï¿½xode a la galaxia del capitï¿½.
 		return e.getIdExode();
 	}
 
 	
-	//Elimina un rebel dels assignats a un capità. L'elimina tb de tots els èxodes als que ha estat afegit. 
-	//Retorna false si aquell rebel no ha estat assignat al capita que ha iniciat sessió 
+	//Elimina un rebel dels assignats a un capitï¿½. L'elimina tb de tots els ï¿½xodes als que ha estat afegit. 
+	//Retorna false si aquell rebel no ha estat assignat al capita que ha iniciat sessiï¿½ 
 	public boolean eliminarRebel(String idRebel) {
-		Rebel j = contCap.getCapita(idCap).getRebels().remove(idRebel);		//Mètode remove de un hashmap retorna null 
+		Rebel j = contCap.getCapita(idCap).getRebels().remove(idRebel);		//Mï¿½tode remove de un hashmap retorna null 
 																			//si no hi ha cap Rebel associat amb el seu id
 		if((j!=null)){
 			ArrayList<String> exodes = getGalaxia(idCap).getExodes();									
@@ -115,10 +129,10 @@ public class CapitaControlador {
 	}
 	
 	
-	//Elimina un rebel dels assignats a un capità. L'elimina tb de tots els èxodes als que ha estat afegit. 
-	//Retorna false si aquell rebel no ha estat assignat al capita que ha iniciat sessió 
+	//Elimina un rebel dels assignats a un capitï¿½. L'elimina tb de tots els ï¿½xodes als que ha estat afegit. 
+	//Retorna false si aquell rebel no ha estat assignat al capita que ha iniciat sessiï¿½ 
 	public boolean eliminarRebel(String idRebel, String idCapita) {
-		Rebel j = contCap.getCapita(idCapita).getRebels().remove(idRebel);		//Mètode remove de un hashmap retorna null 
+		Rebel j = contCap.getCapita(idCapita).getRebels().remove(idRebel);		//Mï¿½tode remove de un hashmap retorna null 
 																				//si no hi ha cap Rebel associat amb el seu id
 		if((j!=null)){
 			ArrayList<String> exodes = getGalaxia(idCapita).getExodes();									
@@ -133,8 +147,8 @@ public class CapitaControlador {
 	}
 	
 
-	//Elimina l' èxode de la galaxia del capita que ha iniciat la sessió i actualitza el llistat  
-	//de exodes de cada rebel que estaba assignat a l'èxode.
+	//Elimina l' ï¿½xode de la galaxia del capita que ha iniciat la sessiï¿½ i actualitza el llistat  
+	//de exodes de cada rebel que estaba assignat a l'ï¿½xode.
 	public boolean eliminarExode(String idExode) throws IOException {
 		
 		//Per a cada rebel se li elimina el exode si el tenia assignat
@@ -146,7 +160,7 @@ public class CapitaControlador {
 				getCapita().getRebels().get(laTropa.get(i)).getExodes().remove(idExode);
 			}
 			
-			getGalaxia().removeExode(idExode);								//Eliminem l'exode de la galaxia del capita que ha iniciat la sessió
+			getGalaxia().removeExode(idExode);								//Eliminem l'exode de la galaxia del capita que ha iniciat la sessiï¿½
 			return true;
 		}else{
 			return false;
@@ -154,8 +168,8 @@ public class CapitaControlador {
 	}
 
 	
-	//Elimina l' èxode de la galaxia del capita que ha iniciat la sessió i actualitza el llistat 
-	//de exodes de cada rebel que estaba assignat a l'èxode.
+	//Elimina l' ï¿½xode de la galaxia del capita que ha iniciat la sessiï¿½ i actualitza el llistat 
+	//de exodes de cada rebel que estaba assignat a l'ï¿½xode.
 	public boolean eliminarExode(String idExode, String idCapita) throws IOException {
 		
 		//Per a cada rebel se li elimina el exode si el tenia assignat
@@ -166,19 +180,19 @@ public class CapitaControlador {
 			for (int i = 0; i < size; i++) {
 				getCapita(idCapita).getRebels().get(laTropa.get(i)).getExodes().remove(idExode);
 			}
-			getGalaxia(idCapita).removeExode(idExode);								//Eliminem l'exode de la galaxia del capita que ha iniciat la sessió
+			getGalaxia(idCapita).removeExode(idExode);								//Eliminem l'exode de la galaxia del capita que ha iniciat la sessiï¿½
 			return true;
 		}else{
 			return false;
 		}
 	}
 
-	//Retorna l'objecte Capita que té l'identificador idCapita.
+	//Retorna l'objecte Capita que tï¿½ l'identificador idCapita.
 	public Capita getCapita(String idCapita) {
 		return contCap.getCapita(idCapita);
 	}
 
-	//Retorna l'objecte Capita del capita que ha inicat la sessió.
+	//Retorna l'objecte Capita del capita que ha inicat la sessiï¿½.
 	public Capita getCapita() {
 		return contCap.getCapita(idCap);
 	}
@@ -195,5 +209,9 @@ public class CapitaControlador {
 	
 	public void logOut(){
 		idCap=null;
+	}
+	
+	public void afegirCapita(Capita c){
+		contCap.addCapita(c);
 	}
 }

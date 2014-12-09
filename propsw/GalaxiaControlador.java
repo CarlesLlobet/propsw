@@ -1,5 +1,5 @@
 /*
- * @Author: Marc Ronquillo González
+ * @Author: Marc Ronquillo Gonzï¿½lez
  * Grup 44 - 9.1
  */ 
 
@@ -19,15 +19,18 @@ public class GalaxiaControlador{
 		capiControl=capi;
 	}
 	
+	
+	/*
 	/**
 	 * Crea un objecte de la classe Galaxia.
 	 * @return Objecte Galaxia instanciat
 	 */
+	/*
 	public Galaxia createGalaxia() {
 		new CapitaControlador();
 		Galaxia g=new Galaxia(getCapita());
 		return g;
-	}
+	}   */
 
 	/**
 	 * Es borren tots els camps de l'objecte Galaxia actual.
@@ -49,11 +52,16 @@ public class GalaxiaControlador{
 	public void addBase(String nom) throws IOException{
 		new Base(nom,getGalaxia());
 	}
+	
+	//AFEGIT
+	public void addBase(String nom, String idCap) throws IOException{
+		new Base(nom,capiControl.getGalaxia(idCap));
+	}
 
 	/**
-	 * S'esborra la base amb la id indicada al paràmetre
+	 * S'esborra la base amb la id indicada al parï¿½metre
 	 * @param idBase id de la Base a esborrar
-	 * @return Booleà que indica si l'identificador de la base es correspon amb una base existent.
+	 * @return Booleï¿½ que indica si l'identificador de la base es correspon amb una base existent.
 	 * @throws IOException si id no existeix
 	 */
 	public void deleteBase(int idBase) throws IOException{
@@ -65,8 +73,8 @@ public class GalaxiaControlador{
 	/**
 	 * Es canvia el nom a la Base indicada
 	 * @param idBase identificador de la Base a editar
-	 * @param nom Nou nom que prendrà la base
-	 * @return Booleà que indica si l'identificador de la base es correspon amb una base existent.
+	 * @param nom Nou nom que prendrï¿½ la base
+	 * @return Booleï¿½ que indica si l'identificador de la base es correspon amb una base existent.
 	 * @throws IOException si id no existeix
 	 */
 	public void setBase(int idBase, String nom) throws IOException{
@@ -76,8 +84,8 @@ public class GalaxiaControlador{
 	}
 
 	/**
-	 * Llistat de totes les bases de la Galàxia
-	 * @return String que conté l'id i el nom de totes les bases de la Galàxia actual.
+	 * Llistat de totes les bases de la Galï¿½xia
+	 * @return String que contï¿½ l'id i el nom de totes les bases de la Galï¿½xia actual.
 	 * @throws IOException si id no existeix
 	 */
 	public String listBases() throws IOException{
@@ -90,9 +98,9 @@ public class GalaxiaControlador{
 
 	/**
 	 * Crea una aresta entre dues bases
-	 * @param from identificador de la Base de la qual ha de partir l'adjacència.
-	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacència.
-	 * @param capacitat Valor de capacitat que prendrà 
+	 * @param from identificador de la Base de la qual ha de partir l'adjacï¿½ncia.
+	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacï¿½ncia.
+	 * @param capacitat Valor de capacitat que prendrï¿½ 
 	 * @param cost
 	 * @throws IOException si id no existeix
 	 */
@@ -103,8 +111,8 @@ public class GalaxiaControlador{
 	
 	/**
 	 * Modifica els valors de cost i capacitat d'un tram entre dues bases.
-	 * @param from identificador de la Base de la qual ha de partir l'adjacència.
-	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacència.
+	 * @param from identificador de la Base de la qual ha de partir l'adjacï¿½ncia.
+	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacï¿½ncia.
 	 * @param capacitat Valor actualitzat de capacitat del tram
 	 * @param cost valor actualitzat de cost del tram 
 	 * @throws IOException si id no existeix
@@ -117,8 +125,8 @@ public class GalaxiaControlador{
 
 	/**
 	 * S'elimina un tram entre dues bases.
-	 * @param from identificador de la Base de la qual ha de partir l'adjacència.
-	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacència.
+	 * @param from identificador de la Base de la qual ha de partir l'adjacï¿½ncia.
+	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacï¿½ncia.
 	 * @throws IOException si id no existeix
 	 */
 	public void deleteAdjacencia(int from, int to) throws IOException{
@@ -128,8 +136,8 @@ public class GalaxiaControlador{
 
 	/**
 	 * Retorna la aresta demanada del graf
-	 * @param from identificador de la Base de la qual ha de partir l'adjacència.
-	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacència.
+	 * @param from identificador de la Base de la qual ha de partir l'adjacï¿½ncia.
+	 * @param to identificador de la Base a la qual ha d'anar a parar l'adjacï¿½ncia.
 	 * @return objecte aresta demanat
 	 * @throws IOException si id no existeix
 	 */
@@ -147,8 +155,8 @@ public class GalaxiaControlador{
 	}
 	
 	/**
-	 * Llista els exodes existents per la Galàxia
-	 * @return un string amb els ids dels èxodes
+	 * Llista els exodes existents per la Galï¿½xia
+	 * @return un string amb els ids dels ï¿½xodes
 	 */
 	public String listExodes(){
 		String sRet=getGalaxia().getExodes().toString();

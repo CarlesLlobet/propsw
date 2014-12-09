@@ -425,4 +425,10 @@ public class Exode implements Serializable{
 		return grafResidualPreProces;
 	}
 	
+	public boolean checkearCamino(ArrayList<Integer> camino){
+		boolean ret = false;
+		
+		return ret;
+	}
+	
 }
