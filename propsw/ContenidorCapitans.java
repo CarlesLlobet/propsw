@@ -1,4 +1,5 @@
 /*
+ /*
  * @Author: Marcos Pérez Rubio
  * Grup 44 - 9.1
  */
@@ -34,17 +35,17 @@ public class ContenidorCapitans {
 	 * Constructor que no inicialitza el contenidor.
 	 * @param a sense ús.
 	 */
-//	public ContenidorCapitans(boolean a){
-//		
-//	}
+	public ContenidorCapitans(boolean a){
+		
+	}
 	
 	/**
 	 * Afegeix un capita al contenidor
 	 * @param capita Capita a afegir al contenidor
 	 * @return true després d'afegir el capita
 	 */
-	public boolean addCapita(Capita capita) {
-		this.contCap.put(capita.getId(),capita);
+	public static boolean addCapita(Capita capita) {
+		contCap.put(capita.getId(),capita);
 		return true;
 	}
 

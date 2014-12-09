@@ -1,4 +1,5 @@
 /*
+ /*
  * @Author: Marc Ronquillo González
  * Grup 44 - 9.1
  */
@@ -6,6 +7,7 @@
 
 package propsw;
 
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -25,7 +27,7 @@ public class LlegirEscriure {
 	 * que es fa servir per tenir una còpia del hashmap a la classe amb la que treballar.
 	 */
 	public LlegirEscriure(){
-		//cp=new ContenidorCapitans(true);
+		cp=new ContenidorCapitans(true);
 		contCap=ContenidorCapitans.getHashContenidor();
 	}
 	
@@ -48,8 +50,16 @@ public class LlegirEscriure {
 		Capita aux=(Capita) ois.readObject();
 		
 		while (aux!=null){
-			cp.addCapita(aux);
-			aux=(Capita) ois.readObject();
+			//System.out.println(ContenidorCapitans.getHashContenidor().get("1").getNom()); // LukeSkywalker2
+			ContenidorCapitans.addCapita(aux);
+			//System.out.println(ContenidorCapitans.getHashContenidor().get("1").getNom()); // LukeSkywalker
+			aux = null;
+			try{
+				aux =(Capita) ois.readObject();
+			}catch(EOFException e){
+				aux=null;
+			}
+			//System.out.println("Entra");
 		}
 		ois.close();
 	

@@ -7,8 +7,9 @@
 package propsw;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Base {
+public class Base implements Serializable{
 	
 	//Nom de la base
 	private String nom = null;
