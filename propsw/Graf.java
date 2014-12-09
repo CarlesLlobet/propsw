@@ -1,13 +1,13 @@
 package propsw;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.*;
 
 // @autor Sergi Soriano 
 
-public class Graf<T>
+public class Graf<T> implements Serializable
 {
-  	static class Aresta
+  	static class Aresta implements Serializable
   	{
 	    public int capacidad;
 	    public Double coste;

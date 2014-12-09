@@ -214,4 +214,10 @@ public class CapitaControlador {
 	public void afegirCapita(Capita c){
 		contCap.addCapita(c);
 	}
+	
+	public void inicialitzar(){
+		Capita c = new Capita("Luke Skywalker");
+		contCap.addCapita(c);
+		idCap = c.getId();
+	}
 }
