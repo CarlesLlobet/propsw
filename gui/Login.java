@@ -1,15 +1,12 @@
 package gui;
 
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.HierarchyEvent;
-import java.awt.event.HierarchyListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
@@ -18,8 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 public class Login extends JPanelBg{
@@ -91,14 +90,8 @@ public class Login extends JPanelBg{
 					deleteView();
 					Principal.loadMenuCapita();
 				}
-				else if (us.equals("")){
-					JOptionPane.showMessageDialog(Principal.getWindow(), "Introduce un usuario.");
-				}
-				else if (pa == ""){
-					JOptionPane.showMessageDialog(Principal.getWindow(), "Introduce una contraseña");
-				}
 				else {
-					JOptionPane.showMessageDialog(Principal.getWindow(), "Usuario o contraseña incorrectos");
+					JOptionPane.showMessageDialog(Principal.getWindow(), "Usuario y/o contraseña incorrectos");
 				}
 			}
 		});
@@ -124,10 +117,18 @@ public class Login extends JPanelBg{
 		this.add(button);
 		Component verticalGlue_3 = Box.createVerticalGlue();
 		this.add(verticalGlue_3);
+		
+		//fem que el botó d'iniciar sessió estigui relacionat amb la tecla intro
+
+		
 	}
 	
 	public void focus(){
 		//Aquesta funcio ens serveix per a establir a quin objecte s'ha de fer focus al carregar la vista
 		user.requestFocusInWindow();
+		
+		//Aprofitem per associar la tecla intro amb un boto
+		JRootPane rootPane = SwingUtilities.getRootPane(button); 
+		rootPane.setDefaultButton(button);
 	}
 }

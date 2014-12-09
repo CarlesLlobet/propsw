@@ -34,9 +34,9 @@ public class MenuCapita extends JPanelBg {
 	public MenuCapita() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setImage("/images/bg.jpg");
-        System.out.println("CREADO MENU CAPITAN");
         
         box = new JComboBox<String>();
+        box.setPreferredSize(new Dimension(28, 48));
         box.setRequestFocusEnabled(false);
         box.setFont(new Font("Tahoma", Font.PLAIN, 14));
         box.setMaximumRowCount(10);
@@ -51,16 +51,25 @@ public class MenuCapita extends JPanelBg {
         
         Component verticalGlue = Box.createVerticalGlue();
         add(verticalGlue);
-        box.setMinimumSize(d);
-        box.setMaximumSize(d);
+        box.setMinimumSize(new Dimension(150, 48));
+        box.setMaximumSize(new Dimension(150, 48));
         add(box);
         
         Component verticalStrut = Box.createVerticalStrut(20);
         add(verticalStrut);
         
         btnAcceder = new JButton("Acceder");
+        btnAcceder.setPreferredSize(new Dimension(71, 48));
+        btnAcceder.setMinimumSize(new Dimension(100, 48));
+        btnAcceder.setMaximumSize(new Dimension(100, 48));
         btnAcceder.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
+        		if (box.getSelectedIndex() == 1){
+        			System.out.println("To gestio galaxia");
+        			deleteView();
+        			Principal.loadGestioGalaxia();
+        		}
+        		else System.out.println("Seleccionado: " + String.valueOf(box.getSelectedItem()));
         		Principal.llistarcomponents();
         	}
         });
@@ -87,6 +96,9 @@ public class MenuCapita extends JPanelBg {
 		});
         
         btnNewButton = new JButton("Cerrar sesión");
+        btnNewButton.setPreferredSize(new Dimension(120, 48));
+        btnNewButton.setMinimumSize(new Dimension(120, 48));
+        btnNewButton.setMaximumSize(new Dimension(120, 48));
         btnNewButton.setRequestFocusEnabled(false);
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
