@@ -25,8 +25,8 @@ public class LlegirEscriure {
 	 * que es fa servir per tenir una còpia del hashmap a la classe amb la que treballar.
 	 */
 	public LlegirEscriure(){
-		cp=new ContenidorCapitans(true);
-		contCap=cp.getHashContenidor();
+		//cp=new ContenidorCapitans(true);
+		contCap=ContenidorCapitans.getHashContenidor();
 	}
 	
 	/**

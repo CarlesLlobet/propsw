@@ -34,9 +34,9 @@ public class ContenidorCapitans {
 	 * Constructor que no inicialitza el contenidor.
 	 * @param a sense ús.
 	 */
-	public ContenidorCapitans(boolean a){
-		
-	}
+//	public ContenidorCapitans(boolean a){
+//		
+//	}
 	
 	/**
 	 * Afegeix un capita al contenidor
@@ -78,7 +78,7 @@ public class ContenidorCapitans {
 	 * Mètode per accedir al contenidor.
 	 * @return contenidor de capitans.
 	 */
-	public HashMap<String,Capita> getHashContenidor(){
+	public static HashMap<String,Capita> getHashContenidor(){
 		return contCap;
 	}
 	

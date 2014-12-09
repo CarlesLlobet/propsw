@@ -5,6 +5,7 @@ package propsw;
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 
@@ -24,10 +25,23 @@ public class CapitaControlador {
 	//Ha de chekejar si el username i el password pertanyen a un capitï¿½. Aquesta
 	//informaciï¿½ estarï¿½ en un fitxer. Per fer aquesta implementaciï¿½ es necessita
 	//tenir accï¿½s a la capa de dades que no estï¿½ implementada en aquesta versiï¿½.
-	public void login(String nom, String password) {
-		Capita c = new Capita("Luke Skywalker");
-		contCap.addCapita(c);
-		idCap = c.getId();
+	//Ultima versió: El metode busca de tots els capitans que hi ha en el contenidor capitans
+	//busca un d'ells que coincideixi nom i password.
+	//Si existeix aleshores retorna el objecte capita, sino retorna un null.
+	public Capita login(String nom, String password) {
+		Capita c = null;		
+		Iterator<String> str = ContenidorCapitans.getHashContenidor().keySet().iterator();
+		String h = "";
+		boolean found = false;
+		while(str.hasNext()&&!found){
+			h = str.next();
+			c = ContenidorCapitans.getHashContenidor().get(h);
+			if(c.getNom().equals(nom)==false || c.getPassword().equals(password)==false){
+				c = null;
+				found = true;
+			}			
+		}		
+		return c;
 	}
 
 	

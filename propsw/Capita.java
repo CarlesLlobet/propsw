@@ -60,6 +60,11 @@ public class Capita implements Serializable{
 		return true;
 	}
 	
+	public String getPassword(){
+		return pass;
+		
+	}
+	
 	/**
 	 * Assigna un nom al capità
 	 * @param nom Nom que s'assigna al capità
