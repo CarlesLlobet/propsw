@@ -1,4 +1,7 @@
-package gui;
+package gui.gestiogalaxia;
+import gui.JPanelBg;
+import gui.Principal;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -24,7 +27,7 @@ public class GalGest extends JPanelBg {
 	
     private GalExp eg = new GalExp();
     private GalImp ig = new GalImp();
-    private ModificarGalaxia mg = new ModificarGalaxia();
+    private GalMod mg = new GalMod();
     private GalDraw gd = new GalDraw();
 	
 	public GalGest() {
@@ -89,6 +92,7 @@ public class GalGest extends JPanelBg {
 
         
         panel.add(gd,"draw");
+        gd.setLayout(new BorderLayout(0, 0));
 
         card.show(panel, "draw");
 
@@ -104,25 +108,25 @@ public class GalGest extends JPanelBg {
 	                		gd = new GalDraw();
 	                        panel.add(gd,"draw");
 	                		card.show(panel,"draw");
-	                		panel.remove(toRemove);
+	                		removeCard(toRemove);
 	                		break;
 	                	case 1:
-	                		mg = new ModificarGalaxia();
+	                		mg = new GalMod();
 	                        panel.add(mg,"modify");
 	                		card.show(panel,"modify");
-	                		panel.remove(toRemove);
+	                		removeCard(toRemove);
 	                		break;
 	                	case 2:
 	                		ig = new GalImp();
 	                        panel.add(ig,"import");
 	                		card.show(panel,"import");
-	                		panel.remove(toRemove);
+	                		removeCard(toRemove);
 	                		break;
 	                	case 3:
 	                		eg = new GalExp();
 	                        panel.add(eg,"export");
 	                		card.show(panel,"export");
-	                		panel.remove(toRemove);
+	                		removeCard(toRemove);
 	                		break;
 	                	default:
 	                		System.out.println("DEFAULT");
@@ -134,6 +138,13 @@ public class GalGest extends JPanelBg {
         
         
 	}
+	
+	private void removeCard(Component c){
+		panel.remove(c);
+		this.revalidate();
+		this.repaint();
+	}
+	
 	private JPanel getCurrentCard(){
 		//Esborra la unica carta que s'esta mostrant en pantalla
     	JPanel currentcard = null;

@@ -1,5 +1,7 @@
 package gui;
 
+import gui.gestiogalaxia.GalGest;
+
 import java.awt.CardLayout;
 import java.awt.Component;
 
@@ -17,11 +19,12 @@ public class Principal {
 	private static CardLayout card = new CardLayout();
 	private static int cont = 0;
 	
+	
 	private static void init(){
-		//Configurem la finestra i carreguem el login
+		//Configurem la finestra
 		container.setLayout(card);
 		window.add(container);
-		card.show(container,"login");
+		//carreguem el login
 		loadLogin();
 	}
 
