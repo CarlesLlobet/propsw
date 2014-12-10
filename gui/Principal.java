@@ -1,12 +1,13 @@
 package gui;
 
+import gui.gestioexode.GestioExode;
 import gui.gestiogalaxia.GalGest;
+import gui.gestiorebel.GestioRebel;
 
 import java.awt.CardLayout;
 import java.awt.Component;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class Principal {
 	/**
@@ -50,6 +51,20 @@ public class Principal {
 		g.focus();
 	}
 	
+	public static void loadGestioExode(){
+		GestioExode ge = new GestioExode();
+		container.add(ge,"gestexod");
+		card.show(container,"gestexod");
+		window.setVisible(true);
+		ge.focus();
+	}
+	public static void loadGestioRebel(){
+		GestioRebel gr = new GestioRebel();
+		container.add(gr,"gestreb");
+		card.show(container,"gestreb");
+		window.setVisible(true);
+		gr.focus();
+	}
 	public static void removeView(Component c){
 		container.remove(c);
 	}
@@ -61,6 +76,10 @@ public class Principal {
 		window.setVisible(true);
 		mc.focus();
 	}
+	
+	
+	
+	
 	
 	public static Ventana getWindow(){
 		return window;

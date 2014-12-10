@@ -1,4 +1,4 @@
-package gui.gestioexode;
+package gui.gestiorebel;
 
 import gui.JPanelBg;
 import gui.Principal;
@@ -18,13 +18,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
-public class GestioExode extends JPanelBg{
+public class GestioRebel extends JPanelBg{
 	private JComboBox<String> accio;
-	private JComboBox<String> pickexode;
+	private JComboBox<String> pickrebel;
 	private JButton button;
 	private JButton btnNewButton;
 
-	public GestioExode() {
+	public GestioRebel() {
 		setImage("/images/bg.jpg");
 		setLayout(new BorderLayout(0, 0));
 		
@@ -42,10 +42,10 @@ public class GestioExode extends JPanelBg{
 		verticalBox.add(accio);
 		//preparem el contingut del primer combobox
 		accio.addItem("Acción a Ejecutar");
-		accio.addItem("Crear éxodo");
-		accio.addItem("Modificar éxodo");
-		accio.addItem("Consultar éxodo");
-		accio.addItem("Eliminar éxodo");
+		accio.addItem("Crear rebelde");
+		accio.addItem("Modificar rebelde");
+		accio.addItem("Consultar rebelde");
+		accio.addItem("Eliminar rebelde");
 		
 		//preparamos el comportamiento segun la selección
 		
@@ -55,10 +55,10 @@ public class GestioExode extends JPanelBg{
                 if (e.getStateChange() == ItemEvent.SELECTED) {
 	                int val = accio.getSelectedIndex();
 	                if (val <= 1) {
-	                	pickexode.setVisible(false);
+	                	pickrebel.setVisible(false);
 	                }
 	                else {
-	                	pickexode.setVisible(true);	                
+	                	pickrebel.setVisible(true);	                
 	                }
                 }
             }
@@ -72,17 +72,17 @@ public class GestioExode extends JPanelBg{
 		verticalBox.add(verticalStrut);
 	
 		
-		pickexode = new JComboBox<String>();
-		pickexode.setMinimumSize(new Dimension(120, 20));
-		pickexode.setMaximumSize(new Dimension(120, 20));
-		pickexode.setVisible(false);
-		verticalBox.add(pickexode);
+		pickrebel = new JComboBox<String>();
+		pickrebel.setMinimumSize(new Dimension(120, 20));
+		pickrebel.setMaximumSize(new Dimension(120, 20));
+		pickrebel.setVisible(false);
+		verticalBox.add(pickrebel);
 		
-		pickexode.addItem("Escoge éxodo");
-		pickexode.addItem("Exodo 1");
-		pickexode.addItem("Exodo 2");
-		pickexode.addItem("Exodo 3");
-		pickexode.addItem("Exodo 4");
+		pickrebel.addItem("Escoge rebelde");
+		pickrebel.addItem("Rebelde 1");
+		pickrebel.addItem("Rebelde 2");
+		pickrebel.addItem("Rebelde 3");
+		pickrebel.addItem("Rebelde 4");
 		
 		
 		
@@ -97,8 +97,8 @@ public class GestioExode extends JPanelBg{
         		if (accio.getSelectedIndex() == 0) {
         			JOptionPane.showMessageDialog(Principal.getWindow(), "Por favor, seleccione una opción válida");
         		}
-        		else if (pickexode.getSelectedIndex() == 0 && pickexode.isVisible()) {
-        			JOptionPane.showMessageDialog(Principal.getWindow(), "Por favor, seleccione una éxodo");
+        		else if (pickrebel.getSelectedIndex() == 0 && pickrebel.isVisible()){
+        			JOptionPane.showMessageDialog(Principal.getWindow(), "Por favor, seleccione un rebelde");
         		}
         		else {
         			System.out.println("do something");
@@ -137,7 +137,7 @@ public class GestioExode extends JPanelBg{
 		//Aquesta funcio ens serveix per a establir a quin objecte s'ha de fer focus al carregar la vista
 		accio.requestFocusInWindow();
 		//Aprofitem per associar la tecla intro amb un boto
-		JRootPane rootPane = SwingUtilities.getRootPane(button); 
-		rootPane.setDefaultButton(button);
+		JRootPane rootPane = SwingUtilities.getRootPane(btnNewButton); 
+		rootPane.setDefaultButton(btnNewButton);
 	}
 }

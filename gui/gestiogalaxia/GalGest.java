@@ -41,6 +41,68 @@ public class GalGest extends JPanelBg {
         Component verticalStrut_2 = Box.createVerticalStrut(20);
         verticalBox.add(verticalStrut_2);
         
+        Box horizontalBox_2 = Box.createHorizontalBox();
+        verticalBox.add(horizontalBox_2);
+        
+        Component horizontalGlue_1 = Box.createHorizontalGlue();
+        horizontalBox_2.add(horizontalGlue_1);
+        
+        box = new JComboBox<String>();
+        box.setPreferredSize(new Dimension(150, 20));
+        box.setMinimumSize(new Dimension(150, 20));
+        horizontalBox_2.add(box);
+        box.setMaximumSize(new Dimension(200, 48));
+        
+        Component horizontalGlue_2 = Box.createHorizontalGlue();
+        horizontalBox_2.add(horizontalGlue_2);
+        box.addItem("Consultar");
+        box.addItem("Modificar");
+        box.addItem("Importar");
+        box.addItem("Exportar");
+        
+                box.addItemListener(new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                        	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
+        	                int val = box.getSelectedIndex();
+        	                JPanel toRemove = getCurrentCard();
+        	                switch(val){
+        	                	case 0: 
+        	                		gd = new GalDraw();
+        	                        panel.add(gd,"draw");
+        	                		card.show(panel,"draw");
+        	                		removeCard(toRemove);
+        	                		break;
+        	                	case 1:
+        	                		mg = new GalMod();
+        	                        panel.add(mg,"modify");
+        	                		card.show(panel,"modify");
+        	                		removeCard(toRemove);
+        	                		break;
+        	                	case 2:
+        	                		ig = new GalImp();
+        	                        panel.add(ig,"import");
+        	                		card.show(panel,"import");
+        	                		removeCard(toRemove);
+        	                		break;
+        	                	case 3:
+        	                		eg = new GalExp();
+        	                        panel.add(eg,"export");
+        	                		card.show(panel,"export");
+        	                		removeCard(toRemove);
+        	                		break;
+        	                	default:
+        	                		System.out.println("DEFAULT");
+        	                		break;
+        	                }
+                        }
+                    }
+                });
+        
+        Component verticalStrut = Box.createVerticalStrut(20);
+        verticalBox.add(verticalStrut);
+        
         Box horizontalBox = Box.createHorizontalBox();
         horizontalBox.setAlignmentY(Component.CENTER_ALIGNMENT);
         verticalBox.add(horizontalBox);
@@ -56,18 +118,14 @@ public class GalGest extends JPanelBg {
         Component horizontalStrut = Box.createHorizontalStrut(20);
         horizontalBox.add(horizontalStrut);
         
-        Component verticalStrut = Box.createVerticalStrut(20);
-        verticalBox.add(verticalStrut);
-        
-        box = new JComboBox<String>();
-        verticalBox.add(box);
-        box.setMaximumSize(new Dimension(200, 48));
-        
         Box horizontalBox_1 = Box.createHorizontalBox();
         horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
         verticalBox.add(horizontalBox_1);
         
         Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+        horizontalStrut_2.setPreferredSize(new Dimension(20, 40));
+        horizontalStrut_2.setMinimumSize(new Dimension(20, 40));
+        horizontalStrut_2.setMaximumSize(new Dimension(20, 40));
         horizontalBox_1.add(horizontalStrut_2);
         
         button = new JButton("Atrás");
@@ -82,10 +140,6 @@ public class GalGest extends JPanelBg {
         
         Component horizontalGlue = Box.createHorizontalGlue();
         horizontalBox_1.add(horizontalGlue);
-        box.addItem("Consultar");
-        box.addItem("Modificar");
-        box.addItem("Importar");
-        box.addItem("Exportar");
         
         
         //Carreguem les 4 possibles vistes que pot haver-hi: modificar, importar, exportar, dibuixar la galaxia
@@ -95,46 +149,6 @@ public class GalGest extends JPanelBg {
         gd.setLayout(new BorderLayout(0, 0));
 
         card.show(panel, "draw");
-
-        box.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
-	                int val = box.getSelectedIndex();
-	                JPanel toRemove = getCurrentCard();
-	                switch(val){
-	                	case 0: 
-	                		gd = new GalDraw();
-	                        panel.add(gd,"draw");
-	                		card.show(panel,"draw");
-	                		removeCard(toRemove);
-	                		break;
-	                	case 1:
-	                		mg = new GalMod();
-	                        panel.add(mg,"modify");
-	                		card.show(panel,"modify");
-	                		removeCard(toRemove);
-	                		break;
-	                	case 2:
-	                		ig = new GalImp();
-	                        panel.add(ig,"import");
-	                		card.show(panel,"import");
-	                		removeCard(toRemove);
-	                		break;
-	                	case 3:
-	                		eg = new GalExp();
-	                        panel.add(eg,"export");
-	                		card.show(panel,"export");
-	                		removeCard(toRemove);
-	                		break;
-	                	default:
-	                		System.out.println("DEFAULT");
-	                		break;
-	                }
-                }
-            }
-        });
         
         
 	}

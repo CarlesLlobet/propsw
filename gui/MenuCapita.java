@@ -67,13 +67,28 @@ public class MenuCapita extends JPanelBg {
         btnAcceder.setMaximumSize(new Dimension(100, 48));
         btnAcceder.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		if (box.getSelectedIndex() == 1){
-        			System.out.println("To gestio galaxia");
-        			deleteView();
-        			Principal.loadGestioGalaxia();
+        		int val = box.getSelectedIndex();
+        		switch(val){
+	        		case 0:
+	        			System.out.println("To gestio rebels");
+	        			deleteView();
+	        			Principal.loadGestioRebel();
+	        			break;
+	        		case 1:
+	        			System.out.println("To gestio galaxia");
+	        			deleteView();
+	        			Principal.loadGestioGalaxia();
+	        			break;
+	        		case 2:
+	        			System.out.println("To gestio exode");
+	        			deleteView();
+	        			Principal.loadGestioExode();
+	        			break;
+	        		default:
+	            		System.out.println("Seleccionado: " + String.valueOf(val));
+	            		Principal.llistarcomponents();
+	        			break;
         		}
-        		else System.out.println("Seleccionado: " + String.valueOf(box.getSelectedItem()));
-        		Principal.llistarcomponents();
         	}
         });
         btnAcceder.setRequestFocusEnabled(false);
