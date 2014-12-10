@@ -7,6 +7,8 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
@@ -20,12 +22,17 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JComboBox;
 
 public class Login extends JPanelBg{
 
 	private JButton button;
 	private JTextField user;
 	private JPasswordField pass;
+	private JLabel lblContrasea;
+	private JLabel lblAccederComo;
+	private JComboBox<String> box;
+	
 	//Aquest atribut ens permet obtenir una referencia a la vista per eliminarla.
 	//private Login view;
 	
@@ -42,6 +49,48 @@ public class Login extends JPanelBg{
 		
 		Component verticalGlue_2 = Box.createVerticalGlue();
 		add(verticalGlue_2);
+		
+		lblAccederComo = new JLabel("Acceder como:");
+		lblAccederComo.setMaximumSize(new Dimension(120, 23));
+		lblAccederComo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAccederComo.setFocusable(false);
+		lblAccederComo.setAlignmentX(0.5f);
+		add(lblAccederComo);
+		
+		box = new JComboBox<String>();
+		box.setMaximumSize(new Dimension(200, 20));
+		add(box);
+		//Preparem el contingut del combo box
+		box.addItem("Capitán");
+		//Esto será de ejemplo y consistira en una lista de capitanes que se obtiene del contentedor de capitanes
+		box.addItem("Rebelde del Capitan 1");
+		box.addItem("Rebelde del Capitan 2");
+		box.addItem("Rebelde del Capitan 3");
+		
+		box.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
+                	//Si val = 0 Entrem com a capita, per tant fiquem a visible el camp de password;
+	                int val = box.getSelectedIndex();
+	                user.setText("");
+	                if (val == 0){
+	                	lblContrasea.setVisible(true);
+	                	pass.setVisible(true);
+	                	pass.setText("");
+	                }
+	                else {
+	                	lblContrasea.setVisible(false);
+	                	pass.setVisible(false);
+	                }
+                }
+            }
+		});
+		
+		
+		Component verticalStrut = Box.createVerticalStrut(20);
+		add(verticalStrut);
 		
 		JLabel lblNewLabel = new JLabel("Usuario");
 		lblNewLabel.setFocusable(false);
@@ -63,7 +112,7 @@ public class Login extends JPanelBg{
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		this.add(verticalStrut_1);
 		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+		lblContrasea = new JLabel("Contrase\u00F1a");
 		lblContrasea.setFocusable(false);
 		lblContrasea.setMaximumSize(new Dimension(100, 23));
 		lblContrasea.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -119,13 +168,12 @@ public class Login extends JPanelBg{
 		this.add(verticalGlue_3);
 		
 		//fem que el botó d'iniciar sessió estigui relacionat amb la tecla intro
-
 		
 	}
 	
 	public void focus(){
 		//Aquesta funcio ens serveix per a establir a quin objecte s'ha de fer focus al carregar la vista
-		user.requestFocusInWindow();
+		box.requestFocusInWindow();
 		
 		//Aprofitem per associar la tecla intro amb un boto
 		JRootPane rootPane = SwingUtilities.getRootPane(button); 

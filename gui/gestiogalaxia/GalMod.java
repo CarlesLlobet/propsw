@@ -34,6 +34,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import net.miginfocom.swing.MigLayout;
+import java.awt.ComponentOrientation;
 
 public class GalMod extends JPanel{
 	private JTextField textField;
@@ -41,6 +42,7 @@ public class GalMod extends JPanel{
 	private JTextField textField_2;
 	private JTextField textField_3;
 	public GalMod() {
+		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		setBackground(new Color(0,0,0,0));
 		//setBackground(Color.CYAN);
 		System.out.println("A PINTAAAR MODIFICAR GALAXIA");
@@ -90,7 +92,6 @@ public class GalMod extends JPanel{
 		horizontalBox.add(horizontalStrut_3);
 		
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setPreferredSize(new Dimension(71, 30));
 		horizontalBox.add(btnGuardar);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
@@ -122,7 +123,6 @@ public class GalMod extends JPanel{
 		horizontalBox_2.add(horizontalStrut_8);
 		
 		JButton btnAfegir = new JButton("Afegir");
-		btnAfegir.setPreferredSize(new Dimension(61, 30));
 		horizontalBox_2.add(btnAfegir);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
@@ -257,8 +257,6 @@ public class GalMod extends JPanel{
 		
 		JButton button = new JButton("Crear adyacencia");
 		horizontalBox_16.add(button);
-		button.setMinimumSize(new Dimension(117, 30));
-		button.setMaximumSize(new Dimension(117, 20));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -324,6 +322,7 @@ public class GalMod extends JPanel{
 		horizontalBox_3.add(horizontalStrut_26);
 		
 		JButton button_2 = new JButton("Eliminar adyacencia");
+		button_2.setPreferredSize(new Dimension(125, 20));
 		horizontalBox_3.add(button_2);
 		
 		Component verticalStrut_7 = Box.createVerticalStrut(20);
