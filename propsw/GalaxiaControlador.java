@@ -43,6 +43,13 @@ public class GalaxiaControlador{
 	
 		return g;
 	}
+	
+	//AFEGIT
+	public void resetGalaxia(String idCapi) {
+		
+		Galaxia g = new Galaxia(getCapita());
+		capiControl.getCapita(idCapi).setGalaxia(g);
+	}
 
 	/**
 	 * Afegeix una Base a la Galaxia
@@ -107,6 +114,12 @@ public class GalaxiaControlador{
 	public void createAdjacency(int from, int to, int capacitat, double cost) throws IOException{
 		
 		getGalaxia().conectarNodes(from,to,capacitat,cost);
+	}
+	
+	//AFEGIT
+	public void createAdjacency(int from, int to, int capacitat, double cost, String idCapi) throws IOException{
+		
+		capiControl.getGalaxia(idCapi).conectarNodes(from,to,capacitat,cost);
 	}
 	
 	/**
