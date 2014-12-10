@@ -26,6 +26,8 @@ public class Exode implements Serializable{
 	private String idExode;
 	private FordFulkerson<Base> ff;
 	private HashMap<Integer,ArrayList<Integer[]>> collsAmpolla;
+	private HashMap<String,ArrayList<Integer>> caminsFixats;
+	private boolean invalid;
 	
 	
 	/**
@@ -41,10 +43,140 @@ public class Exode implements Serializable{
 		destins = new HashMap<String, Integer>();
 		camins = new HashMap<String, ArrayList<Integer>>();
 		collsAmpolla = new HashMap<Integer, ArrayList<Integer[]>>();
-		
+		caminsFixats = new HashMap<String,ArrayList<Integer>>();
+		invalid = false;
 	}
 	
 	
+	//Retorna true si el exode es invalid degut a algun dels camins fixats
+	public boolean isInvalid() {
+		return invalid;
+	}
+
+
+
+	// Aquest mètode fixa un camí a un rebel. Retorna true si el camí es un camí vàlid
+	// Perque sigui vàlid ha de complir les seguents condicions:
+	// 		- Que hi hagi connexions entre totes les arestes desde el origen fins al destí.
+	// 		- Que aquestes arestes tinguin totes una capacitat >= 1
+	// Si no es compleix alguna d'aquestes dues condicions aleshores:
+	//		- Insereix el cami en la variable caminsFixats i modifica la variable camins per treure el cami assignat a aquell 
+	//		rebel en l'anterior execució i assignar el nou camí.
+	//		- Retorna false i marca l'exode com invàlid.
+	// Si es compleixen aquestes condicions:
+	//		- Resta 1 a la capacitat de totes les arestes del camí i suma 1 al fluxe de cada aresta del camí en el graf inicial.
+	//		- En la variable camins s'afegeix el nou camí per a aquest rebel i es treu el que hi habia assignat.
+	//		- En la variable caminsFixats s'afegeix el nou camí fixat per a aquest rebel
+	// En el mètode execució cal afegir els camins fixats quan es fa un new de la variable camins perque tingui en compte els 
+	// camins fixats.
+	public boolean fixarCami(String idRebel, ArrayList<Integer> cami) throws IOException{
+		boolean toRet = true;
+		actualitzat = false;		
+		toRet = checkCami(cami); //Es comproben les dues primeres condicions. Retorna true si es compleixen les dues
+		if(toRet){
+			//Si compleix les dues condicions
+			int camiSize = cami.size();
+			//Es fa el recorregut del camí restant 1 a cada capacitat i afegint 1 al fluxe.
+			int capacidad=0;
+			int idAresta =0;
+			double coste = 0;
+			int flujo = 0;
+			for (int i = 0; i < camiSize - 1; i++) {
+				idAresta = grafInicial.getIDAresta(cami.get(i),cami.get(i+1));
+				capacidad = grafInicial.getCapacidadAresta(idAresta);
+				coste = grafInicial.getCosteAresta(idAresta);
+				flujo = grafInicial.getFlujoAresta(idAresta);
+				grafInicial.substituirAresta(idAresta, capacidad-1, coste);		//Decremento la capacitat en 1
+				grafInicial.setFlujoAresta(idAresta, flujo+1);					//Incremento el fluxe en 1
+			}
+		}
+		desfixarCami(idRebel); 					//Si el rebel te un cami fixat aquest s'ha de desfixar abans...
+		caminsFixats.put(idRebel, cami);		//Afegeixo el cami als camins fixats y als camins resultants
+		camins.put(idRebel, cami);				//independentment de si es correcte o no el camí.
+		destins.put(idRebel,cami.get(cami.size()-1));				//Actualitzem el cami del rebel per si ha cambiat
+		if(!toRet)invalid = true;
+		return toRet;
+	}
+	
+	//Retorna false si el idRebel no tenia un camí fixat
+	//Retorna true si aquest existeix. Si existeix a mes fa:
+	//		- Treu el cami de la variable caminsFixats
+	//		- Treu el cami de la variable camins
+	//		- actualitza l'estat del graf inical  
+	//		(només si es un camí vàlid) sumant 1 
+	//		a les capacitats de les arestes del cami i restant 1 al fluxe 
+	//		de les arestes de l camí.
+	//		- Actualitza l'estat d'invalid en funció si hi ha algun cami fixat que 
+	//		no compleix les restriccions
+	public boolean desfixarCami(String idRebel) throws IOException{
+		boolean toRet = false;
+		ArrayList<Integer> cami = caminsFixats.get(idRebel);
+		if(cami!=null){
+			actualitzat = false;
+			toRet = true;
+			caminsFixats.remove(idRebel);
+			camins.remove(idRebel);
+			
+			//Si el camí es un camí vàlid aleshores es fa la actualització del graf inicial
+			if(checkCami(cami)){
+			
+				int camiSize = cami.size();
+				//Es fa el recorregut del camí sumant 1 a cada capacitat i restant 1 al fluxe.
+				int capacidad=0;
+				int idAresta =0;
+				double coste = 0;
+				int flujo = 0;
+				for (int i = 0; i < camiSize - 1; i++) {
+					idAresta = grafInicial.getIDAresta(cami.get(i),cami.get(i+1));
+					capacidad = grafInicial.getCapacidadAresta(idAresta);
+					coste = grafInicial.getCosteAresta(idAresta);
+					flujo = grafInicial.getFlujoAresta(idAresta);
+					grafInicial.substituirAresta(idAresta, capacidad+1, coste);		//Incremento la capacitat en 1
+					grafInicial.setFlujoAresta(idAresta, flujo-1);					//Decremento el fluxe en 1
+				}
+			}
+			//Actualitzo el estat de invalid de l'exode (serà invalid si algun 
+			//dels camins fixats no passa les restriccions del checkCami())
+			Iterator<String> it = caminsFixats.keySet().iterator();
+			String str = "";
+			invalid = true;
+			while(it.hasNext()){
+				str = it.next();
+				if(checkCami(caminsFixats.get(str))==false)invalid = true;
+			}
+			if(caminsFixats.keySet().size()<=0)invalid=false;
+		}
+		
+		return toRet;
+	}
+	
+	// Retorna true si hi ha connexio entre totes les bases del camí
+	// i si la capacitat de totes les arestes es > 1
+	private boolean checkCami(ArrayList<Integer> cami) {
+		boolean toRet = true;
+		int camiSize = cami.size();
+		for (int i = 0; i < camiSize - 1; i++) {
+			try {
+				//Si son adjacents miro que la capacitat sigui >=1 sino retornare false
+				if(toRet && grafInicial.adjacents(cami.get(i), cami.get(i+1))){
+					if(grafInicial.getCapacidadAresta(grafInicial.getIDAresta(cami.get(i), cami.get(i+1)))<1){
+						toRet=false;		//La capacitat de l'aresta es 0 o menor que 0
+					}
+				}else{
+					toRet = false;			//O bé no son adjacents o bé ja habiem marcat com a false el toRet
+				}
+			} catch (IOException e) {
+				//Hi ha una excepcio perque o bé algun dels identificadors dels 
+				//nodes del cami no existeix o bé alguna parella de node contigus 
+				//estan repetits. Per tant retornem false.
+				toRet = false;
+			}
+		}
+		return toRet;
+	}
+
+
+
 	/**
 	 * Consulta els dest’ assignat a cada rebel.
 	 * @return HashMap amb key=idRebel i value = idBase (Dest’ assignat al Rebel)
@@ -54,6 +186,7 @@ public class Exode implements Serializable{
 	}
 	
 	/**
+	 * Nomes retorna el numero de destins dels rebels que no son amb cami fixat.
 	 * Consulta del numero de rebels que van a cada un dels destins.
 	 * @return Retorna hashMap amb key = idBase (cada un dels destins) i value = numero de rebels que van a aquell dest’.
 	 */
@@ -61,18 +194,19 @@ public class Exode implements Serializable{
 		//Cada rebel té un destí assignat. Es fa una llista 
 		//dels diferents destins sense repeticions
 		HashMap<Integer,Integer> toReturn = new HashMap<Integer, Integer>();
-		
 		Iterator<String> keys = destins.keySet().iterator();
 		String k = "";
 		Integer idBase= null;
 		int counter;
 		while(keys.hasNext()){
 			k = keys.next();
-			idBase = destins.get(k);
-			if(!toReturn.containsKey(idBase))toReturn.put(idBase,1);
-			else{
-				counter = toReturn.get(idBase)+1;
-				toReturn.put(idBase,counter);							//Actualitzem el contador
+			if(!caminsFixats.keySet().contains(k)){
+				idBase = destins.get(k);
+				if(!toReturn.containsKey(idBase))toReturn.put(idBase,1);
+				else{
+					counter = toReturn.get(idBase)+1;
+					toReturn.put(idBase,counter);							//Actualitzem el contador
+				}
 			}
 		}
 		return toReturn;
@@ -82,9 +216,13 @@ public class Exode implements Serializable{
 	 * Execuci— de l'algoritme Dijkstra
 	 * @throws IOException
 	 */
-	public void execucioDijkstra() throws IOException {
-		ff = new FFDijkstra<Base>(idBaseInici,2,galaxia);
-		execucio();
+	//Retorna true o false si s'ha fet la execucio
+	public boolean execucioDijkstra() throws IOException {
+		if(!invalid){
+			ff = new FFDijkstra<Base>(idBaseInici,2,galaxia);
+			execucio();
+		}
+		return !invalid;
 		
 	}
 	
@@ -100,9 +238,13 @@ public class Exode implements Serializable{
 	 * Execuci— de l'algoritme DFS i emplena la variable camins assignant un cam’ a cada rebel assignat a l'éxode.
 	 * @throws IOException
 	 */
-	public void execucioDFS() throws IOException {
-		ff = new FordFulkerson<Base>();
-		execucio();
+	//Retorna true o false si s'ha fet la execucio
+	public boolean execucioDFS() throws IOException {
+		if(!invalid){
+			ff = new FordFulkerson<Base>();
+			execucio();
+		}
+		return !invalid;
 	}
 	
 	/**
@@ -112,10 +254,13 @@ public class Exode implements Serializable{
 	private void execucio() throws IOException{
 		cost = 0;
 		camins = new HashMap<String, ArrayList<Integer>>();				//Reinicialitzem el mapa de camins  perque farem una nova execució
+		camins.putAll(caminsFixats);									//Afegim els camins fixats a mans per l'usuari
 		collsAmpolla = new HashMap<Integer, ArrayList<Integer[]>>();	//Reinicialitzem els colls d'ampolla perque fem una nova execució de l'algoritme
 		// Hem de unir els destins amb el sumidero en el graf inicial
-		Base b = new Base(galaxia);
-		grafResidualPostProces =  galaxia.getCopiaGraf();
+		Base b = new Base();
+		b.setGraf(grafInicial);
+		grafInicial.afegirNode(b);
+		grafResidualPostProces =  galaxia.getCopiaGraf(grafInicial);
 		HashMap<Integer,Integer> destinsResum = getDestinsResum();
 		ArrayList<Integer> dests = new ArrayList<Integer>(destinsResum.keySet());
 		int sizeDests = dests.size();
@@ -128,7 +273,8 @@ public class Exode implements Serializable{
 		grafResidualPreProces = galaxia.getCopiaGraf(grafResidualPostProces);
 		//Surten "n=flow" rebels de l'origen ....
 		generaCamins(grafResidualPostProces,idBaseInici, new ArrayList<Integer>(), flow, destinsResum);			//El post-processament del graf residual
-		galaxia.removeNode(b.getId());
+		
+		grafInicial.removeNode(b.getId());
 		actualitzat = true;
 	}
 
@@ -226,9 +372,13 @@ public class Exode implements Serializable{
 	 * Execuci— de l'algoritme EdmondKarp
 	 * @throws IOException
 	 */
-	public void execucioBFS() throws IOException {
-		ff = new EdmondsKarp<Base>(idBaseInici, 2, galaxia);
-		execucio();
+	//Retorna true o false si s'ha fet la execucio
+	public boolean execucioBFS() throws IOException {
+		if(!invalid){
+			ff = new EdmondsKarp<Base>(idBaseInici, 2, galaxia);
+			execucio();
+		}
+		return !invalid;
 	}
 	
 	//S'afegeix un rebel a l'exode només si aquest forma part de la tropa del capitˆ
@@ -425,10 +575,23 @@ public class Exode implements Serializable{
 		return grafResidualPreProces;
 	}
 	
-	public boolean checkearCamino(ArrayList<Integer> camino){
-		boolean ret = false;
-		
-		return ret;
+	
+	
+	public String getUltimAlgoritmeExecutat(){
+		String toRet = "";
+		if (ff==null){
+			toRet = "No s'ha executat cap algoritme";
+		}else{
+			toRet = ff.getClass().getName();
+		}
+		return toRet;
 	}
+
+
+	public HashMap<String, ArrayList<Integer>> getCaminsFixats() {
+		return caminsFixats;
+	}
+	
+	
 	
 }

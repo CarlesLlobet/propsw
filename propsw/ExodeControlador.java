@@ -132,5 +132,33 @@ public class ExodeControlador{
 		capi.getRebel(idRebel).esborrarExode(idExode);           
 		return capi.getGalaxia().getExode(idExode).borrarRebel(idRebel);
 	}
+	
+	//Fixa un cami d'un rebel a un èxode.
+	public boolean fixarCamiExode(String idExode, String idRebel, ArrayList<Integer> camiBases) throws IOException{
+		return capi.getGalaxia().getExode(idExode).fixarCami(idRebel, camiBases);
+	}
+	
+	//Desfixa un cami d'un rebel a un èxode.
+	public boolean desfixarCamiExode(String idExode, String idRebel) throws IOException{
+		return capi.getGalaxia().getExode(idExode).desfixarCami(idRebel);
+	}
 
+	//Retorna true si el exode es invàlid. Si es invalid no es pot fer cap execució.
+	//Es invalid si algun dels camins fixats no conpleix les restriccions:
+	//	- Totes bases del cami han de tenir aresta amb la base seguent del camí
+	//	- Totes les arestes han de tenir capacitat < 
+	public boolean isExodeInvalid(String idExode) throws IOException{
+		return capi.getGalaxia().getExode(idExode).isInvalid();
+	}
+	
+	//Retorna els camins fixats on el key es el identificador del rebel y el arraylist 
+	//de integers es el camí
+	public HashMap<String,ArrayList<Integer>> getCaminsFixatsExode(String idExode){
+		return capi.getGalaxia().getExode(idExode).getCaminsFixats();
+	}
+	
+	//Retorna el nome de la classe de l'ultim algoritme executat. 
+	public String getUltimAlgoritmeExode(String idExode) throws IOException{
+		return capi.getGalaxia().getExode(idExode).getUltimAlgoritmeExecutat();
+	}
 }
