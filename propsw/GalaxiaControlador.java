@@ -168,6 +168,17 @@ public class GalaxiaControlador{
 	}
 	
 	/**
+	 * 
+	 *  Genera un ArrayList de les bases que hi ha a la galaxia
+	 * @return ArrayList de les bases de la galaxia
+	 * @throws IOException
+	 */
+	public ArrayList<Base> getBaseArray() throws IOException{
+		return getGalaxia().getBaseArray();
+	}
+	
+	
+	/**
 	 * Llista els exodes existents per la Gal�xia
 	 * @return un string amb els ids dels �xodes
 	 */
@@ -185,5 +196,6 @@ public class GalaxiaControlador{
 	public Capita getCapita(){
 		return capiControl.getCapita();
 	}
+	
 	
 }
