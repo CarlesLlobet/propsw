@@ -36,12 +36,11 @@ public class GalaxiaControlador{
 	 * Es borren tots els camps de l'objecte Galaxia actual.
 	 * @return Objecte de la classe Galaxia resetejat
 	 */
-	public Galaxia resetGalaxia() {
+	public void resetGalaxia() {
 		
 		Galaxia g = new Galaxia(getCapita());
 		getCapita().setGalaxia(g);
 	
-		return g;
 	}
 	
 	//AFEGIT
