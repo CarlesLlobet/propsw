@@ -93,10 +93,15 @@ public class LlegirEscriureNatural {
         java.io.PrintStream ps = new java.io.PrintStream( outFileName+".txt" );
         ps.println("Capita:"+c.getNom()+","+c.getPassword());
         ps.println("Nombre rebels:"+Integer.toString( c.getRebels().size() ));
-        ps.println("Nombre bases:"+Integer.toString( c.getGalaxia().getBaseArray().size() ));
-        //     while(){
-        //     	ps.println("Conexio:"++","++","++","++);
-        //     }
+        int nBases = c.getGalaxia().getBaseArray().size();
+        ps.println("Nombre bases:"+Integer.toString( nBases ));
+        for(int i = 0; i < nBases; ++i){
+            for(int j = 0; j < nBases; ++i){
+            	if (gaco.existsAdjacency(i, j)){
+            		ps.println("Conexio:"+ Integer.toString(i) +","+ Integer.toString(j) +","+ Integer.toString(gaco.getCapacitatAdjacency(i, j)) +","+ Double.toString(gaco.getCostAdjacency(i, j)));
+            	}
+            }
+        }
         ps.close();		
 	}
 	
@@ -105,10 +110,15 @@ public class LlegirEscriureNatural {
 		idCapi = idCapita;
 		Capita c = caco.getCapita(idCapi);
         java.io.PrintStream ps = new java.io.PrintStream( outFileName+".txt" );
-        ps.println("Nombre bases:"+Integer.toString( c.getGalaxia().getBaseArray().size() ));
-   //     while(){
-   //     	ps.println("Conexio:"++","++","++","++);
-   //     }
+        int nBases = c.getGalaxia().getBaseArray().size();
+        ps.println("Nombre bases:"+Integer.toString( nBases ));
+        for(int i = 0; i < nBases; ++i){
+            for(int j = 0; j < nBases; ++i){
+            	if (gaco.existsAdjacency(i, j)){
+            		ps.println("Conexio:"+ Integer.toString(i) +","+ Integer.toString(j) +","+ Integer.toString(gaco.getCapacitatAdjacency(i, j)) +","+ Double.toString(gaco.getCostAdjacency(i, j)));
+            	}
+            }
+        }
         ps.close();		
 	}
 }

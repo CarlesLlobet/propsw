@@ -166,6 +166,23 @@ public class GalaxiaControlador{
 		return aresta;
 	}
 	
+	//AFEGIT
+	public boolean existsAdjacency(int from, int to) throws IOException{
+		return getGalaxia().adjacents(from,to);
+	}
+	
+	//AFEGIT
+	public int getCapacitatAdjacency(int from, int to) throws IOException{
+		int idAresta=getGalaxia().getIDAresta(from,to);
+		return getGalaxia().getCapacidadAresta(idAresta);
+	}
+	
+	//AFEGIT
+	public double getCostAdjacency(int from, int to) throws IOException{
+		int idAresta=getGalaxia().getIDAresta(from,to);
+		return getGalaxia().getCosteAresta(idAresta);
+	}
+	
 	/**
 	 * 
 	 *  Genera un ArrayList de les bases que hi ha a la galaxia
