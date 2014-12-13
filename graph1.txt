@@ -1,0 +1,138 @@
+g graph1
+v s
+v o
+v p
+v q
+v r
+v t
+e s o 3 
+e s p 3 
+e o p 2 
+e o q 3 
+e p r 2 
+e r t 3 
+e q r 4 
+e q t 2
+g graph2
+v s
+v d1
+v d2
+v d3
+v t1
+v t2
+v t3
+v t4
+v t5
+v t6
+v t
+e s d1 5 
+e s d2 5 
+e s d3 5 
+e t1 t 2 
+e t2 t 2 
+e t3 t 2 
+e t4 t 2 
+e t5 t 2 
+e t6 t 2
+e d1 t1 1
+e d1 t2 1
+e d1 t3 1
+e d1 t4 1
+e d1 t5 1
+e d1 t6 1
+e d2 t1 1
+e d2 t2 1
+e d2 t3 1
+e d2 t4 1
+e d2 t5 1
+e d2 t6 1
+e d3 t1 1
+e d3 t2 1
+e d3 t3 1
+e d3 t4 1
+e d3 t5 1
+e d3 t6 1
+g graph3
+v s
+v d1
+v d2
+v d3
+v d4
+v d5
+v t1
+v t2
+v t3
+v t4
+v t5
+v t6
+v t
+e s d1 10 
+e s d2 10 
+e s d3 10 
+e s d4 10 
+e s d5 10 
+e t1 t 2 
+e t2 t 2 
+e t3 t 2 
+e t4 t 2 
+e t5 t 2 
+e t6 t 2
+e d1 t1 1
+e d1 t2 1
+e d1 t3 1
+e d1 t4 1
+e d1 t5 1
+e d1 t6 1
+e d2 t1 1
+e d2 t2 1
+e d2 t3 1
+e d2 t4 1
+e d2 t5 1
+e d2 t6 1
+e d3 t1 1
+e d3 t2 1
+e d3 t3 1
+e d3 t4 1
+e d3 t5 1
+e d3 t6 1
+e d4 t1 1
+e d4 t2 1
+e d4 t3 1
+e d4 t4 1
+e d4 t5 1
+e d4 t6 1
+e d5 t1 1
+e d5 t2 1
+e d5 t3 1
+e d5 t4 1
+e d5 t5 1
+e d5 t6 1
+g graph4
+v s
+v a
+v b
+v c
+v d
+v o
+v p
+v q
+v r
+v t
+e s a 1 
+e s b 1 
+e s c 1 
+e s d 1
+e a o 1
+e a p 1 
+e b t 1 
+e c t 1 
+e d t 1 
+e a t 1 
+e s o 1 
+e s p 1 
+e o p 1 
+e o q 1 
+e p r 1 
+e r t 1 
+e q r 1 
+e q t 1
