@@ -36,9 +36,20 @@ public class MenuCapita extends JPanelBg {
 	public MenuCapita() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setImage("/images/bg.jpg");
+
+        Dimension d = new Dimension(150,23);
+        
+        Component verticalGlue = Box.createVerticalGlue();
+        add(verticalGlue);
+        
+        Box horizontalBox_1 = Box.createHorizontalBox();
+        add(horizontalBox_1);
+        
+        Component horizontalGlue_3 = Box.createHorizontalGlue();
+        horizontalBox_1.add(horizontalGlue_3);
         
         box = new JComboBox<String>();
-        box.setPreferredSize(new Dimension(28, 48));
+        horizontalBox_1.add(box);
         box.setRequestFocusEnabled(false);
         box.setFont(new Font("Tahoma", Font.PLAIN, 14));
         box.setMaximumRowCount(10);
@@ -49,22 +60,23 @@ public class MenuCapita extends JPanelBg {
         box.addItem("Añadir capitán");
         box.addItem("Cambiar contraseña");
         box.addItem("Borrar este capitán");
-
-        Dimension d = new Dimension(150,23);
-        
-        Component verticalGlue = Box.createVerticalGlue();
-        add(verticalGlue);
-        box.setMinimumSize(new Dimension(150, 48));
         box.setMaximumSize(new Dimension(150, 48));
-        add(box);
+        
+        Component horizontalGlue_2 = Box.createHorizontalGlue();
+        horizontalBox_1.add(horizontalGlue_2);
         
         Component verticalStrut = Box.createVerticalStrut(20);
         add(verticalStrut);
         
+        Box horizontalBox_2 = Box.createHorizontalBox();
+        add(horizontalBox_2);
+        
+        Component horizontalGlue_4 = Box.createHorizontalGlue();
+        horizontalBox_2.add(horizontalGlue_4);
+        
         btnAcceder = new JButton("Acceder");
-        btnAcceder.setPreferredSize(new Dimension(71, 48));
-        btnAcceder.setMinimumSize(new Dimension(100, 48));
-        btnAcceder.setMaximumSize(new Dimension(100, 48));
+        horizontalBox_2.add(btnAcceder);
+        btnAcceder.setMaximumSize(new Dimension(100, 23));
         btnAcceder.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		int val = box.getSelectedIndex();
@@ -86,7 +98,6 @@ public class MenuCapita extends JPanelBg {
 	        			break;
 	        		default:
 	            		System.out.println("Seleccionado: " + String.valueOf(val));
-	            		Principal.llistarcomponents();
 	        			break;
         		}
         	}
@@ -94,7 +105,9 @@ public class MenuCapita extends JPanelBg {
         btnAcceder.setRequestFocusEnabled(false);
         btnAcceder.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnAcceder.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(btnAcceder);
+        
+        Component horizontalGlue_5 = Box.createHorizontalGlue();
+        horizontalBox_2.add(horizontalGlue_5);
         
         Component verticalGlue_1 = Box.createVerticalGlue();
         add(verticalGlue_1);
@@ -113,29 +126,35 @@ public class MenuCapita extends JPanelBg {
 		      }
 		});
         
+        Box horizontalBox = Box.createHorizontalBox();
+        verticalBox.add(horizontalBox);
+        
+        Component horizontalGlue_1 = Box.createHorizontalGlue();
+        horizontalBox.add(horizontalGlue_1);
+        
         btnNewButton = new JButton("Cerrar sesión");
-        btnNewButton.setPreferredSize(new Dimension(120, 48));
-        btnNewButton.setMinimumSize(new Dimension(120, 48));
-        btnNewButton.setMaximumSize(new Dimension(120, 48));
+        horizontalBox.add(btnNewButton);
+        btnNewButton.setPreferredSize(new Dimension(120, 23));
+        btnNewButton.setMaximumSize(new Dimension(120, 23));
         btnNewButton.setRequestFocusEnabled(false);
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        verticalBox.add(btnNewButton);
+        
+        Component horizontalGlue = Box.createHorizontalGlue();
+        horizontalBox.add(horizontalGlue);
+        
+                btnNewButton.addActionListener(new ActionListener() {
+        			public void actionPerformed(ActionEvent arg0) {
+        				deleteView();
+        				Principal.loadLogin();
+        			}
+        		});
         
         Component verticalStrut_1 = Box.createVerticalStrut(20);
         verticalBox.add(verticalStrut_1);
-
-        btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//Principal.removeMenuCapita();
-				System.out.println("To login");
-				deleteView();
-				Principal.loadLogin();
-			}
-		});
 	}
 	
-	public void focus(){
+	public void config(){
 		box.requestFocusInWindow();
 		
 		//Seleccionamos el botón de acceder como acción principal al pulsar intro

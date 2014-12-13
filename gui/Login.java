@@ -32,12 +32,12 @@ public class Login extends JPanelBg{
 	private JLabel lblContrasea;
 	private JLabel lblAccederComo;
 	private JComboBox<String> box;
-	
-	//Aquest atribut ens permet obtenir una referencia a la vista per eliminarla.
-	//private Login view;
-	
+	private Box horizontalBox;
+	private Component horizontalGlue;
+	private Component horizontalGlue_1;
+	private Login view;
 	public Login() {
-		invalidate();
+		//Preparamos la vista
 		setBounds(100, 100, 793, 499);
 		setFocusTraversalPolicyProvider(true);
 		setAutoscrolls(true);
@@ -57,37 +57,28 @@ public class Login extends JPanelBg{
 		lblAccederComo.setAlignmentX(0.5f);
 		add(lblAccederComo);
 		
+		horizontalBox = Box.createHorizontalBox();
+		add(horizontalBox);
+		
+		horizontalGlue_1 = Box.createHorizontalGlue();
+		horizontalBox.add(horizontalGlue_1);
+		
 		box = new JComboBox<String>();
-		box.setMaximumSize(new Dimension(200, 20));
-		add(box);
-		//Preparem el contingut del combo box
+		box.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		horizontalBox.add(box);
+		box.setMaximumSize(new Dimension(200, 40));
+		
+		horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox.add(horizontalGlue);
+
+		
+		//TODO ESTA PARTE ESTARA EN LA LOGICA DE LA VISTA, SE TIENEN QUE REALIZAR LLAMADAS A LOS CONTROLADORES
+		//Preparamos el contenido del JComboBox
 		box.addItem("Capitán");
 		//Esto será de ejemplo y consistira en una lista de capitanes que se obtiene del contentedor de capitanes
 		box.addItem("Rebelde del Capitan 1");
 		box.addItem("Rebelde del Capitan 2");
 		box.addItem("Rebelde del Capitan 3");
-		
-		box.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
-                	//Si val = 0 Entrem com a capita, per tant fiquem a visible el camp de password;
-	                int val = box.getSelectedIndex();
-	                user.setText("");
-	                if (val == 0){
-	                	lblContrasea.setVisible(true);
-	                	pass.setVisible(true);
-	                	pass.setText("");
-	                }
-	                else {
-	                	lblContrasea.setVisible(false);
-	                	pass.setVisible(false);
-	                }
-                }
-            }
-		});
-		
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
 		add(verticalStrut);
@@ -130,6 +121,38 @@ public class Login extends JPanelBg{
 		this.add(verticalStrut_3);
 		
 		button = new JButton("Entrar");
+		button.setSelected(true);
+		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		button.setAlignmentX(Component.CENTER_ALIGNMENT);
+		button.setMinimumSize(new Dimension(100, 23));
+		button.setMaximumSize(new Dimension(100, 23));
+		this.add(button);
+		Component verticalGlue_3 = Box.createVerticalGlue();
+		this.add(verticalGlue_3);
+		view = this;
+		
+		//LOGICA DE LA VISTA
+		box.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
+                	//Si val = 0 Entrem com a capita, per tant fiquem a visible el camp de password;
+	                int val = box.getSelectedIndex();
+	                user.setText("");
+	                if (val == 0){
+	                	lblContrasea.setVisible(true);
+	                	pass.setVisible(true);
+	                	pass.setText("");
+	                }
+	                else {
+	                	lblContrasea.setVisible(false);
+	                	pass.setVisible(false);
+	                }
+                }
+            }
+		});
+		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("MENU CAPITAN");
@@ -149,34 +172,27 @@ public class Login extends JPanelBg{
 		  .addKeyEventDispatcher(new KeyEventDispatcher() {
 		      @Override
 		      public boolean dispatchKeyEvent(KeyEvent e) {
-		    	//AMB EL ISVISIBLE CONTROLEM SI ES LA VISTA CARREGADA I PER TANT EL TECLAT NOMES REACCIONA PER ELLA.
-		    	if (e.getKeyCode() == 27) System.exit(0);
-		        if (isVisible()) System.out.println("TECLADO EN LOGIN");
-		        //Principal.close();
+		    	//if (view.isShowing()){
+		    		if(e.getKeyCode() == 27) {
+		    			System.exit(0);
+		    		}
+		    	//}
 		        return false;
 		      }
 		});
-		
-		button.setSelected(true);
-		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		button.setAlignmentX(Component.CENTER_ALIGNMENT);
-		button.setMinimumSize(new Dimension(100, 23));
-		button.setMaximumSize(new Dimension(100, 23));
-		this.add(button);
-		Component verticalGlue_3 = Box.createVerticalGlue();
-		this.add(verticalGlue_3);
-		
-		//fem que el botó d'iniciar sessió estigui relacionat amb la tecla intro
 		
 	}
-	
-	public void focus(){
-		//Aquesta funcio ens serveix per a establir a quin objecte s'ha de fer focus al carregar la vista
+
+	public void config(){
+		//Solicitamos focus al JComboBox
 		box.requestFocusInWindow();
 		
-		//Aprofitem per associar la tecla intro amb un boto
+		//Asociamos la tecla intro con el botón de entrar
 		JRootPane rootPane = SwingUtilities.getRootPane(button); 
 		rootPane.setDefaultButton(button);
+		
+		//Centramos el texto del JComboBox
+		((JLabel)box.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 	}
 }
