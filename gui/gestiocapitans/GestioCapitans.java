@@ -98,6 +98,10 @@ public class GestioCapitans extends JPanelBg {
         horizontalBox.add(horizontalStrut);
                 
         boto = new JButton("New button");
+        boto.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         horizontalBox.add(boto);
         boto.setVisible(false);
                 
@@ -159,33 +163,30 @@ public class GestioCapitans extends JPanelBg {
 	                		card.show(panel,"CambiaContra");
 	                		break;
 	                	case 2:
-	                		//Marcamos como visible el botón importar/exportar y le asignamos el texto según su función.
+	                		boto.setVisible(true);
+	                		boto.setText("Borrar");
+	                		break;
+	                	case 3:
+	                		 //FALTA FER EL RESET
+	                		//Ocultamos el botón, que no necesitamos
+	                		boto.setVisible(false);
+	                		ccontra = new CanviaContra();	                		
+	                		card.show(panel,"CambiaContra");
+	                		break;
+	                	case 4://Marcamos como visible el botón importar/exportar y le asignamos el texto según su función.
 	                		boto.setVisible(true);
 	                		boto.setText("Importar");
 	                		ig.reset();
 	                		//Cargamos el panel de importar
 	                		card.show(panel,"import");
 	                		break;
-	                	case 3:
-	                		//Marcamos como visible el botón de importar/exportar y le asignamos el texto según su función
+	                	case 5: //Marcamos como visible el botón de importar/exportar y le asignamos el texto según su función
 	                		boto.setVisible(true);
 	                		boto.setText("Exportar");
 	                		eg.reset();
 	                		//Cargamos el panel de exportar
 	                		card.show(panel,"export");
 	                		break;
-	                	case 4://FALTA FER EL ESBORRA
-	                		//Ocultamos el botón, que no necesitamos
-	                		boto.setVisible(false);
-	                		//ccontra = new CanviaContra();	                		
-	                		//card.show(panel,"CambiaContra");
-	                		break;
-	                	case 5: //FALTA FER EL RESET
-	                		//Ocultamos el botón, que no necesitamos
-	                		boto.setVisible(false);
-	                		ccontra = new CanviaContra();	                		
-	                		card.show(panel,"CambiaContra");
-	                		break;	
 	                	default:
 	                		System.out.println("DEFAULT");
 	                		break;
