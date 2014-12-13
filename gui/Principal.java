@@ -97,15 +97,15 @@ public class Principal {
 	
 	
 	//Retorna 
-	public CapitaControlador getCc(){
+	public static CapitaControlador getCc(){
 		return cc;
 	}
 	
-	public GalaxiaControlador getGc(){
+	public static GalaxiaControlador getGc(){
 		return gc;
 	}
 	
-	public ExodeControlador getEc(){
+	public static ExodeControlador getEc(){
 		return ec;
 	}
 	

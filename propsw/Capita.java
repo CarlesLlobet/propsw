@@ -33,7 +33,7 @@ public class Capita implements Serializable{
 	public Capita(){
 		++cont;
 		this.id = cont.toString();
-		this.nom = null;
+		this.nom = "admin";
 		this.ContReb = new HashMap<String,Rebel>();
 		this.gal = new Galaxia(this);
 	}

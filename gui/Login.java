@@ -158,7 +158,7 @@ public class Login extends JPanelBg{
 				System.out.println("MENU CAPITAN");
 				String us = user.getText();
 				String pa = String.valueOf(pass.getPassword());
-				if (us.equals("admin") && pa.equals("admin")){
+				if (Principal.getCc().login(us, pa) != null){
 					deleteView();
 					Principal.loadMenuCapita();
 				}
