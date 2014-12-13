@@ -92,14 +92,16 @@ public class GestioCapitans extends JPanelBg {
         panel.add(eg,"export");
         card.show(panel, "crea");
                 
-        
-        
-        Component horizontalStrut = Box.createHorizontalStrut(20);
-        horizontalBox.add(horizontalStrut);
-                
         boto = new JButton("New button");
         boto.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		int val = box.getSelectedIndex();
+        		switch(val) {
+        			//case 0:
+        				
+        		
+        		}
+        		
         	}
         });
         horizontalBox.add(boto);
@@ -147,7 +149,7 @@ public class GestioCapitans extends JPanelBg {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                 	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
 	                int val = box.getSelectedIndex();
-	                validate();	
+	                revalidate();	
 	                switch(val){
 	                	case 0: 
 	                		boto.setVisible(true);
@@ -159,21 +161,23 @@ public class GestioCapitans extends JPanelBg {
 	                	case 1:
 	                		//Ocultamos el botón, que no necesitamos
 	                		boto.setVisible(false);
+	                		panel.setVisible(true);
 	                		ccontra = new CanviaContra();	                		
 	                		card.show(panel,"CambiaContra");
 	                		break;
 	                	case 2:
+	                		panel.setVisible(false);
 	                		boto.setVisible(true);
 	                		boto.setText("Borrar");
 	                		break;
 	                	case 3:
-	                		 //FALTA FER EL RESET
 	                		//Ocultamos el botón, que no necesitamos
-	                		boto.setVisible(false);
-	                		ccontra = new CanviaContra();	                		
-	                		card.show(panel,"CambiaContra");
+	                		boto.setVisible(true);
+	                		boto.setText("Reset");
+	                		panel.setVisible(false);
 	                		break;
 	                	case 4://Marcamos como visible el botón importar/exportar y le asignamos el texto según su función.
+	                		panel.setVisible(true);
 	                		boto.setVisible(true);
 	                		boto.setText("Importar");
 	                		ig.reset();
@@ -181,6 +185,7 @@ public class GestioCapitans extends JPanelBg {
 	                		card.show(panel,"import");
 	                		break;
 	                	case 5: //Marcamos como visible el botón de importar/exportar y le asignamos el texto según su función
+	                		panel.setVisible(true);
 	                		boto.setVisible(true);
 	                		boto.setText("Exportar");
 	                		eg.reset();

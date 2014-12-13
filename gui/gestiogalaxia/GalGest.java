@@ -2,7 +2,6 @@ package gui.gestiogalaxia;
 import gui.ImpExp;
 import gui.JPanelBg;
 import gui.Principal;
-import gui.gestiocapitans.GalDraw;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
