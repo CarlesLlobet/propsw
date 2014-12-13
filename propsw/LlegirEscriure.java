@@ -88,9 +88,7 @@ public class LlegirEscriure {
 		  Entry<String, Capita> thisEntry = (Entry<String,Capita>) entries.next();
 		  oos.writeObject(thisEntry.getValue());
 		}
-		
 		oos.close();
-		
 	}
 	
 	/**
