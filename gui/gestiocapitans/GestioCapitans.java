@@ -12,7 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 
+import javax.swing.JOptionPane;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -112,11 +114,22 @@ public class GestioCapitans extends JPanelBg {
         		switch(val) {
         			case 0: 
         				String lectura = cc.getNom();
-        				Principal.getCc().;
-        				
-        		
-        		}
-        		
+        				if (lectura.equals("")) {
+        					alertaCapitaNoNom();
+        				}
+        				else if (Principal.getCc().checkCapitaNom(lectura)){
+								try {
+									Principal.getCc().afegirCapita(lectura);
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+        				}
+        				else {
+        					alertaCapitaNomE();
+        				}
+    
+        		}        		
         	}
         });
                 
@@ -224,6 +237,14 @@ public class GestioCapitans extends JPanelBg {
         
 	}
 	
+	private void alertaCapitaNoNom(){
+		JOptionPane.showMessageDialog(Principal.getWindow(),"El capitán debe tener un nombre.");
+	}
+	
+	private void alertaCapitaNomE(){
+		JOptionPane.showMessageDialog(Principal.getWindow(),"Ya existe un capitán con ese nombre.");
+
+	}
 	
 	public void config(){
 		box.requestFocusInWindow();
