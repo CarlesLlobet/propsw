@@ -2,6 +2,7 @@ package propsw;
 
 //@author Toni Mart�nez
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class CapitaControlador {
 
 
 	public CapitaControlador(){
+		
 		contCap = new ContenidorCapitans();
 	}
 	
@@ -215,10 +217,19 @@ public class CapitaControlador {
 		contCap.addCapita(c);
 	}
 	
-	public void inicialitzar() throws IOException{
-		Capita c = new Capita("admin");
-		contCap.addCapita(c);
-		idCap = c.getId();
+	public void inicialitzar() throws Exception{
+		
+		File file=new File("./bd.dat");
+		
+		if(file.exists()){
+			LlegirEscriure lle=new LlegirEscriure();
+			lle.importar();
+		}
+		else{
+			Capita c = new Capita("admin");
+			contCap.addCapita(c);
+			idCap = c.getId();
+		}
 	}
 	
 	/**
