@@ -92,23 +92,33 @@ public class GestioCapitans extends JPanelBg {
         panel.add(eg,"export");
         card.show(panel, "crea");
                 
-        boto = new JButton("New button");
+        Component horizontalGlue_6 = Box.createHorizontalGlue();
+        horizontalBox.add(horizontalGlue_6);
+        
+        Box horizontalBox_4 = Box.createHorizontalBox();
+        verticalBox_1.add(horizontalBox_4);
+        
+        Component horizontalGlue_7 = Box.createHorizontalGlue();
+        horizontalBox_4.add(horizontalGlue_7);
+        
+        boto = new JButton("Crear");
+        horizontalBox_4.add(boto);
+        
+        Component horizontalGlue_8 = Box.createHorizontalGlue();
+        horizontalBox_4.add(horizontalGlue_8);
         boto.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		int val = box.getSelectedIndex();
         		switch(val) {
-        			//case 0:
+        			case 0: 
+        				String lectura = cc.getNom();
+        				Principal.getCc().;
         				
         		
         		}
         		
         	}
         });
-        horizontalBox.add(boto);
-        boto.setVisible(false);
-                
-        Component horizontalGlue_6 = Box.createHorizontalGlue();
-        horizontalBox.add(horizontalGlue_6);
                 
         Component verticalGlue_1 = Box.createVerticalGlue();
         verticalBox_1.add(verticalGlue_1);
@@ -160,7 +170,8 @@ public class GestioCapitans extends JPanelBg {
 	                		break;
 	                	case 1:
 	                		//Ocultamos el botón, que no necesitamos
-	                		boto.setVisible(false);
+	                		boto.setVisible(true);
+	                		boto.setText("Cambiar");
 	                		panel.setVisible(true);
 	                		ccontra = new CanviaContra();	                		
 	                		card.show(panel,"CambiaContra");
