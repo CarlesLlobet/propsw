@@ -275,4 +275,21 @@ public class CapitaControlador {
 		logOut();
 		ContenidorCapitans.getHashContenidor().clear();
 	}
+	
+	public boolean checkCapitaNom(String s){
+		Capita c = null;		
+		Iterator<String> str = ContenidorCapitans.getHashContenidor().keySet().iterator();
+		String h = "";
+		boolean found = false;
+		while(str.hasNext()&&!found){
+			h = str.next();
+			c = ContenidorCapitans.getHashContenidor().get(h);
+			System.out.println("Nom Capita: " + c.getNom());
+			System.out.println("Pass capita: " + c.getPassword());
+			if(c.getNom().equals(s)){
+				found = true;
+			}			
+		}		
+		return found;
+	}
 }
