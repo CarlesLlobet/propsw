@@ -34,7 +34,7 @@ public class GestioRebel extends JPanelBg{
 	private JPanel panel; 
 	
 	
-	private ConsultaRebels cr = new ConsultaRebels();
+	private ConsultaRebel cr = new ConsultaRebel();
 	private ModificaRebel mr = new ModificaRebel();
 	private CreaNom cn = new CreaNom();
 	

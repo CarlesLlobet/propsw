@@ -225,6 +225,11 @@ public class CapitaControlador {
 		contCap.addCapita(c);
 	}
 	
+	public void afegirCapita(String s) throws IOException{
+		Capita c  = new Capita(s);
+		contCap.addCapita(c);
+	}
+	
 	public void inicialitzar() throws Exception{
 		
 		File file=new File("./bd.dat");
