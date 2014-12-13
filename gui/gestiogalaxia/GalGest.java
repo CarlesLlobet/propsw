@@ -1,4 +1,5 @@
 package gui.gestiogalaxia;
+import gui.ImpExp;
 import gui.JPanelBg;
 import gui.Principal;
 
@@ -14,23 +15,26 @@ import java.awt.event.ItemListener;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class GalGest extends JPanelBg {
-	
 	private JComboBox<String> box;
 	private JButton button;
 	private CardLayout card = new CardLayout(0, 0);
 	private JPanel panel = new JPanel(); 
-	private boolean first = true;
-	//vistes que es carregaran:
+	private JButton impExp;
 	
-    private GalExp eg = new GalExp();
-    private GalImp ig = new GalImp();
+	//vistes que es carregaran:
+    private ImpExp eg = new ImpExp();
+    private ImpExp ig = new ImpExp();
     private GalMod mg = new GalMod();
     private GalDraw gd = new GalDraw();
 	
 	public GalGest() {
+		
+		//PREPARAMOS LA VISTA
         setImage("/images/bg.jpg");
         setLayout(new BorderLayout(0, 0));
         
@@ -60,63 +64,52 @@ public class GalGest extends JPanelBg {
         box.addItem("Importar");
         box.addItem("Exportar");
         
-                box.addItemListener(new ItemListener() {
-                    @Override
-                    public void itemStateChanged(ItemEvent e) {
-                        if (e.getStateChange() == ItemEvent.SELECTED) {
-                        	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
-        	                int val = box.getSelectedIndex();
-        	                JPanel toRemove = getCurrentCard();
-        	                switch(val){
-        	                	case 0: 
-        	                		gd = new GalDraw();
-        	                        panel.add(gd,"draw");
-        	                		card.show(panel,"draw");
-        	                		removeCard(toRemove);
-        	                		break;
-        	                	case 1:
-        	                		mg = new GalMod();
-        	                        panel.add(mg,"modify");
-        	                		card.show(panel,"modify");
-        	                		removeCard(toRemove);
-        	                		break;
-        	                	case 2:
-        	                		ig = new GalImp();
-        	                        panel.add(ig,"import");
-        	                		card.show(panel,"import");
-        	                		removeCard(toRemove);
-        	                		break;
-        	                	case 3:
-        	                		eg = new GalExp();
-        	                        panel.add(eg,"export");
-        	                		card.show(panel,"export");
-        	                		removeCard(toRemove);
-        	                		break;
-        	                	default:
-        	                		System.out.println("DEFAULT");
-        	                		break;
-        	                }
-                        }
-                    }
-                });
+        Box verticalBox_1 = Box.createVerticalBox();
+        verticalBox.add(verticalBox_1);
         
-        Component verticalStrut = Box.createVerticalStrut(20);
-        verticalBox.add(verticalStrut);
+        Component verticalGlue = Box.createVerticalGlue();
+        verticalBox_1.add(verticalGlue);
         
         Box horizontalBox = Box.createHorizontalBox();
+        verticalBox_1.add(horizontalBox);
         horizontalBox.setAlignmentY(Component.CENTER_ALIGNMENT);
-        verticalBox.add(horizontalBox);
         
-        Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-        horizontalBox.add(horizontalStrut_1);
+        Component horizontalGlue_5 = Box.createHorizontalGlue();
+        horizontalBox.add(horizontalGlue_5);
         
         panel = new JPanel();
         horizontalBox.add(panel);
         panel.setMaximumSize(new Dimension(48515, 562356));
         panel.setLayout(card);
         
+        //Carreguem toas las vistas que vamos a utilizar y mostramos el dibujo
+        panel.add(gd,"draw");
+        panel.add(mg,"modify");
+        panel.add(ig,"import");
+        panel.add(eg,"export");
+        card.show(panel, "draw");
+                
         Component horizontalStrut = Box.createHorizontalStrut(20);
         horizontalBox.add(horizontalStrut);
+                
+        impExp = new JButton("New button");
+        horizontalBox.add(impExp);
+        impExp.setVisible(false);
+                
+        Component horizontalGlue_6 = Box.createHorizontalGlue();
+        horizontalBox.add(horizontalGlue_6);
+                
+        Component verticalGlue_1 = Box.createVerticalGlue();
+        verticalBox_1.add(verticalGlue_1);
+        
+        Box horizontalBox_3 = Box.createHorizontalBox();
+        verticalBox.add(horizontalBox_3);
+        
+        Component horizontalGlue_3 = Box.createHorizontalGlue();
+        horizontalBox_3.add(horizontalGlue_3);
+        
+        Component horizontalGlue_4 = Box.createHorizontalGlue();
+        horizontalBox_3.add(horizontalGlue_4);
         
         Box horizontalBox_1 = Box.createHorizontalBox();
         horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -129,57 +122,79 @@ public class GalGest extends JPanelBg {
         horizontalBox_1.add(horizontalStrut_2);
         
         button = new JButton("Atrás");
-        button.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		deleteView();
-        		Principal.loadMenuCapita();
-        	}
-        });
+        
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         horizontalBox_1.add(button);
         
         Component horizontalGlue = Box.createHorizontalGlue();
         horizontalBox_1.add(horizontalGlue);
         
-        
-        //Carreguem les 4 possibles vistes que pot haver-hi: modificar, importar, exportar, dibuixar la galaxia
 
+        //PROGRAMEM EL COMPORTAMENT DE LA VISTA:
+        //Programem el comportament cada cop que el JComboBox canvia de valor
+        box.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
+	                int val = box.getSelectedIndex();
+	                validate();	
+	                switch(val){
+	                	case 0: 
+	                		//Ocultamos el botón, que no necesitamos
+	                		impExp.setVisible(false);
+	                		gd = new GalDraw();
+	                        panel.add(gd,"draw");
+	                		card.show(panel,"draw");
+	                		break;
+	                	case 1:
+	                		//Ocultamos el botón, que no necesitamos
+	                		impExp.setVisible(false);
+	                		mg = new GalMod();	                		
+	                		card.show(panel,"modify");
+	                		break;
+	                	case 2:
+	                		//Marcamos como visible el botón importar/exportar y le asignamos el texto según su función.
+	                		impExp.setVisible(true);
+	                		impExp.setText("Importar");
+	                		ig.reset();
+	                		//Cargamos el panel de importar
+	                		card.show(panel,"import");
+	                		break;
+	                	case 3:
+	                		//Marcamos como visible el botón de importar/exportar y le asignamos el texto según su función
+	                		impExp.setVisible(true);
+	                		impExp.setText("Exportar");
+	                		eg.reset();
+	                		//Cargamos el panel de exportar
+	                		card.show(panel,"export");
+	                		break;
+	                	default:
+	                		System.out.println("DEFAULT");
+	                		break;
+	                }
+                }
+            }
+        });
         
-        panel.add(gd,"draw");
-        gd.setLayout(new BorderLayout(0, 0));
-
-        card.show(panel, "draw");
         
+        //Programem el comportament del botó de retrocedir
+        button.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		deleteView();
+        		Principal.loadMenuCapita();
+        	}
+        }); 
+        
+        //FALTA PROGRAMAR LA LOGICA SEGUN EXP/IMPORTAR llamadas correspondientes. IMPEXP no tiene lógica ninguna. (matizar)
         
 	}
 	
-	private void removeCard(Component c){
-		panel.remove(c);
-		this.revalidate();
-		this.repaint();
-	}
 	
-	private JPanel getCurrentCard(){
-		//Esborra la unica carta que s'esta mostrant en pantalla
-    	JPanel currentcard = null;
-	    for (Component c : panel.getComponents() ) {
-	        if (c.isVisible() == true) {
-	        	currentcard = (JPanel)c;
-	        }
-	    }
-	    return currentcard;
-	}
-	
-	public void focus(){
+	public void config(){
 		box.requestFocusInWindow();
+		
+		//Centramos el texto del JComboBox
+		((JLabel)box.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 	}
-	
-
-	
-	
-	
-	
-	
-	
-
 }

@@ -133,7 +133,7 @@ public class GestioExode extends JPanelBg{
 		horizontalBox_1.add(horizontalGlue_1);
 	}
 	
-	public void focus(){
+	public void config(){
 		//Aquesta funcio ens serveix per a establir a quin objecte s'ha de fer focus al carregar la vista
 		accio.requestFocusInWindow();
 		//Aprofitem per associar la tecla intro amb un boto

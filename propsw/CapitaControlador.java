@@ -211,13 +211,43 @@ public class CapitaControlador {
 		idCap=null;
 	}
 	
-	public void afegirCapita(Capita c){
+	public void afegirCapita(Capita c) throws IOException{
 		contCap.addCapita(c);
 	}
 	
-	public void inicialitzar(){
-		Capita c = new Capita("Luke Skywalker");
+	public void inicialitzar() throws IOException{
+		Capita c = new Capita("admin");
 		contCap.addCapita(c);
 		idCap = c.getId();
+	}
+	
+	/**
+	 * Carrega el fitxer binari que conté el contenidor de capitans
+	 * @throws Exception
+	 */
+	public void importarContenidorCapitans() throws Exception{
+		LlegirEscriure lle=new LlegirEscriure();
+		lle.importar();
+	}
+	
+	/**
+	 * Exporta el fitxer binari que conté el contenidor de capitans
+	 * @throws Exception
+	 */
+	public void exportarContenidorCapitans() throws Exception{
+		LlegirEscriure lle=new LlegirEscriure();
+		lle.exportar();
+	}
+	
+	/**
+	 * Esborra el fitxer binari que conté el contenidor de capitans, esborra
+	 * el hashmap contenidor i fa un logout del capità actual
+	 * @throws IOException
+	 */
+	public void resetSistema() throws IOException{
+		LlegirEscriure lle=new LlegirEscriure();
+		lle.eliminarFitxer();
+		logOut();
+		ContenidorCapitans.getHashContenidor().clear();
 	}
 }

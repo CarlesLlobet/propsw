@@ -8,8 +8,10 @@
 package propsw;
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
@@ -50,16 +52,13 @@ public class LlegirEscriure {
 		Capita aux=(Capita) ois.readObject();
 		
 		while (aux!=null){
-			//System.out.println(ContenidorCapitans.getHashContenidor().get("1").getNom()); // LukeSkywalker2
 			ContenidorCapitans.addCapita(aux);
-			//System.out.println(ContenidorCapitans.getHashContenidor().get("1").getNom()); // LukeSkywalker
 			aux = null;
 			try{
 				aux =(Capita) ois.readObject();
 			}catch(EOFException e){
 				aux=null;
 			}
-			//System.out.println("Entra");
 		}
 		ois.close();
 	
@@ -69,7 +68,7 @@ public class LlegirEscriure {
 	 * Crida al mètode escriure
 	 * @throws Exception
 	 */
-	public void exportar() throws Exception{
+	public void exportar() throws IOException{
 		
 		escriure(path);
 	}
@@ -79,7 +78,7 @@ public class LlegirEscriure {
 	 * @param fitxer  path del fitxer
 	 * @throws Exception
 	 */
-	public void escriure(String fitxer) throws Exception{
+	public void escriure(String fitxer) throws IOException{
 		
 		ObjectOutputStream oos= new ObjectOutputStream(new FileOutputStream(fitxer));
 		
@@ -92,5 +91,18 @@ public class LlegirEscriure {
 		
 		oos.close();
 		
+	}
+	
+	/**
+	 * Elimina el fitxer de base de dades
+	 * @throws IOException
+	 */
+	public void eliminarFitxer() throws IOException{
+		File file=new File("./bd.dat");
+		if(file.exists())
+			file.delete();
+		else{
+			throw new IOException("El programa no té base de dades per eliminar.");
+		}
 	}
 }

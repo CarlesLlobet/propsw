@@ -36,12 +36,18 @@ public class GalaxiaControlador{
 	 * Es borren tots els camps de l'objecte Galaxia actual.
 	 * @return Objecte de la classe Galaxia resetejat
 	 */
-	public Galaxia resetGalaxia() {
+	public void resetGalaxia() {
 		
 		Galaxia g = new Galaxia(getCapita());
 		getCapita().setGalaxia(g);
 	
-		return g;
+	}
+	
+	//AFEGIT
+	public void resetGalaxia(String idCapi) {
+		
+		Galaxia g = new Galaxia(getCapita());
+		capiControl.getCapita(idCapi).setGalaxia(g);
 	}
 
 	/**
@@ -109,6 +115,12 @@ public class GalaxiaControlador{
 		getGalaxia().conectarNodes(from,to,capacitat,cost);
 	}
 	
+	//AFEGIT
+	public void createAdjacency(int from, int to, int capacitat, double cost, String idCapi) throws IOException{
+		
+		capiControl.getGalaxia(idCapi).conectarNodes(from,to,capacitat,cost);
+	}
+	
 	/**
 	 * Modifica els valors de cost i capacitat d'un tram entre dues bases.
 	 * @param from identificador de la Base de la qual ha de partir l'adjac�ncia.
@@ -154,6 +166,34 @@ public class GalaxiaControlador{
 		return aresta;
 	}
 	
+	//AFEGIT
+	public boolean existsAdjacency(int from, int to) throws IOException{
+		return getGalaxia().adjacents(from,to);
+	}
+	
+	//AFEGIT
+	public int getCapacitatAdjacency(int from, int to) throws IOException{
+		int idAresta=getGalaxia().getIDAresta(from,to);
+		return getGalaxia().getCapacidadAresta(idAresta);
+	}
+	
+	//AFEGIT
+	public double getCostAdjacency(int from, int to) throws IOException{
+		int idAresta=getGalaxia().getIDAresta(from,to);
+		return getGalaxia().getCosteAresta(idAresta);
+	}
+	
+	/**
+	 * 
+	 *  Genera un ArrayList de les bases que hi ha a la galaxia
+	 * @return ArrayList de les bases de la galaxia
+	 * @throws IOException
+	 */
+	public ArrayList<Base> getBaseArray() throws IOException{
+		return getGalaxia().getBaseArray();
+	}
+	
+	
 	/**
 	 * Llista els exodes existents per la Gal�xia
 	 * @return un string amb els ids dels �xodes
@@ -172,5 +212,6 @@ public class GalaxiaControlador{
 	public Capita getCapita(){
 		return capiControl.getCapita();
 	}
+	
 	
 }

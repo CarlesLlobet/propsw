@@ -42,10 +42,9 @@ public class GalMod extends JPanel{
 	private JTextField textField_2;
 	private JTextField textField_3;
 	public GalMod() {
+		//PREPARAMOS LA VISTA
 		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		setBackground(new Color(0,0,0,0));
-		//setBackground(Color.CYAN);
-		System.out.println("A PINTAAAR MODIFICAR GALAXIA");
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
@@ -128,6 +127,35 @@ public class GalMod extends JPanel{
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		verticalStrut_1.setMaximumSize(new Dimension(30, 20));
 		verticalBox_5.add(verticalStrut_1);
+		
+		JLabel lblEliminarBase = new JLabel("Eliminar Base - Nombre");
+		lblEliminarBase.setFont(new Font("Tahoma", Font.BOLD, 14));
+		verticalBox_5.add(lblEliminarBase);
+		
+		Box horizontalBox_4 = Box.createHorizontalBox();
+		horizontalBox_4.setAlignmentY(0.5f);
+		horizontalBox_4.setAlignmentX(0.0f);
+		verticalBox_5.add(horizontalBox_4);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		horizontalStrut_1.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_4.add(horizontalStrut_1);
+		
+		JLabel lblBaseAEliminar = new JLabel("Base a eliminar:");
+		horizontalBox_4.add(lblBaseAEliminar);
+		
+		Component horizontalStrut_17 = Box.createHorizontalStrut(20);
+		horizontalStrut_17.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_4.add(horizontalStrut_17);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setMaximumSize(new Dimension(80, 20));
+		comboBox_2.setAlignmentX(0.0f);
+		horizontalBox_4.add(comboBox_2);
+		
+		Component verticalStrut_9 = Box.createVerticalStrut(20);
+		verticalStrut_9.setMaximumSize(new Dimension(30, 20));
+		verticalBox_5.add(verticalStrut_9);
 		
 		JLabel label_4 = new JLabel("Crear Adyacencia\r\n");
 		verticalBox_5.add(label_4);
@@ -257,11 +285,7 @@ public class GalMod extends JPanel{
 		
 		JButton button = new JButton("Crear adyacencia");
 		horizontalBox_16.add(button);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
+
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalStrut.setMaximumSize(new Dimension(30, 20));
 		verticalBox_5.add(verticalStrut);
@@ -338,6 +362,14 @@ public class GalMod extends JPanel{
 		
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		add(horizontalGlue_1);
+		
+		
+		//LOGICA DE LA VISTA
+		
+		
+		
+			
+	
 	}
 
 }

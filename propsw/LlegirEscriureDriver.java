@@ -27,6 +27,7 @@ public class LlegirEscriureDriver {
 	System.out.println("11) Llistar Èxodes");
 	System.out.println("12) Exportar");
 	System.out.println("13) Importar");
+	System.out.println("14) Esborrar fitxer");
 	//System.out.println("11) Login");
 	System.out.println("0) exit");
 	}
@@ -62,12 +63,7 @@ public class LlegirEscriureDriver {
 					}
 					break;*/
 			case 2:
-					if(gControl.resetGalaxia()!=null){
-						System.out.println("S'ha resetejat la Galàxia satisfactòriament.");
-					}
-					else{
-						System.out.println("Hi ha hagut algun problema resetejant la galàxia.");
-					}
+					gControl.resetGalaxia();
 					break;
 			case 3:
 					System.out.println("Introdueix el nou nom per a la base: ");
@@ -216,6 +212,12 @@ public class LlegirEscriureDriver {
 					try{
 						lle.importar();
 					}
+					catch(Exception e){
+						e.printStackTrace();
+					}
+					break;
+			case 14:
+					try{lle.eliminarFitxer();}
 					catch(Exception e){
 						e.printStackTrace();
 					}
