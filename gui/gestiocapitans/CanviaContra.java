@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 
-public class GalDraw extends JPanel{
-	public GalDraw() {
+public class CanviaContra extends JPanel{
+	public CanviaContra() {
 		setBackground(Color.PINK);
 		System.out.println("CAMBIA CONTRA");
 	}

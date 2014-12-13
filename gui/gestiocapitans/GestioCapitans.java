@@ -1,9 +1,8 @@
 package gui.gestiocapitans;
+import gui.CreaNom;
 import gui.ImpExp;
 import gui.JPanelBg;
 import gui.Principal;
-import gui.gestiogalaxia.CanviaContra;
-import gui.gestiogalaxia.CapCrea;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -26,12 +25,12 @@ public class GestioCapitans extends JPanelBg {
 	private JButton button;
 	private CardLayout card = new CardLayout(0, 0);
 	private JPanel panel = new JPanel(); 
-	private JButton impExp;
+	private JButton boto;
 	
 	//vistes que es carregaran:
     private ImpExp eg = new ImpExp();
     private ImpExp ig = new ImpExp();
-    private CapCrea cc = new CapCrea();
+    private CreaNom cc = new CreaNom();
     private CanviaContra ccontra = new CanviaContra();
 	
 	public GestioCapitans() {
@@ -98,9 +97,9 @@ public class GestioCapitans extends JPanelBg {
         Component horizontalStrut = Box.createHorizontalStrut(20);
         horizontalBox.add(horizontalStrut);
                 
-        impExp = new JButton("New button");
-        horizontalBox.add(impExp);
-        impExp.setVisible(false);
+        boto = new JButton("New button");
+        horizontalBox.add(boto);
+        boto.setVisible(false);
                 
         Component horizontalGlue_6 = Box.createHorizontalGlue();
         horizontalBox.add(horizontalGlue_6);
@@ -147,43 +146,43 @@ public class GestioCapitans extends JPanelBg {
 	                validate();	
 	                switch(val){
 	                	case 0: 
-	                		//Ocultamos el botón, que no necesitamos
-	                		impExp.setVisible(false);
-	                		cc = new CapCrea();
-	                        panel.add(cc,"crea");
+	                		boto.setVisible(true);
+	                		boto.setText("Crear");
+	                		cc.reset();
+	                		panel.setVisible(true);
 	                		card.show(panel,"crea");
 	                		break;
 	                	case 1:
 	                		//Ocultamos el botón, que no necesitamos
-	                		impExp.setVisible(false);
+	                		boto.setVisible(false);
 	                		ccontra = new CanviaContra();	                		
 	                		card.show(panel,"CambiaContra");
 	                		break;
 	                	case 2:
 	                		//Marcamos como visible el botón importar/exportar y le asignamos el texto según su función.
-	                		impExp.setVisible(true);
-	                		impExp.setText("Importar");
+	                		boto.setVisible(true);
+	                		boto.setText("Importar");
 	                		ig.reset();
 	                		//Cargamos el panel de importar
 	                		card.show(panel,"import");
 	                		break;
 	                	case 3:
 	                		//Marcamos como visible el botón de importar/exportar y le asignamos el texto según su función
-	                		impExp.setVisible(true);
-	                		impExp.setText("Exportar");
+	                		boto.setVisible(true);
+	                		boto.setText("Exportar");
 	                		eg.reset();
 	                		//Cargamos el panel de exportar
 	                		card.show(panel,"export");
 	                		break;
 	                	case 4://FALTA FER EL ESBORRA
 	                		//Ocultamos el botón, que no necesitamos
-	                		impExp.setVisible(false);
+	                		boto.setVisible(false);
 	                		//ccontra = new CanviaContra();	                		
 	                		//card.show(panel,"CambiaContra");
 	                		break;
 	                	case 5: //FALTA FER EL RESET
 	                		//Ocultamos el botón, que no necesitamos
-	                		impExp.setVisible(false);
+	                		boto.setVisible(false);
 	                		ccontra = new CanviaContra();	                		
 	                		card.show(panel,"CambiaContra");
 	                		break;	

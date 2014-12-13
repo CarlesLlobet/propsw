@@ -1,5 +1,6 @@
 package gui;
 
+import gui.gestiocapitans.GestioCapitans;
 import gui.gestioexode.GestioExode;
 import gui.gestiogalaxia.GalGest;
 import gui.gestiorebel.GestioRebel;
@@ -11,8 +12,6 @@ import java.io.IOException;
 import javax.swing.JPanel;
 
 import propsw.CapitaControlador;
-import propsw.ExodeControlador;
-import propsw.GalaxiaControlador;
 import propsw.ExodeControlador;
 import propsw.GalaxiaControlador;
 
@@ -95,6 +94,12 @@ public class Principal {
 		mc.config();
 	}
 	
+	public static void loadGestioCapita(){
+		GestioCapitans gc = new GestioCapitans();
+		container.add(gc, "gestiocap");
+		card.show(container, "gestiocap");
+		window.setVisible(true);
+	}
 	
 	//Retorna 
 	public static CapitaControlador getCc(){

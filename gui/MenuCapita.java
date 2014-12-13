@@ -149,6 +149,8 @@ public class MenuCapita extends JPanelBg {
 	        			break;
 	        		case 3:
 	        			System.out.println("Gestio capita");
+	        			deleteView();
+	        			Principal.loadGestioCapita();
 	        			break;
 	        		case 4:
 	        			System.out.println("Executar exode");
