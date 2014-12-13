@@ -38,6 +38,8 @@ public class CapitaControlador {
 		while(str.hasNext()&&!found){
 			h = str.next();
 			c = ContenidorCapitans.getHashContenidor().get(h);
+			System.out.println("Nom Capita: " + c.getNom());
+			System.out.println("Pass capita: " + c.getPassword());
 			if(c.getNom().equals(nom)==false || c.getPassword().equals(password)==false){
 				c = null;
 				found = true;

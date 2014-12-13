@@ -2,6 +2,7 @@ package propsw;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -95,6 +96,65 @@ public class FordFulkersonDriver {
 		System.out.println("Graf residual: ");
 		System.out.println(algoritme.printMatrix(grafResidual));
 		
+		System.out.println("GRAF 1");
+		testOficial(1);
+		System.out.println("GRAF 2");
+		testOficial(2);
+		System.out.println("GRAF 3");
+		testOficial(3);
+		System.out.println("GRAF 4");
+		testOficial(4);
+		
+		
+	}
+	
+	
+	
+	private static void testOficial(int numGrafProba) throws IOException{
+		
+		FordFulkerson<String> algoritme = new FordFulkerson<String>();	
+		
+		//Ejecucion del fichero test.ff del mismo directorio donde esta la classe FordFoulkerson
+		Scanner s = new Scanner(new File("graph1.txt"));
+		String line = "";
+		String[] nums;
+		Graf<String> graf = new Graf<String>();
+		
+		
+		
+		int counter =0;
+		boolean finished = false;
+		
+		//Construim les connexions del graf
+		
+		int keyCounter = 0;
+		HashMap<String,Integer> keys = new HashMap<String,Integer>();
+		
+		while(s.hasNextLine() && !finished){
+			line = s.nextLine();
+			nums = line.split(" ");
+			if (nums[0].equals("g"))counter++;
+			if (counter > numGrafProba)finished = true;
+			if (counter == numGrafProba){
+				if(nums[0].equals("v")){
+					graf.afegirNode(nums[1]);
+					keys.put(nums[1], keyCounter);
+					keyCounter++;
+				}
+				if(nums[0].equals("e"))graf.conectarNodes(keys.get(nums[1]), keys.get(nums[2]), Integer.parseInt(nums[3]), 5.0);				
+			}
+		}
+		
+		System.out.println("Graf inicial: \n"+algoritme.printMatrix(graf));
+		
+		//Executem l'algoritme
+		algoritme = new FordFulkerson<String>();
+		Graf<String> grafResidual = algoritme.findMaxFlow(graf,0,keyCounter-1);
+		//Just després d'executar l'algoritme si es crida al mètode getMaxFlow() retornarà
+		//el MaxFlow de la última execució del algoritme. 
+		System.out.println("MaxFlow: "+algoritme.getMaxFlow());
+		System.out.println("Graf residual: ");
+		System.out.println(algoritme.printMatrix(grafResidual));
 	}
 
 }

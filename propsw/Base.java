@@ -17,13 +17,20 @@ public class Base implements Serializable{
 	//Galaxia a la qual esta associada la base
 	private Galaxia g;
 	
+	private Graf<Base> graf;
+	
 	/**
 	 * Constructor d'un objecte Capita.
 	 * @param g Galaxia a la que pertany
 	 */
 	public Base(Galaxia g) throws IOException{
 		this.g = g;
+		this.graf = g;
 		g.afegirNode(this);
+	}
+	
+	public Base(){
+		
 	}
 
 	/**
@@ -35,6 +42,7 @@ public class Base implements Serializable{
 	public Base(String nom, Galaxia g) throws IOException{
 		this.nom = nom;
 		this.g = g;
+		this.graf = g;
 		g.afegirNode(this);
 	}
 	
@@ -80,12 +88,22 @@ public class Base implements Serializable{
 	 */
 	public int getId() throws IOException{
 		int toRet=-1;
-		for (int i = 0; i < g.getNSize(); i++) {
-			if(g.getNode(i)==this){
+		for (int i = 0; i < graf.getNSize(); i++) {
+			if(graf.getNode(i)==this){
 				toRet = i;
 			}
 		}
 		return toRet;
 	}
+
+	public Graf<Base> getGraf() {
+		return graf;
+	}
+
+	public void setGraf(Graf<Base> graf) {
+		this.graf = graf;
+	}
+	
+	
 	
 }

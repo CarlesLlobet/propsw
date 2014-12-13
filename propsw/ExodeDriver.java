@@ -40,6 +40,9 @@ public class ExodeDriver {
         System.out.println("14) Consulta el graf inicial");
         System.out.println("15) Consulta la galaxia");
         System.out.println("16) Consulta FordFoulkerson");
+        System.out.println("17) Quin es l'últim algoritme utilitzat?");
+        System.out.println("18) Fixar camí d'un rebel");
+        System.out.println("19) Des-fixar camí d'un rebel");
         System.out.println("0) exit");
 	}
 	
@@ -220,8 +223,6 @@ public class ExodeDriver {
 					break;
 				
 				
-				
-				
 				case 13:
 					System.out.println("Escriu l'identificador del Rebel que vols llistar el seu camí");
 					String identificador = br.readLine();
@@ -235,6 +236,50 @@ public class ExodeDriver {
 					break;		
 				case 16:
 					System.out.println("El FordFoulkerson es: " + e.getFf());
+					break;
+				case 17:
+					System.out.println("L'últim executat es: " + e.getUltimAlgoritmeExecutat());
+					break;
+				case 18:
+					// --- Fixar cami d'un rebel ---
+					//Llista tots els rebels assignats
+					System.out.println("Els rebels d'aquest exode son: " + e.getRebels());
+					System.out.println("Escriu el id del rebel que vols fixar el camí:");
+					//Demana per pantalla el id del rebel
+					String  idRebel = Integer.parseInt(br.readLine()) + "";
+					//Llista les bases de la galaxia
+					System.out.println("La teva galaxia la formen les seguents bases: ");
+					for (int i = 0; i < g.getNSize(); i++) {
+						System.out.println(g.getNode(i));
+					}
+					System.out.println("Escriu el cami de les bases que vols que formin el cami fixat del rebel "+idRebel);
+					System.out.println("Exemple: '4 3 6 1 2 5' separat per espai entre base i base");
+					//Demana per pantalla el cami (successió de numero separats per un espai)
+					String[] cami = br.readLine().split(" ");
+					ArrayList<Integer> camiArr = new ArrayList<Integer>();
+					for (int i = 0; i < cami.length; i++) {
+						camiArr.add(Integer.parseInt(cami[i]));
+					}
+					boolean correcte = e.fixarCami(idRebel, camiArr);
+					//Passa per pantalla si el camí fixat compleix les restriccions o no
+					if(correcte)System.out.println("El camí es correcte (compleix amb les restriccions del graf inicial)");
+					else
+						System.out.println("El camí no compleix amb les restriccions del graf inicial. O passa per una aresta amb capacitat < 1 o inventa arestes que no estan en el graf");
+					//Passa per pantalla si l'exode es vàlid o invàlid
+					if(e.isInvalid())System.out.println("El estat del exode es invalid");
+					else
+						System.out.println("El estat del exode es valid. Pots executar un algoritme");
+					break;
+				case 19:
+					System.out.println("Els rebels amb camí fixat son: " + e.getCaminsFixats());
+					System.out.println("Selecciona el rebel que vols desfixar");
+					String idRebel2 = Integer.parseInt(br.readLine())+"";
+					boolean esCorrecte = e.desfixarCami(idRebel2);
+					if(!esCorrecte){
+						System.out.println("El idRebel seleccionat no es correcte!");
+					}
+					System.out.println("Els rebels amb camí fixat son: " + e.getCaminsFixats());
+					System.out.println("Exode invalid: "+e.isInvalid());
 					break;	
 				default:
 					System.out.println("No existeix aquesta opcio");

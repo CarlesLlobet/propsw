@@ -1,0 +1,57 @@
+-- Toni --
+
+He afegit 4 mètodes en el ExodeControlador:
+
+	public boolean fixarCamiExode(String idExode, String idRebel, ArrayList<Integer> camiBases) throws IOException
+	// Fixa un cami d'un rebel a un èxode.
+	// Aquest mètode fixa un camí a un rebel. Retorna true si el camí es un camí vàlid
+	// Perque sigui vàlid ha de complir les seguents condicions:
+	// 		- Que hi hagi connexions entre totes les arestes desde el origen fins al destí.
+	// 		- Que aquestes arestes tinguin totes una capacitat >= 1
+	// Si no es compleix alguna d'aquestes dues condicions aleshores:
+	//		- Insereix el cami en la variable caminsFixats i modifica la variable camins per treure el cami assignat a aquell 
+	//		rebel en l'anterior execució i assignar el nou camí.
+	//		- Retorna false i marca l'exode com invàlid.
+	// Si es compleixen aquestes condicions:
+	//		- Resta 1 a la capacitat de totes les arestes del camí i suma 1 al fluxe de cada aresta del camí en el graf inicial.
+	//		- En la variable camins s'afegeix el nou camí per a aquest rebel i es treu el que hi habia assignat.
+	//		- En la variable caminsFixats s'afegeix el nou camí fixat per a aquest rebel
+	// En el mètode execució s'afegeixen els camins fixats quan es fa un new de la variable camins perque tingui en compte els 
+	// camins fixats.
+	
+	
+	public boolean desfixarCamiExode(String idExode, String idRebel) throws IOException{
+	//Desfixa un cami d'un rebel a un èxode.
+	//Retorna false si el idRebel no tenia un camí fixat
+	//Retorna true si aquest existeix. Si existeix a mes fa:
+	//		- Treu el cami de la variable caminsFixats
+	//		- Treu el cami de la variable camins
+	//		- actualitza l'estat del graf inical  
+	//		(només si es un camí vàlid) sumant 1 
+	//		a les capacitats de les arestes del cami i restant 1 al fluxe 
+	//		de les arestes de l camí.
+	//		- Actualitza l'estat d'invalid en funció si hi ha algun cami fixat que 
+	//		no compleix les restriccions
+	
+	public boolean isExodeInvalid(String idExode) throws IOException
+	//Retorna true si el exode es invàlid. Si es invalid no es pot fer cap execució.
+	//Es invalid si algun dels camins fixats no conpleix les restriccions:
+	//	- Totes bases del cami han de tenir aresta amb la base seguent del camí
+	//	- Totes les arestes han de tenir capacitat < 
+	
+	public HashMap<String,ArrayList<Integer>> getCaminsFixatsExode(String idExode)
+	//Retorna els camins fixats on el key es el identificador del rebel y el arraylist 
+	//de integers es el camí
+	
+	
+	//Retorna el nome de la classe de l'ultim algoritme executat. 
+	public String getUltimAlgoritmeExode(String idExode) throws IOException
+	
+En la classe ExodeDriver he afegit les opcions 17,18,19 que son per probar el fixar/desfixar 
+camins i el getUltimAlgoritmeExecutat(). Ho he fet servir de tester i es pot comprobar que funciona bé
+
+La clase Base la he cambiat lleugerament perque no només retorni la galaxia sinó el graf perque 
+el necessitava. També li he posat un constructor buit tal i com va dir l'Alicia.
+
+----
+
