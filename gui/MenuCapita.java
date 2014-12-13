@@ -7,15 +7,9 @@ import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -27,8 +21,11 @@ import javax.swing.SwingUtilities;
 public class MenuCapita extends JPanelBg {
 	
 	private JComboBox<String> box;
+	private JComboBox<String> exode;
+	private JComboBox<String> exec;
 	private JButton btnAcceder;
 	private JButton btnNewButton;
+	private Component VS2, VS3;
 	//private MenuCapita view;
 	/**
 	 * Create the panel.
@@ -56,17 +53,63 @@ public class MenuCapita extends JPanelBg {
         box.addItem("Gestionar rebeldes");
         box.addItem("Gestionar galaxia");
         box.addItem("Gestionar éxodos");
+        box.addItem("Gestionar capitán");
         box.addItem("Ejecutar éxodo");
-        box.addItem("Añadir capitán");
-        box.addItem("Cambiar contraseña");
-        box.addItem("Borrar este capitán");
         box.setMaximumSize(new Dimension(150, 48));
         
         Component horizontalGlue_2 = Box.createHorizontalGlue();
         horizontalBox_1.add(horizontalGlue_2);
         
+        VS2 = Box.createVerticalStrut(20);
+        VS2.setVisible(false);
+        add(VS2);
+        
+        Box horizontalBox_3 = Box.createHorizontalBox();
+        add(horizontalBox_3);
+        
+        Component horizontalGlue_6 = Box.createHorizontalGlue();
+        horizontalBox_3.add(horizontalGlue_6);
+        
+        exode = new JComboBox<String>();
+        exode.setVisible(false);
+        exode.setRequestFocusEnabled(false);
+        exode.setMaximumSize(new Dimension(150, 48));
+        exode.setMaximumRowCount(10);
+        exode.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        horizontalBox_3.add(exode);
+        exode.addItem("Selecciona Éxodo");
+        exode.addItem("Éxodo 1");
+        exode.addItem("Éxodo 2");
+        exode.addItem("Éxodo 3");
+        
+        Component horizontalGlue_7 = Box.createHorizontalGlue();
+        horizontalBox_3.add(horizontalGlue_7);
+        
         Component verticalStrut = Box.createVerticalStrut(20);
         add(verticalStrut);
+        
+        Box horizontalBox_4 = Box.createHorizontalBox();
+        add(horizontalBox_4);
+        
+        Component horizontalGlue_8 = Box.createHorizontalGlue();
+        horizontalBox_4.add(horizontalGlue_8);
+        
+        exec = new JComboBox<String>();
+        exec.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        exec.setMaximumSize(new Dimension(150, 48));
+        horizontalBox_4.add(exec);
+        exec.addItem("Selecciona ejecución");
+        exec.addItem("FordFulkerson");
+        exec.addItem("Dijkstra");
+        exec.addItem("DFS");
+        exec.setVisible(false);
+        
+        Component horizontalGlue_9 = Box.createHorizontalGlue();
+        horizontalBox_4.add(horizontalGlue_9);
+        
+        VS3 = Box.createVerticalStrut(20);
+        add(VS3);
+        VS3.setVisible(false);
         
         Box horizontalBox_2 = Box.createHorizontalBox();
         add(horizontalBox_2);
@@ -76,11 +119,19 @@ public class MenuCapita extends JPanelBg {
         
         btnAcceder = new JButton("Acceder");
         horizontalBox_2.add(btnAcceder);
-        btnAcceder.setMaximumSize(new Dimension(100, 23));
-        btnAcceder.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		int val = box.getSelectedIndex();
-        		switch(val){
+        btnAcceder.setMaximumSize(new Dimension(100, 48));
+        
+                btnAcceder.setRequestFocusEnabled(false);
+                btnAcceder.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                btnAcceder.setAlignmentX(Component.CENTER_ALIGNMENT);
+                
+                Component horizontalGlue_5 = Box.createHorizontalGlue();
+                horizontalBox_2.add(horizontalGlue_5);
+                
+                btnAcceder.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent arg0) {
+                		int val = box.getSelectedIndex();
+                		switch(val){
 	        		case 0:
 	        			System.out.println("To gestio rebels");
 	        			deleteView();
@@ -96,18 +147,18 @@ public class MenuCapita extends JPanelBg {
 	        			deleteView();
 	        			Principal.loadGestioExode();
 	        			break;
+	        		case 3:
+	        			System.out.println("Gestio capita");
+	        			break;
+	        		case 4:
+	        			System.out.println("Executar exode");
+	        			break;
 	        		default:
 	            		System.out.println("Seleccionado: " + String.valueOf(val));
 	        			break;
-        		}
-        	}
-        });
-        btnAcceder.setRequestFocusEnabled(false);
-        btnAcceder.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        btnAcceder.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
-        Component horizontalGlue_5 = Box.createHorizontalGlue();
-        horizontalBox_2.add(horizontalGlue_5);
+                		}
+                	}
+                });
         
         Component verticalGlue_1 = Box.createVerticalGlue();
         add(verticalGlue_1);
@@ -117,15 +168,7 @@ public class MenuCapita extends JPanelBg {
         add(verticalBox);
         
 		
-		KeyboardFocusManager.getCurrentKeyboardFocusManager()
-		  .addKeyEventDispatcher(new KeyEventDispatcher() {
-		      @Override
-		      public boolean dispatchKeyEvent(KeyEvent e) {
-		    	if (isVisible()) System.out.println("TECLADO EN MENUCAPITAN");
-		        return false;
-		      }
-		});
-        
+
         Box horizontalBox = Box.createHorizontalBox();
         verticalBox.add(horizontalBox);
         
@@ -135,7 +178,7 @@ public class MenuCapita extends JPanelBg {
         btnNewButton = new JButton("Cerrar sesión");
         horizontalBox.add(btnNewButton);
         btnNewButton.setPreferredSize(new Dimension(120, 23));
-        btnNewButton.setMaximumSize(new Dimension(120, 23));
+        btnNewButton.setMaximumSize(new Dimension(120, 48));
         btnNewButton.setRequestFocusEnabled(false);
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -143,15 +186,63 @@ public class MenuCapita extends JPanelBg {
         Component horizontalGlue = Box.createHorizontalGlue();
         horizontalBox.add(horizontalGlue);
         
-                btnNewButton.addActionListener(new ActionListener() {
-        			public void actionPerformed(ActionEvent arg0) {
-        				deleteView();
-        				Principal.loadLogin();
-        			}
-        		});
+                
         
         Component verticalStrut_1 = Box.createVerticalStrut(20);
         verticalBox.add(verticalStrut_1);
+
+        
+        //LÓGICA DE LA VISTA
+        
+        box.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
+                    int val = box.getSelectedIndex();
+                    switch(val){
+                    	case 4:
+                    		exode.setVisible(true);
+                    		exec.setVisible(true);
+                    		VS2.setVisible(true);
+                    		VS3.setVisible(true);
+                    		btnAcceder.setText("Ejecutar");
+                    		break;
+                    	default:
+                    		exode.setVisible(false);
+                    		exec.setVisible(false);
+                    		VS2.setVisible(false);
+                    		VS3.setVisible(false);
+                    		btnAcceder.setText("Acceder");
+                    		break;
+                    }
+	             }
+             }
+		});
+        
+        
+        
+        
+        
+        
+        
+        
+        btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				deleteView();
+				Principal.loadLogin();
+			}
+		});
+        
+		KeyboardFocusManager.getCurrentKeyboardFocusManager()
+		  .addKeyEventDispatcher(new KeyEventDispatcher() {
+		      @Override
+		      public boolean dispatchKeyEvent(KeyEvent e) {
+		    	if (isVisible()) System.out.println("TECLADO EN MENUCAPITAN");
+		        return false;
+		      }
+		});
+      
 	}
 	
 	public void config(){
