@@ -213,6 +213,12 @@ public class CapitaControlador {
 	
 	public void logOut(){
 		idCap=null;
+		try {
+			exportarContenidorCapitans();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void afegirCapita(Capita c) throws IOException{
@@ -222,15 +228,16 @@ public class CapitaControlador {
 	public void inicialitzar() throws Exception{
 		
 		File file=new File("./bd.dat");
-		
-		if(file.exists()){
+		if(file.exists() && file.length() != 0){
 			LlegirEscriure lle=new LlegirEscriure();
 			lle.importar();
 		}
 		else{
+			if (file.length() == 0) file.delete();
 			Capita c = new Capita("admin");
 			contCap.addCapita(c);
 			idCap = c.getId();
+			file.createNewFile();
 		}
 	}
 	

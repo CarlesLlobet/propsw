@@ -223,15 +223,10 @@ public class MenuCapita extends JPanelBg {
 		});
         
         
-        
-        
-        
-        
-        
-        
         btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				deleteView();
+				Principal.getCc().logOut();
 				Principal.loadLogin();
 			}
 		});
