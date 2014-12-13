@@ -216,7 +216,7 @@ public class CapitaControlador {
 	}
 	
 	public void inicialitzar() throws IOException{
-		Capita c = new Capita("Luke Skywalker");
+		Capita c = new Capita("admin");
 		contCap.addCapita(c);
 		idCap = c.getId();
 	}

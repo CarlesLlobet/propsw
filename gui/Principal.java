@@ -6,8 +6,15 @@ import gui.gestiorebel.GestioRebel;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.io.IOException;
 
 import javax.swing.JPanel;
+
+import propsw.CapitaControlador;
+import propsw.ExodeControlador;
+import propsw.GalaxiaControlador;
+import propsw.ExodeControlador;
+import propsw.GalaxiaControlador;
 
 public class Principal {
 	/**
@@ -19,6 +26,10 @@ public class Principal {
 	private static JPanel container = new JPanel();
 	private static CardLayout card = new CardLayout();
 
+	private static CapitaControlador cc = new CapitaControlador();
+	private static GalaxiaControlador gc = new GalaxiaControlador(cc);
+	private static ExodeControlador ec = new ExodeControlador(cc);
+	
 	//Configuramos la ventana y cargamos la vista de Login
 	private static void init(){
 		container.setLayout(card);
@@ -28,6 +39,12 @@ public class Principal {
 
 	public static void main(String[] args) {
 		init();
+		try {
+			cc.inicialitzar();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/* Funciones "load..."
@@ -78,6 +95,19 @@ public class Principal {
 		mc.config();
 	}
 	
+	
+	//Retorna 
+	public CapitaControlador getCc(){
+		return cc;
+	}
+	
+	public GalaxiaControlador getGc(){
+		return gc;
+	}
+	
+	public ExodeControlador getEc(){
+		return ec;
+	}
 	
 	
 	//Función que elimina del contenedor una vista c
