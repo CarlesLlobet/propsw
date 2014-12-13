@@ -167,21 +167,6 @@ public class Login extends JPanelBg{
 				}
 			}
 		});
-		
-		KeyboardFocusManager.getCurrentKeyboardFocusManager()
-		  .addKeyEventDispatcher(new KeyEventDispatcher() {
-		      @Override
-		      public boolean dispatchKeyEvent(KeyEvent e) {
-		    	//if (view.isShowing()){
-		    		if(e.getKeyCode() == 27) {
-		    			System.exit(0);
-		    		}
-		    	//}
-		        return false;
-		      }
-		});
-
-		
 	}
 
 	public void config(){
