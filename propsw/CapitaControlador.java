@@ -198,7 +198,6 @@ public class CapitaControlador {
 
 	//Retorna l'objecte Capita del capita que ha inicat la sessi�.
 	public Capita getCapita() {
-		System.out.println("ID CAP ES :" + idCap);
 		return contCap.getCapita(idCap);
 	}
 	//Retorna un false si no existeix el rebel amb el idRebel passat

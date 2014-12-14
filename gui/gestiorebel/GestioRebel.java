@@ -152,6 +152,28 @@ public class GestioRebel extends JPanelBg{
 		
 		
 		//LOGICA DE LA VISTA 
+		
+		
+		pickrebel.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getStateChange() == ItemEvent.SELECTED){
+					int val = pickrebel.getSelectedIndex();
+					switch(val){
+						case 0:
+							cr.reset();
+							break;
+						default:
+							cr.refresh(String.valueOf(val));
+					}
+				}
+			}
+		});
+		
+		
+		
+		
 		//Comportamiento JComboBox
 		accio.addItemListener(new ItemListener() {
             @Override
@@ -162,12 +184,15 @@ public class GestioRebel extends JPanelBg{
 	                case 0:
 	                	panel.setVisible(true);
 	                	pickrebel.setVisible(true);
+	                	pickrebel.setSelectedIndex(0);
+	                	cr.reset();
 	                	Boton.setVisible(false);
 	                	card.show(panel,"consulta");
 	                	break;
 	                case 1:
 	                	panel.setVisible(true);
 	                	pickrebel.setVisible(true);
+	                	pickrebel.setSelectedIndex(0);
 	                	Boton.setVisible(false);
 	                	card.show(panel, "modify");
 	                	break;
@@ -181,6 +206,7 @@ public class GestioRebel extends JPanelBg{
 	                case 3: 
 	                	panel.setVisible(false);
 	                	pickrebel.setVisible(true);
+	                	pickrebel.setSelectedIndex(0);
 	                	Boton.setVisible(true);
 	                	Boton.setText("Esborra");
 	                default:	                	
@@ -195,6 +221,28 @@ public class GestioRebel extends JPanelBg{
 		
 		Boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+					int val = accio.getSelectedIndex();
+					switch(val){
+						case 0: //consulta
+							
+							break;
+						case 1: //modifica
+							break;
+						case 2: //crea
+							String nom = cn.getNom();
+							if (nom != ""){
+								Principal.getCc().crearRebel(nom);
+								JOptionPane.showMessageDialog(Principal.getWindow(), "Rebelde añadido.");
+							}
+							else {
+								JOptionPane.showMessageDialog(Principal.getWindow(), "El nombre debe tener un nombre.");
+							}
+							break;
+						case 3:	//esborra
+							break;
+						default:
+							break;
+					}
 		    		/*if (pickrebel.getSelectedIndex() == 0 && pickrebel.isVisible()){
 		    			JOptionPane.showMessageDialog(Principal.getWindow(), "Por favor, seleccione un rebelde");
 		    		}
