@@ -23,7 +23,7 @@ import java.awt.BorderLayout;
 public class ModificaRebel extends JPanel{
 	public ModificaRebel(){
 		setBackground(Color.GRAY);
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		Box verticalBox = Box.createVerticalBox();
 		verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -34,7 +34,7 @@ public class ModificaRebel extends JPanel{
 		
 		Panel panel = new Panel();
 		verticalBox.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		Box verticalBox_1 = Box.createVerticalBox();
 		verticalBox_1.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -100,6 +100,7 @@ public class ModificaRebel extends JPanel{
 		horizontalBox_1.add(horizontalStrut_3);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setMaximumSize(new Dimension(32767, 23));
 		horizontalBox_1.add(comboBox);
 		
 		Component horizontalStrut_4 = Box.createHorizontalStrut(20);

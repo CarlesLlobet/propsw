@@ -7,6 +7,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import javax.swing.BoxLayout;
 
 public class ModificarExode extends JPanel {
 
@@ -14,12 +15,14 @@ public class ModificarExode extends JPanel {
 	 * Create the panel.
 	 */
 	public ModificarExode() {
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		Box verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 		
 		Panel panel = new Panel();
 		verticalBox.add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		Box verticalBox_1 = Box.createVerticalBox();
 		panel.add(verticalBox_1);
