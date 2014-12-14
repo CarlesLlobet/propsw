@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
+import java.awt.Dimension;
 
 public class ModificarExode extends JPanel {
 
@@ -43,6 +44,7 @@ public class ModificarExode extends JPanel {
 		horizontalBox.add(horizontalStrut);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setMaximumSize(new Dimension(32767, 23));
 		horizontalBox.add(comboBox);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
@@ -55,6 +57,7 @@ public class ModificarExode extends JPanel {
 		horizontalBox.add(horizontalStrut_2);
 		
 		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setMaximumSize(new Dimension(32767, 23));
 		horizontalBox.add(comboBox_1);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
@@ -82,6 +85,7 @@ public class ModificarExode extends JPanel {
 		horizontalBox_1.add(horizontalStrut_4);
 		
 		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setMaximumSize(new Dimension(32767, 23));
 		horizontalBox_1.add(comboBox_2);
 		
 		Component horizontalStrut_5 = Box.createHorizontalStrut(20);
@@ -109,6 +113,7 @@ public class ModificarExode extends JPanel {
 		horizontalBox_2.add(horizontalStrut_6);
 		
 		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setMaximumSize(new Dimension(32767, 23));
 		horizontalBox_2.add(comboBox_3);
 		
 		Component horizontalStrut_7 = Box.createHorizontalStrut(20);
@@ -136,6 +141,7 @@ public class ModificarExode extends JPanel {
 		horizontalBox_3.add(horizontalStrut_8);
 		
 		JComboBox comboBox_4 = new JComboBox();
+		comboBox_4.setMaximumSize(new Dimension(32767, 23));
 		horizontalBox_3.add(comboBox_4);
 		
 		Component horizontalStrut_9 = Box.createHorizontalStrut(20);
