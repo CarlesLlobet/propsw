@@ -2,10 +2,13 @@ package propsw;
 
 //@author Toni Mart�nez
 
+import gui.Principal;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -252,6 +255,12 @@ public class CapitaControlador {
 			idCap = c.getId();
 			file.createNewFile();
 		}
+	}
+	
+	public ArrayList<String> arrayListRebelsOrd(){
+		ArrayList<String> rebels = new ArrayList<String>(getCapita().getRebels().keySet());
+		Collections.sort(rebels);
+		return rebels;
 	}
 	
 	/**

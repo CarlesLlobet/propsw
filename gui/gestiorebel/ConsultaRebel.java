@@ -93,9 +93,10 @@ public class ConsultaRebel extends JPanel{
 		Principal.getCc().getCapita().getRebels().keySet();
 	}
 		
+	
 	public void refresh(String idReb){
 		comboBox.setSelectedIndex(0);
-		ArrayList<String> rebels = new ArrayList<String>(Principal.getCc().getCapita().getRebels().keySet());
+		ArrayList<String> rebels = Principal.getCc().arrayListRebelsOrd();
 		System.out.println("REBELS EXISTENTS");
 		for (String r : rebels){
 			System.out.println("r: " +r + " NOM: " + Principal.getCc().getRebel(r).getNom());

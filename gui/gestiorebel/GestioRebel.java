@@ -8,25 +8,24 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 public class GestioRebel extends JPanelBg{
 	private JComboBox<String> accio;
-	private JComboBox<String> pickrebel;
+	private JComboBox<String> pickrebel =  new JComboBox<String>();
 	private JButton button;
 	private JButton Boton;
 	
@@ -82,9 +81,6 @@ public class GestioRebel extends JPanelBg{
 		accio.addItem("Eliminar rebelde");
 		
 
-		
-		
-					
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalBox.add(verticalStrut);
 		
@@ -94,17 +90,11 @@ public class GestioRebel extends JPanelBg{
 		Component horizontalGlue_5 = Box.createHorizontalGlue();
 		horizontalBox_3.add(horizontalGlue_5);
 		
-			pickrebel = new JComboBox<String>();
-			horizontalBox_3.add(pickrebel);
-			pickrebel.setMinimumSize(new Dimension(120, 20));
-			pickrebel.setMaximumSize(new Dimension(120, 20));
-			
-			pickrebel.addItem("Escoge rebelde");
-			pickrebel.addItem("Rebelde 1");
-			pickrebel.addItem("Rebelde 2");
-			pickrebel.addItem("Rebelde 3");
-			pickrebel.addItem("Rebelde 4");
-		
+		pickrebel = new JComboBox<String>();
+		horizontalBox_3.add(pickrebel);
+		pickrebel.setMinimumSize(new Dimension(120, 20));
+		pickrebel.setMaximumSize(new Dimension(120, 20));
+		actupickrebel();
 		Component horizontalGlue_6 = Box.createHorizontalGlue();
 		horizontalBox_3.add(horizontalGlue_6);
 		
@@ -158,15 +148,7 @@ public class GestioRebel extends JPanelBg{
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				if (e.getStateChange() == ItemEvent.SELECTED){
-					int val = pickrebel.getSelectedIndex();
-					switch(val){
-						case 0:
-							cr.reset();
-							break;
-						default:
-							cr.refresh(String.valueOf(val));
-					}
+				if (e.getStateChange() == ItemEvent.SELECTED){	
 				}
 			}
 		});
@@ -180,11 +162,12 @@ public class GestioRebel extends JPanelBg{
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
 	                int val = accio.getSelectedIndex();
+	                revalidate();
 	                switch(val){
 	                case 0:
 	                	panel.setVisible(true);
 	                	pickrebel.setVisible(true);
-	                	pickrebel.setSelectedIndex(0);
+	                	actupickrebel();
 	                	cr.reset();
 	                	Boton.setVisible(false);
 	                	card.show(panel,"consulta");
@@ -192,7 +175,7 @@ public class GestioRebel extends JPanelBg{
 	                case 1:
 	                	panel.setVisible(true);
 	                	pickrebel.setVisible(true);
-	                	pickrebel.setSelectedIndex(0);
+	                	actupickrebel();
 	                	Boton.setVisible(false);
 	                	card.show(panel, "modify");
 	                	break;
@@ -207,13 +190,13 @@ public class GestioRebel extends JPanelBg{
 	                	panel.setVisible(false);
 	                	pickrebel.setVisible(true);
 	                	pickrebel.setSelectedIndex(0);
+	                	actupickrebel();
 	                	Boton.setVisible(true);
 	                	Boton.setText("Esborra");
 	                default:	                	
 	                	break;
 	                }
                 }
-                revalidate();
             }
 		});
 		
@@ -239,6 +222,12 @@ public class GestioRebel extends JPanelBg{
 							}
 							break;
 						case 3:	//esborra
+							String val2 = pickrebel.getSelectedItem().toString();
+							System.out.println("REBEL A ESBORRAR : " + val);
+							boolean b = Principal.getCc().eliminarRebel(val2);
+							if (b) JOptionPane.showMessageDialog(Principal.getWindow(), "Rebelde eliminado.");
+							else JOptionPane.showMessageDialog(Principal.getWindow(), "No existe este rebelde para el capitán");
+							actupickrebel();
 							break;
 						default:
 							break;
@@ -272,6 +261,19 @@ public class GestioRebel extends JPanelBg{
 		
 	}
 	
+	private void actupickrebel(){
+		System.out.println("ACTU PICK REBEL");
+		pickrebel.removeAllItems();
+		pickrebel.addItem("Escoge rebelde");
+		ArrayList<String> rebels = Principal.getCc().arrayListRebelsOrd();
+		int i = 1;
+		for(String r : rebels){
+			System.out.println("Rebelde " + r);
+			pickrebel.addItem(r);
+			++i;
+		}
+	}
+
 	public void config(){
 		//Aquesta funcio ens serveix per a establir a quin objecte s'ha de fer focus al carregar la vista
 		accio.requestFocusInWindow();
