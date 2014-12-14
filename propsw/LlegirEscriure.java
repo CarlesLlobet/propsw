@@ -52,7 +52,7 @@ public class LlegirEscriure {
 		Capita aux=(Capita) ois.readObject();
 		
 		while (aux!=null){
-			ContenidorCapitans.addCapitaExtern(aux);
+			ContenidorCapitans.addCapita(aux);
 			aux = null;
 			try{
 				aux =(Capita) ois.readObject();

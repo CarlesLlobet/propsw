@@ -12,6 +12,8 @@ public class Capita implements Serializable{
 	//Contador que s'utiltiza per assignar la id al capita
 	private static Integer cont = 0;
 	
+	private Integer contador;
+	
 	//Id del capita
 	private String id;
 	
@@ -36,6 +38,7 @@ public class Capita implements Serializable{
 		this.nom = "admin";
 		this.ContReb = new HashMap<String,Rebel>();
 		this.gal = new Galaxia(this);
+		setContador();
 	}
 
 	/**
@@ -48,6 +51,7 @@ public class Capita implements Serializable{
 		this.nom = nom;
 		this.ContReb = new HashMap<String,Rebel>();
 		this.gal = new Galaxia(this);
+		setContador();
 	}
 
 	/**
@@ -127,7 +131,11 @@ public class Capita implements Serializable{
 		return this.gal;
 	}
 	
-	public static void augmentarContador(){
-		cont=cont+1;
+	public void setContador(){
+		contador=cont;
+	}
+	
+	public String getIdNoStatic(){
+		return this.contador.toString();
 	}
 }
