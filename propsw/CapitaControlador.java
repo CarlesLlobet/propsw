@@ -325,4 +325,8 @@ public class CapitaControlador {
 		contCap.deleteCapita(idCap);
 		logOut();
 	}
+	
+	public static void setCont(int i){
+		Capita.setCont(i);
+	}
 }

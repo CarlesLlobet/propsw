@@ -138,4 +138,8 @@ public class Capita implements Serializable{
 	public String getIdNoStatic(){
 		return this.contador.toString();
 	}
+	
+	public static void setCont(int i){
+		cont=i;
+	}
 }

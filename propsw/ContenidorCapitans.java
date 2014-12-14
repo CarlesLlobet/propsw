@@ -66,6 +66,7 @@ public class ContenidorCapitans {
 		return true;
 	}
 	
+	
 	/**
 	 * Esborra un capita del contenidor
 	 * @param idCapita Id del capita a esborrar

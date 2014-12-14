@@ -61,6 +61,7 @@ public class LlegirEscriure {
 			}
 		}
 		ois.close();
+		CapitaControlador.setCont(ContenidorCapitans.getHashContenidor().size()+1);
 	
 	}
 	
