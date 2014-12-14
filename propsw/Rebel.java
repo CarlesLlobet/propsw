@@ -14,6 +14,8 @@ public class Rebel implements Serializable{
 	//Contador que s'utilitza per assignar una id al rebel
 	private static Integer cont = 0;
 	
+	private Integer contador;
+	
 	//Id del rebel
 	private String id;
 	
@@ -41,6 +43,7 @@ public class Rebel implements Serializable{
 		this.id = cont.toString();
 		this.exodes = new ArrayList<String>();
 		this.nom = null;
+		setContador();
 	}
 	
 	/**
@@ -52,6 +55,7 @@ public class Rebel implements Serializable{
 		this.id = cont.toString();
 		this.nom = nom;
 		this.exodes = new ArrayList<String>();
+		setContador();
 	}
 	
 	/**
@@ -59,7 +63,7 @@ public class Rebel implements Serializable{
 	 * @return Retorna l'id del rebel 
 	 */
 	public String getId(){
-		return this.id;
+		return this.contador.toString();
 	}
 	
 	/**
@@ -122,5 +126,9 @@ public class Rebel implements Serializable{
 	@Override
 	public String toString() {
 		return id+"\t-\t"+nom;
+	}
+	
+	public void setContador(){
+		contador=cont;
 	}
 }

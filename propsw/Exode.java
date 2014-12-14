@@ -21,6 +21,7 @@ public class Exode implements Serializable{
 	private Galaxia galaxia;
 	private Integer flow;
 	private static Integer cont = 0;
+	private Integer contador;
 	private double cost;
 	private boolean actualitzat;
 	private String idExode;
@@ -45,6 +46,7 @@ public class Exode implements Serializable{
 		collsAmpolla = new HashMap<Integer, ArrayList<Integer[]>>();
 		caminsFixats = new HashMap<String,ArrayList<Integer>>();
 		invalid = false;
+		setContador();
 	}
 	
 	
@@ -438,7 +440,7 @@ public class Exode implements Serializable{
 	 * @return String identificador de l'éxode.
 	 */
 	public String getIdExode(){
-		return idExode;
+		return this.contador.toString();
 	}
 	
 	/**
@@ -592,6 +594,8 @@ public class Exode implements Serializable{
 		return caminsFixats;
 	}
 	
-	
+	public void setContador(){
+		contador=cont;
+	}
 	
 }
