@@ -65,7 +65,24 @@ public class ContenidorCapitans {
 		}
 		return true;
 	}
-
+	
+	public static void addCapitaExtern(Capita capita) throws IOException{
+		boolean ok=true;
+		Iterator<Entry<String, Capita>> entries = contCap.entrySet().iterator();
+		while (entries.hasNext()) {
+		  
+		  Entry<String, Capita> thisEntry = (Entry<String,Capita>) entries.next();
+		  if(thisEntry.getValue().getNom()==capita.getNom())
+			  ok=false;
+		}
+		if(ok==true){
+			 Capita.augmentarContador();
+			 contCap.put(capita.getId(),capita);
+		}
+		else{
+			throw new IOException("El nom ja existeix");
+		}
+	}
 	/**
 	 * Esborra un capita del contenidor
 	 * @param idCapita Id del capita a esborrar

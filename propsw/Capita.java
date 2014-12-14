@@ -126,4 +126,8 @@ public class Capita implements Serializable{
 	public Galaxia getGalaxia(){
 		return this.gal;
 	}
+	
+	public static void augmentarContador(){
+		cont=cont+1;
+	}
 }
