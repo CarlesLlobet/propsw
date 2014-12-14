@@ -3,17 +3,15 @@ package gui;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -22,7 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
+
+import propsw.Capita;
 
 public class Login extends JPanelBg{
 
@@ -35,7 +34,6 @@ public class Login extends JPanelBg{
 	private Box horizontalBox;
 	private Component horizontalGlue;
 	private Component horizontalGlue_1;
-	private Login view;
 	public Login() {
 		//Preparamos la vista
 		setBounds(100, 100, 793, 499);
@@ -129,7 +127,6 @@ public class Login extends JPanelBg{
 		this.add(button);
 		Component verticalGlue_3 = Box.createVerticalGlue();
 		this.add(verticalGlue_3);
-		view = this;
 		
 		//LOGICA DE LA VISTA
 		box.addItemListener(new ItemListener() {
@@ -158,6 +155,8 @@ public class Login extends JPanelBg{
 				System.out.println("MENU CAPITAN");
 				String us = user.getText();
 				String pa = String.valueOf(pass.getPassword());
+				System.out.println("El valor de usuario: " +us);
+				System.out.println("Contraseña: " + pa);
 				if (Principal.getCc().login(us, pa) != null){
 					deleteView();
 					Principal.loadMenuCapita();

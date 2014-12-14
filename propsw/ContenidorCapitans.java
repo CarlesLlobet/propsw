@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Set;
 
 
 public class ContenidorCapitans {
@@ -48,17 +49,17 @@ public class ContenidorCapitans {
 	 * @return true després d'afegir el capita
 	 */
 	public static boolean addCapita(Capita capita) throws IOException{
-		
 		boolean ok=true;
 		Iterator<Entry<String, Capita>> entries = contCap.entrySet().iterator();
-		
 		while (entries.hasNext()) {
+		  
 		  Entry<String, Capita> thisEntry = (Entry<String,Capita>) entries.next();
 		  if(thisEntry.getValue().getNom()==capita.getNom())
 			  ok=false;
 		}
-		if(ok==true)
+		if(ok==true){
 			 contCap.put(capita.getId(),capita);
+		}
 		else{
 			throw new IOException("El nom ja existeix");
 		}

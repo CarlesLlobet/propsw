@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 
 
@@ -38,12 +39,11 @@ public class CapitaControlador {
 		while(str.hasNext()&&!found){
 			h = str.next();
 			c = ContenidorCapitans.getHashContenidor().get(h);
-			System.out.println("Nom Capita: " + c.getNom());
-			System.out.println("Pass capita: " + c.getPassword());
-			if(c.getNom().equals(nom)==false || c.getPassword().equals(password)==false){
-				c = null;
+			if(c.getNom().equals(nom)== true && c.getPassword().equals(password)==true){
+				idCap = c.getId();
 				found = true;
-			}			
+			}	
+			if (!str.hasNext() && !found) c=null;
 		}		
 		return c;
 	}
@@ -198,17 +198,23 @@ public class CapitaControlador {
 
 	//Retorna l'objecte Capita del capita que ha inicat la sessi�.
 	public Capita getCapita() {
+		System.out.println("ID CAP ES :" + idCap);
 		return contCap.getCapita(idCap);
 	}
 	//Retorna un false si no existeix el rebel amb el idRebel passat
 	public boolean modificaRebel(String nom, String idRebel){
-		Rebel r = getCapita().getRebels().get(idRebel);
+		Rebel r = getCapita().getRebels().get(idRebel); 
 		if(r!=null){
 			r.setNom(nom);
 			return true;
 		}else{
 			return false;
 		}
+	}
+	
+	
+	public void canviContra(String s){
+		getCapita().setPassword(s);
 	}
 	
 	public void logOut(){
@@ -226,18 +232,21 @@ public class CapitaControlador {
 	}
 	
 	public void afegirCapita(String s) throws IOException{
+		System.out.println("Agegim un capita amb nom " + s);
 		Capita c  = new Capita(s);
+		System.out.println("I id: " + c.getId());
 		contCap.addCapita(c);
 	}
 	
 	public void inicialitzar() throws Exception{
-		
 		File file=new File("./bd.dat");
 		if(file.exists() && file.length() != 0){
+			System.out.println("EXISTE EL ARCHIVO");
 			LlegirEscriure lle=new LlegirEscriure();
 			lle.importar();
 		}
 		else{
+			System.out.println("NO EXISTE EL ARCHIVO, LO CREAMOS");
 			if (file.length() == 0) file.delete();
 			Capita c = new Capita("admin");
 			contCap.addCapita(c);
@@ -272,11 +281,22 @@ public class CapitaControlador {
 	public void resetSistema() throws IOException{
 		LlegirEscriure lle=new LlegirEscriure();
 		lle.eliminarFitxer();
-		logOut();
 		ContenidorCapitans.getHashContenidor().clear();
 	}
 	
+
+	public void escriureCont(){
+		System.out.println("CONTENIDOR CAPITA");
+		Set<String> set = contCap.getHashContenidor().keySet();
+		int i = 1;
+		for (String s : set){
+			System.out.println("User " + String.valueOf(i) + ": " + contCap.getCapita(s).getNom());
+			++i;
+		}		
+	}
+	
 	public boolean checkCapitaNom(String s){
+		System.out.println("S ES: " + s);
 		Capita c = null;		
 		Iterator<String> str = ContenidorCapitans.getHashContenidor().keySet().iterator();
 		String h = "";
@@ -291,5 +311,10 @@ public class CapitaControlador {
 			}			
 		}		
 		return found;
+	}
+	
+	public void deleteCapita(){
+		contCap.deleteCapita(idCap);
+		logOut();
 	}
 }

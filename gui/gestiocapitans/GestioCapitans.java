@@ -14,13 +14,15 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 
-import javax.swing.JOptionPane;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import propsw.Capita;
 
 public class GestioCapitans extends JPanelBg {
 	private JComboBox<String> box;
@@ -32,7 +34,7 @@ public class GestioCapitans extends JPanelBg {
 	//vistes que es carregaran:
     private ImpExp eg = new ImpExp();
     private ImpExp ig = new ImpExp();
-    private CreaNom cc = new CreaNom();
+    private CreaNom cn = new CreaNom();
     private CanviaContra ccontra = new CanviaContra();
 	
 	public GestioCapitans() {
@@ -88,7 +90,7 @@ public class GestioCapitans extends JPanelBg {
         panel.setLayout(card);
         
         //Carreguem toas las vistas que vamos a utilizar y mostramos el dibujo
-        panel.add(cc,"crea");
+        panel.add(cn,"crea");
         panel.add(ccontra,"CambiaContra");
         panel.add(ig,"import");
         panel.add(eg,"export");
@@ -113,13 +115,17 @@ public class GestioCapitans extends JPanelBg {
         		int val = box.getSelectedIndex();
         		switch(val) {
         			case 0: 
-        				String lectura = cc.getNom();
+        				String lectura = cn.getNom();
         				if (lectura.equals("")) {
         					alertaCapitaNoNom();
         				}
-        				else if (Principal.getCc().checkCapitaNom(lectura)){
+        				else if (!Principal.getCc().checkCapitaNom(lectura)){
 								try {
 									Principal.getCc().afegirCapita(lectura);
+									alertaCapitaAfegit(lectura);
+									//Aquesta s'haura de borrar
+									Principal.getCc().escriureCont();
+									cn.reset();
 								} catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
@@ -128,7 +134,61 @@ public class GestioCapitans extends JPanelBg {
         				else {
         					alertaCapitaNomE();
         				}
-    
+        				break;
+        			case 1: //cambiar contraseña
+        				/*
+        				Capita c = Principal.getCc().getCapita();
+        				if (c == null) System.out.println("CAPITA NUL");
+        				String current = c.getPassword();
+        				String s1; = String.valueOf(ccontra.new1().getPassword());
+        				String s2 = String.valueOf(ccontra.new2().getPassword());
+        				String old = String.valueOf(ccontra.old().getPassword());
+        				System.out.println("new: " + s1 + "new: "+ s2 + "old: " + old);
+        				
+        				System.out.println("current: "+ current);
+
+        				if (old.equals(current)){
+        					if (s1.equals("") || s2.equals("")){
+        						JOptionPane.showMessageDialog(Principal.getWindow(),"La nueva contraseña no puede ser vacía");
+        					}else if (s1.equals(s2)) {
+        						Principal.getCc().canviContra(s1);
+        					}else {
+            					JOptionPane.showMessageDialog(Principal.getWindow(),"Las contraseñas no coinciden");
+        					}
+        				}
+        				else {
+        					JOptionPane.showMessageDialog(Principal.getWindow(),"Contraseña incorrecta");
+        				}*/
+        				break;
+        			case 2: //borrar capitan
+        				//FALTA PANEL CONFIRMACION
+        				Principal.getCc().deleteCapita();
+    					JOptionPane.showMessageDialog(Principal.getWindow(),"Capitán eliminado, se vuelve al login.");
+        				deleteView();
+        				Principal.loadLogin();
+        				break;
+        			case 3:
+        				//FALTA PANEL CONFIRMACION
+        				try {
+							Principal.getCc().resetSistema();
+	        				deleteView();
+	        				Principal.getCc().inicialitzar();
+	        				Principal.loadLogin();	
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}						
+        				break;
+        			case 4: //importar
+        				break;
+        			case 5: //exportar
+        				break;	
+        			default:
+        				System.out.println("huehue");
+        				break;
         		}        		
         	}
         });
@@ -177,7 +237,7 @@ public class GestioCapitans extends JPanelBg {
 	                	case 0: 
 	                		boto.setVisible(true);
 	                		boto.setText("Crear");
-	                		cc.reset();
+	                		cn.reset();
 	                		panel.setVisible(true);
 	                		card.show(panel,"crea");
 	                		break;
@@ -245,6 +305,11 @@ public class GestioCapitans extends JPanelBg {
 		JOptionPane.showMessageDialog(Principal.getWindow(),"Ya existe un capitán con ese nombre.");
 
 	}
+	
+	private void alertaCapitaAfegit(String s){
+		JOptionPane.showMessageDialog(Principal.getWindow(),"Se ha añadido el capitán con nombre: " + s);
+	}
+	
 	
 	public void config(){
 		box.requestFocusInWindow();

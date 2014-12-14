@@ -47,7 +47,7 @@ public class LlegirEscriure {
 	 * @throws Exception
 	 */
 	public void llegir(String fitxer) throws Exception{
-		
+		System.out.println("ESTAMOS LEYENDO");
 		ObjectInputStream ois=new ObjectInputStream(new FileInputStream(fitxer));
 		Capita aux=(Capita) ois.readObject();
 		
@@ -86,6 +86,7 @@ public class LlegirEscriure {
 		
 		while (entries.hasNext()) {
 		  Entry<String, Capita> thisEntry = (Entry<String,Capita>) entries.next();
+		  System.out.println("Escribimos: "+ thisEntry.getValue().getNom());
 		  oos.writeObject(thisEntry.getValue());
 		}
 		oos.close();

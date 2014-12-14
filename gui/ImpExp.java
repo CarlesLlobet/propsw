@@ -19,7 +19,6 @@ public class ImpExp extends JPanel{
 	public ImpExp() {
 				//Amb això fiquem el fondo del panel transparent.
 				setBackground(new Color(0,0,0,0));
-				System.out.println("A PINTAAAR IMPORT GALAXIA");
 				setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 				
 				Box verticalBox = Box.createVerticalBox();

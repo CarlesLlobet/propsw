@@ -16,9 +16,9 @@ import javax.swing.JPasswordField;
 import java.awt.Font;
 
 public class CanviaContra extends JPanel {
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
-	private JPasswordField passwordField_2;
+	private JPasswordField newpass1;
+	private JPasswordField newpass2;
+	private JPasswordField oldpass;
 	public CanviaContra() {
 		setBackground(new Color(0,0,0,0));
 		setLayout(new BorderLayout(0, 0));
@@ -42,9 +42,9 @@ public class CanviaContra extends JPanel {
 		horizontalStrut.setMaximumSize(new Dimension(20, 20));
 		horizontalBox.add(horizontalStrut);
 		
-		passwordField = new JPasswordField();
-		passwordField.setMaximumSize(new Dimension(100, 23));
-		horizontalBox.add(passwordField);
+		newpass1 = new JPasswordField();
+		newpass1.setMaximumSize(new Dimension(100, 23));
+		horizontalBox.add(newpass1);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		verticalBox.add(verticalStrut_1);
@@ -61,9 +61,9 @@ public class CanviaContra extends JPanel {
 		horizontalStrut_1.setMaximumSize(new Dimension(20, 20));
 		horizontalBox_1.add(horizontalStrut_1);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setMaximumSize(new Dimension(100, 23));
-		horizontalBox_1.add(passwordField_1);
+		newpass2 = new JPasswordField();
+		newpass2.setMaximumSize(new Dimension(100, 23));
+		horizontalBox_1.add(newpass2);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalBox.add(verticalStrut);
@@ -80,13 +80,20 @@ public class CanviaContra extends JPanel {
 		horizontalStrut_2.setMaximumSize(new Dimension(20, 20));
 		horizontalBox_2.add(horizontalStrut_2);
 		
-		passwordField_2 = new JPasswordField();
-		passwordField_2.setMaximumSize(new Dimension(100, 23));
-		horizontalBox_2.add(passwordField_2);
+		oldpass = new JPasswordField();
+		oldpass.setMaximumSize(new Dimension(100, 23));
+		horizontalBox_2.add(oldpass);
 		
 		Component verticalGlue_1 = Box.createVerticalGlue();
 		verticalBox.add(verticalGlue_1);
-		System.out.println("CAMBIA CONTRA");
 	}
 	
+	public void config(){
+		
+	}	/*
+	public void reset(){
+		newpass1.setText("");
+		newpass2.setText("");
+		oldpass.setText("");
+	}*/
 }

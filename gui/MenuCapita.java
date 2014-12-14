@@ -235,7 +235,7 @@ public class MenuCapita extends JPanelBg {
 		  .addKeyEventDispatcher(new KeyEventDispatcher() {
 		      @Override
 		      public boolean dispatchKeyEvent(KeyEvent e) {
-		    	if (isVisible()) System.out.println("TECLADO EN MENUCAPITAN");
+		    	//if (isVisible()) System.out.println("TECLADO EN MENUCAPITAN");
 		        return false;
 		      }
 		});
