@@ -48,7 +48,8 @@ public class GrafStarWarsPanel extends mxGraphComponent {
 		{
 			objectes = new Object[graf.getNSize()];
 			int idBase = 0;
-			graph = paintRecursiuHelper(parent, objectes, graph, idBase, INIT_X, INIT_Y);
+			if(objectes.length>0)
+				graph = paintRecursiuHelper(parent, objectes, graph, idBase, INIT_X, INIT_Y);
 			
 		}
 		finally

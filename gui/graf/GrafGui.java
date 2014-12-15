@@ -24,7 +24,7 @@ public class GrafGui extends JFrame
 		super("Prueba Graf");
 
 		graphComponent = new GrafStarWarsPanel();			//Inicialitzo el Panel
-		graphComponent.setGraf(readFromOficalFile(1)) ;		//Li assigno un Graf<Base>  (En aquest cas el llegeixo del fitxer que va penjar la profe al racó)
+		graphComponent.setGraf(readFromOficalFile(2)) ;		//Li assigno un Graf<Base>  (En aquest cas el llegeixo del fitxer que va penjar la profe al racó)
 		getContentPane().add(graphComponent);				//L'afegeixo al ContentPAne on el vull mostrar
 		graphComponent.paintTheGraf();						//Crido a paintTheGraf() i es pinta ordenadament 
 		
