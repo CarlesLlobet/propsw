@@ -50,7 +50,7 @@ public class ModificarExode extends JPanel {
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
 		horizontalBox.add(horizontalStrut_1);
 		
-		JLabel lblNewLabel = new JLabel("ID Base destino:");
+		JLabel lblNewLabel = new JLabel("Base destino:");
 		horizontalBox.add(lblNewLabel);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
@@ -134,7 +134,7 @@ public class ModificarExode extends JPanel {
 		Component horizontalGlue_6 = Box.createHorizontalGlue();
 		horizontalBox_3.add(horizontalGlue_6);
 		
-		JLabel lblEjecutar = new JLabel("Ejecutar:");
+		JLabel lblEjecutar = new JLabel("Ejecuci\u00F3n");
 		horizontalBox_3.add(lblEjecutar);
 		
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
@@ -156,21 +156,28 @@ public class ModificarExode extends JPanel {
 		Component verticalStrut_3 = Box.createVerticalStrut(20);
 		verticalBox_1.add(verticalStrut_3);
 		
-		Box horizontalBox_4 = Box.createHorizontalBox();
-		verticalBox_1.add(horizontalBox_4);
+		Box horizontalBox_5 = Box.createHorizontalBox();
+		verticalBox_1.add(horizontalBox_5);
 		
-		Component horizontalGlue_8 = Box.createHorizontalGlue();
-		horizontalBox_4.add(horizontalGlue_8);
+		Component horizontalGlue_10 = Box.createHorizontalGlue();
+		horizontalBox_5.add(horizontalGlue_10);
 		
-		JButton btnNewButton_3 = new JButton("Guardar cambios");
-		horizontalBox_4.add(btnNewButton_3);
+		JButton button = new JButton("Guardar cambios");
+		horizontalBox_5.add(button);
 		
-		Component horizontalGlue_9 = Box.createHorizontalGlue();
-		horizontalBox_4.add(horizontalGlue_9);
+		Component horizontalGlue_11 = Box.createHorizontalGlue();
+		horizontalBox_5.add(horizontalGlue_11);
 		
 		Component verticalGlue = Box.createVerticalGlue();
 		verticalBox_1.add(verticalGlue);
 
 	}
-
+	
+	public void reset(){
+		
+	}
+	
+	public void actualitza(String s){
+		
+	}
 }

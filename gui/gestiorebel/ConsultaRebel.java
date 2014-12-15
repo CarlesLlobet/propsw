@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -96,14 +97,24 @@ public class ConsultaRebel extends JPanel{
 	
 	public void refresh(String idReb){
 		comboBox.setSelectedIndex(0);
-		lblNewLabel.setText("Nom Rebel: " + Principal.getCc().getCapita().getRebels().get(idReb).getNom());
+		try {
+			lblNewLabel.setText("Nom Rebel: " + Principal.getCc().getCapita().getRebels().get(idReb).getNom());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		//chivatus
 		ArrayList<String> rebels = Principal.getCc().arrayListRebelsOrd();
 		System.out.println("REBELS EXISTENTS");
 		for (String r : rebels){
-			System.out.println("r: " +r + " NOM: " + Principal.getCc().getRebel(r).getNom());
+			try {
+				System.out.println("r: " +r + " NOM: " + Principal.getCc().getRebel(r).getNom());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		

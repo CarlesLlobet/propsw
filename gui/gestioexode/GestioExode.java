@@ -3,7 +3,8 @@ package gui.gestioexode;
 import gui.JPanelBg;
 import gui.Principal;
 
-import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -12,9 +13,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
@@ -22,11 +25,17 @@ public class GestioExode extends JPanelBg{
 	private JComboBox<String> accio;
 	private JComboBox<String> pickexode;
 	private JButton button;
-	private JButton btnNewButton;
+	private JButton eliminar;
+	
+	private CardLayout card = new CardLayout(0, 0);
+	private JPanel panel = new JPanel(); 
+	
+	private ModificarExode cme = new ModificarExode();
+	private ConsultaExode conse = new ConsultaExode();
 
 	public GestioExode() {
 		setImage("/images/bg.jpg");
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		Box verticalBox = Box.createVerticalBox();
 		verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -35,10 +44,26 @@ public class GestioExode extends JPanelBg{
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
 		verticalBox.add(verticalStrut_2);
 		
+		Box horizontalBox = Box.createHorizontalBox();
+		horizontalBox.setAlignmentY(Component.CENTER_ALIGNMENT);
+		verticalBox.add(horizontalBox);
+		
+		Component horizontalGlue_2 = Box.createHorizontalGlue();
+		horizontalBox.add(horizontalGlue_2);
+		
 		accio = new JComboBox<String>();
+		horizontalBox.add(accio);
 		accio.setMaximumSize(new Dimension(150, 20));
 		accio.setMinimumSize(new Dimension(150, 20));
-		verticalBox.add(accio);
+
+		panel.setBackground(new Color(0,0,0,0));
+        panel.setLayout(card);
+		panel.add(cme,"creamod");
+		panel.add(conse,"consex");
+		card.show(panel,"creamod");
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox.add(horizontalGlue);
 		//preparem el contingut del primer combobox
 		accio.addItem("Crear éxodo");
 		accio.addItem("Modificar éxodo");
@@ -52,29 +77,71 @@ public class GestioExode extends JPanelBg{
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
 	                int val = accio.getSelectedIndex();
-	                if (val <= 1) {
-	                	pickexode.setVisible(false);
+	                switch(val){
+	                	case 0: //crear
+	                		cme.reset();
+	                		panel.setVisible(true);
+	                		pickexode.setVisible(false);
+	                		card.show(panel,"creamod");
+	                		eliminar.setVisible(false);
+	                		break;
+	                	case 1: // modificar
+	                		int val2 = pickexode.getSelectedIndex();
+	                		pickexode.setVisible(true);
+	                		panel.setVisible(true);
+	                		if(val2 > 0){
+	                			//s es un id valid
+	                			String s = pickexode.getSelectedItem().toString();
+	                			cme.actualitza(s);
+	                		}
+	                		else cme.reset();
+	                		card.show(panel,"creamod");	            
+	                		eliminar.setVisible(false);
+	                		break;
+	                	case 2: //consultar
+	                		panel.setVisible(true);
+	                		pickexode.setVisible(true);
+	                		int val3 = pickexode.getSelectedIndex();
+	                		if(val3 > 0){
+	                			//s es un id valid
+	                			String s = pickexode.getSelectedItem().toString();
+	                			conse.actualitza(s);
+	                		}
+	                		else conse.reset();
+	                		card.show(panel,"consex");
+	                		eliminar.setVisible(false);
+	                		break;
+	                	case 3: //eliminar
+	                		eliminar.setVisible(true);
+	                		panel.setVisible(false);
+	                		pickexode.setVisible(true);
+	                		pickexode.setSelectedIndex(0);
+	                		break;
 	                }
-	                else {
-	                	pickexode.setVisible(true);	                
-	                }
+	                revalidate();
                 }
             }
 		});
 		
 		
-		
-		
-		
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalBox.add(verticalStrut);
-	
 		
-		pickexode = new JComboBox<String>();
-		pickexode.setMinimumSize(new Dimension(120, 20));
-		pickexode.setMaximumSize(new Dimension(120, 20));
-		pickexode.setVisible(false);
-		verticalBox.add(pickexode);
+		Box horizontalBox_3 = Box.createHorizontalBox();
+		verticalBox.add(horizontalBox_3);
+			
+			Component horizontalGlue_5 = Box.createHorizontalGlue();
+			horizontalBox_3.add(horizontalGlue_5);
+		
+			
+			pickexode = new JComboBox<String>();
+			horizontalBox_3.add(pickexode);
+			pickexode.setMinimumSize(new Dimension(120, 20));
+			pickexode.setMaximumSize(new Dimension(120, 20));
+			
+			Component horizontalGlue_6 = Box.createHorizontalGlue();
+			horizontalBox_3.add(horizontalGlue_6);
+			pickexode.setVisible(false);
 		
 		pickexode.addItem("Escoge éxodo");
 		pickexode.addItem("Exodo 1");
@@ -85,10 +152,35 @@ public class GestioExode extends JPanelBg{
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		verticalBox.add(verticalStrut_1);
 		
-		btnNewButton = new JButton("Acceder");
-		btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		verticalBox.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+		Box verticalBox_1 = Box.createVerticalBox();
+		verticalBox_1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		verticalBox.add(verticalBox_1);
+		
+		
+		Component verticalGlue_1 = Box.createVerticalGlue();
+		verticalBox_1.add(verticalGlue_1);
+		
+		Box horizontalBox_2 = Box.createHorizontalBox();
+		horizontalBox_2.setAlignmentY(Component.CENTER_ALIGNMENT);
+		verticalBox_1.add(horizontalBox_2);
+		
+		Component horizontalGlue_3 = Box.createHorizontalGlue();
+		horizontalBox_2.add(horizontalGlue_3);
+		
+		horizontalBox_2.add(panel);
+
+		Component horizontalGlue_4 = Box.createHorizontalGlue();
+		horizontalBox_2.add(horizontalGlue_4);
+		
+		Component verticalGlue = Box.createVerticalGlue();
+		verticalBox_1.add(verticalGlue);
+		
+		eliminar = new JButton("Eliminar");
+		eliminar.setAlignmentX(Component.CENTER_ALIGNMENT);
+		verticalBox.add(eliminar);
+		
+		
+		eliminar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		if (accio.getSelectedIndex() == 0) {
         			JOptionPane.showMessageDialog(Principal.getWindow(), "Por favor, seleccione una opción válida");
@@ -101,10 +193,6 @@ public class GestioExode extends JPanelBg{
         		}
         	}	
         });
-		
-		
-		Component verticalGlue_1 = Box.createVerticalGlue();
-		verticalBox.add(verticalGlue_1);
 		
 		Box horizontalBox_1 = Box.createHorizontalBox();
 		horizontalBox_1.setAlignmentY(0.5f);
