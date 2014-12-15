@@ -1,11 +1,12 @@
 /*
- * @Author: Marcos Pérez Rubio
+ * @Author: Marcos Pï¿½rez Rubio
  * Grup 44 - 9.1
  */
 
 
 package propsw;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -69,9 +70,11 @@ public class Rebel implements Serializable{
 	/**
 	 * Consulta el nom del rebel
 	 * @return Retorna el nom del rebel
+	 * @throws IOException 
 	 */
-	public String getNom(){
-		return this.nom;
+	public String getNom() throws IOException{
+		if(this.nom==null) throw new IOException("El rebel no te nom");
+		else return this.nom;
 	}
 	 
 	/**
@@ -129,7 +132,7 @@ public class Rebel implements Serializable{
 	}
 	
 	/**
-	 * Iguala el valor de la variable no estàtica contador al static cont
+	 * Iguala el valor de la variable no estï¿½tica contador al static cont
 	 */
 	public void setContador(){
 		contador=cont;
@@ -137,7 +140,7 @@ public class Rebel implements Serializable{
 	
 	/**
 	 * Actualitza el contador de ids de Rebels.
-	 * @param i valor enter al qual es posarà el contador de ids.
+	 * @param i valor enter al qual es posarï¿½ el contador de ids.
 	 */
 	public static void setCont(int i){
 		cont=i;
