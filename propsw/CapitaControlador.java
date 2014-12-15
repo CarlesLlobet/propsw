@@ -374,4 +374,8 @@ public class CapitaControlador {
 	public static void setCont(int i){
 		Capita.setCont(i);
 	}
+	
+	public static void setContRebel(int i){
+		Rebel.setCont(i+1);
+	}
 }

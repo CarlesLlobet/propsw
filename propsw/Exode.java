@@ -598,4 +598,8 @@ public class Exode implements Serializable{
 		contador=cont;
 	}
 	
+	public static void setCont(int i){
+		cont=i;
+	}
+	
 }

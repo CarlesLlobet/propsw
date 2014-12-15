@@ -34,9 +34,15 @@ public class GalaxiaControladorDriver {
 	//Es crea un capità a través de la galàxia del qual es faràn totes les operacions
 	//Es crea una instància de classe Galaxia
 	CapitaControlador capi=new CapitaControlador();
+	try {
+		capi.inicialitzar();
+	} catch (Exception e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	capi.login("admin", "admin");
 	
 	GalaxiaControlador gControl=new GalaxiaControlador(capi);
-	capi.login("a","b");
 	
 	InputStreamReader isr = new InputStreamReader(System.in);
 	BufferedReader br = new BufferedReader (isr);
@@ -51,20 +57,16 @@ public class GalaxiaControladorDriver {
 		switch(op)
 		{
 			case 1:
-					if(gControl.createGalaxia()!=null){
+					/*if(gControl.createGalaxia()!=null){
 						System.out.println("S'ha creat una nova galàxia satisfactòriament.");
 					}
 					else{
 						System.out.println("Hi ha hagut algun problema creant una nova galàxia.");
-					}
+					}*/
 					break;
 			case 2:
-					if(gControl.resetGalaxia()!=null){
-						System.out.println("S'ha resetejat la Galàxia satisfactòriament.");
-					}
-					else{
-						System.out.println("Hi ha hagut algun problema resetejant la galàxia.");
-					}
+					gControl.resetGalaxia();
+						
 					break;
 			case 3:
 					System.out.println("Introdueix el nou nom per a la base: ");

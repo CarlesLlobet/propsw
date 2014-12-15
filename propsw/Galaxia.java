@@ -221,5 +221,6 @@ public class Galaxia extends Graf<Base> implements Serializable{
 	 */
 	public ArrayList<String> getExodes(){
 		return new ArrayList<String>(exodes.keySet());
-	}			
+	}
+	
 }

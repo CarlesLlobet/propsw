@@ -131,4 +131,8 @@ public class Rebel implements Serializable{
 	public void setContador(){
 		contador=cont;
 	}
+	
+	public static void setCont(int i){
+		cont=i;
+	}
 }

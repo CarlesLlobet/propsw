@@ -161,4 +161,8 @@ public class ExodeControlador{
 	public String getUltimAlgoritmeExode(String idExode) throws IOException{
 		return capi.getGalaxia().getExode(idExode).getUltimAlgoritmeExecutat();
 	}
+	
+	public static void setCont(int i){
+		Exode.setCont(i);
+	}
 }

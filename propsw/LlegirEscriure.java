@@ -61,7 +61,7 @@ public class LlegirEscriure {
 			}
 		}
 		ois.close();
-		CapitaControlador.setCont(ContenidorCapitans.getHashContenidor().size()+1);
+		actualitzarContadors();
 	
 	}
 	
@@ -104,5 +104,36 @@ public class LlegirEscriure {
 		else{
 			throw new IOException("El programa no té base de dades per eliminar.");
 		}
+	}
+	
+	public void actualitzarContadors(){
+		
+		int contadorRebels=0;
+		int contadorExodes=0;
+		CapitaControlador.setCont(ContenidorCapitans.getHashContenidor().size()+1);
+
+		Iterator<Entry<String, Capita>> entries = contCap.entrySet().iterator();
+		Iterator<Entry<String, Rebel>> entries2;
+		while (entries.hasNext()) {
+			Entry<String, Capita> thisEntry = (Entry<String,Capita>) entries.next();
+			entries2=thisEntry.getValue().getRebels().entrySet().iterator();
+			while(entries2.hasNext()){
+				Entry<String, Rebel> thisEntry2 = (Entry<String,Rebel>) entries2.next();
+				contadorRebels++;
+			}
+		}
+		CapitaControlador.setContRebel(contadorRebels+1);
+		
+		Iterator<Entry<String, Capita>> entries3 = contCap.entrySet().iterator();
+		Iterator<Entry<String, Exode>> entries4;
+		while (entries3.hasNext()) {
+			Entry<String, Capita> thisEntry3 = (Entry<String,Capita>) entries3.next();
+			entries4=thisEntry3.getValue().getGalaxia().getExodesHash().entrySet().iterator();
+			while(entries4.hasNext()){
+				Entry<String, Exode> thisEntry4 = (Entry<String,Exode>) entries4.next();
+				contadorExodes++;
+			}
+		}
+		ExodeControlador.setCont(contadorExodes+1);
 	}
 }
