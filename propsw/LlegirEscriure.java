@@ -126,8 +126,7 @@ public class LlegirEscriure {
 				contadorRebels++;
 			}
 		}
-		CapitaControlador.setContRebel(contadorRebels+1);
-		
+		CapitaControlador.setContRebel(contadorRebels);
 		Iterator<Entry<String, Capita>> entries3 = contCap.entrySet().iterator();
 		Iterator<Entry<String, Exode>> entries4;
 		while (entries3.hasNext()) {
@@ -138,6 +137,6 @@ public class LlegirEscriure {
 				contadorExodes++;
 			}
 		}
-		ExodeControlador.setCont(contadorExodes+1);
+		ExodeControlador.setCont(contadorExodes);
 	}
 }

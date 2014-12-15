@@ -384,6 +384,6 @@ public class CapitaControlador {
 	 * @param i valor enter al qual es posarà el contador de ids.
 	 */
 	public static void setContRebel(int i){
-		Rebel.setCont(i+1);
+		Rebel.setCont(i);
 	}
 }
