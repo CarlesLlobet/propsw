@@ -106,7 +106,7 @@ public class ModificarExode extends JPanel {
 		Component horizontalGlue_4 = Box.createHorizontalGlue();
 		horizontalBox_2.add(horizontalGlue_4);
 		
-		JLabel lblInicioxodo = new JLabel("     Inicio \u00E9xodo:");
+		JLabel lblInicioxodo = new JLabel("Inicio \u00E9xodo:");
 		horizontalBox_2.add(lblInicioxodo);
 		
 		Component horizontalStrut_6 = Box.createHorizontalStrut(20);
@@ -134,7 +134,7 @@ public class ModificarExode extends JPanel {
 		Component horizontalGlue_6 = Box.createHorizontalGlue();
 		horizontalBox_3.add(horizontalGlue_6);
 		
-		JLabel lblEjecutar = new JLabel("            Ejecutar:");
+		JLabel lblEjecutar = new JLabel("Ejecutar:");
 		horizontalBox_3.add(lblEjecutar);
 		
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);

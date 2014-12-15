@@ -96,6 +96,10 @@ public class ConsultaRebel extends JPanel{
 	
 	public void refresh(String idReb){
 		comboBox.setSelectedIndex(0);
+		lblNewLabel.setText("Nom Rebel: " + Principal.getCc().getCapita().getRebels().get(idReb).getNom());
+		
+		
+		//chivatus
 		ArrayList<String> rebels = Principal.getCc().arrayListRebelsOrd();
 		System.out.println("REBELS EXISTENTS");
 		for (String r : rebels){

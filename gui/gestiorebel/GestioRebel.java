@@ -148,13 +148,29 @@ public class GestioRebel extends JPanelBg{
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
-				if (e.getStateChange() == ItemEvent.SELECTED){	
+				if (e.getStateChange() == ItemEvent.SELECTED){
+					//Aquí controlamos en que opción estamos cuando se escoge un rebelde
+					int val = accio.getSelectedIndex();
+					int val2 = pickrebel.getSelectedIndex();
+					switch(val){
+						case 0: //consulta rebelde
+							String idReb = pickrebel.getSelectedItem().toString();
+							if(val2 > 0){
+								cr.refresh(idReb);
+							}
+							else cr.reset();
+							break;
+						case 1://modifica rebel
+							String idReb2 = pickrebel.getSelectedItem().toString();
+							if(val2 > 0) cr.refresh(idReb2);
+							break;
+						default:
+							System.out.println("Otras cosas");
+							break;
+					}
 				}
 			}
 		});
-		
-		
-		
 		
 		//Comportamiento JComboBox
 		accio.addItemListener(new ItemListener() {
@@ -215,10 +231,10 @@ public class GestioRebel extends JPanelBg{
 							String nom = cn.getNom();
 							if (nom != ""){
 								Principal.getCc().crearRebel(nom);
-								JOptionPane.showMessageDialog(Principal.getWindow(), "Rebelde añadido.");
+								JOptionPane.showMessageDialog(Principal.getWindow(), "Rebelde añadido con nombre: " + nom);
 							}
 							else {
-								JOptionPane.showMessageDialog(Principal.getWindow(), "El nombre debe tener un nombre.");
+								JOptionPane.showMessageDialog(Principal.getWindow(), "El Rebelde debe tener un nombre.");
 							}
 							break;
 						case 3:	//esborra
@@ -272,6 +288,7 @@ public class GestioRebel extends JPanelBg{
 			pickrebel.addItem(r);
 			++i;
 		}
+		pickrebel.setSelectedItem(0);
 	}
 
 	public void config(){

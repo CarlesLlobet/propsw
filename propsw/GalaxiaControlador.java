@@ -7,6 +7,7 @@ package propsw;
 import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GalaxiaControlador{
 	
@@ -197,6 +198,20 @@ public class GalaxiaControlador{
 		return getGalaxia().getBaseArray();
 	}
 	
+	//retorna un arraylist de string de les bases, ordenats
+	public ArrayList<String> arrayBaseOrd() throws IOException{
+		ArrayList<Base> bases = getBaseArray();
+		ArrayList<String> toRet = new ArrayList<String>();
+		ArrayList<Integer> aux = new ArrayList<Integer>();
+		for(Base b : bases){
+			aux.add(b.getId());
+		}
+		Collections.sort(aux);
+		for (Integer i: aux){
+			toRet.add(String.valueOf(i));
+		}
+		return toRet;
+	}
 	
 	/**
 	 * Llista els exodes existents per la Gal�xia

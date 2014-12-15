@@ -2,6 +2,7 @@ package gui.gestiogalaxia;
 import gui.ImpExp;
 import gui.JPanelBg;
 import gui.Principal;
+import gui.graf.GrafStarWarsPanel;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -30,7 +32,7 @@ public class GalGest extends JPanelBg {
     private ImpExp eg = new ImpExp();
     private ImpExp ig = new ImpExp();
     private GalMod mg = new GalMod();
-    private GalDraw gd = new GalDraw();
+    private GrafStarWarsPanel gd = new GrafStarWarsPanel();
 	
 	public GalGest() {
 		
@@ -87,6 +89,23 @@ public class GalGest extends JPanelBg {
         panel.add(mg,"modify");
         panel.add(ig,"import");
         panel.add(eg,"export");
+        
+        
+        //dibuixem el graf
+        try {
+			gd.setGraf(Principal.getCc().getGalaxia().getCopiaGraf());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			gd.paintTheGraf();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+        
         card.show(panel, "draw");
                 
         Component horizontalStrut = Box.createHorizontalStrut(20);
@@ -138,19 +157,30 @@ public class GalGest extends JPanelBg {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                 	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
 	                int val = box.getSelectedIndex();
-	                validate();	
 	                switch(val){
 	                	case 0: 
 	                		//Ocultamos el botón, que no necesitamos
 	                		impExp.setVisible(false);
-	                		gd = new GalDraw();
+							try {
+								gd.setGraf(Principal.getCc().getGalaxia().getCopiaGraf());
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							try {
+								gd.paintTheGraf();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 	                        panel.add(gd,"draw");
 	                		card.show(panel,"draw");
 	                		break;
 	                	case 1:
 	                		//Ocultamos el botón, que no necesitamos
 	                		impExp.setVisible(false);
-	                		mg = new GalMod();	                		
+	                		mg.reset();
+	                		//mg.actuCombos();
 	                		card.show(panel,"modify");
 	                		break;
 	                	case 2:
@@ -173,6 +203,8 @@ public class GalGest extends JPanelBg {
 	                		System.out.println("DEFAULT");
 	                		break;
 	                }
+	                revalidate();	
+	                repaint();
                 }
             }
         });
@@ -188,8 +220,8 @@ public class GalGest extends JPanelBg {
         
         //FALTA PROGRAMAR LA LOGICA SEGUN EXP/IMPORTAR llamadas correspondientes. IMPEXP no tiene lógica ninguna. (matizar)
         
+
 	}
-	
 	
 	public void config(){
 		box.requestFocusInWindow();

@@ -31,10 +31,9 @@ public class GestioExode extends JPanelBg{
 		Box verticalBox = Box.createVerticalBox();
 		verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(verticalBox);
-
 		
-		Component verticalGlue = Box.createVerticalGlue();
-		verticalBox.add(verticalGlue);
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		verticalBox.add(verticalStrut_2);
 		
 		accio = new JComboBox<String>();
 		accio.setMaximumSize(new Dimension(150, 20));

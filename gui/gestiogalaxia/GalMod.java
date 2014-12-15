@@ -3,44 +3,36 @@ package gui.gestiogalaxia;
 import gui.Principal;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import javax.swing.Box;
-
-import java.awt.Component;
-
 import javax.swing.JTextField;
 
-import java.awt.Dimension;
-
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import javax.swing.border.LineBorder;
-import javax.swing.JToolBar;
-import javax.swing.JTabbedPane;
-import java.awt.SystemColor;
-import java.awt.Panel;
-import java.awt.Font;
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.CardLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import net.miginfocom.swing.MigLayout;
-import java.awt.ComponentOrientation;
-
 public class GalMod extends JPanel{
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField nomBase;
+	private JTextField cap;
+	private JTextField cost;
+	
+	private JComboBox<String> eliminaBase;
+	private JComboBox<String> creaBO;
+	private JComboBox<String> creaBD;
+	private JComboBox<String> eliminaBO;
+	private JComboBox<String> eliminaBD;
+	
+	
 	public GalMod() {
 		//PREPARAMOS LA VISTA
 		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -66,37 +58,6 @@ public class GalMod extends JPanel{
 		verticalBox_5.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(verticalBox_5);
 		
-		JLabel lblNomGalaxia = new JLabel("Nombre Galaxia\r\n");
-		verticalBox_5.add(lblNomGalaxia);
-		lblNomGalaxia.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
-		Box horizontalBox = Box.createHorizontalBox();
-		horizontalBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-		verticalBox_5.add(horizontalBox);
-		horizontalBox.setAlignmentY(Component.CENTER_ALIGNMENT);
-		horizontalBox.setBackground(Color.WHITE);
-		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		horizontalStrut_2.setMaximumSize(new Dimension(20, 30));
-		horizontalBox.add(horizontalStrut_2);
-		
-		textField = new JTextField();
-		textField.setMaximumSize(new Dimension(120, 20));
-		horizontalBox.add(textField);
-		textField.setAlignmentX(Component.LEFT_ALIGNMENT);
-		textField.setColumns(10);
-		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		horizontalStrut_3.setMaximumSize(new Dimension(20, 30));
-		horizontalBox.add(horizontalStrut_3);
-		
-		JButton btnGuardar = new JButton("Guardar");
-		horizontalBox.add(btnGuardar);
-		
-		Component verticalStrut_2 = Box.createVerticalStrut(20);
-		verticalStrut_2.setMaximumSize(new Dimension(30, 20));
-		verticalBox_5.add(verticalStrut_2);
-		
 		JLabel lblAfegirBase = new JLabel("A\u00F1adir Base - Nombre");
 		verticalBox_5.add(lblAfegirBase);
 		lblAfegirBase.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -111,11 +72,11 @@ public class GalMod extends JPanel{
 		horizontalStrut_7.setMaximumSize(new Dimension(20, 30));
 		horizontalBox_2.add(horizontalStrut_7);
 		
-		textField_1 = new JTextField();
-		textField_1.setMaximumSize(new Dimension(120, 20));
-		textField_1.setColumns(10);
-		textField_1.setAlignmentX(0.0f);
-		horizontalBox_2.add(textField_1);
+		nomBase = new JTextField();
+		nomBase.setMaximumSize(new Dimension(120, 20));
+		nomBase.setColumns(10);
+		nomBase.setAlignmentX(0.0f);
+		horizontalBox_2.add(nomBase);
 		
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		horizontalStrut_8.setMaximumSize(new Dimension(20, 30));
@@ -128,7 +89,7 @@ public class GalMod extends JPanel{
 		verticalStrut_1.setMaximumSize(new Dimension(30, 20));
 		verticalBox_5.add(verticalStrut_1);
 		
-		JLabel lblEliminarBase = new JLabel("Eliminar Base - Nombre");
+		JLabel lblEliminarBase = new JLabel("Eliminar Base");
 		lblEliminarBase.setFont(new Font("Tahoma", Font.BOLD, 14));
 		verticalBox_5.add(lblEliminarBase);
 		
@@ -148,10 +109,10 @@ public class GalMod extends JPanel{
 		horizontalStrut_17.setMaximumSize(new Dimension(20, 20));
 		horizontalBox_4.add(horizontalStrut_17);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setMaximumSize(new Dimension(80, 20));
-		comboBox_2.setAlignmentX(0.0f);
-		horizontalBox_4.add(comboBox_2);
+		eliminaBase = new JComboBox<String>();
+		eliminaBase.setMaximumSize(new Dimension(200, 20));
+		eliminaBase.setAlignmentX(0.0f);
+		horizontalBox_4.add(eliminaBase);
 		
 		Component verticalStrut_9 = Box.createVerticalStrut(20);
 		verticalStrut_9.setMaximumSize(new Dimension(30, 20));
@@ -177,10 +138,10 @@ public class GalMod extends JPanel{
 		horizontalBox_13.add(horizontalStrut_10);
 		horizontalStrut_10.setMaximumSize(new Dimension(20, 20));
 		
-		JComboBox comboBox = new JComboBox();
-		horizontalBox_13.add(comboBox);
-		comboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-		comboBox.setMaximumSize(new Dimension(80, 20));
+		creaBO = new JComboBox<String>();
+		horizontalBox_13.add(creaBO);
+		creaBO.setAlignmentX(Component.LEFT_ALIGNMENT);
+		creaBO.setMaximumSize(new Dimension(200, 20));
 		
 		Component verticalStrut_6 = Box.createVerticalStrut(20);
 		verticalStrut_6.setMaximumSize(new Dimension(30, 20));
@@ -202,10 +163,10 @@ public class GalMod extends JPanel{
 		horizontalBox_14.add(horizontalStrut_11);
 		horizontalStrut_11.setMaximumSize(new Dimension(20, 20));
 		
-		JComboBox comboBox_1 = new JComboBox();
-		horizontalBox_14.add(comboBox_1);
-		comboBox_1.setAlignmentX(Component.LEFT_ALIGNMENT);
-		comboBox_1.setMaximumSize(new Dimension(80, 20));
+		creaBD = new JComboBox<String>();
+		horizontalBox_14.add(creaBD);
+		creaBD.setAlignmentX(Component.LEFT_ALIGNMENT);
+		creaBD.setMaximumSize(new Dimension(200, 20));
 		
 		Component verticalStrut_5 = Box.createVerticalStrut(20);
 		verticalStrut_5.setMaximumSize(new Dimension(30, 20));
@@ -227,12 +188,12 @@ public class GalMod extends JPanel{
 		horizontalBox_15.add(horizontalStrut_12);
 		horizontalStrut_12.setMaximumSize(new Dimension(20, 20));
 		
-		textField_2 = new JTextField();
-		horizontalBox_15.add(textField_2);
-		textField_2.setMinimumSize(new Dimension(40, 20));
-		textField_2.setMaximumSize(new Dimension(40, 20));
-		textField_2.setAlignmentX(Component.LEFT_ALIGNMENT);
-		textField_2.setColumns(10);
+		cap = new JTextField();
+		horizontalBox_15.add(cap);
+		cap.setMinimumSize(new Dimension(40, 20));
+		cap.setMaximumSize(new Dimension(40, 20));
+		cap.setAlignmentX(Component.LEFT_ALIGNMENT);
+		cap.setColumns(10);
 		
 		Component verticalStrut_4 = Box.createVerticalStrut(20);
 		verticalStrut_4.setMaximumSize(new Dimension(30, 20));
@@ -264,12 +225,12 @@ public class GalMod extends JPanel{
 		horizontalBox_16.add(horizontalStrut_13);
 		horizontalStrut_13.setMaximumSize(new Dimension(20, 20));
 		
-		textField_3 = new JTextField();
-		horizontalBox_16.add(textField_3);
-		textField_3.setMinimumSize(new Dimension(40, 30));
-		textField_3.setMaximumSize(new Dimension(40, 20));
-		textField_3.setColumns(10);
-		textField_3.setAlignmentX(0.0f);
+		cost = new JTextField();
+		horizontalBox_16.add(cost);
+		cost.setMinimumSize(new Dimension(40, 30));
+		cost.setMaximumSize(new Dimension(40, 20));
+		cost.setColumns(10);
+		cost.setAlignmentX(0.0f);
 		
 		Component horizontalStrut_14 = Box.createHorizontalStrut(20);
 		horizontalBox_16.add(horizontalStrut_14);
@@ -283,8 +244,8 @@ public class GalMod extends JPanel{
 		horizontalBox_16.add(horizontalStrut_16);
 		horizontalStrut_16.setMaximumSize(new Dimension(20, 20));
 		
-		JButton button = new JButton("Crear adyacencia");
-		horizontalBox_16.add(button);
+		JButton crearAd = new JButton("Crear adyacencia");
+		horizontalBox_16.add(crearAd);
 
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalStrut.setMaximumSize(new Dimension(30, 20));
@@ -310,10 +271,10 @@ public class GalMod extends JPanel{
 		horizontalStrut_22.setMaximumSize(new Dimension(20, 20));
 		horizontalBox_1.add(horizontalStrut_22);
 		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setMaximumSize(new Dimension(80, 20));
-		comboBox_4.setAlignmentX(0.0f);
-		horizontalBox_1.add(comboBox_4);
+		eliminaBO = new JComboBox<String>();
+		eliminaBO.setMaximumSize(new Dimension(200, 20));
+		eliminaBO.setAlignmentX(0.0f);
+		horizontalBox_1.add(eliminaBO);
 		
 		Component verticalStrut_3 = Box.createVerticalStrut(20);
 		verticalStrut_3.setMaximumSize(new Dimension(30, 20));
@@ -335,23 +296,19 @@ public class GalMod extends JPanel{
 		horizontalStrut_25.setMaximumSize(new Dimension(20, 20));
 		horizontalBox_3.add(horizontalStrut_25);
 		
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setMinimumSize(new Dimension(100, 20));
-		comboBox_5.setMaximumSize(new Dimension(80, 20));
-		comboBox_5.setAlignmentX(0.0f);
-		horizontalBox_3.add(comboBox_5);
+		eliminaBD = new JComboBox<String>();
+		eliminaBD.setMinimumSize(new Dimension(100, 20));
+		eliminaBD.setMaximumSize(new Dimension(200, 20));
+		eliminaBD.setAlignmentX(0.0f);
+		horizontalBox_3.add(eliminaBD);
 		
 		Component horizontalStrut_26 = Box.createHorizontalStrut(20);
 		horizontalStrut_26.setMaximumSize(new Dimension(20, 20));
 		horizontalBox_3.add(horizontalStrut_26);
 		
-		JButton button_2 = new JButton("Eliminar adyacencia");
-		button_2.setPreferredSize(new Dimension(125, 20));
-		horizontalBox_3.add(button_2);
-		
-		Component verticalStrut_7 = Box.createVerticalStrut(20);
-		verticalStrut_7.setMaximumSize(new Dimension(30, 20));
-		verticalBox_5.add(verticalStrut_7);
+		JButton eliminarAd = new JButton("Eliminar adyacencia");
+		eliminarAd.setPreferredSize(new Dimension(125, 20));
+		horizontalBox_3.add(eliminarAd);
 		
 		Component MOLTIMPORTANT = Box.createHorizontalStrut(20);
 		MOLTIMPORTANT.setMaximumSize(new Dimension(20, 20));
@@ -363,13 +320,132 @@ public class GalMod extends JPanel{
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		add(horizontalGlue_1);
 		
+		actuCombos();
+        
+        btnAfegir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nom = nomBase.getText();
+				if (!nom.equals("")){
+					try {
+						Principal.getGc().addBase(nom);
+						actuCombos();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				nomBase.setText("");
+			}
+		});
+        
+        crearAd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String bo = creaBO.getSelectedItem().toString();
+				int val1 = creaBO.getSelectedIndex();
+				String bd = creaBD.getSelectedItem().toString();
+				int val2 = creaBD.getSelectedIndex();
+				String capa = cap.getText();
+				String coste = cost.getText();
+				if (val1 > 0 && val2 > 0 && !cap.equals("") && !cost.equals("")){
+					try {
+						Principal.getGc().createAdjacency(Integer.parseInt(bo), Integer.parseInt(bd), Integer.parseInt(capa), Integer.parseInt(coste));
+						actuCombos();
+						cap.setText("");
+						cost.setText("");
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 		
-		//LOGICA DE LA VISTA
-		
-		
-		
-			
-	
+        eliminarAd.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String bo = eliminaBO.getSelectedItem().toString();
+				int v1 = eliminaBO.getSelectedIndex();
+				String bd = eliminaBD.getSelectedItem().toString();
+				int v2 = eliminaBD.getSelectedIndex();
+				System.out.println("BO: " + bo + " BD: " + bd + "V1: " + v1 + " V2: " + v2);
+				if (v1 > 0 && v2 > 0) {
+					try {
+						//AIXO NO TIRA EXCEPCIO QUAN 
+						Principal.getGc().deleteAdjacencia(Integer.parseInt(bo), Integer.parseInt(bd));
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						System.out.println("No existe adyacencia");
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					actuCombos();
+				}
+			}
+		});
 	}
-
+	
+	
+	//Aquesta funcio actualitza els combobox cada vegada que hi hagi un canvi a la galaxia.
+	public void actuCombos(){
+		System.out.println("ACTUCOMBO");
+		//recalculem l'array de les bases que existeixen:
+		ArrayList<String> bases = new ArrayList<String>();
+		try {
+			bases = Principal.getGc().arrayBaseOrd();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("BASES DE LA GALAXIA");
+		for (String s: bases){
+			System.out.println("ID BASE : "+ s);
+		}
+		
+		
+		eliminaBase.removeAllItems();;
+		creaBO.removeAllItems();
+		creaBD.removeAllItems();
+		eliminaBO.removeAllItems();
+		eliminaBD.removeAllItems();
+		
+		eliminaBase.addItem("Escoge Base");
+		creaBO.addItem("Escoge Base");
+		creaBD.addItem("Escoge Base");
+		eliminaBO.addItem("Escoge Base");
+		eliminaBD.addItem("Escoge Base");
+		
+		for(String s : bases){
+			eliminaBase.addItem(s);
+			creaBO.addItem(s);
+			creaBD.addItem(s);
+			eliminaBO.addItem(s);
+			eliminaBD.addItem(s);
+		}
+		
+		eliminaBase.setSelectedIndex(0);
+		creaBO.setSelectedIndex(0);
+		creaBD.setSelectedIndex(0);
+		eliminaBO.setSelectedIndex(0);
+		eliminaBD.setSelectedIndex(0);
+		revalidate();
+	}	
+	
+	public void reset(){
+		eliminaBase.setSelectedIndex(0);
+		creaBO.setSelectedIndex(0);
+		creaBD.setSelectedIndex(0);
+		eliminaBO.setSelectedIndex(0);
+		eliminaBD.setSelectedIndex(0);
+		cap.setText("");
+		cost.setText("");
+		nomBase.setText("");
+	}
 }

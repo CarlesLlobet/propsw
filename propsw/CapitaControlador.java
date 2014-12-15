@@ -2,13 +2,11 @@ package propsw;
 
 //@author Toni Martï¿½nez
 
-import gui.Principal;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -214,7 +212,7 @@ public class CapitaControlador {
 		}
 	}
 	
-	
+	  
 	public void canviContra(String s){
 		getCapita().setPassword(s);
 	}
@@ -259,9 +257,57 @@ public class CapitaControlador {
 	
 	public ArrayList<String> arrayListRebelsOrd(){
 		ArrayList<String> rebels = new ArrayList<String>(getCapita().getRebels().keySet());
-		Collections.sort(rebels);
+		ArrayList<Integer> r = new ArrayList<Integer>();
+		for (String s : rebels){
+			r.add(Integer.parseInt(s));
+		}
+		Collections.sort(r);
+		rebels.clear();
+		for (Integer i : r){
+			rebels.add(String.valueOf(i));
+		}
 		return rebels;
 	}
+	
+	
+	//Aquesta funció retorna un array amb tots els ids dels exodes per la galaxia del capita ordenats
+	public ArrayList<String> arrayListExodesOrd(){
+		ArrayList<String> exodes = new ArrayList<String>(getCapita().getGalaxia().getExodes());
+		ArrayList<Integer> e = new ArrayList<Integer>();
+		for (String s : exodes){
+			e.add(Integer.parseInt(s));
+		}
+		Collections.sort(e);
+		exodes.clear();
+		for (Integer i : e){
+			exodes.add(String.valueOf(i));
+		}
+		return exodes;
+	}
+	
+	//Per al string idReb, cerca tots els exodes als quals el rebel participa i retorna un arraylist de idExode ordenat.
+	//AIXO FIJO QUE VA A EXODE - 
+	public ArrayList<String> arrayListExodesOrdReb(String idReb){
+		ArrayList<String> llistexodes= new ArrayList<String>(getCapita().getGalaxia().getExodes());		
+		ArrayList<String> exodes = new ArrayList<String>();
+		for(String s : llistexodes){
+			if (getCapita().getGalaxia().getExode(s).getRebels().contains(idReb)){
+				exodes.add(s);
+			}
+		}
+		//Ho ordenem:
+		ArrayList<Integer> aux = new ArrayList<Integer>();
+		for (String s2: exodes){
+			aux.add(Integer.parseInt(s2));
+		}
+		exodes.clear();
+		Collections.sort(aux);
+		for(Integer i : aux){
+			exodes.add(String.valueOf(i));
+		}
+		return exodes;
+	}
+	
 	
 	/**
 	 * Carrega el fitxer binari que conté el contenidor de capitans
