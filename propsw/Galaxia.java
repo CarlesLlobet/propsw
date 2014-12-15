@@ -223,4 +223,17 @@ public class Galaxia extends Graf<Base> implements Serializable{
 		return new ArrayList<String>(exodes.keySet());
 	}
 	
+	/**Override de removeAresta de Graf que si que controla l'excepció de que no existeixi l'aresta
+	 * @param int id_from: id Base inicio tramo. id_to: id Base fin tramo
+	 * @throws IOException si no existeix l'aresta.
+	 */
+	@Override
+	 public void removeAresta(int id_from, int id_to) throws IOException {
+		 
+		 getNode(id_from);
+		 getNode(id_to);
+		 getIDAresta(id_from, id_to);
+		 super.removeAresta(id_from, id_to);
+		 
+	    }
 }

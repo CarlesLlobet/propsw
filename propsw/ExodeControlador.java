@@ -162,6 +162,10 @@ public class ExodeControlador{
 		return capi.getGalaxia().getExode(idExode).getUltimAlgoritmeExecutat();
 	}
 	
+	/**
+	 * Actualitza el contador de ids de Exodes.
+	 * @param i valor enter al qual es posarà el contador de ids.
+	 */
 	public static void setCont(int i){
 		Exode.setCont(i);
 	}

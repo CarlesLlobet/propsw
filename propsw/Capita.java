@@ -131,14 +131,25 @@ public class Capita implements Serializable{
 		return this.gal;
 	}
 	
+	/**
+	 * Iguala el valor de la variable no estàtica contador al static cont
+	 */
 	public void setContador(){
 		contador=cont;
 	}
 	
+	/**
+	 * Retorna la id del Capità segons el contador no estàtic.
+	 * @return String id del Capità.
+	 */
 	public String getIdNoStatic(){
 		return this.contador.toString();
 	}
 	
+	/**
+	 * Actualitza el contador de ids de Capitans.
+	 * @param i valor enter al qual es posarà el contador de ids.
+	 */
 	public static void setCont(int i){
 		cont=i;
 	}

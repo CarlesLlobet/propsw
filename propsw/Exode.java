@@ -594,10 +594,17 @@ public class Exode implements Serializable{
 		return caminsFixats;
 	}
 	
+	/**
+	 * Iguala el valor de la variable no estàtica contador al static cont
+	 */
 	public void setContador(){
 		contador=cont;
 	}
 	
+	/**
+	 * Actualitza el contador de ids de Exodes.
+	 * @param i valor enter al qual es posarà el contador de ids.
+	 */
 	public static void setCont(int i){
 		cont=i;
 	}

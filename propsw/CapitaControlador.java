@@ -371,10 +371,18 @@ public class CapitaControlador {
 		logOut();
 	}
 	
+	/**
+	 * Actualitza el contador de ids de Capitans.
+	 * @param i valor enter al qual es posarà el contador de ids.
+	 */
 	public static void setCont(int i){
 		Capita.setCont(i);
 	}
 	
+	/**
+	 * Actualitza el contador de ids de Rebels.
+	 * @param i valor enter al qual es posarà el contador de ids.
+	 */
 	public static void setContRebel(int i){
 		Rebel.setCont(i+1);
 	}

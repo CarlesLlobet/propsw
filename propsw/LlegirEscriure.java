@@ -106,6 +106,10 @@ public class LlegirEscriure {
 		}
 	}
 	
+	/**
+	 * Actualitza els contadors dels ids de les classes Capità, Rebel i Exode als valors que li corresponen 
+	 * segons la mida de les llistes d'instàncies que s'han importat.
+	 */
 	public void actualitzarContadors(){
 		
 		int contadorRebels=0;
