@@ -7,7 +7,6 @@ import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -49,7 +48,7 @@ public class GalMod extends JPanel{
 		Component verticalGlue = Box.createVerticalGlue();
 		verticalBox.add(verticalGlue);
 		
-		Panel panel = new Panel();
+		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		verticalBox.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));

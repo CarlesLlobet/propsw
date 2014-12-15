@@ -1,26 +1,18 @@
 package gui.gestiorebel;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import javax.swing.Box;
-
-import java.awt.Panel;
-
-import javax.swing.JLabel;
-import javax.swing.JButton;
-
-import java.awt.Component;
-
-import javax.swing.JList;
-import javax.swing.JComboBox;
-
 import java.awt.Font;
-import java.awt.BorderLayout;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class ModificaRebel extends JPanel{
@@ -39,7 +31,7 @@ public class ModificaRebel extends JPanel{
 		verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(verticalBox);
 		
-		Panel panel = new Panel();
+		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0,0,0,0));
 		verticalBox.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));

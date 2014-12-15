@@ -22,8 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import propsw.Capita;
-
 public class GestioCapitans extends JPanelBg {
 	private JComboBox<String> box;
 	private JButton button;

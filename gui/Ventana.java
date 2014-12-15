@@ -1,9 +1,8 @@
 package gui;
 
 import java.awt.Dimension;
+
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 
 public class Ventana extends JFrame {
 

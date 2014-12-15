@@ -1,11 +1,8 @@
 package gui.gestiogalaxia;
 
-import gui.Principal;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import java.awt.Color;
+
+import javax.swing.JPanel;
 
 public class GalDraw extends JPanel{
 	public GalDraw() {

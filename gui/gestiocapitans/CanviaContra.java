@@ -1,19 +1,15 @@
 package gui.gestiocapitans;
 
-import gui.Principal;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import java.awt.Color;
-import javax.swing.Box;
-import javax.swing.JTextField;
-import java.awt.Component;
-import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import javax.swing.JPasswordField;
-import java.awt.Font;
 
 public class CanviaContra extends JPanel {
 	private JPasswordField newpass1;

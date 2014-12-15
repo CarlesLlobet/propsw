@@ -1,14 +1,14 @@
 package gui.gestioexode;
 
-import javax.swing.JPanel;
-import javax.swing.Box;
-import java.awt.Panel;
 import java.awt.Component;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
 import java.awt.Dimension;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class ModificarExode extends JPanel {
 
@@ -21,7 +21,7 @@ public class ModificarExode extends JPanel {
 		Box verticalBox = Box.createVerticalBox();
 		add(verticalBox);
 		
-		Panel panel = new Panel();
+		JPanel panel = new JPanel();
 		verticalBox.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		

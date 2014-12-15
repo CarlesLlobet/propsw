@@ -179,7 +179,7 @@ public class GalGest extends JPanelBg {
 	                	case 1:
 	                		//Ocultamos el botón, que no necesitamos
 	                		impExp.setVisible(false);
-	                		mg.reset();
+	                		//mg.reset();
 	                		//mg.actuCombos();
 	                		card.show(panel,"modify");
 	                		break;

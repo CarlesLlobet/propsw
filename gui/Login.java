@@ -21,8 +21,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
-import propsw.Capita;
-
 public class Login extends JPanelBg{
 
 	private JButton button;
