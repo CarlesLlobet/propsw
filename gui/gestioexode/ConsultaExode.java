@@ -1,6 +1,6 @@
 package gui.gestioexode;
 
-import gui.JPanelBg;
+
 import gui.Principal;
 import gui.graf.GrafStarWarsPanel;
 
@@ -10,34 +10,44 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import propsw.Rebel;
+
 
 
 public class ConsultaExode extends JPanel{
 	
 	private String idExode;
 	private JComboBox<String> rebelsCombo;
+	private JTextField textoFlow;
+	private JTextField textoCoste;
+	private GrafStarWarsPanel graphComponent;
+	private JList<String> listaBasesCamino;
+	private DefaultListModel<String> listModel;
 	
-	public void actualitza(String idExode){
+	public void actualitza(String idExode) throws IOException{
 		this.idExode = idExode;
 		rebelsCombo.removeAllItems();
 		rebelsCombo.addItem("Escoge rebelde");
 		ArrayList<Integer> rebels = new ArrayList<Integer>(Principal.getEc().getRebelsExode(idExode).values());
-		int i = 1;
 		for(Integer r : rebels){
 			System.out.println("Rebelde " + r);
-			rebelsCombo.addItem(r);
-			++i;
+			rebelsCombo.addItem(r+"");
 		}
+		textoFlow.setText("Flow: "+Principal.getEc().getFlowExode(idExode));
+		textoCoste.setText("Coste: "+Principal.getEc().getCostExode(idExode));
+		graphComponent.setGraf(Principal.getEc().getGrafResidual(idExode));
+		graphComponent.paintTheGraf();
+		
 	}
 	
 	
@@ -57,7 +67,7 @@ public class ConsultaExode extends JPanel{
 		Component verticalStrut_2 = Box.createVerticalStrut(20);
 		verticalBox.add(verticalStrut_2);
 		
-		GrafStarWarsPanel graphComponent = new GrafStarWarsPanel();
+		graphComponent = new GrafStarWarsPanel();
 		graphComponent.setMaximumSize(new Dimension(600, 350));
 		graphComponent.setMinimumSize(new Dimension(400, 250));
 		verticalBox.add(graphComponent);
@@ -70,11 +80,11 @@ public class ConsultaExode extends JPanel{
 		horizontalBox0.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox.add(horizontalBox0);
 		
-		JTextField textoFlow = new JTextField("Flow: ");
+		textoFlow = new JTextField("Flow: ");
 		textoFlow.setMinimumSize(new Dimension(50,15));
 		horizontalBox0.add(textoFlow);
 		
-		JTextField textoCoste= new JTextField("Coste: ");
+		textoCoste= new JTextField("Coste: ");
 		textoCoste.setMinimumSize(new Dimension(50,15));
 		horizontalBox0.add(textoCoste);
 		
@@ -96,19 +106,23 @@ public class ConsultaExode extends JPanel{
 		JLabel labelCamiList = new JLabel("Detalle camino");
 		horizontalBox2.add(labelCamiList);
 		
-		JList<String> listaBasesCamino = new JList<String>();
+		listaBasesCamino = new JList<String>();
+		listModel = new DefaultListModel<String>();
+		listaBasesCamino.setModel(listModel);
 		listaBasesCamino.setMinimumSize(new Dimension(50,100));
 		horizontalBox2.add(listaBasesCamino);
 		
 		
 		rebelsCombo.addItemListener(new ItemListener() {
-			
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
 				String idRebel = arg0.getItem().toString();
 				System.out.println("idRebel :"+idRebel);
-				
-				
+				ArrayList<Integer> basesCami = Principal.getEc().getCaminsExode(idExode).get(idRebel);
+				listaBasesCamino.removeAll();
+				for (Integer integer : basesCami) {
+					listModel.addElement(integer+"");
+				}
 			}
 		});
 		

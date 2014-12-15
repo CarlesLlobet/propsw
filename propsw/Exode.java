@@ -609,4 +609,20 @@ public class Exode implements Serializable{
 		cont=i;
 	}
 	
+	//Retorna el graf residual sense arestes retro
+	public Graf<Base> getGrafResidualNet() throws IOException{
+		Graf<Base> toReturn = getGalaxia().getCopiaGraf(grafResidualPreProces);
+		
+		int idAresta;
+		int numNodes = toReturn.getNSize();
+		for (int i = 0; i < numNodes; i++) {
+			ArrayList<Integer> outs = toReturn.getOutNodes(i);
+			for (Integer integer : outs) {
+				idAresta = toReturn.getIDAresta(i, integer);
+				if(toReturn.getFlujoAresta(idAresta)<0)toReturn.removeAresta(i, integer);
+			}
+		}
+		
+		return toReturn;
+	}
 }

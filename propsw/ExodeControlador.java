@@ -169,4 +169,9 @@ public class ExodeControlador{
 	public static void setCont(int i){
 		Exode.setCont(i);
 	}
+	
+	
+	public Graf<Base> getGrafResidual(String idExode) throws IOException{
+		return capi.getGalaxia().getExode(idExode).getGrafResidualNet();
+	}
 }

@@ -134,7 +134,8 @@ public class ExodeDriver {
 				case 3: //FALTA FER
 					System.out.println("Execució FordFulkerson amb DFS: ");
 					e.execucioDFS();
-					System.out.println("La matriu flux/capacitat del graf residual despres de l'execució es :\n"+e.getFf().printMatrix(e.getGrafResidual()));
+					System.out.println("La matriu flux/capacitat del graf residual despres de l'execució es :\n"+e.getFf().printMatrix(e.getGrafResidualNet()));
+					System.out.println("Graf Brut! es :\n"+e.getFf().printMatrix(e.getGrafResidual()));
 					System.out.println("El numero de rebels que arriben al seu destí són: "+e.getFlow());
 					System.out.println("Els camins assignats als rebels son:\n "+e.getCamins());
 					System.out.println("Les arestes que fa coll d'ampolla són: ");
