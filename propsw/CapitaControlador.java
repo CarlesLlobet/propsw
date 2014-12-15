@@ -335,6 +335,10 @@ public class CapitaControlador {
 		LlegirEscriure lle=new LlegirEscriure();
 		lle.eliminarFitxer();
 		ContenidorCapitans.getHashContenidor().clear();
+		
+		setContRebel(0);
+		ExodeControlador.setCont(0);
+		setCont(0);
 	}
 	
 
