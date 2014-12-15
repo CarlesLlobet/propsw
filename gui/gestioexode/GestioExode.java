@@ -62,6 +62,7 @@ public class GestioExode extends JPanelBg{
 		panel.add(conse,"consex");
 		card.show(panel,"creamod");
 		
+		
 		Component horizontalGlue = Box.createHorizontalGlue();
 		horizontalBox.add(horizontalGlue);
 		//preparem el contingut del primer combobox
@@ -178,7 +179,8 @@ public class GestioExode extends JPanelBg{
 		eliminar = new JButton("Eliminar");
 		eliminar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox.add(eliminar);
-		
+		eliminar.setVisible(false);
+
 		
 		eliminar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
