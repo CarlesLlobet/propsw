@@ -1,6 +1,12 @@
 Capita:tato,tato
 Nombre rebels:5
+Nom rebel:0,aa
+Nom rebel:2,cc
+Nom rebel:4,ee
 Nombre bases:4
+Nom base:0,aa
+Nom base:1,bb
+Nom base:3,dd
 Conexio:0,1,2,1.1
 Conexio:0,2,2,1.1
 Conexio:0,3,2,1.1

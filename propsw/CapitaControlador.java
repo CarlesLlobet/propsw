@@ -28,7 +28,7 @@ public class CapitaControlador {
 	//Ha de chekejar si el username i el password pertanyen a un capitï¿½. Aquesta
 	//informaciï¿½ estarï¿½ en un fitxer. Per fer aquesta implementaciï¿½ es necessita
 	//tenir accï¿½s a la capa de dades que no estï¿½ implementada en aquesta versiï¿½.
-	//Ultima versió: El metode busca de tots els capitans que hi ha en el contenidor capitans
+	//Ultima versiï¿½: El metode busca de tots els capitans que hi ha en el contenidor capitans
 	//busca un d'ells que coincideixi nom i password.
 	//Si existeix aleshores retorna el objecte capita, sino retorna un null.
 	public Capita login(String nom, String password) {
@@ -211,6 +211,19 @@ public class CapitaControlador {
 		}
 	}
 	
+	public boolean modificaRebel(String idCapita, String nom, String idRebel){
+		Rebel r = getCapita(idCapita).getRebels().get(idRebel); 
+		if(r!=null){
+			r.setNom(nom);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public String getNomRebel(String idCapita, String idRebel) throws IOException{
+		return contCap.getCapita(idCapita).getRebels().get(idRebel).getNom();
+	}
 	  
 	public void canviContra(String s){
 		getCapita().setPassword(s);
@@ -268,7 +281,7 @@ public class CapitaControlador {
 		return rebels;
 	}
 	
-	//Aquesta funció, donat un array de strings de ids , el passa a int per a ordenarlo i torna a transformarlo a int
+	//Aquesta funciï¿½, donat un array de strings de ids , el passa a int per a ordenarlo i torna a transformarlo a int
 	private ArrayList<String> ordenarArrayString(ArrayList<String> a){
 		ArrayList<Integer> aux = new ArrayList<Integer>();
 		for (String s : a){
@@ -288,7 +301,7 @@ public class CapitaControlador {
 	}
 	
 	
-	//Aquesta funció retorna un array amb tots els ids dels exodes per la galaxia del capita ordenats
+	//Aquesta funciï¿½ retorna un array amb tots els ids dels exodes per la galaxia del capita ordenats
 	public ArrayList<String> arrayListExodesOrd(){
 		return ordenarArrayString(new ArrayList<String>(getCapita().getGalaxia().getExodes()));
 	}
@@ -309,7 +322,7 @@ public class CapitaControlador {
 	
 	
 	/**
-	 * Carrega el fitxer binari que conté el contenidor de capitans
+	 * Carrega el fitxer binari que contï¿½ el contenidor de capitans
 	 * @throws Exception
 	 */
 	public void importarContenidorCapitans() throws Exception{
@@ -318,7 +331,7 @@ public class CapitaControlador {
 	}
 	
 	/**
-	 * Exporta el fitxer binari que conté el contenidor de capitans
+	 * Exporta el fitxer binari que contï¿½ el contenidor de capitans
 	 * @throws Exception
 	 */
 	public void exportarContenidorCapitans() throws Exception{
@@ -327,14 +340,18 @@ public class CapitaControlador {
 	}
 	
 	/**
-	 * Esborra el fitxer binari que conté el contenidor de capitans, esborra
-	 * el hashmap contenidor i fa un logout del capità actual
+	 * Esborra el fitxer binari que contï¿½ el contenidor de capitans, esborra
+	 * el hashmap contenidor i fa un logout del capitï¿½ actual
 	 * @throws IOException
 	 */
 	public void resetSistema() throws IOException{
 		LlegirEscriure lle=new LlegirEscriure();
 		lle.eliminarFitxer();
 		ContenidorCapitans.getHashContenidor().clear();
+		
+		setContRebel(0);
+		ExodeControlador.setCont(0);
+		setCont(0);
 	}
 	
 
@@ -373,7 +390,7 @@ public class CapitaControlador {
 	
 	/**
 	 * Actualitza el contador de ids de Capitans.
-	 * @param i valor enter al qual es posarà el contador de ids.
+	 * @param i valor enter al qual es posarï¿½ el contador de ids.
 	 */
 	public static void setCont(int i){
 		Capita.setCont(i);
@@ -381,9 +398,9 @@ public class CapitaControlador {
 	
 	/**
 	 * Actualitza el contador de ids de Rebels.
-	 * @param i valor enter al qual es posarà el contador de ids.
+	 * @param i valor enter al qual es posarï¿½ el contador de ids.
 	 */
 	public static void setContRebel(int i){
-		Rebel.setCont(i+1);
+		Rebel.setCont(i);
 	}
 }

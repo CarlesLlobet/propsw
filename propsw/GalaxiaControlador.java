@@ -89,6 +89,12 @@ public class GalaxiaControlador{
 			getGalaxia().getBase(idBase).setNom(nom);
 		
 	}
+	
+	public void setBase(String idCapita, int idBase, String nom) throws IOException{
+		
+		capiControl.getGalaxia(idCapita).getBase(idBase).setNom(nom);
+	
+}
 
 	/**
 	 * Llistat de totes les bases de la Gal�xia
@@ -101,6 +107,10 @@ public class GalaxiaControlador{
 		ArrayList <Base> bases=getGalaxia().getBaseArray();
 		str=bases.toString();
 		return str;
+	}
+	
+	public String getNomBase(String idCapita, int idBase) throws IOException{
+		return capiControl.getGalaxia(idCapita).getBase(idBase).getNom();
 	}
 
 	/**
