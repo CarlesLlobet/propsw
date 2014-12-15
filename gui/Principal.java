@@ -37,13 +37,13 @@ public class Principal {
 	}
 
 	public static void main(String[] args) throws Exception {
-		init();
 		try {
 			cc.inicialitzar();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		init();
 	}
 	
 	/* Funciones "load..."

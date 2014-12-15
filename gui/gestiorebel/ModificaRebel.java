@@ -68,7 +68,7 @@ public class ModificaRebel extends JPanel{
 		horizontalBox.add(horizontalStrut_1);
 		
 		textField = new JTextField();
-		textField.setMaximumSize(new Dimension(2147483647, 20));
+		textField.setMaximumSize(new Dimension(120, 20));
 		horizontalBox.add(textField);
 		textField.setColumns(10);
 		

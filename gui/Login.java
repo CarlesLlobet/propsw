@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -63,19 +64,10 @@ public class Login extends JPanelBg{
 		box.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		horizontalBox.add(box);
 		box.setMaximumSize(new Dimension(200, 40));
-		
+		actuCombo();
 		horizontalGlue = Box.createHorizontalGlue();
 		horizontalBox.add(horizontalGlue);
 
-		
-		//TODO ESTA PARTE ESTARA EN LA LOGICA DE LA VISTA, SE TIENEN QUE REALIZAR LLAMADAS A LOS CONTROLADORES
-		//Preparamos el contenido del JComboBox
-		box.addItem("Capitán");
-		//Esto será de ejemplo y consistira en una lista de capitanes que se obtiene del contentedor de capitanes
-		box.addItem("Rebelde del Capitan 1");
-		box.addItem("Rebelde del Capitan 2");
-		box.addItem("Rebelde del Capitan 3");
-		
 		Component verticalStrut = Box.createVerticalStrut(20);
 		add(verticalStrut);
 		
@@ -143,6 +135,7 @@ public class Login extends JPanelBg{
 	                else {
 	                	lblContrasea.setVisible(false);
 	                	pass.setVisible(false);
+	                	rebelCapId(box.getSelectedItem().toString());
 	                }
                 }
             }
@@ -176,5 +169,30 @@ public class Login extends JPanelBg{
 		
 		//Centramos el texto del JComboBox
 		((JLabel)box.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+	}
+	
+	public void actuCombo(){
+		ArrayList<String> caps = Principal.getCc().arrayListCapOrd();
+		box.removeAllItems();
+		box.addItem("Capitán");
+		for (String s : caps){
+			System.out.println("CAPITAN: " + s);
+			box.addItem("Rebelde del capitán: " + s);
+		}
+	}
+	
+	//Donat un string del combo box, retorna la id del capita del rebel.
+	private String rebelCapId(String s){
+		boolean dospunts = false;
+		int i = 0;
+		while (!dospunts && i < s.length()){
+			char c = s.charAt(i);
+			if (String.valueOf(c).equals(":")){
+				dospunts = true;
+			}
+			++i;
+		}			
+		String id = s.substring(i, s.length());
+		return s;
 	}
 }

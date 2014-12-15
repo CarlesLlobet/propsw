@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -269,20 +268,29 @@ public class CapitaControlador {
 		return rebels;
 	}
 	
+	//Aquesta funció, donat un array de strings de ids , el passa a int per a ordenarlo i torna a transformarlo a int
+	private ArrayList<String> ordenarArrayString(ArrayList<String> a){
+		ArrayList<Integer> aux = new ArrayList<Integer>();
+		for (String s : a){
+			aux.add(Integer.parseInt(s));
+		}
+		Collections.sort(aux);
+		a.clear();
+		for (Integer i : aux){
+			a.add(String.valueOf(i));
+		}
+		return a;
+	}
+	
+	//Aquesta funcion retorna un arraylist amb els ids de tots els capitans que hi ha al sistema ordenats
+	public ArrayList<String> arrayListCapOrd(){
+		return ordenarArrayString(new ArrayList<String>(contCap.getHashContenidor().keySet()));
+	}
+	
 	
 	//Aquesta funció retorna un array amb tots els ids dels exodes per la galaxia del capita ordenats
 	public ArrayList<String> arrayListExodesOrd(){
-		ArrayList<String> exodes = new ArrayList<String>(getCapita().getGalaxia().getExodes());
-		ArrayList<Integer> e = new ArrayList<Integer>();
-		for (String s : exodes){
-			e.add(Integer.parseInt(s));
-		}
-		Collections.sort(e);
-		exodes.clear();
-		for (Integer i : e){
-			exodes.add(String.valueOf(i));
-		}
-		return exodes;
+		return ordenarArrayString(new ArrayList<String>(getCapita().getGalaxia().getExodes()));
 	}
 	
 	//Per al string idReb, cerca tots els exodes als quals el rebel participa i retorna un arraylist de idExode ordenat.
@@ -296,16 +304,7 @@ public class CapitaControlador {
 			}
 		}
 		//Ho ordenem:
-		ArrayList<Integer> aux = new ArrayList<Integer>();
-		for (String s2: exodes){
-			aux.add(Integer.parseInt(s2));
-		}
-		exodes.clear();
-		Collections.sort(aux);
-		for(Integer i : aux){
-			exodes.add(String.valueOf(i));
-		}
-		return exodes;
+		return ordenarArrayString(exodes);
 	}
 	
 	

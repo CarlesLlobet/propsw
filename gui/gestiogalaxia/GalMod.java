@@ -42,7 +42,6 @@ public class GalMod extends JPanel{
 		add(horizontalGlue);
 		
 		Box verticalBox = Box.createVerticalBox();
-		verticalBox.setMaximumSize(new Dimension(550, 550));
 		add(verticalBox);
 		
 		Component verticalGlue = Box.createVerticalGlue();
@@ -53,9 +52,15 @@ public class GalMod extends JPanel{
 		verticalBox.add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
+		Box horizontalBox = Box.createHorizontalBox();
+		panel.add(horizontalBox);
+		
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		horizontalBox.add(horizontalStrut_2);
+		
 		Box verticalBox_5 = Box.createVerticalBox();
+		horizontalBox.add(verticalBox_5);
 		verticalBox_5.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(verticalBox_5);
 		
 		JLabel lblAfegirBase = new JLabel("A\u00F1adir Base - Nombre");
 		verticalBox_5.add(lblAfegirBase);
@@ -84,6 +89,23 @@ public class GalMod extends JPanel{
 		JButton btnAfegir = new JButton("Afegir");
 		horizontalBox_2.add(btnAfegir);
 		
+		btnAfegir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nom = nomBase.getText();
+				if (!nom.equals("")){
+					try {
+						Principal.getGc().addBase(nom);
+						actuCombos();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				nomBase.setText("");
+			}
+		});
+		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		verticalStrut_1.setMaximumSize(new Dimension(30, 20));
 		verticalBox_5.add(verticalStrut_1);
@@ -109,9 +131,28 @@ public class GalMod extends JPanel{
 		horizontalBox_4.add(horizontalStrut_17);
 		
 		eliminaBase = new JComboBox<String>();
-		eliminaBase.setMaximumSize(new Dimension(200, 20));
+		eliminaBase.setMaximumSize(new Dimension(80, 20));
 		eliminaBase.setAlignmentX(0.0f);
 		horizontalBox_4.add(eliminaBase);
+		
+		Component horizontalStrut_27 = Box.createHorizontalStrut(20);
+		horizontalStrut_27.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_4.add(horizontalStrut_27);
+		
+		JButton borrar = new JButton("Eliminar");
+		horizontalBox_4.add(borrar);
+		
+		Component horizontalStrut_18 = Box.createHorizontalStrut(20);
+		horizontalStrut_18.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_4.add(horizontalStrut_18);
+		
+		Component horizontalStrut_28 = Box.createHorizontalStrut(20);
+		horizontalStrut_28.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_4.add(horizontalStrut_28);
+		borrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		
 		Component verticalStrut_9 = Box.createVerticalStrut(20);
 		verticalStrut_9.setMaximumSize(new Dimension(30, 20));
@@ -140,7 +181,15 @@ public class GalMod extends JPanel{
 		creaBO = new JComboBox<String>();
 		horizontalBox_13.add(creaBO);
 		creaBO.setAlignmentX(Component.LEFT_ALIGNMENT);
-		creaBO.setMaximumSize(new Dimension(200, 20));
+		creaBO.setMaximumSize(new Dimension(80, 20));
+		
+		Component horizontalStrut_23 = Box.createHorizontalStrut(20);
+		horizontalStrut_23.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_13.add(horizontalStrut_23);
+		
+		Component horizontalStrut_29 = Box.createHorizontalStrut(20);
+		horizontalStrut_29.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_13.add(horizontalStrut_29);
 		
 		Component verticalStrut_6 = Box.createVerticalStrut(20);
 		verticalStrut_6.setMaximumSize(new Dimension(30, 20));
@@ -165,7 +214,15 @@ public class GalMod extends JPanel{
 		creaBD = new JComboBox<String>();
 		horizontalBox_14.add(creaBD);
 		creaBD.setAlignmentX(Component.LEFT_ALIGNMENT);
-		creaBD.setMaximumSize(new Dimension(200, 20));
+		creaBD.setMaximumSize(new Dimension(80, 20));
+		
+		Component horizontalStrut_20 = Box.createHorizontalStrut(20);
+		horizontalStrut_20.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_14.add(horizontalStrut_20);
+		
+		Component horizontalStrut_30 = Box.createHorizontalStrut(20);
+		horizontalStrut_30.setMaximumSize(new Dimension(20, 20));
+		horizontalBox_14.add(horizontalStrut_30);
 		
 		Component verticalStrut_5 = Box.createVerticalStrut(20);
 		verticalStrut_5.setMaximumSize(new Dimension(30, 20));
@@ -204,10 +261,6 @@ public class GalMod extends JPanel{
 		horizontalBox_12.setAlignmentY(Component.CENTER_ALIGNMENT);
 		verticalBox_5.add(horizontalBox_12);
 		
-		Component horizontalStrut_4 = Box.createHorizontalStrut(20);
-		horizontalStrut_4.setMaximumSize(new Dimension(20, 20));
-		horizontalBox_12.add(horizontalStrut_4);
-		
 		Box horizontalBox_16 = Box.createHorizontalBox();
 		verticalBox_5.add(horizontalBox_16);
 		horizontalBox_16.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -243,102 +296,14 @@ public class GalMod extends JPanel{
 		horizontalBox_16.add(horizontalStrut_16);
 		horizontalStrut_16.setMaximumSize(new Dimension(20, 20));
 		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		verticalStrut_2.setMaximumSize(new Dimension(30, 20));
+		verticalBox_5.add(verticalStrut_2);
+		
 		JButton crearAd = new JButton("Crear adyacencia");
-		horizontalBox_16.add(crearAd);
-
-		Component verticalStrut = Box.createVerticalStrut(20);
-		verticalStrut.setMaximumSize(new Dimension(30, 20));
-		verticalBox_5.add(verticalStrut);
+		verticalBox_5.add(crearAd);
 		
-		JLabel lblEliminarAdyacencia = new JLabel("Eliminar adyacencia");
-		verticalBox_5.add(lblEliminarAdyacencia);
-		lblEliminarAdyacencia.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
-		Box horizontalBox_1 = Box.createHorizontalBox();
-		horizontalBox_1.setAlignmentY(0.5f);
-		horizontalBox_1.setAlignmentX(0.0f);
-		verticalBox_5.add(horizontalBox_1);
-		
-		Component horizontalStrut_21 = Box.createHorizontalStrut(20);
-		horizontalStrut_21.setMaximumSize(new Dimension(20, 20));
-		horizontalBox_1.add(horizontalStrut_21);
-		
-		JLabel label = new JLabel("Base Origen");
-		horizontalBox_1.add(label);
-		
-		Component horizontalStrut_22 = Box.createHorizontalStrut(20);
-		horizontalStrut_22.setMaximumSize(new Dimension(20, 20));
-		horizontalBox_1.add(horizontalStrut_22);
-		
-		eliminaBO = new JComboBox<String>();
-		eliminaBO.setMaximumSize(new Dimension(200, 20));
-		eliminaBO.setAlignmentX(0.0f);
-		horizontalBox_1.add(eliminaBO);
-		
-		Component verticalStrut_3 = Box.createVerticalStrut(20);
-		verticalStrut_3.setMaximumSize(new Dimension(30, 20));
-		verticalBox_5.add(verticalStrut_3);
-		
-		Box horizontalBox_3 = Box.createHorizontalBox();
-		horizontalBox_3.setAlignmentY(0.5f);
-		horizontalBox_3.setAlignmentX(0.0f);
-		verticalBox_5.add(horizontalBox_3);
-		
-		Component horizontalStrut_24 = Box.createHorizontalStrut(20);
-		horizontalStrut_24.setMaximumSize(new Dimension(20, 20));
-		horizontalBox_3.add(horizontalStrut_24);
-		
-		JLabel label_1 = new JLabel("Base Destino");
-		horizontalBox_3.add(label_1);
-		
-		Component horizontalStrut_25 = Box.createHorizontalStrut(20);
-		horizontalStrut_25.setMaximumSize(new Dimension(20, 20));
-		horizontalBox_3.add(horizontalStrut_25);
-		
-		eliminaBD = new JComboBox<String>();
-		eliminaBD.setMinimumSize(new Dimension(100, 20));
-		eliminaBD.setMaximumSize(new Dimension(200, 20));
-		eliminaBD.setAlignmentX(0.0f);
-		horizontalBox_3.add(eliminaBD);
-		
-		Component horizontalStrut_26 = Box.createHorizontalStrut(20);
-		horizontalStrut_26.setMaximumSize(new Dimension(20, 20));
-		horizontalBox_3.add(horizontalStrut_26);
-		
-		JButton eliminarAd = new JButton("Eliminar adyacencia");
-		eliminarAd.setPreferredSize(new Dimension(125, 20));
-		horizontalBox_3.add(eliminarAd);
-		
-		Component MOLTIMPORTANT = Box.createHorizontalStrut(20);
-		MOLTIMPORTANT.setMaximumSize(new Dimension(20, 20));
-		verticalBox_5.add(MOLTIMPORTANT);
-		
-		Component verticalGlue_1 = Box.createVerticalGlue();
-		verticalBox.add(verticalGlue_1);
-		
-		Component horizontalGlue_1 = Box.createHorizontalGlue();
-		add(horizontalGlue_1);
-		
-		actuCombos();
-        
-        btnAfegir.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String nom = nomBase.getText();
-				if (!nom.equals("")){
-					try {
-						Principal.getGc().addBase(nom);
-						actuCombos();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-				nomBase.setText("");
-			}
-		});
-        
-        crearAd.addActionListener(new ActionListener() {
+		crearAd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String bo = creaBO.getSelectedItem().toString();
@@ -364,30 +329,123 @@ public class GalMod extends JPanel{
 			}
 		});
 		
+				Component verticalStrut = Box.createVerticalStrut(20);
+				verticalStrut.setMaximumSize(new Dimension(30, 20));
+				verticalBox_5.add(verticalStrut);
+				
+				JLabel lblEliminarAdyacencia = new JLabel("Eliminar adyacencia");
+				verticalBox_5.add(lblEliminarAdyacencia);
+				lblEliminarAdyacencia.setFont(new Font("Tahoma", Font.BOLD, 14));
+				
+				Box horizontalBox_1 = Box.createHorizontalBox();
+				horizontalBox_1.setAlignmentY(0.5f);
+				horizontalBox_1.setAlignmentX(0.0f);
+				verticalBox_5.add(horizontalBox_1);
+				
+				Component horizontalStrut_21 = Box.createHorizontalStrut(20);
+				horizontalStrut_21.setMaximumSize(new Dimension(20, 20));
+				horizontalBox_1.add(horizontalStrut_21);
+				
+				JLabel label = new JLabel("Base Origen");
+				horizontalBox_1.add(label);
+				
+				Component horizontalStrut_22 = Box.createHorizontalStrut(20);
+				horizontalStrut_22.setMaximumSize(new Dimension(20, 20));
+				horizontalBox_1.add(horizontalStrut_22);
+				
+				eliminaBO = new JComboBox<String>();
+				eliminaBO.setMaximumSize(new Dimension(80, 20));
+				eliminaBO.setAlignmentX(0.0f);
+				horizontalBox_1.add(eliminaBO);
+				
+				Component horizontalStrut_19 = Box.createHorizontalStrut(20);
+				horizontalStrut_19.setMaximumSize(new Dimension(20, 20));
+				horizontalBox_1.add(horizontalStrut_19);
+				
+				Component horizontalStrut_31 = Box.createHorizontalStrut(20);
+				horizontalStrut_31.setMaximumSize(new Dimension(20, 20));
+				horizontalBox_1.add(horizontalStrut_31);
+				
+				Component verticalStrut_3 = Box.createVerticalStrut(20);
+				verticalStrut_3.setMaximumSize(new Dimension(30, 20));
+				verticalBox_5.add(verticalStrut_3);
+				
+				Box horizontalBox_3 = Box.createHorizontalBox();
+				horizontalBox_3.setAlignmentY(0.5f);
+				horizontalBox_3.setAlignmentX(0.0f);
+				verticalBox_5.add(horizontalBox_3);
+				
+				Component horizontalStrut_24 = Box.createHorizontalStrut(20);
+				horizontalStrut_24.setMaximumSize(new Dimension(20, 20));
+				horizontalBox_3.add(horizontalStrut_24);
+				
+				JLabel label_1 = new JLabel("Base Destino");
+				horizontalBox_3.add(label_1);
+				
+				Component horizontalStrut_25 = Box.createHorizontalStrut(20);
+				horizontalStrut_25.setMaximumSize(new Dimension(20, 20));
+				horizontalBox_3.add(horizontalStrut_25);
+				
+				eliminaBD = new JComboBox<String>();
+				eliminaBD.setMaximumSize(new Dimension(80, 20));
+				eliminaBD.setAlignmentX(0.0f);
+				horizontalBox_3.add(eliminaBD);
+				
+				Component horizontalStrut_26 = Box.createHorizontalStrut(20);
+				horizontalStrut_26.setMaximumSize(new Dimension(20, 20));
+				horizontalBox_3.add(horizontalStrut_26);
+				
+				Component horizontalStrut_32 = Box.createHorizontalStrut(20);
+				horizontalStrut_32.setMaximumSize(new Dimension(20, 20));
+				horizontalBox_3.add(horizontalStrut_32);
+				
+				Component verticalStrut_11 = Box.createVerticalStrut(20);
+				verticalStrut_11.setMaximumSize(new Dimension(30, 20));
+				verticalBox_5.add(verticalStrut_11);
+				
+				JButton eliminarAd = new JButton("Eliminar adyacencia");
+				verticalBox_5.add(eliminarAd);
+				
         eliminarAd.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String bo = eliminaBO.getSelectedItem().toString();
-				int v1 = eliminaBO.getSelectedIndex();
-				String bd = eliminaBD.getSelectedItem().toString();
-				int v2 = eliminaBD.getSelectedIndex();
-				System.out.println("BO: " + bo + " BD: " + bd + "V1: " + v1 + " V2: " + v2);
-				if (v1 > 0 && v2 > 0) {
-					try {
-						//AIXO NO TIRA EXCEPCIO QUAN 
-						Principal.getGc().deleteAdjacencia(Integer.parseInt(bo), Integer.parseInt(bd));
-					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						System.out.println("No existe adyacencia");
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						String bo = eliminaBO.getSelectedItem().toString();
+						int v1 = eliminaBO.getSelectedIndex();
+						String bd = eliminaBD.getSelectedItem().toString();
+						int v2 = eliminaBD.getSelectedIndex();
+						System.out.println("BO: " + bo + " BD: " + bd + "V1: " + v1 + " V2: " + v2);
+						if (v1 > 0 && v2 > 0) {
+							try {
+								//AIXO NO TIRA EXCEPCIO QUAN 
+								Principal.getGc().deleteAdjacencia(Integer.parseInt(bo), Integer.parseInt(bd));
+							} catch (NumberFormatException e1) {
+								// TODO Auto-generated catch block
+								System.out.println("No existe adyacencia");
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							actuCombos();
+						}
 					}
-					actuCombos();
-				}
-			}
-		});
+				});
+				
+				Component horizontalStrut_4 = Box.createHorizontalStrut(20);
+				horizontalStrut_4.setMaximumSize(new Dimension(20, 20));
+				verticalBox_5.add(horizontalStrut_4);
+				
+				Component verticalStrut_10 = Box.createVerticalStrut(20);
+				horizontalBox.add(verticalStrut_10);
+				verticalStrut_10.setMaximumSize(new Dimension(30, 20));
+		
+		Component verticalGlue_1 = Box.createVerticalGlue();
+		verticalBox.add(verticalGlue_1);
+		
+		Component horizontalGlue_1 = Box.createHorizontalGlue();
+		add(horizontalGlue_1);
+		
+		actuCombos();
 	}
 	
 	
