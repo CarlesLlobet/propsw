@@ -50,7 +50,16 @@ public class GrafStarWarsPanel extends mxGraphComponent {
 			int idBase = 0;
 			if(objectes.length>0)
 				graph = paintRecursiuHelper(parent, objectes, graph, idBase, INIT_X, INIT_Y);
-			
+			//Si el objectes contiene nulos significa que el panel no ha pintado todas las bases
+			//Las pintamos debajo de la primera base.
+			int x = INIT_X;
+			int y = INIT_Y;
+			for (int i = 0; i < objectes.length; i++) {
+				if(objectes[i]==null){
+					y = y + DIFF_Y;
+					objectes[i] = graph.insertVertex(parent, null, graf.getNode(i), x, y, TAMANY_X, TAMANY_Y);
+				}
+			}
 		}
 		finally
 		{

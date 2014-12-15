@@ -134,29 +134,6 @@ public class GestioCapitans extends JPanelBg {
         				}
         				break;
         			case 1: //cambiar contraseña
-        				/*
-        				Capita c = Principal.getCc().getCapita();
-        				if (c == null) System.out.println("CAPITA NUL");
-        				String current = c.getPassword();
-        				String s1; = String.valueOf(ccontra.new1().getPassword());
-        				String s2 = String.valueOf(ccontra.new2().getPassword());
-        				String old = String.valueOf(ccontra.old().getPassword());
-        				System.out.println("new: " + s1 + "new: "+ s2 + "old: " + old);
-        				
-        				System.out.println("current: "+ current);
-
-        				if (old.equals(current)){
-        					if (s1.equals("") || s2.equals("")){
-        						JOptionPane.showMessageDialog(Principal.getWindow(),"La nueva contraseña no puede ser vacía");
-        					}else if (s1.equals(s2)) {
-        						Principal.getCc().canviContra(s1);
-        					}else {
-            					JOptionPane.showMessageDialog(Principal.getWindow(),"Las contraseñas no coinciden");
-        					}
-        				}
-        				else {
-        					JOptionPane.showMessageDialog(Principal.getWindow(),"Contraseña incorrecta");
-        				}*/
         				break;
         			case 2: //borrar capitan
         				//FALTA PANEL CONFIRMACION
@@ -241,8 +218,6 @@ public class GestioCapitans extends JPanelBg {
 	                		break;
 	                	case 1:
 	                		//Ocultamos el botón, que no necesitamos
-	                		boto.setVisible(true);
-	                		boto.setText("Cambiar");
 	                		panel.setVisible(true);
 	                		ccontra = new CanviaContra();	                		
 	                		card.show(panel,"CambiaContra");

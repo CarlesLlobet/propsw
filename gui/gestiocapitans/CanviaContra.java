@@ -1,13 +1,19 @@
 package gui.gestiocapitans;
 
+import gui.Principal;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
@@ -80,16 +86,55 @@ public class CanviaContra extends JPanel {
 		oldpass.setMaximumSize(new Dimension(100, 23));
 		horizontalBox_2.add(oldpass);
 		
+		JButton testButton = new JButton();
+		testButton.setText("Test");
+		testButton.setMaximumSize(new Dimension(100, 23));
+		horizontalBox_2.add(testButton);
+		testButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					System.out.println("Cambiamos contraseña");
+					canviaContra();
+			}
+		});
+		
 		Component verticalGlue_1 = Box.createVerticalGlue();
 		verticalBox.add(verticalGlue_1);
 	}
 	
+	private void canviaContra(){
+		String current = Principal.getCc().getCapita().getPassword();
+				
+		String s1 = String.valueOf(newpass1.getPassword());
+		String s2 = String.valueOf(newpass2.getPassword());
+		String old = String.valueOf(oldpass.getPassword());
+		
+		System.out.println("new: " + s1 + " new: "+ s2 + " old: " + old);		
+		System.out.println("current: "+ current);
+
+		if (old.equals(current)){
+			if (s1.equals("") || s2.equals("")){
+				JOptionPane.showMessageDialog(Principal.getWindow(),"La nueva contraseña no puede ser vacía");
+			}else if (s1.equals(s2)) {
+				Principal.getCc().canviContra(s1);
+				JOptionPane.showMessageDialog(Principal.getWindow(),"Contraseña cambiada.");
+				reset();
+			}else {
+				JOptionPane.showMessageDialog(Principal.getWindow(),"Las contraseñas no coinciden");
+			}
+		}
+		else {
+			JOptionPane.showMessageDialog(Principal.getWindow(),"Contraseña incorrecta");
+		}
+	}
+	
 	public void config(){
 		
-	}	/*
+	}	
 	public void reset(){
 		newpass1.setText("");
 		newpass2.setText("");
 		oldpass.setText("");
-	}*/
+	}
 }

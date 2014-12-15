@@ -40,7 +40,6 @@ public class GestioExode extends JPanelBg{
 		accio.setMinimumSize(new Dimension(150, 20));
 		verticalBox.add(accio);
 		//preparem el contingut del primer combobox
-		accio.addItem("Acción a Ejecutar");
 		accio.addItem("Crear éxodo");
 		accio.addItem("Modificar éxodo");
 		accio.addItem("Consultar éxodo");
@@ -82,8 +81,6 @@ public class GestioExode extends JPanelBg{
 		pickexode.addItem("Exodo 2");
 		pickexode.addItem("Exodo 3");
 		pickexode.addItem("Exodo 4");
-		
-		
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		verticalBox.add(verticalStrut_1);
