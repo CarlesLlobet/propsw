@@ -142,6 +142,8 @@ public class GestioCapitans extends JPanelBg {
         				deleteView();
         				Principal.loadLogin();
         				break;
+        				
+        				
         			case 3:
         				//FALTA PANEL CONFIRMACION
         				try {

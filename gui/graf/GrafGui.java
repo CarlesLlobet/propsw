@@ -1,4 +1,5 @@
 package gui.graf;
+// Autor: Toni Martinez
 
 import java.io.File;
 import java.io.IOException;

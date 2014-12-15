@@ -92,6 +92,8 @@ public class CanviaContra extends JPanel {
 		horizontalBox_2.add(testButton);
 		testButton.addActionListener(new ActionListener() {
 			
+			
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					System.out.println("Cambiamos contraseña");
