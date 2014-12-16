@@ -77,9 +77,16 @@ public class CapitaControlador {
 	
 	//Crear un rebel a les ordres d'un capit�
 	public String crearRebel(String nomRebel, String idCapita) {
-		Rebel r = new Rebel(nomRebel);
-		contCap.getCapita(idCapita).getRebels().put(r.getId(), r);
-		return r.getId();
+		if(nomRebel != null){
+			Rebel r = new Rebel(nomRebel);
+			contCap.getCapita(idCapita).getRebels().put(r.getId(), r);
+			return r.getId();
+		}
+		else{
+			Rebel r = new Rebel();
+			contCap.getCapita(idCapita).getRebels().put(r.getId(), r);
+			return r.getId();
+		}
 	}
 
 	//Retorna l'objecte Rebel a les ordres del capit� que ha iniciat sessi�

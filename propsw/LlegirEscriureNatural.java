@@ -34,7 +34,7 @@ public class LlegirEscriureNatural {
 	        	   if (!capicreat) {}//EXCEPCIO FITXER MAL FORMATAT, 
 	        	   int number = Integer.parseInt( tokens[1] );
 	        	   for (int i =0; i < number; ++i){
-	        		   caco.crearRebel(i+"", idCapi);
+	        		   caco.crearRebel(null, idCapi);
 	        	   }
 	        	   
 	           }
