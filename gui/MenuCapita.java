@@ -246,7 +246,7 @@ public class MenuCapita extends JPanelBg {
 		box.requestFocusInWindow();
 		
 		//Seleccionamos el botón de acceder como acción principal al pulsar intro
-		JRootPane rootPane = SwingUtilities.getRootPane(btnAcceder); 
-		rootPane.setDefaultButton(btnAcceder);
+		//JRootPane rootPane = SwingUtilities.getRootPane(btnAcceder); 
+		//r/ootPane.setDefaultButton(btnAcceder);
 	}
 }

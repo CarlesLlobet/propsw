@@ -94,8 +94,8 @@ public class CanviaContra extends JPanel {
 		
 		JButton testButton = new JButton();
 		horizontalBox_3.add(testButton);
-		testButton.setText("Test");
-		testButton.setMaximumSize(new Dimension(100, 23));
+		testButton.setText("Cambiar contrase\u00F1a");
+		testButton.setMaximumSize(new Dimension(150, 23));
 		testButton.addActionListener(new ActionListener() {
 			
 			

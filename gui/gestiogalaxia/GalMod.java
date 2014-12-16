@@ -86,7 +86,7 @@ public class GalMod extends JPanel{
 		horizontalStrut_8.setMaximumSize(new Dimension(20, 30));
 		horizontalBox_2.add(horizontalStrut_8);
 		
-		JButton btnAfegir = new JButton("Afegir");
+		JButton btnAfegir = new JButton("Añadir");
 		horizontalBox_2.add(btnAfegir);
 		
 		btnAfegir.addActionListener(new ActionListener() {

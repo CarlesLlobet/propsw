@@ -107,6 +107,7 @@ public class ModificaRebel extends JPanel{
 	}
 	
 	public void reset(){
+		lblNomrebel.setText("");
 		textField.setText("");
 	}
 }

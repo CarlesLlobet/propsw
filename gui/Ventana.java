@@ -1,9 +1,10 @@
 package gui;
 
 import java.awt.Dimension;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.Scrollable;
 
 public class Ventana extends JFrame {
 
@@ -20,5 +21,10 @@ public class Ventana extends JFrame {
 		double w = size.getWidth()/1.3;
 		setSize((int)w,(int)h);
 		setLocationRelativeTo(null);
+		setTitle("JarJarBeans");
+		
+		URL iconURL = getClass().getResource("/images/vader.png");
+		ImageIcon icon = new ImageIcon(iconURL);
+		this.setIconImage(icon.getImage());
 	}
 }

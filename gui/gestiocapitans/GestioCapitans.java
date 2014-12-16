@@ -8,10 +8,13 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javax.swing.Box;
@@ -24,7 +27,7 @@ import javax.swing.SwingConstants;
 
 public class GestioCapitans extends JPanelBg {
 	private JComboBox<String> box;
-	private JButton button;
+	private JButton atras;
 	private CardLayout card = new CardLayout(0, 0);
 	private JPanel panel = new JPanel(); 
 	private JButton boto;
@@ -44,6 +47,43 @@ public class GestioCapitans extends JPanelBg {
         Box verticalBox = Box.createVerticalBox();
         verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(verticalBox);
+        
+        Box horizontalBox_1 = Box.createHorizontalBox();
+        horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
+        verticalBox.add(horizontalBox_1);
+        
+        Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+        horizontalStrut_2.setPreferredSize(new Dimension(20, 40));
+        horizontalStrut_2.setMinimumSize(new Dimension(20, 40));
+        horizontalStrut_2.setMaximumSize(new Dimension(20, 40));
+        horizontalBox_1.add(horizontalStrut_2);
+        
+        atras = new JButton("Atrás");
+        
+        atras.setAlignmentX(Component.CENTER_ALIGNMENT);
+        horizontalBox_1.add(atras);
+        
+        Component horizontalGlue = Box.createHorizontalGlue();
+        horizontalBox_1.add(horizontalGlue);
+        
+        JButton guardar = new JButton("Guardar");
+        guardar.setAlignmentX(0.5f);
+        horizontalBox_1.add(guardar);
+        
+        Component horizontalStrut = Box.createHorizontalStrut(20);
+        horizontalStrut.setPreferredSize(new Dimension(20, 40));
+        horizontalStrut.setMinimumSize(new Dimension(20, 40));
+        horizontalStrut.setMaximumSize(new Dimension(20, 40));
+        horizontalBox_1.add(horizontalStrut);
+        
+        
+        //Programem el comportament del botó de retrocedir
+        atras.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		deleteView();
+        		Principal.loadMenuCapita();
+        	}
+        }); 
         
         Component verticalStrut_2 = Box.createVerticalStrut(20);
         verticalBox.add(verticalStrut_2);
@@ -173,33 +213,6 @@ public class GestioCapitans extends JPanelBg {
         Component verticalGlue_1 = Box.createVerticalGlue();
         verticalBox_1.add(verticalGlue_1);
         
-        Box horizontalBox_3 = Box.createHorizontalBox();
-        verticalBox.add(horizontalBox_3);
-        
-        Component horizontalGlue_3 = Box.createHorizontalGlue();
-        horizontalBox_3.add(horizontalGlue_3);
-        
-        Component horizontalGlue_4 = Box.createHorizontalGlue();
-        horizontalBox_3.add(horizontalGlue_4);
-        
-        Box horizontalBox_1 = Box.createHorizontalBox();
-        horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
-        verticalBox.add(horizontalBox_1);
-        
-        Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-        horizontalStrut_2.setPreferredSize(new Dimension(20, 40));
-        horizontalStrut_2.setMinimumSize(new Dimension(20, 40));
-        horizontalStrut_2.setMaximumSize(new Dimension(20, 40));
-        horizontalBox_1.add(horizontalStrut_2);
-        
-        button = new JButton("Atrás");
-        
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        horizontalBox_1.add(button);
-        
-        Component horizontalGlue = Box.createHorizontalGlue();
-        horizontalBox_1.add(horizontalGlue);
-        
 
         //PROGRAMEM EL COMPORTAMENT DE LA VISTA:
         //Programem el comportament cada cop que el JComboBox canvia de valor
@@ -260,15 +273,19 @@ public class GestioCapitans extends JPanelBg {
             }
         });
         
-        
-        //Programem el comportament del botó de retrocedir
-        button.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		deleteView();
-        		Principal.loadMenuCapita();
-        	}
-        }); 
-        
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+	  	      @Override
+	  	      public boolean dispatchKeyEvent(KeyEvent e) { 	    	
+	  	    	if (isVisible()) {
+	  	    		if (e.getKeyCode() == 27){ //activar boton atras
+	  	        		deleteView();
+	  	        		Principal.loadMenuCapita();
+	  	    		}
+	  	        }
+	  	    	 return false;
+	  	      }
+	        });		
+
         //FALTA PROGRAMAR LA LOGICA SEGUN EXP/IMPORTAR llamadas correspondientes. IMPEXP no tiene lógica ninguna. (matizar)
         
 	}
