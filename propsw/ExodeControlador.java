@@ -177,4 +177,9 @@ public class ExodeControlador{
 	public Graf<Base> getGrafResidual(String idExode) throws IOException{
 		return capi.getGalaxia().getExode(idExode).getGrafResidualNet();
 	}
+	
+	public ArrayList<Integer[]> getAmpollaIdBases(String idExode) throws IOException{
+		return capi.getGalaxia().getExode(idExode).getAmpollaIdBases();
+	}
+	
 }

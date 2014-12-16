@@ -613,6 +613,7 @@ public class Exode implements Serializable{
 	public Graf<Base> getGrafResidualNet() throws IOException{
 		Graf<Base> toReturn = getGalaxia().getCopiaGraf(grafResidualPreProces);
 		
+		toReturn.removeNode(toReturn.getNSize()-1);
 		int idAresta;
 		int numNodes = toReturn.getNSize();
 		for (int i = 0; i < numNodes; i++) {
@@ -622,6 +623,8 @@ public class Exode implements Serializable{
 				if(toReturn.getFlujoAresta(idAresta)<0)toReturn.removeAresta(i, integer);
 			}
 		}
+		
+		
 		
 		return toReturn;
 	}
