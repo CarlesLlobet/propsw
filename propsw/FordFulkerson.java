@@ -2,12 +2,13 @@ package propsw;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 //@autor Toni Martínez
 
-public class FordFulkerson<T> {	
+public class FordFulkerson<T> implements Serializable{	
 	
 	
 	protected Graf<T> g;
