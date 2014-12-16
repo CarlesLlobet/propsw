@@ -14,8 +14,8 @@ public class LlegirEscriureNatural {
 		gaco = new GalaxiaControlador(cc);
 	}
 	
-	public String llegirCapita(String ruta) throws IOException{		
-		File fitxer = new File(ruta);  
+	public String llegirCapita(String fileName) throws IOException{		
+		File fitxer = new File("import/"+fileName);  
 		boolean capicreat = false;
 	    if ( fitxer.exists() ){                                             
 	        Scanner inFile = new Scanner( fitxer );
@@ -64,9 +64,9 @@ public class LlegirEscriureNatural {
 	    throw new IOException("No s'ha creat el capita.");
 	}
 	
-	public void llegirGalaxia(String ruta, String idCapita) throws IOException{
+	public void llegirGalaxia(String fileName, String idCapita) throws IOException{
 		idCapi = idCapita;
-		File fitxer = new File(ruta);     
+		File fitxer = new File("import/"+fileName);     
 	    if ( fitxer.exists() ){                                             
 	        Scanner inFile = new Scanner( fitxer );
 	        gaco.resetGalaxia(idCapi);
@@ -100,7 +100,7 @@ public class LlegirEscriureNatural {
 	public void escriureCapita(String outFileName, String idCapita) throws IOException{
 		idCapi = idCapita;
 		Capita c = caco.getCapita(idCapi);
-        java.io.PrintStream ps = new java.io.PrintStream( outFileName+".txt" );
+        java.io.PrintStream ps = new java.io.PrintStream( "export/"+outFileName+".txt" );
         ps.println("Capita:"+c.getNom()+","+c.getPassword());
         int nRebels = c.getRebels().size();
         ps.println("Nombre rebels:"+Integer.toString( nRebels ));
@@ -136,7 +136,7 @@ public class LlegirEscriureNatural {
 		 
 		idCapi = idCapita;
 		Capita c = caco.getCapita(idCapi);
-        java.io.PrintStream ps = new java.io.PrintStream( outFileName+".txt" );
+        java.io.PrintStream ps = new java.io.PrintStream( "export/"+outFileName+".txt" );
         int nBases = c.getGalaxia().getBaseArray().size();
         ps.println("Nombre bases:"+Integer.toString( nBases ));  
         for(int i = 0; i<nBases; ++i){
