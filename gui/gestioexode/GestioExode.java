@@ -198,6 +198,35 @@ public class GestioExode extends JPanelBg{
             }
 		});
 		
+		pickexode.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == ItemEvent.SELECTED){
+					int val = pickexode.getSelectedIndex();
+					int val2 = accio.getSelectedIndex();
+					switch(val2){
+						case 0: //consulta
+							if (val > 0)
+								try {
+									conse.actualitza(pickexode.getSelectedItem().toString());
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							else conse.reset();
+							break;
+						case 2: // modifica
+							if (val > 0) me.actualitza(pickexode.getSelectedItem().toString());
+							else me.reset();
+							break;
+						default:
+							System.out.println("Otras opciones");
+							break;
+					}
+				}
+			}
+		});
+		
 		
 		eliminar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
