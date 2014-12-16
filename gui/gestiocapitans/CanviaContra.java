@@ -86,10 +86,16 @@ public class CanviaContra extends JPanel {
 		oldpass.setMaximumSize(new Dimension(100, 23));
 		horizontalBox_2.add(oldpass);
 		
+		Component verticalStrut_2 = Box.createVerticalStrut(20);
+		verticalBox.add(verticalStrut_2);
+		
+		Box horizontalBox_3 = Box.createHorizontalBox();
+		verticalBox.add(horizontalBox_3);
+		
 		JButton testButton = new JButton();
+		horizontalBox_3.add(testButton);
 		testButton.setText("Test");
 		testButton.setMaximumSize(new Dimension(100, 23));
-		horizontalBox_2.add(testButton);
 		testButton.addActionListener(new ActionListener() {
 			
 			

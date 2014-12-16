@@ -133,7 +133,7 @@ public class GestioCapitans extends JPanelBg {
         					alertaCapitaNomE();
         				}
         				break;
-        			case 1: //cambiar contraseña
+        			case 1: //cambiar contraseña        				
         				break;
         			case 2: //borrar capitan
         				//FALTA PANEL CONFIRMACION
@@ -220,6 +220,7 @@ public class GestioCapitans extends JPanelBg {
 	                		break;
 	                	case 1:
 	                		//Ocultamos el botón, que no necesitamos
+	                		boto.setVisible(false);
 	                		panel.setVisible(true);
 	                		ccontra = new CanviaContra();	                		
 	                		card.show(panel,"CambiaContra");

@@ -9,6 +9,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -28,8 +30,6 @@ public class ModificarExode extends JPanel {
 	 */
 	private String data[] = {"NO","HAY","INFO","TODAVIA"};
 	
-	
-	
 	private JComboBox<String> addreb; 
 	private JComboBox<String> baseDesti;
 	private JComboBox<String> borrarRebelde;
@@ -41,8 +41,10 @@ public class ModificarExode extends JPanel {
 	private JComboBox<String> destireb;
 	private JComboBox<String> modreb; 
 	private JList<String> list;
-	private Integer numexecucio = 0;
-	private String idEx =null;
+	private JLabel lblInicioxodo;
+	private JLabel lblEjecutar;
+	private Integer numexecucio;
+	private String idEx;
 	
 	private ArrayList<String> rebelsExode; //rebels que participen a l'exode	   
 	private ArrayList<String> rebelsCapita; //tots els rebels del capita
@@ -204,7 +206,7 @@ public class ModificarExode extends JPanel {
 		Component horizontalGlue_2 = Box.createHorizontalGlue();
 		horizontalBox_2.add(horizontalGlue_2);
 		
-		JLabel lblInicioxodo = new JLabel("Inicio \u00E9xodo:");
+		lblInicioxodo = new JLabel("Inicio \u00E9xodo:");
 		horizontalBox_2.add(lblInicioxodo);
 		
 		Component horizontalStrut_5 = Box.createHorizontalStrut(20);
@@ -235,7 +237,7 @@ public class ModificarExode extends JPanel {
 		Component horizontalGlue_4 = Box.createHorizontalGlue();
 		horizontalBox_3.add(horizontalGlue_4);
 		
-		JLabel lblEjecutar = new JLabel("Ejecuci\u00F3n");
+		lblEjecutar = new JLabel("Ejecuci\u00F3n:");
 		horizontalBox_3.add(lblEjecutar);
 		
 		ejec = new JComboBox<String>();
@@ -406,6 +408,7 @@ public class ModificarExode extends JPanel {
 						baseDesti.setSelectedIndex(0);
 					}
 				}
+				else System.out.println("Exodo nulo");
 			}
 		});
 		
@@ -423,6 +426,7 @@ public class ModificarExode extends JPanel {
 						destireb.setSelectedIndex(0);
 					}
 				}
+				else System.out.println("Exodo nulo");
 			}
 		});
 		
@@ -441,6 +445,7 @@ public class ModificarExode extends JPanel {
 						borrarRebelde.setSelectedIndex(0);
 					}
 				}
+				else System.out.println("Exodo nulo");
 			}
 		});
 		
@@ -461,12 +466,14 @@ public class ModificarExode extends JPanel {
 					}
 					iniciEx.setSelectedItem(0);
 				}
+				else System.out.println("Exodo nulo");
 			}
 		});
 		
 		btnAceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				lblEjecutar.setText("Ejecución: " + ejec.getSelectedItem().toString());
 				numexecucio = ejec.getSelectedIndex();
 			}
 		});
@@ -499,7 +506,6 @@ public class ModificarExode extends JPanel {
 				}
 			}
 		});
-		
 	}
 	
 	/*
@@ -515,6 +521,9 @@ public class ModificarExode extends JPanel {
 	 */
 	
 	public void reset(){
+			idEx = null;
+			numexecucio = 0;
+		
 			addreb.removeAllItems();
 			addreb.addItem("Escoge rebelde");
 			
@@ -545,6 +554,9 @@ public class ModificarExode extends JPanel {
 			destireb.addItem("Escoge base");
 			
 			list = new JList(data);
+			
+			lblEjecutar.setText("Ejecución: ");
+			lblInicioxodo.setText("Inicio éxodo: ");
 	}
 	
 	public void actualitza(String s){
@@ -553,6 +565,7 @@ public class ModificarExode extends JPanel {
 		idEx = s;
 		initBases(); //inicializamos las bases de la galaxia en los comboboxes
 		initRebeldes();//inicializamos todos los combobox
+		lblInicioxodo.setText("Inicio éxodo: " + Principal.getEc().getIniciExode(s).toString());
 	}
 	
 	/*

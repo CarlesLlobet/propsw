@@ -25,7 +25,7 @@ public class CreaExode extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	private HashMap<String,Integer> rebelsAfegits;
+	private HashMap<String,Integer> rebelsAfegits = new HashMap<String,Integer>();
 	private ArrayList<String> rebelsCapita;
 	private ArrayList<String> bases;
 	private Integer idInici = null;
@@ -211,10 +211,6 @@ public class CreaExode extends JPanel {
 		horizontalBox_5.add(creaExe);
 		
 		JButton Crear = new JButton("Crear");
-		Crear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		
 		Component horizontalGlue_12 = Box.createHorizontalGlue();
 		horizontalBox_5.add(horizontalGlue_12);
