@@ -15,7 +15,7 @@ public class LlegirEscriureNatural {
 	}
 	
 	public String llegirCapita(String fileName) throws IOException{		
-		File fitxer = new File("import/"+fileName);  
+		File fitxer = new File("import/"+fileName+".txt");  
 		boolean capicreat = false;
 	    if ( fitxer.exists() ){                                             
 	        Scanner inFile = new Scanner( fitxer );
@@ -66,7 +66,7 @@ public class LlegirEscriureNatural {
 	
 	public void llegirGalaxia(String fileName, String idCapita) throws IOException{
 		idCapi = idCapita;
-		File fitxer = new File("import/"+fileName);     
+		File fitxer = new File("import/"+fileName+".txt");     
 	    if ( fitxer.exists() ){                                             
 	        Scanner inFile = new Scanner( fitxer );
 	        gaco.resetGalaxia(idCapi);
