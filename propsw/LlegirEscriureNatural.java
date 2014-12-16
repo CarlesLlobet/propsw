@@ -9,7 +9,7 @@ public class LlegirEscriureNatural {
 	CapitaControlador caco;
 	GalaxiaControlador gaco;
 	String idCapi;
-	LlegirEscriureNatural(CapitaControlador cc){
+	public LlegirEscriureNatural(CapitaControlador cc){
 		caco = cc;
 		gaco = new GalaxiaControlador(cc);
 	}
