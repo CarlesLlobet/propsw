@@ -193,6 +193,7 @@ public class GestioExode extends JPanelBg{
 	                		break;
 	                }
 	                revalidate();
+	                repaint();
                 }
             }
 		});

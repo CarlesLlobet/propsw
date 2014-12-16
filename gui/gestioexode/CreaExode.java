@@ -18,6 +18,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class CreaExode extends JPanel {
@@ -298,12 +299,11 @@ public class CreaExode extends JPanel {
 				System.out.println("CREAMOS Y EJECUTAMOS EXODO");
 				String id = creaEx();
 				if (id != null)ejecutaEx(id);
-				else System.out.println("ID EXODO NULO");
+				else System.out.println("NO SE HA CREADO EXODO - COMPRUEBA LOS DATOS");
 				reset();
 			}
 		});
 	}
-	
 	
 	/*
 	 * 	
@@ -323,21 +323,26 @@ public class CreaExode extends JPanel {
 	private String creaEx(){
 		System.out.println("PRINTAMOS LOS REBELDES QUE PARTICIPAN");
 		String idexode = null;
-		for (Map.Entry<String, Integer> entry : rebelsAfegits.entrySet()) {
-		    System.out.println("Rebelde: " + entry.getKey() + " Base: " + String.valueOf(entry.getValue()));
-		}
-		System.out.println("ID inicio: " + idInici.toString());
-		System.out.println("Ejecución: " + execucio.toString());
-		try {
-			idexode = Principal.getCc().crearExode(idInici);
+		if (idInici != null){
 			for (Map.Entry<String, Integer> entry : rebelsAfegits.entrySet()) {
-				Principal.getCc().getGalaxia().getExode(idexode).afegirRebel(entry.getKey(), entry.getValue());
-				Principal.getCc().getGalaxia().getExode(idexode).setIdBaseInici(idInici);			
+			    System.out.println("Rebelde: " + entry.getKey() + " Base: " + String.valueOf(entry.getValue()));
 			}
-			System.out.println("Se ha creado un exode con id: " + idexode + "y base inicio: " + idInici);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("ID inicio: " + idInici.toString());
+			System.out.println("Ejecución: " + execucio.toString());
+			try {
+				idexode = Principal.getCc().crearExode(idInici);
+				for (Map.Entry<String, Integer> entry : rebelsAfegits.entrySet()) {
+					Principal.getCc().getGalaxia().getExode(idexode).afegirRebel(entry.getKey(), entry.getValue());
+					Principal.getCc().getGalaxia().getExode(idexode).setIdBaseInici(idInici);			
+				}
+				System.out.println("Se ha creado un exode con id: " + idexode + "y base inicio: " + idInici);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("ID INICI NULL");
 		}
 		return idexode;
 	}
@@ -362,7 +367,6 @@ public class CreaExode extends JPanel {
 		try {bases = Principal.getGc().arrayBaseOrd();} catch (IOException e) {e.printStackTrace();}
 		
 		idInici = null;
-		execucio = null;
 		
 		lblEjecutar.setText("Ejecución: ");
 		lblInicioxodo.setText("Inicio éxodo: ");
