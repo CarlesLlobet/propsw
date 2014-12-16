@@ -42,7 +42,7 @@ public class ModificarExode extends JPanel {
 	private JComboBox<String> modreb; 
 	private JList<String> list;
 	private Integer numexecucio = 0;
-	private String idEx;
+	private String idEx =null;
 	
 	private ArrayList<String> rebelsExode; //rebels que participen a l'exode	   
 	private ArrayList<String> rebelsCapita; //tots els rebels del capita
@@ -240,9 +240,9 @@ public class ModificarExode extends JPanel {
 		
 		ejec = new JComboBox<String>();
 		ejec.addItem("FordFulkerson");
-		ejec.addItem("Dijkstra");
 		ejec.addItem("EK");
-				
+		ejec.addItem("Dijkstra");
+
 		Component horizontalStrut_8 = Box.createHorizontalStrut(20);
 		horizontalStrut_8.setMaximumSize(new Dimension(20, 20));
 		horizontalBox_3.add(horizontalStrut_8);
@@ -392,21 +392,55 @@ public class ModificarExode extends JPanel {
 		btnAnadir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if (idEx != null){
+					int val1 = addreb.getSelectedIndex();
+					String idreb = addreb.getSelectedItem().toString();
+					int val2 = baseDesti.getSelectedIndex();
+					int idb = Integer.parseInt(baseDesti.getSelectedItem().toString());
+					if(val1>0 && val2>0){
+						Principal.getEc().afegirRebelExode(idEx, idreb, idb);
+						addreb.removeItem(idreb);
+						modreb.addItem(idreb);
+						borrarRebelde.addItem(idreb);
+						rebelde.addItem(idreb);
+						baseDesti.setSelectedIndex(0);
+					}
+				}
 			}
 		});
 		
 		btnCambiar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if (idEx != null){
+					int val1 = modreb.getSelectedIndex();
+					String idreb = modreb.getSelectedItem().toString();
+					int val2 = destireb.getSelectedIndex();
+					int idb = Integer.parseInt(destireb.getSelectedItem().toString());
+					if(val1>0 && val2>0){
+						Principal.getEc().modificarRebelExode(idEx, idreb, idb);
+						modreb.setSelectedIndex(0);
+						destireb.setSelectedIndex(0);
+					}
+				}
 			}
 		});
 		
 		btnBorrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if (idEx != null){
+					int val1 = borrarRebelde.getSelectedIndex();
+					String idreb = borrarRebelde.getSelectedItem().toString();
+					if(val1>0){
+						Principal.getEc().treureRebelExode(idEx, idreb);
+						addreb.addItem(idreb);
+						modreb.removeItem(idreb);
+						borrarRebelde.removeItem(idreb);
+						rebelde.removeItem(idreb);
+						borrarRebelde.setSelectedIndex(0);
+					}
+				}
 			}
 		});
 		
@@ -414,14 +448,26 @@ public class ModificarExode extends JPanel {
 		btnMod.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if (idEx!= null){
+					int val = iniciEx.getSelectedIndex();
+					if (val > 0){
+						int idb = Integer.parseInt(iniciEx.getSelectedItem().toString());
+						try {
+							Principal.getCc().getGalaxia().getExode(idEx).setIdBaseInici(idb);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					iniciEx.setSelectedItem(0);
+				}
 			}
 		});
 		
 		btnAceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				numexecucio = ejec.getSelectedIndex();
 			}
 		});
 
@@ -439,11 +485,20 @@ public class ModificarExode extends JPanel {
 			}
 		});
 
-		
-		
-		
-		
-		
+		ejecutar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (idEx != null) {
+					try {
+						Principal.getEc().execucio(idEx, numexecucio);
+						System.out.println("Exodo ejecutado");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 		
 	}
 	

@@ -28,6 +28,7 @@ public class GestioExode extends JPanelBg{
 	private JButton button;
 	private JButton eliminar;
 	
+	private String idEx = null;
 	private CardLayout card = new CardLayout(0, 0);
 	private JPanel panel; 
 	
@@ -154,10 +155,9 @@ public class GestioExode extends JPanelBg{
 	                		actuPickExode();
 	                		int val3 = pickexode.getSelectedIndex();
 	                		if(val3 > 0){
-	                			//s es un id valid
-	                			String s = pickexode.getSelectedItem().toString();
+	                			idEx = pickexode.getSelectedItem().toString();
 	                			try {
-									conse.actualitza(s);
+									conse.actualitza(idEx);
 								} catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
@@ -179,9 +179,8 @@ public class GestioExode extends JPanelBg{
 	                		actuPickExode();
 	                		panel.setVisible(true);
 	                		if(val2 > 0){
-	                			//s es un id valid
-	                			String s = pickexode.getSelectedItem().toString();
-	                			me.actualitza(s);
+	                			idEx = pickexode.getSelectedItem().toString();
+	                			me.actualitza(idEx);
 	                		}
 	                		else me.reset();
 	                		card.show(panel,"mod");	            
@@ -203,20 +202,25 @@ public class GestioExode extends JPanelBg{
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED){
 					int val = pickexode.getSelectedIndex();
+					if (val == 0) idEx = null;
+					else idEx = pickexode.getSelectedItem().toString();
 					int val2 = accio.getSelectedIndex();
 					switch(val2){
 						case 0: //consulta
-							if (val > 0)
+							if (val > 0){
 								try {
-									conse.actualitza(pickexode.getSelectedItem().toString());
+									conse.actualitza(idEx);
 								} catch (IOException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
+							}
 							else conse.reset();
 							break;
 						case 2: // modifica
-							if (val > 0) me.actualitza(pickexode.getSelectedItem().toString());
+							if (val > 0) {
+								me.actualitza(pickexode.getSelectedItem().toString());
+							}
 							else me.reset();
 							break;
 						default:

@@ -28,8 +28,8 @@ public class CreaExode extends JPanel {
 	private HashMap<String,Integer> rebelsAfegits;
 	private ArrayList<String> rebelsCapita;
 	private ArrayList<String> bases;
-	private Integer idInici;
-	private Integer execucio;
+	private Integer idInici = null;
+	private Integer execucio = 0;
 	
 	private JComboBox<String> baseDesti;
 	private JComboBox<String> addreb;
