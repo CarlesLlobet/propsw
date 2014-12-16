@@ -121,15 +121,6 @@ public class GalGest extends JPanelBg {
         Component verticalGlue_1 = Box.createVerticalGlue();
         verticalBox_1.add(verticalGlue_1);
         
-        Box horizontalBox_3 = Box.createHorizontalBox();
-        verticalBox.add(horizontalBox_3);
-        
-        Component horizontalGlue_3 = Box.createHorizontalGlue();
-        horizontalBox_3.add(horizontalGlue_3);
-        
-        Component horizontalGlue_4 = Box.createHorizontalGlue();
-        horizontalBox_3.add(horizontalGlue_4);
-        
         Box horizontalBox_1 = Box.createHorizontalBox();
         horizontalBox_1.setAlignmentY(Component.CENTER_ALIGNMENT);
         verticalBox.add(horizontalBox_1);

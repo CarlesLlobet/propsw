@@ -26,12 +26,15 @@ public class ExodeControlador{
 	 */
 	public void execucio(String idExode, Integer tipusExec) throws IOException {
 		if (tipusExec == 0){
+			System.out.println("BFS - FF");
 			capi.getGalaxia().getExode(idExode).execucioBFS();
 		}
 		else if (tipusExec == 1){
+			System.out.println("DFS - EK");
 			capi.getGalaxia().getExode(idExode).execucioDFS();
 		}
 		else if (tipusExec == 2){
+			System.out.println("DIJKSTRA");
 			capi.getGalaxia().getExode(idExode).execucioDijkstra();
 		}
 	}

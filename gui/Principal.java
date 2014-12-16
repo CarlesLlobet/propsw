@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.io.IOException;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import propsw.CapitaControlador;
 import propsw.ExodeControlador;

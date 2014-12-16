@@ -21,9 +21,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
-
-
 public class ConsultaExode extends JPanel{
 	
 	private String idExode;

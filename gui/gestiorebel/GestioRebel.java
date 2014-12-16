@@ -31,7 +31,6 @@ public class GestioRebel extends JPanelBg{
 	private CardLayout card = new CardLayout(0, 0);
 	private JPanel panel; 
 	
-	
 	private ConsultaRebel cr = new ConsultaRebel();
 	private ModificaRebel mr = new ModificaRebel();
 	private CreaNom cn = new CreaNom();
@@ -119,14 +118,8 @@ public class GestioRebel extends JPanelBg{
 		verticalBox.add(Boton);
 		Boton.setVisible(false);
 		
-		
-		
-
-					
 		Component verticalGlue_2 = Box.createVerticalGlue();
 		verticalBox.add(verticalGlue_2);
-		
-
 		
 		Box horizontalBox_1 = Box.createHorizontalBox();
 		horizontalBox_1.setAlignmentY(0.5f);
@@ -138,7 +131,6 @@ public class GestioRebel extends JPanelBg{
 		horizontalStrut_1.setMaximumSize(new Dimension(20, 40));
 		horizontalBox_1.add(horizontalStrut_1);
 
-		
 		
 		//LOGICA DE LA VISTA 
 		
@@ -161,7 +153,8 @@ public class GestioRebel extends JPanelBg{
 							break;
 						case 1://modifica rebel
 							String idReb2 = pickrebel.getSelectedItem().toString();
-							if(val2 > 0) cr.refresh(idReb2);
+							System.out.println("REBERDE" + idReb2);
+							if(val2 > 0) mr.refresh(idReb2);
 							break;
 						default:
 							System.out.println("Otras cosas");
@@ -191,7 +184,8 @@ public class GestioRebel extends JPanelBg{
 	                	panel.setVisible(true);
 	                	pickrebel.setVisible(true);
 	                	actupickrebel();
-	                	Boton.setVisible(false);
+	                	Boton.setVisible(true);
+	                	Boton.setText("Cambiar nombre");
 	                	card.show(panel, "modify");
 	                	break;
 	                case 2:
@@ -220,11 +214,20 @@ public class GestioRebel extends JPanelBg{
 		Boton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 					int val = accio.getSelectedIndex();
+					revalidate();
 					switch(val){
 						case 0: //consulta
 							
 							break;
 						case 1: //modifica
+							int val2 = pickrebel.getSelectedIndex();
+							if (val2 > 0) {
+								mr.canvia(pickrebel.getSelectedItem().toString());
+							}
+							else{
+								System.out.println("hauries d'escollir un rebel");
+							}
+							mr.reset();
 							break;
 						case 2: //crea
 							String nom = cn.getNom();
@@ -237,9 +240,8 @@ public class GestioRebel extends JPanelBg{
 							}
 							break;
 						case 3:	//esborra
-							String val2 = pickrebel.getSelectedItem().toString();
-							System.out.println("REBEL A ESBORRAR : " + val);
-							boolean b = Principal.getCc().eliminarRebel(val2);
+							String val3 = pickrebel.getSelectedItem().toString();
+							boolean b = Principal.getCc().eliminarRebel(val3);
 							if (b) JOptionPane.showMessageDialog(Principal.getWindow(), "Rebelde eliminado.");
 							else JOptionPane.showMessageDialog(Principal.getWindow(), "No existe este rebelde para el capitán");
 							actupickrebel();

@@ -267,6 +267,23 @@ public class CapitaControlador {
 		}
 	}
 	
+	
+	//Aquesta funci�, donat un array de strings de ids , el passa a int per a ordenarlo i torna a transformarlo a int
+	public ArrayList<String> ordenarArrayString(ArrayList<String> a){
+		ArrayList<Integer> aux = new ArrayList<Integer>();
+		for (String s : a){
+			aux.add(Integer.parseInt(s));
+		}
+		Collections.sort(aux);
+		a.clear();
+		for (Integer i : aux){
+			a.add(String.valueOf(i));
+		}
+		return a;
+	}
+	
+
+	//Retorna un array d'strings dels rebels del capita
 	public ArrayList<String> arrayListRebelsOrd(){
 		ArrayList<String> rebels = new ArrayList<String>(getCapita().getRebels().keySet());
 		ArrayList<Integer> r = new ArrayList<Integer>();
@@ -279,20 +296,6 @@ public class CapitaControlador {
 			rebels.add(String.valueOf(i));
 		}
 		return rebels;
-	}
-	
-	//Aquesta funci�, donat un array de strings de ids , el passa a int per a ordenarlo i torna a transformarlo a int
-	private ArrayList<String> ordenarArrayString(ArrayList<String> a){
-		ArrayList<Integer> aux = new ArrayList<Integer>();
-		for (String s : a){
-			aux.add(Integer.parseInt(s));
-		}
-		Collections.sort(aux);
-		a.clear();
-		for (Integer i : aux){
-			a.add(String.valueOf(i));
-		}
-		return a;
 	}
 	
 	//Aquesta funcion retorna un arraylist amb els ids de tots els capitans que hi ha al sistema ordenats
