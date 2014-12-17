@@ -204,14 +204,21 @@ public class GestioCapitans extends JPanelBg {
 							String ic = len.llegirCapita(ig.getText());
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
-							JOptionPane.showMessageDialog(Principal.getWindow(),"Ha ocurrido un error mientras importaba el capitán" );
+							JOptionPane.showMessageDialog(Principal.getWindow(),"Ha ocurrido un error mientras se importaba el capitán" );
 							e1.printStackTrace();
 						}
+						ig.reset();
         				break;
         			case 5: //exportar
-        				
-        				
-        				
+        				LlegirEscriureNatural len2 = new LlegirEscriureNatural(Principal.getCc());
+						try {
+							len2.escriureCapita(eg.getText(), Principal.getCc().getCapita().getId());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(Principal.getWindow(),"Ha ocurrido un error mientras se exportaba el capitán" );
+							e1.printStackTrace();
+						}
+						eg.reset();
         				break;	
         			default:
         				System.out.println("huehue");
