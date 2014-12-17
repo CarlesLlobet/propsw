@@ -4,10 +4,10 @@
  */ 
 
 package propsw;
-import java.io.*;
-import java.lang.String;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 public class GalaxiaControlador{
 	

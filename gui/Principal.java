@@ -109,6 +109,13 @@ public class Principal {
 		window.setVisible(true);
 	}
 	
+	public static void loadSessioRebel(String idcap, String idreb){
+		SessioRebel sr = new SessioRebel(idcap,idreb);
+		container.add(sr, "execex");
+		card.show(container,"execex");
+		window.setVisible(true);
+	}
+	
 	//Retorna 
 	public static CapitaControlador getCc(){
 		return cc;
@@ -121,6 +128,8 @@ public class Principal {
 	public static ExodeControlador getEc(){
 		return ec;
 	}
+	
+
 	
 	
 	//Función que elimina del contenedor una vista c

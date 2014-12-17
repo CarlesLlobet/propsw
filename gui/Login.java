@@ -33,6 +33,14 @@ public class Login extends JPanelBg{
 	private Box horizontalBox;
 	private Component horizontalGlue;
 	private Component horizontalGlue_1;
+	private Box horizontalBox_1;
+	private Component horizontalGlue_2;
+	private JComboBox<String> rebel;
+	private Component horizontalGlue_3;
+	private JLabel lblNewLabel;
+	private String idrebelde;
+	private String idcapitan;
+	
 	public Login() {
 		//Preparamos la vista
 		setBounds(100, 100, 793, 499);
@@ -71,12 +79,27 @@ public class Login extends JPanelBg{
 		Component verticalStrut = Box.createVerticalStrut(20);
 		add(verticalStrut);
 		
-		JLabel lblNewLabel = new JLabel("Usuario");
+		lblNewLabel = new JLabel("Usuario");
 		lblNewLabel.setFocusable(false);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblNewLabel.setMaximumSize(new Dimension(100, 23));
 		add(lblNewLabel);
+		
+		horizontalBox_1 = Box.createHorizontalBox();
+		add(horizontalBox_1);
+		
+		horizontalGlue_2 = Box.createHorizontalGlue();
+		horizontalBox_1.add(horizontalGlue_2);
+		
+		rebel = new JComboBox<String>();
+		rebel.setVisible(false);
+		rebel.setMaximumSize(new Dimension(200, 40));
+		rebel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		horizontalBox_1.add(rebel);
+		
+		horizontalGlue_3 = Box.createHorizontalGlue();
+		horizontalBox_1.add(horizontalGlue_3);
 	
 		user = new JTextField();
 		user.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -128,32 +151,58 @@ public class Login extends JPanelBg{
 	                int val = box.getSelectedIndex();
 	                user.setText("");
 	                if (val == 0){
+	                	lblNewLabel.setText("Usuario");
+	                	user.setVisible(true);
+	                	rebel.setVisible(false);
 	                	lblContrasea.setVisible(true);
 	                	pass.setVisible(true);
+	                	rebel.setVisible(true);
 	                	pass.setText("");
 	                }
 	                else {
+	                	lblNewLabel.setText("Rebelde");
+	                	user.setVisible(false);
+	                	rebel.setVisible(true);
 	                	lblContrasea.setVisible(false);
 	                	pass.setVisible(false);
-	                	rebelCapId(box.getSelectedItem().toString());
+	                	idcapitan = rebelCapId(box.getSelectedItem().toString());
+	                	ArrayList<String> rebs = Principal.getCc().ordenarArrayString(new ArrayList<String>(Principal.getCc().getCapita(idcapitan).getRebels().keySet()));
+	                	for (String s2: rebs){
+	                		rebel.addItem(s2);
+	                	}
 	                }
                 }
             }
 		});
 		
+		rebel.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	idrebelde = rebel.getSelectedItem().toString();
+                }
+            }
+        });
+		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("MENU CAPITAN");
-				String us = user.getText();
-				String pa = String.valueOf(pass.getPassword());
-				System.out.println("El valor de usuario: " +us);
-				System.out.println("Contraseña: " + pa);
-				if (Principal.getCc().login(us, pa) != null){
-					deleteView();
-					Principal.loadMenuCapita();
+				if (box.getSelectedIndex() == 0){
+					String us = user.getText();
+					String pa = String.valueOf(pass.getPassword());
+					System.out.println("El valor de usuario: " +us);
+					System.out.println("Contraseña: " + pa);
+					if (Principal.getCc().login(us, pa) != null){
+						deleteView();
+						Principal.loadMenuCapita();
+					}
+					else {
+						JOptionPane.showMessageDialog(Principal.getWindow(), "Usuario y/o contraseña incorrectos");
+					}
 				}
 				else {
-					JOptionPane.showMessageDialog(Principal.getWindow(), "Usuario y/o contraseña incorrectos");
+					System.out.println("Iniciamos sesión como rebelde " + idrebelde + " del capitan "+ idcapitan);
+					deleteView();
+					Principal.loadSessioRebel(idcapitan,idrebelde);
 				}
 			}
 		});
@@ -176,7 +225,6 @@ public class Login extends JPanelBg{
 		box.removeAllItems();
 		box.addItem("Capitán");
 		for (String s : caps){
-			System.out.println("CAPITAN: " + s);
 			box.addItem("Rebelde del capitán: " + s);
 		}
 	}
@@ -192,7 +240,8 @@ public class Login extends JPanelBg{
 			}
 			++i;
 		}			
+		++i;
 		String id = s.substring(i, s.length());
-		return s;
+		return id;
 	}
 }

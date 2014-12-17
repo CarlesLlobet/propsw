@@ -29,7 +29,6 @@ public class ModificarExode extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	private String data[] = {"NO","HAY","INFO","TODAVIA"};
 	
 	private JComboBox<String> addreb; 
 	private JComboBox<String> baseDesti;

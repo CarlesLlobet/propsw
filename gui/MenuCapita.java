@@ -17,6 +17,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class MenuCapita extends JPanelBg {
 	
@@ -123,8 +124,6 @@ public class MenuCapita extends JPanelBg {
         verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(verticalBox);
         
-		
-
         Box horizontalBox = Box.createHorizontalBox();
         verticalBox.add(horizontalBox);
         
@@ -141,8 +140,6 @@ public class MenuCapita extends JPanelBg {
         
         Component horizontalGlue = Box.createHorizontalGlue();
         horizontalBox.add(horizontalGlue);
-        
-                
         
         Component verticalStrut_1 = Box.createVerticalStrut(20);
         verticalBox.add(verticalStrut_1);
@@ -191,42 +188,34 @@ public class MenuCapita extends JPanelBg {
         		int val = box.getSelectedIndex();
         		switch(val){
     		case 0:
-    			System.out.println("To gestio rebels");
     			deleteView();
     			Principal.loadGestioRebel();
     			break;
     		case 1:
-    			System.out.println("To gestio galaxia");
     			deleteView();
     			Principal.loadGestioGalaxia();
     			break;
     		case 2:
-    			System.out.println("To gestio exode");
     			deleteView();
     			Principal.loadGestioExode();
     			break;
     		case 3:
-    			System.out.println("Gestio capita");
     			deleteView();
     			Principal.loadGestioCapita();
     			break;
     		case 4: //ejecutar exodo
-    			System.out.println("Executar exode");
     			int val1 = exode.getSelectedIndex();
     			if(val1 > 0){
     				String idEx = exode.getSelectedItem().toString();
     				int val2 = exec.getSelectedIndex();
     				try {
-    					System.out.println("VAL2: " + String.valueOf(val2));
 						Principal.getEc().execucio(idEx, val2);
+						JOptionPane.showMessageDialog(Principal.getWindow(), "Exodo ejecutado correctamente.");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
     			}
-    			else System.out.println("Escoge un exodo correcto");
-    			break;
-    		default:
-        		System.out.println("Seleccionado: " + String.valueOf(val));
+    			else JOptionPane.showMessageDialog(Principal.getWindow(), "Escoja un éxodo correcto.");
     			break;
         		}
         	}
@@ -253,7 +242,6 @@ public class MenuCapita extends JPanelBg {
 	
 	public void config(){
 		box.requestFocusInWindow();
-		
 		//Seleccionamos el botón de acceder como acción principal al pulsar intro
 		//JRootPane rootPane = SwingUtilities.getRootPane(btnAcceder); 
 		//r/ootPane.setDefaultButton(btnAcceder);
