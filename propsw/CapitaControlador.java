@@ -330,6 +330,18 @@ public class CapitaControlador {
 		return ordenarArrayString(exodes);
 	}
 	
+	public ArrayList<String> arrayListExodesOrdReb(String idcap, String idReb){
+		ArrayList<String> llistexodes= new ArrayList<String>(getCapita(idcap).getGalaxia().getExodes());		
+		ArrayList<String> exodes = new ArrayList<String>();
+		for(String s : llistexodes){
+			if (getCapita(idcap).getGalaxia().getExode(s).getRebels().contains(idReb)){
+				exodes.add(s);
+			}
+		}
+		//Ho ordenem:
+		return ordenarArrayString(exodes);
+	}
+	
 	
 	/**
 	 * Carrega el fitxer binari que cont� el contenidor de capitans

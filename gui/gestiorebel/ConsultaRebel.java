@@ -28,7 +28,7 @@ public class ConsultaRebel extends JPanel{
 	private JList<String> list;
 	private DefaultListModel<String> m;
 	private String rebel;
-	
+	private boolean consulta = false;
 	public ConsultaRebel(){
 		setBackground(new Color(0,0,0,0));
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -94,33 +94,53 @@ public class ConsultaRebel extends JPanel{
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
 		add(horizontalGlue_1);
 		
-		Principal.getCc().getCapita().getRebels().keySet();
-
 		comboBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED){
-					int val = comboBox.getSelectedIndex();
-					if (val > 0){
-						if (rebel!= null){
-							ArrayList<Integer> c = Principal.getEc().getCaminsExode(comboBox.getSelectedItem().toString()).get(rebel);
+					
+						int val = comboBox.getSelectedIndex();
+						if (val > 0){
+							if (!consulta){
+								if (rebel!= null){
+									ArrayList<Integer> c = Principal.getEc().getCaminsExode(comboBox.getSelectedItem().toString()).get(rebel);
+										if(c!= null){
+										for(Integer i : c){
+											System.out.println("Elemento i: " + i.toString());
+											String s = i.toString();
+											m.addElement(s);
+										}
+									}
+								}
+								else {
+									JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione un rebelde");
+								}
+							}
+							else{
+								ArrayList<Integer> c = Principal.getEc().getCaminsExode(comboBox.getSelectedItem().toString()).get(rebel);
 								if(c!= null){
-								for(Integer i : c){
-									System.out.println("Elemento i: " + i.toString());
-									String s = i.toString();
-									m.addElement(s);
+									for(Integer i : c){
+										System.out.println("Elemento i: " + i.toString());
+										String s = i.toString();
+										m.addElement(s);
+									}
 								}
 							}
 						}
-						else {
-							JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione un rebelde");
-						}
 					}
-				}
 			}
 		});
 	}
 		
+	public void calcula(String idcap, String idreb){
+		consulta = true;
+		rebel = idreb;
+		ArrayList<String> exodes= new ArrayList<String>(Principal.getCc().arrayListExodesOrdReb(idcap,idreb));
+		for (String s : exodes){
+			comboBox.addItem(s);
+		}	
+		
+	}
 	
 	public void refresh(String idReb){
 		System.out.println("REFRESH");
