@@ -62,7 +62,7 @@ public class GalaxiaControlador{
 	
 	//AFEGIT
 	public void addBase(String nom, String idCap) throws IOException{
-		new Base(capiControl.getGalaxia(idCap));
+		new Base(nom, capiControl.getGalaxia(idCap));
 	}
 
 	/**

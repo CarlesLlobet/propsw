@@ -1,11 +1,11 @@
 Capita:tato,tato
-Nombre rebels:50
+Nombre rebels:20
 Nom rebel:1,ab
 Nom rebel:2,cc
 Nom rebel:3,cc
 Nom rebel:4,ee
 Nom rebel:5,es
-Nombre bases:40
+Nombre bases:20
 Nom base:0,aa
 Nom base:1,bb
 Nom base:3,dd
