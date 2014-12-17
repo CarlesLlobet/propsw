@@ -166,6 +166,7 @@ public class Login extends JPanelBg{
 	                	lblContrasea.setVisible(false);
 	                	pass.setVisible(false);
 	                	idcapitan = rebelCapId(box.getSelectedItem().toString());
+	                	Principal.getCc().setIdCap(idcapitan);
 	                	ArrayList<String> rebs = Principal.getCc().ordenarArrayString(new ArrayList<String>(Principal.getCc().getCapita(idcapitan).getRebels().keySet()));
 	                	for (String s2: rebs){
 	                		rebel.addItem(s2);

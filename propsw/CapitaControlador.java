@@ -55,6 +55,7 @@ public class CapitaControlador {
 	}
 	//Get galaxia del capit� que ha iniciat sessi�
 	public Galaxia getGalaxia() {
+		String idCap = this.idCap;
 		return contCap.getCapita(idCap).getGalaxia();
 	}
 
@@ -424,5 +425,10 @@ public class CapitaControlador {
 	 */
 	public static void setContRebel(int i){
 		Rebel.setCont(i);
+	}
+	
+	
+	public void setIdCap(String idCap){
+		this.idCap = idCap;
 	}
 }
