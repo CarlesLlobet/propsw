@@ -75,6 +75,20 @@ public class GalGest extends JPanelBg {
         guardar.setAlignmentX(0.5f);
         horizontalBox_1.add(guardar);
         
+        guardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Principal.getCc().exportarContenidorCapitans();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("Error al guardar!");
+				}
+			}
+		});
+        
         Component horizontalStrut_1 = Box.createHorizontalStrut(20);
         horizontalStrut_1.setPreferredSize(new Dimension(20, 40));
         horizontalStrut_1.setMinimumSize(new Dimension(20, 40));

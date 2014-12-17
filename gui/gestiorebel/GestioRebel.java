@@ -83,6 +83,20 @@ public class GestioRebel extends JPanelBg{
 				guardar.setAlignmentX(0.5f);
 				horizontalBox_1.add(guardar);
 				
+				guardar.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						try {
+							Principal.getCc().exportarContenidorCapitans();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							System.out.println("Error al guardar!");
+						}
+					}
+				});
+				
 				Component horizontalStrut = Box.createHorizontalStrut(20);
 				horizontalStrut.setPreferredSize(new Dimension(20, 40));
 				horizontalStrut.setMinimumSize(new Dimension(20, 40));
