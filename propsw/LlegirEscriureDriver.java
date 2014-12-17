@@ -37,7 +37,12 @@ public class LlegirEscriureDriver {
 	//Es crea una instància de classe Galaxia
 		Capita capita=new Capita();
 	CapitaControlador capi=new CapitaControlador();
-	capi.inicialitzar();
+	try {
+		capi.inicialitzar();
+	} catch (Exception e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	
 	GalaxiaControlador gControl=new GalaxiaControlador(capi);
 	LlegirEscriure lle=new LlegirEscriure();

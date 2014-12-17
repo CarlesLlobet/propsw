@@ -52,107 +52,107 @@ public class ExodeControladorDriver {
 	}
 	
 	public static void main(String[] args) throws IOException {
-	//INICIALITZACIONS NECESARIES PER PROVAR LA CLASE
-		ExodeControlador c = new ExodeControlador();
-	//es crea el capita
-		c.login("foo", "foooooo");
-	//s'afegeixen 6 bases
-		new Base(c.getGalaxia());
-		new Base(c.getGalaxia());
-		new Base(c.getGalaxia());
-		new Base(c.getGalaxia());
-		new Base(c.getGalaxia());
-		new Base(c.getGalaxia());
-	//es crean conexions entre les anteriors bases
-		c.getGalaxia().conectarNodes(0, 1, 5, 5.0);
-		c.getGalaxia().conectarNodes(0, 2, 7, 5.0);
-		c.getGalaxia().conectarNodes(1, 3, 2, 5.0);
-		c.getGalaxia().conectarNodes(1, 2, 1, 5.0);
-		c.getGalaxia().conectarNodes(2, 3, 9, 5.0);
-		c.getGalaxia().conectarNodes(2, 4, 4, 5.0);
-		c.getGalaxia().conectarNodes(2, 5, 3, 5.0);
-		c.getGalaxia().conectarNodes(4, 3, 2, 5.0);
-	//es crea l'exode, amb base inicial 0
-		String idExode = c.crearExode(0);
-	//
-		
-		InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader (isr);
-        intro();
-        menu();
-        int op = Integer.parseInt(br.readLine());
-        while (op != 0) {
-			switch(op) 
-			{
-				case 1: //Executar BFS
-					c.execucio(idExode, 0);
-					break;
-					
-				case 2: // Executar DFS
-					c.execucio(idExode, 1);
-					break;
-					
-				case 3: // Executar Dijkstra
-					c.execucio(idExode, 2);
-					break;
-					
-				case 4://Consultar base inicial
-					System.out.println("La base "+ c.getIniciExode(idExode) +" es el punt de partida de l'exode");
-					break;
-					
-				case 5: //Consultar nombre rebels de l'exode
-					System.out.println("Participen "+ c.getRebelsSize(idExode) +" rebels a l'exode " + idExode);
-					break;
-					
-				case 6: //Consultar els rebels de l'exode
-					System.out.println("S'indica idRebel = BaseDesti \n"+c.getRebelsExode(idExode));
-					break;
-				
-				case 7: //Consultar els camins dels rebels de l'exode
-					System.out.println("Camins dels rebels: "+c.getCaminsExode(idExode));
-					break;
-					
-				case 8: //Consultar el flow de l'exode
-					System.out.println("Han arribat " +c.getFlowExode(idExode)+ " al seu desti");
-					break;
-					
-				case 9: //Consultar el cost de l'exode
-					System.out.println("El cost total de l'exode es de: " +c.getCostExode(idExode));
-					break;
-					
-				case 10: //Consultar el coll d'ampolla
-					ArrayList<Integer> coll = c.getAmpollaExode(idExode);
-					if (coll.size() <= 0)System.out.println("NO tenim coll d'ampolla");
-					else System.out.println("Les seguents arestes formen el coll d'ampolla: " + coll);
-					break;
-					
-				case 11: //afegir un rebel a l'exode
-					String idR = c.crearRebel("Rebel0");
-					System.out.println("El rebel amb id: "+ idR +" S'afegira, ");
-					System.out.println("introdueix la base de desti del rebel:");
-					c.afegirRebelExode(idExode, idR, Integer.parseInt(br.readLine()));
-					
-					break;
-					
-				case 12: //modificar un rebel de l'exode
-					System.out.println("introdueix la id del rebel que vols modificar:");
-					String idRm = br.readLine();
-					System.out.println("introdueix la nova base de desti del rebel:");
-					c.modificarRebelExode(idExode, idRm, Integer.parseInt(br.readLine()));
-					break;
-					
-				case 13: //Treure rebel de l'exode
-					System.out.println("introdueix la id del rebel que vols treure:");
-					String idRd = br.readLine();
-					c.treureRebelExode(idExode, idRd);
-					break;
-					
-				default:
-					System.out.println("No existeix aquesta opci�");
-					break;
-			}
-			menu();
-			op = Integer.parseInt(br.readLine());
-		}
+//	//INICIALITZACIONS NECESARIES PER PROVAR LA CLASE
+//		ExodeControlador c = new ExodeControlador();
+//	//es crea el capita
+//		c.login("foo", "foooooo");
+//	//s'afegeixen 6 bases
+//		new Base(c.getGalaxia());
+//		new Base(c.getGalaxia());
+//		new Base(c.getGalaxia());
+//		new Base(c.getGalaxia());
+//		new Base(c.getGalaxia());
+//		new Base(c.getGalaxia());
+//	//es crean conexions entre les anteriors bases
+//		c.getGalaxia().conectarNodes(0, 1, 5, 5.0);
+//		c.getGalaxia().conectarNodes(0, 2, 7, 5.0);
+//		c.getGalaxia().conectarNodes(1, 3, 2, 5.0);
+//		c.getGalaxia().conectarNodes(1, 2, 1, 5.0);
+//		c.getGalaxia().conectarNodes(2, 3, 9, 5.0);
+//		c.getGalaxia().conectarNodes(2, 4, 4, 5.0);
+//		c.getGalaxia().conectarNodes(2, 5, 3, 5.0);
+//		c.getGalaxia().conectarNodes(4, 3, 2, 5.0);
+//	//es crea l'exode, amb base inicial 0
+//		String idExode = c.crearExode(0);
+//	//
+//		
+//		InputStreamReader isr = new InputStreamReader(System.in);
+//        BufferedReader br = new BufferedReader (isr);
+//        intro();
+//        menu();
+//        int op = Integer.parseInt(br.readLine());
+//        while (op != 0) {
+//			switch(op) 
+//			{
+//				case 1: //Executar BFS
+//					c.execucio(idExode, 0);
+//					break;
+//					
+//				case 2: // Executar DFS
+//					c.execucio(idExode, 1);
+//					break;
+//					
+//				case 3: // Executar Dijkstra
+//					c.execucio(idExode, 2);
+//					break;
+//					
+//				case 4://Consultar base inicial
+//					System.out.println("La base "+ c.getIniciExode(idExode) +" es el punt de partida de l'exode");
+//					break;
+//					
+//				case 5: //Consultar nombre rebels de l'exode
+//					System.out.println("Participen "+ c.getRebelsSize(idExode) +" rebels a l'exode " + idExode);
+//					break;
+//					
+//				case 6: //Consultar els rebels de l'exode
+//					System.out.println("S'indica idRebel = BaseDesti \n"+c.getRebelsExode(idExode));
+//					break;
+//				
+//				case 7: //Consultar els camins dels rebels de l'exode
+//					System.out.println("Camins dels rebels: "+c.getCaminsExode(idExode));
+//					break;
+//					
+//				case 8: //Consultar el flow de l'exode
+//					System.out.println("Han arribat " +c.getFlowExode(idExode)+ " al seu desti");
+//					break;
+//					
+//				case 9: //Consultar el cost de l'exode
+//					System.out.println("El cost total de l'exode es de: " +c.getCostExode(idExode));
+//					break;
+//					
+//				case 10: //Consultar el coll d'ampolla
+//					ArrayList<Integer> coll = c.getAmpollaExode(idExode);
+//					if (coll.size() <= 0)System.out.println("NO tenim coll d'ampolla");
+//					else System.out.println("Les seguents arestes formen el coll d'ampolla: " + coll);
+//					break;
+//					
+//				case 11: //afegir un rebel a l'exode
+//					String idR = c.crearRebel("Rebel0");
+//					System.out.println("El rebel amb id: "+ idR +" S'afegira, ");
+//					System.out.println("introdueix la base de desti del rebel:");
+//					c.afegirRebelExode(idExode, idR, Integer.parseInt(br.readLine()));
+//					
+//					break;
+//					
+//				case 12: //modificar un rebel de l'exode
+//					System.out.println("introdueix la id del rebel que vols modificar:");
+//					String idRm = br.readLine();
+//					System.out.println("introdueix la nova base de desti del rebel:");
+//					c.modificarRebelExode(idExode, idRm, Integer.parseInt(br.readLine()));
+//					break;
+//					
+//				case 13: //Treure rebel de l'exode
+//					System.out.println("introdueix la id del rebel que vols treure:");
+//					String idRd = br.readLine();
+//					c.treureRebelExode(idExode, idRd);
+//					break;
+//					
+//				default:
+//					System.out.println("No existeix aquesta opci�");
+//					break;
+//			}
+//			menu();
+//			op = Integer.parseInt(br.readLine());
+//		}
 	}
 }
