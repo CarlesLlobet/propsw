@@ -22,7 +22,7 @@ public class ConsultaRebel extends JPanel{
 	private JLabel lblNewLabel;
 	private JComboBox comboBox;
 	private JList list;
-	private String data[] = {"NO", "HAY", "INFO", "TODAVIA"};
+	private String data[] = {};
 
 	
 	public ConsultaRebel(){

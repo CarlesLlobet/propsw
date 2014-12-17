@@ -273,18 +273,7 @@ public class GestioCapitans extends JPanelBg {
             }
         });
         
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-	  	      @Override
-	  	      public boolean dispatchKeyEvent(KeyEvent e) { 	    	
-	  	    	if (isVisible()) {
-	  	    		if (e.getKeyCode() == 27){ //activar boton atras
-	  	        		deleteView();
-	  	        		Principal.loadMenuCapita();
-	  	    		}
-	  	        }
-	  	    	 return false;
-	  	      }
-	        });		
+
 
         //FALTA PROGRAMAR LA LOGICA SEGUN EXP/IMPORTAR llamadas correspondientes. IMPEXP no tiene lógica ninguna. (matizar)
         

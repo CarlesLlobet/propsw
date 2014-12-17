@@ -1,5 +1,6 @@
 package gui;
 
+import gui.execucioexode.ExecucioExode;
 import gui.gestiocapitans.GestioCapitans;
 import gui.gestioexode.GestioExode;
 import gui.gestiogalaxia.GalGest;
@@ -10,7 +11,6 @@ import java.awt.Component;
 import java.io.IOException;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import propsw.CapitaControlador;
 import propsw.ExodeControlador;
@@ -99,6 +99,13 @@ public class Principal {
 		GestioCapitans gc = new GestioCapitans();
 		container.add(gc, "gestiocap");
 		card.show(container, "gestiocap");
+		window.setVisible(true);
+	}
+	
+	public static void loadExecucioExode(){
+		ExecucioExode ee = new ExecucioExode();
+		container.add(ee, "execex");
+		card.show(container,"execex");
 		window.setVisible(true);
 	}
 	

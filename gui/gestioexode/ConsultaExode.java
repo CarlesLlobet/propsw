@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.BoxLayout;
 
 public class ConsultaExode extends JPanel{
 	
@@ -64,8 +65,7 @@ public class ConsultaExode extends JPanel{
 	
 	
 	public ConsultaExode(){
-		
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		Box verticalBox = Box.createVerticalBox();
 		verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -75,7 +75,7 @@ public class ConsultaExode extends JPanel{
 		verticalBox.add(verticalStrut_2);
 		
 		graphComponent = new GrafStarWarsPanel();
-		graphComponent.setMaximumSize(new Dimension(600, 350));
+		graphComponent.setMaximumSize(new Dimension(4525623, 5962562));
 		graphComponent.setMinimumSize(new Dimension(400, 250));
 		graphComponent.setSize(new Dimension(600, 350));
 		try{
@@ -84,11 +84,13 @@ public class ConsultaExode extends JPanel{
 		verticalBox.add(graphComponent);
 		
 		JLabel labelInfo = new JLabel("Los cuellos de botella se indican con aristas en rojo");
+		labelInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
 		labelInfo.setForeground(Color.RED);
 		verticalBox.add(labelInfo);
 		
 		marcarDesmarcarCuellos = new JButton();
-		marcarDesmarcarCuellos.setText("Marcar cuellos de botella");
+		marcarDesmarcarCuellos.setAlignmentX(Component.CENTER_ALIGNMENT);
+		marcarDesmarcarCuellos.setText("Cuellos de botella");
 		marcarDesmarcarCuellos.addActionListener(new ActionListener() {
 			
 			@Override
@@ -114,48 +116,66 @@ public class ConsultaExode extends JPanel{
 		horizontalBox0.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox.add(horizontalBox0);
 		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalBox0.add(horizontalGlue);
+		
 		textoFlow = new JTextField("MaxFlow: ");
 		textoFlow.setMinimumSize(new Dimension(50,15));
 		textoFlow.setMaximumSize(new Dimension(50,15));
 		horizontalBox0.add(textoFlow);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		horizontalStrut.setMaximumSize(new Dimension(20, 20));
+		horizontalBox0.add(horizontalStrut);
 		
 		textoCoste= new JTextField("Coste: ");
 		textoCoste.setMinimumSize(new Dimension(50,15));
 		textoCoste.setMaximumSize(new Dimension(50,15));
 		horizontalBox0.add(textoCoste);
 		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		horizontalStrut_1.setMaximumSize(new Dimension(20, 20));
+		horizontalBox0.add(horizontalStrut_1);
+		
 		textoDestinos= new JTextField("Rebeldes que llegan al destino: ");
 		textoDestinos.setMinimumSize(new Dimension(250,15));
 		textoDestinos.setMaximumSize(new Dimension(250,15));
 		horizontalBox0.add(textoDestinos);
 		
+		Component horizontalGlue_1 = Box.createHorizontalGlue();
+		horizontalBox0.add(horizontalGlue_1);
+		
 		Box horizontalBox = Box.createHorizontalBox();
 		horizontalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox.add(horizontalBox);
 		
-		JLabel labelRebelCombo = new JLabel("Rebel");
+		Component horizontalGlue_3 = Box.createHorizontalGlue();
+		horizontalBox.add(horizontalGlue_3);
+		
+		JLabel labelRebelCombo = new JLabel("Rebelde:");
 		horizontalBox.add(labelRebelCombo);
 		
 		rebelsCombo = new JComboBox<String>();
+		rebelsCombo.setMaximumSize(new Dimension(100, 20));
 		rebelsCombo.setVisible(true);
 		horizontalBox.add(rebelsCombo);
 		
-		
-		Box horizontalBox2 = Box.createHorizontalBox();
-		horizontalBox2.setAlignmentX(Component.CENTER_ALIGNMENT);
-		verticalBox.add(horizontalBox2);
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		horizontalStrut_2.setMaximumSize(new Dimension(20, 20));
+		horizontalBox.add(horizontalStrut_2);
 		
 		JLabel labelCamiList = new JLabel("Detalle camino");
-		horizontalBox2.add(labelCamiList);
-		
-		listaBasesCamino = new JList<String>();
-		listaBasesCamino.setVisible(true);
+		horizontalBox.add(labelCamiList);
 		listModel = new DefaultListModel<String>();
+
+		listaBasesCamino = new JList<String>();
+		horizontalBox.add(listaBasesCamino);
+		listaBasesCamino.setVisible(true);
 		listaBasesCamino.setModel(listModel);
 		listaBasesCamino.setMinimumSize(new Dimension(50,100));
-		horizontalBox2.add(listaBasesCamino);
 		
-		
+		Component horizontalGlue_2 = Box.createHorizontalGlue();
+		horizontalBox.add(horizontalGlue_2);
 		
 		
 		rebelsCombo.addItemListener(new ItemListener() {
@@ -163,9 +183,7 @@ public class ConsultaExode extends JPanel{
 
 			@Override
 			public void itemStateChanged(ItemEvent arg0) {
-				
 				if (arg0.getStateChange() == ItemEvent.SELECTED) {
-					
 					  if(basesCamiSeleccionat!=null){
 						  for (int i = 0; i < basesCamiSeleccionat.size()-1; i++) {
 			        		  graphComponent.coloreaAresta(basesCamiSeleccionat.get(i), basesCamiSeleccionat.get(i+1), "blue");

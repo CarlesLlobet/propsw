@@ -46,30 +46,22 @@ public class GestioExode extends JPanelBg{
 		Box verticalBox = Box.createVerticalBox();
 		verticalBox.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(verticalBox);
+
+		Box horizontalBox_1 = Box.createHorizontalBox();
+		horizontalBox_1.setAlignmentY(0.5f);
+		verticalBox.add(horizontalBox_1);
 		
-				
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		horizontalStrut_1.setPreferredSize(new Dimension(20, 40));
+		horizontalStrut_1.setMinimumSize(new Dimension(20, 40));
+		horizontalStrut_1.setMaximumSize(new Dimension(20, 40));
+		horizontalBox_1.add(horizontalStrut_1);
 		
-				
-				Box horizontalBox_1 = Box.createHorizontalBox();
-				horizontalBox_1.setAlignmentY(0.5f);
-				verticalBox.add(horizontalBox_1);
-				
-				Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-				horizontalStrut_1.setPreferredSize(new Dimension(20, 40));
-				horizontalStrut_1.setMinimumSize(new Dimension(20, 40));
-				horizontalStrut_1.setMaximumSize(new Dimension(20, 40));
-				horizontalBox_1.add(horizontalStrut_1);
-				
-				
-				atras = new JButton("Atr\u00E1s");
-				atras.setAlignmentX(0.5f);
-				horizontalBox_1.add(atras);
-				atras.addActionListener(new ActionListener() {
-	        	public void actionPerformed(ActionEvent arg0) {
-	        		deleteView();
-	        		Principal.loadMenuCapita();
-	        	}
-	        });
+		
+		atras = new JButton("Atr\u00E1s");
+		atras.setAlignmentX(0.5f);
+		horizontalBox_1.add(atras);
+
 				
 				
 		Component horizontalGlue_1 = Box.createHorizontalGlue();
@@ -183,17 +175,7 @@ public class GestioExode extends JPanelBg{
 		                case 0: //consultar
 	                		panel.setVisible(true);
 	                		actuPickExode();
-	                		int val3 = pickexode.getSelectedIndex();
-	                		if(val3 > 0){
-	                			idEx = pickexode.getSelectedItem().toString();
-	                			try {
-									conse.actualitza(idEx);
-								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-	                		}
-	                		else conse.reset();
+	                		conse.reset();
 	                		card.show(panel,"consex");
 	                		eliminar.setVisible(false);
 	                		break;
@@ -205,14 +187,9 @@ public class GestioExode extends JPanelBg{
 	                		eliminar.setVisible(false);
 	                		break;
 	                	case 2: // modificar
-	                		int val2 = pickexode.getSelectedIndex();
 	                		actuPickExode();
 	                		panel.setVisible(true);
-	                		if(val2 > 0){
-	                			idEx = pickexode.getSelectedItem().toString();
-	                			me.actualitza(idEx);
-	                		}
-	                		else me.reset();
+	                		me.reset();
 	                		card.show(panel,"mod");	            
 	                		eliminar.setVisible(false);
 	                		break;
@@ -222,8 +199,6 @@ public class GestioExode extends JPanelBg{
 	                		actuPickExode();
 	                		break;
 	                }
-	                revalidate();
-	                repaint();
                 }
             }
 		});
@@ -233,12 +208,17 @@ public class GestioExode extends JPanelBg{
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED){
 					int val = pickexode.getSelectedIndex();
-					if (val == 0) idEx = null;
+					if (val == 0) {
+						idEx = null;
+						int val2 = accio.getSelectedIndex();
+						if (val2 == 0) conse.reset();
+						else if (val2 == 2) me.reset();
+					}
 					else idEx = pickexode.getSelectedItem().toString();
 					int val2 = accio.getSelectedIndex();
 					switch(val2){
 						case 0: //consulta
-							if (val > 0){
+							if (idEx != null){
 								try {
 									conse.actualitza(idEx);
 								} catch (IOException e1) {
@@ -249,49 +229,55 @@ public class GestioExode extends JPanelBg{
 							else conse.reset();
 							break;
 						case 2: // modifica
-							if (val > 0) {
-								me.actualitza(pickexode.getSelectedItem().toString());
+							if (idEx != null) {
+								me.reset();
+								me.actualitza(idEx);
 							}
 							else me.reset();
 							break;
-						default:
-							System.out.println("Otras opciones");
-							break;
 					}
 				}
+                revalidate();
+                repaint();
 			}
 		});
 		
 		
 		eliminar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		if (accio.getSelectedIndex() == 0) {
-        			JOptionPane.showMessageDialog(Principal.getWindow(), "Por favor, seleccione una opción válida");
-        		}
-        		else if (pickexode.getSelectedIndex() == 0 && pickexode.isVisible()) {
-        			JOptionPane.showMessageDialog(Principal.getWindow(), "Por favor, seleccione una éxodo");
-        		}
+        		if (accio.getSelectedIndex() == 0) alertOpcion();
+        		else if (pickexode.getSelectedIndex() == 0 && pickexode.isVisible()) alertExodo();
         		else {
-        			System.out.println("do something");
+        			String idEx = pickexode.getSelectedItem().toString();
+        			try {
+						Principal.getCc().getGalaxia().removeExode(idEx);
+						JOptionPane.showMessageDialog(Principal.getWindow(), "Eliminado éxodo: " + idEx);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
         		}
+        		actuPickExode();
         	}	
-        });		
+        });			
 		
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-	  	      @Override
-	  	      public boolean dispatchKeyEvent(KeyEvent e) { 	    	
-	  	    	if (isVisible()) {
-	  	    		if (e.getKeyCode() == 27){ //activar boton atras
-	  	        		deleteView();
-	  	        		Principal.loadMenuCapita();
-	  	    		}
-	  	        }
-	  	    	 return false;
-	  	      }
-	        });		
-
+		atras.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent arg0) {
+	    		deleteView();
+	    		Principal.loadMenuCapita();
+	    	}
+		});
 		
 	}
+	
+	private void alertExodo(){
+		JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione un éxodo válido");
+	}
+	
+	private void alertOpcion(){
+		JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione una opción válida");
+	}
+	
 	
 	public void config(){
 		//Aquesta funcio ens serveix per a establir a quin objecte s'ha de fer focus al carregar la vista

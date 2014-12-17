@@ -37,6 +37,9 @@ public class GalGest extends JPanelBg {
     private GalMod mg = new GalMod();
     private GrafStarWarsPanel gd = new GrafStarWarsPanel();
 	
+    private String idEx = null;
+    
+    
 	public GalGest() {
 		
 		//PREPARAMOS LA VISTA
@@ -168,7 +171,7 @@ public class GalGest extends JPanelBg {
                 	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
 	                int val = box.getSelectedIndex();
 	                switch(val){
-	                	case 0: 
+	                	case 0: //consulta
 	                		//Ocultamos el botón, que no necesitamos
 	                		impExp.setVisible(false);
 							try {
@@ -186,14 +189,14 @@ public class GalGest extends JPanelBg {
 	                        panel.add(gd,"draw");
 	                		card.show(panel,"draw");
 	                		break;
-	                	case 1:
+	                	case 1: //Crear
 	                		//Ocultamos el botón, que no necesitamos
 	                		impExp.setVisible(false);
 	                		//mg.reset();
 	                		//mg.actuCombos();
 	                		card.show(panel,"modify");
 	                		break;
-	                	case 2:
+	                	case 2: //Modificar
 	                		//Marcamos como visible el botón importar/exportar y le asignamos el texto según su función.
 	                		impExp.setVisible(true);
 	                		impExp.setText("Importar");
@@ -218,21 +221,6 @@ public class GalGest extends JPanelBg {
                 }
             }
         });
-        
-        //FALTA PROGRAMAR LA LOGICA SEGUN EXP/IMPORTAR llamadas correspondientes. IMPEXP no tiene lógica ninguna. (matizar)
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-	  	      @Override
-	  	      public boolean dispatchKeyEvent(KeyEvent e) { 	    	
-	  	    	if (isVisible()) {
-	  	    		if (e.getKeyCode() == 27){ //activar boton atras
-	  	        		deleteView();
-	  	        		Principal.loadMenuCapita();
-	  	    		}
-	  	        }
-	  	    	 return false;
-	  	      }
-	        });		
-
 	}
 	
 	public void config(){

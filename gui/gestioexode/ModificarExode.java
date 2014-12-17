@@ -14,13 +14,14 @@ import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.sql.rowset.BaseRowSet;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ModificarExode extends JPanel {
@@ -37,7 +38,6 @@ public class ModificarExode extends JPanel {
 	private JComboBox<String> ejec;
 	private JComboBox<String> rebelde;
 	private JComboBox<String> addbasecamino;
-	private JComboBox<String> removebasecamino;
 	private JComboBox<String> destireb;
 	private JComboBox<String> modreb; 
 	private JList<String> list;
@@ -45,11 +45,13 @@ public class ModificarExode extends JPanel {
 	private JLabel lblEjecutar;
 	private Integer numexecucio;
 	private String idEx;
-	
+	private DefaultListModel<String> m;
+	private boolean panels;
 	private ArrayList<String> rebelsExode; //rebels que participen a l'exode	   
 	private ArrayList<String> rebelsCapita; //tots els rebels del capita
 	private ArrayList<String> rebelsExclosos; //rebels que no participen
-	
+	private ArrayList<Integer> basesCamiSeleccionat;
+
 	
 	public ModificarExode() {
 		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -281,6 +283,9 @@ public class ModificarExode extends JPanel {
 		horizontalBox_6.setAlignmentY(0.5f);
 		verticalBox_2.add(horizontalBox_6);
 		
+		Component horizontalGlue_13 = Box.createHorizontalGlue();
+		horizontalBox_6.add(horizontalGlue_13);
+		
 		Box verticalBox_4 = Box.createVerticalBox();
 		verticalBox_4.setAlignmentY(Component.TOP_ALIGNMENT);
 		horizontalBox_6.add(verticalBox_4);
@@ -312,7 +317,10 @@ public class ModificarExode extends JPanel {
 		lblCaminoAsignado.setAlignmentX(Component.CENTER_ALIGNMENT);
 		verticalBox_3.add(lblCaminoAsignado);
 		
-		list = new JList(data);
+		list = new JList<String>();
+		list.setVisible(true);
+		m = new DefaultListModel<String>();
+		list.setModel(m);
 		list.setAlignmentY(Component.TOP_ALIGNMENT);
 		verticalBox_3.add(list);
 		
@@ -350,13 +358,9 @@ public class ModificarExode extends JPanel {
 		Box horizontalBox_10 = Box.createHorizontalBox();
 		verticalBox_5.add(horizontalBox_10);
 		
-		JLabel lblEliminarBase = new JLabel("Eliminar base: ");
+		JLabel lblEliminarBase = new JLabel("Eliminar base seleccionada: ");
 		lblEliminarBase.setAlignmentX(Component.CENTER_ALIGNMENT);
 		horizontalBox_10.add(lblEliminarBase);
-		
-		removebasecamino = new JComboBox<String>();
-		removebasecamino.setMaximumSize(new Dimension(50, 23));
-		horizontalBox_10.add(removebasecamino);
 		
 		Component horizontalStrut_14 = Box.createHorizontalStrut(20);
 		horizontalStrut_14.setMaximumSize(new Dimension(20, 20));
@@ -365,6 +369,9 @@ public class ModificarExode extends JPanel {
 		JButton btnEliminarBase = new JButton("Eliminar");
 		horizontalBox_10.add(btnEliminarBase);
 		btnEliminarBase.setAlignmentX(0.5f);
+		
+		Component horizontalGlue_12 = Box.createHorizontalGlue();
+		horizontalBox_6.add(horizontalGlue_12);
 		
 		Component verticalStrut_4 = Box.createVerticalStrut(20);
 		verticalBox_1.add(verticalStrut_4);
@@ -407,8 +414,9 @@ public class ModificarExode extends JPanel {
 						rebelde.addItem(idreb);
 						baseDesti.setSelectedIndex(0);
 					}
+					else alertBaseRebel();
 				}
-				else System.out.println("Exodo nulo");
+				else alertExodo();
 			}
 		});
 		
@@ -425,8 +433,9 @@ public class ModificarExode extends JPanel {
 						modreb.setSelectedIndex(0);
 						destireb.setSelectedIndex(0);
 					}
+					alertBaseRebel();
 				}
-				else System.out.println("Exodo nulo");
+				else alertExodo();
 			}
 		});
 		
@@ -444,11 +453,47 @@ public class ModificarExode extends JPanel {
 						rebelde.removeItem(idreb);
 						borrarRebelde.setSelectedIndex(0);
 					}
+					else alertRebelde();
 				}
-				else System.out.println("Exodo nulo");
+				else alertExodo();
 			}
 		});
 		
+		rebelde.addItemListener(new ItemListener() {
+			@Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	if (idEx != null){
+                		basesCamiSeleccionat = new ArrayList<Integer>();
+	                	int val = rebelde.getSelectedIndex();
+	                	if (val > 0){
+	                		  addbasecamino.removeAllItems();
+		                	  String idReb = rebelde.getSelectedItem().toString();
+		                	  basesCamiSeleccionat = Principal.getEc().getCaminsExode(idEx).get(idReb);
+		                	  ArrayList<String> s = new ArrayList<String>(); //arraylist amb totes les bases de la galaxia
+		                	  try {
+		                		  s =Principal.getGc().arrayBaseOrd();
+		                	  } catch (IOException e1) {
+								e1.printStackTrace();
+		                	  }
+		                	  m.removeAllElements();
+		                	  if (basesCamiSeleccionat != null){
+			                	  for (String s2 : s) {
+			                		    if(basesCamiSeleccionat.contains(Integer.parseInt(s2))){
+				  			        		m.addElement(s2);
+			                		    }
+			                		    else{
+			                		    	addbasecamino.addItem(s2);
+			                		    }
+			                	  }
+		                	  }
+	                	}
+	                	else alertRebelde();
+                	}
+                	else alertExodo();
+                }
+			}
+		});
 		
 		btnMod.addActionListener(new ActionListener() {
 			@Override
@@ -466,7 +511,8 @@ public class ModificarExode extends JPanel {
 					}
 					iniciEx.setSelectedItem(0);
 				}
-				else System.out.println("Exodo nulo");
+				else alertExodo();
+
 			}
 		});
 		
@@ -478,17 +524,68 @@ public class ModificarExode extends JPanel {
 			}
 		});
 
+		//eliminamos una base del camino
 		btnEliminarBase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if(idEx != null){
+					if (rebelde.getSelectedIndex() > 0){
+						int index = list.getSelectedIndex();
+						if (index >= 0){
+							String idb = m.getElementAt(index);
+							m.removeElement(idb);
+							addbasecamino.addItem(idb);					
+							//Generem un array de ints que equival al nou cami a fixar
+							int i = 0;
+							ArrayList<Integer> b = new ArrayList<Integer>();
+							while (i < m.size()){
+								b.add(Integer.parseInt(m.getElementAt(i)));
+								++i;
+							}
+							String idreb = rebelde.getSelectedItem().toString();
+							try {
+								Principal.getEc().fixarCamiExode(idEx, idreb, b);
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+						else alertBase();
+					}
+					else alertRebelde();
+				}	
+				else alertExodo();
 			}
 		});
 		
 		btnAnadirBase.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				if(idEx != null){
+					if (rebelde.getSelectedIndex() > 0){
+						int index = list.getSelectedIndex();
+						if (index >= 0){
+							String idb = addbasecamino.getSelectedItem().toString();
+							m.add(index,idb);
+							addbasecamino.removeItem(idb);							
+							//Generem un array de ints que equival al nou cami a fixar
+							int i = 0;
+							ArrayList<Integer> b = new ArrayList<Integer>();
+							while (i < m.size()){
+								b.add(Integer.parseInt(m.getElementAt(i)));
+								++i;
+							}
+							String idreb = rebelde.getSelectedItem().toString();
+							try {
+								Principal.getEc().fixarCamiExode(idEx, idreb, b);
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+						else alertBase();
+					}
+					else alertRebelde();
+				}	
+				else alertExodo();
 			}
 		});
 
@@ -497,32 +594,60 @@ public class ModificarExode extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (idEx != null) {
 					try {
-						Principal.getEc().execucio(idEx, numexecucio);
-						System.out.println("Exodo ejecutado");
+						if(Principal.getEc().isExodeInvalid(idEx)) exodeInvalid();
+						else {
+							Principal.getEc().execucio(idEx, numexecucio);
+							alertEjecucion(idEx,numexecucio);
+						}
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
+				else alertExodo();
 			}
 		});
 	}
 	
-	/*
-		private JComboBox<String> addreb; 
-		private JComboBox<String> baseDesti;
-		private JComboBox<String> borrarRebelde;
-		private JComboBox<String> iniciEx;
-		private JComboBox<String> ejec;
-		private JComboBox<String> rebelde;
-		private JComboBox<String> addbasecamino;
-		private JComboBox<String> removebasecamino;
-		private JList<String> list;
-	 */
+	private void alertEjecucion(String s, int n){
+		String exec = null;
+		switch(n){
+			case 0:
+				exec = "FordFulkerson";
+				break;
+			case 1:
+				exec = "Edmonds-Karp";
+				break;
+			case 2:
+				exec = "Dijkstra";
+				break;
+		}
+		if(panels)JOptionPane.showMessageDialog(Principal.getWindow(), "Se ha ejecutado el exodo: " + s + " con el algoritmo: " + exec);
+	}
+	
+	private void exodeInvalid(){
+		if(panels)JOptionPane.showMessageDialog(Principal.getWindow(), "El éxodo es inválido, por favor repase los datos.");
+	}
+	private void alertBase(){
+		if(panels)JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione una base");
+	}
+	
+	private void alertExodo(){
+		if(panels)JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione un éxodo válido");
+	}
+	
+	private void alertRebelde(){
+		if(panels)JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione un rebelde válido");
+	}
+	
+	private void alertBaseRebel(){
+		if(panels)JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione un rebelde y una base");
+	}
 	
 	public void reset(){
 			idEx = null;
 			numexecucio = 0;
+			panels = false;
 		
 			addreb.removeAllItems();
 			addreb.addItem("Escoge rebelde");
@@ -536,7 +661,7 @@ public class ModificarExode extends JPanel {
 			iniciEx.removeAllItems();
 			iniciEx.addItem("Escoge base");
 			
-			ejec.setSelectedIndex(0);
+			//ejec.setSelectedIndex(0);
 			
 			rebelde.removeAllItems();
 			rebelde.addItem("Escoge rebelde");
@@ -544,47 +669,25 @@ public class ModificarExode extends JPanel {
 			addbasecamino.removeAllItems();
 			addbasecamino.addItem("Escoge base");
 			
-			removebasecamino.removeAllItems();
-			removebasecamino.addItem("Escoge base");
-			
 			modreb.removeAllItems();
 			modreb.addItem("Escoge rebelde");
 			
 			destireb.removeAllItems();
 			destireb.addItem("Escoge base");
 			
-			list = new JList(data);
-			
 			lblEjecutar.setText("Ejecución: ");
 			lblInicioxodo.setText("Inicio éxodo: ");
+			panels = true;
 	}
 	
 	public void actualitza(String s){
-		//s = idExode;
+		//s = idExode;E
 		System.out.println("Actualitza, del exode :" + s );
 		idEx = s;
 		initBases(); //inicializamos las bases de la galaxia en los comboboxes
 		initRebeldes();//inicializamos todos los combobox
 		lblInicioxodo.setText("Inicio éxodo: " + Principal.getEc().getIniciExode(s).toString());
 	}
-	
-	/*
-	 	private JComboBox<String> addreb; 
-		private JComboBox<String> baseDesti;
-		private JComboBox<String> borrarRebelde;
-		private JComboBox<String> iniciEx;
-		private JComboBox<String> ejec;
-		private JComboBox<String> rebelde;
-		private JComboBox<String> addbasecamino;
-		private JComboBox<String> removebasecamino;
-									destireb
-									modreb
-		private JList<String> list;
-		
-		private ArrayList<String> rebelsExode; //rebels que participen a l'exode	   
-		private ArrayList<String> rebelsCapita; //tots els rebels del capita
-		private ArrayList<String> rebelsExclosos; //rebels que no participen
-	 */
 	
 	private void initRebeldes(){
 		rebelsCapita = new ArrayList(Principal.getCc().arrayListRebelsOrd());
@@ -617,7 +720,6 @@ public class ModificarExode extends JPanel {
 			baseDesti.addItem(s);
 			destireb.addItem(s);
 			addbasecamino.addItem(s);
-			removebasecamino.addItem(s);
 			iniciEx.addItem(s);
 		}
 		String s = Principal.getEc().getIniciExode(idEx).toString();
