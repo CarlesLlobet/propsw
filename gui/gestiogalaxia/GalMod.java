@@ -17,6 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -88,23 +89,6 @@ public class GalMod extends JPanel{
 		
 		JButton btnAfegir = new JButton("Añadir");
 		horizontalBox_2.add(btnAfegir);
-		
-		btnAfegir.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String nom = nomBase.getText();
-				if (!nom.equals("")){
-					try {
-						Principal.getGc().addBase(nom);
-						actuCombos();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} 
-				}
-				nomBase.setText("");
-			}
-		});
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(20);
 		verticalStrut_1.setMaximumSize(new Dimension(30, 20));
@@ -383,12 +367,12 @@ public class GalMod extends JPanel{
 					int idb = Integer.parseInt(eliminaBase.getSelectedItem().toString());
 					try {
 						Principal.getCc().getGalaxia().removeBase(idb);
+						actuCombos();
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					eliminaBase.removeItemAt(val);
-					eliminaBase.setSelectedIndex(0);
+					//eliminaBase.removeItemAt(val);
+					//eliminaBase.setSelectedIndex(0);
 				}
 			}
 		});
@@ -405,15 +389,18 @@ public class GalMod extends JPanel{
 				String coste = cost.getText();
 				if (val1 > 0 && val2 > 0 && !cap.equals("") && !cost.equals("")){
 					try {
-						Principal.getGc().createAdjacency(Integer.parseInt(bo), Integer.parseInt(bd), Integer.parseInt(capa), Integer.parseInt(coste));
+						if(Principal.getGc().existsAdjacency(Integer.parseInt(bo), Integer.parseInt(bd), Principal.getCc().getCapita().getId())){
+							JOptionPane.showMessageDialog(Principal.getWindow(), "Ya existe esta adyacencia.");
+						}
+						else {
+							Principal.getGc().createAdjacency(Integer.parseInt(bo), Integer.parseInt(bd), Integer.parseInt(capa), Integer.parseInt(coste));							
+						}
 						actuCombos();
 						cap.setText("");
 						cost.setText("");
 					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -432,18 +419,33 @@ public class GalMod extends JPanel{
 				System.out.println("BO: " + bo + " BD: " + bd + "V1: " + v1 + " V2: " + v2);
 				if (v1 > 0 && v2 > 0) {
 					try {
-						//AIXO NO TIRA EXCEPCIO QUAN 
+						
 						Principal.getGc().deleteAdjacencia(Integer.parseInt(bo), Integer.parseInt(bd));
 					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
 						System.out.println("No existe adyacencia");
 						e1.printStackTrace();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					actuCombos();
 				}
+			}
+		});
+		
+		btnAfegir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nom = nomBase.getText();
+				if (!nom.equals("")){
+					try {
+						Principal.getGc().addBase(nom);
+						actuCombos();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					} 
+				}
+				else JOptionPane.showMessageDialog(Principal.getWindow(), "La base debe tener un nombre.");
+				nomBase.setText("");
 			}
 		});
 		
@@ -473,7 +475,6 @@ public class GalMod extends JPanel{
 		try {
 			bases = Principal.getGc().arrayBaseOrd();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -481,7 +482,6 @@ public class GalMod extends JPanel{
 		for (String s: bases){
 			System.out.println("ID BASE : "+ s);
 		}
-		
 		
 		eliminaBase.removeAllItems();;
 		creaBO.removeAllItems();

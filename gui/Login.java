@@ -149,14 +149,13 @@ public class Login extends JPanelBg{
                 	//entrem al if només quan s'hagi seleccionat l'item, para evitar doble reaccion del listener
                 	//Si val = 0 Entrem com a capita, per tant fiquem a visible el camp de password;
 	                int val = box.getSelectedIndex();
-	                user.setText("");
 	                if (val == 0){
 	                	lblNewLabel.setText("Usuario");
 	                	user.setVisible(true);
+		                user.setText("");
 	                	rebel.setVisible(false);
 	                	lblContrasea.setVisible(true);
 	                	pass.setVisible(true);
-	                	rebel.setVisible(true);
 	                	pass.setText("");
 	                }
 	                else {

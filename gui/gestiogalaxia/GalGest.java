@@ -246,6 +246,7 @@ public class GalGest extends JPanelBg {
 	    				LlegirEscriureNatural len = new LlegirEscriureNatural(Principal.getCc());
 						try {
 							len.llegirGalaxia(ig.getText(),Principal.getCc().getCapita().getId());
+							System.out.println("IMPORTAR");
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(Principal.getWindow(),"Ha ocurrido un error mientras se importaba la galaxia" );
@@ -257,6 +258,7 @@ public class GalGest extends JPanelBg {
 	    				LlegirEscriureNatural len2 = new LlegirEscriureNatural(Principal.getCc());
 						try {
 							len2.escriureGalaxia(eg.getText(),Principal.getCc().getCapita().getId());
+							System.out.println("EXPORTAR");
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							JOptionPane.showMessageDialog(Principal.getWindow(),"Ha ocurrido un error mientras se exportaba la galaxia" );
