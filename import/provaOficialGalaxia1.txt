@@ -1,0 +1,15 @@
+Nombre bases:6
+Nom base:0,s
+Nom base:1,o
+Nom base:2,p
+Nom base:3,q
+Nom base:4,r
+Nom base:5,t
+Conexio:0,1,3,5.0
+Conexio:0,2,3,5.0
+Conexio:1,2,2,5.0
+Conexio:1,3,3,5.0
+Conexio:2,4,2,5.0
+Conexio:4,5,3,5.0
+Conexio:3,4,4,5.0
+Conexio:3,5,2,5.0

@@ -1,0 +1,62 @@
+Capita:tato3,tato
+Nombre rebels:5
+Nom rebel:1,ab
+Nom rebel:2,cc
+Nom rebel:3,cc
+Nom rebel:4,ee
+Nom rebel:5,es
+Nombre bases:13
+Nom base:0,s
+Nom base:1,d1
+Nom base:2,d2
+Nom base:3,d3
+Nom base:4,d4
+Nom base:5,d5
+Nom base:6,t1
+Nom base:7,t2
+Nom base:8,t3
+Nom base:9,t4
+Nom base:10,t5
+Nom base:11,t6
+Nom base:12,t
+Conexio:0,1,10,5.0
+Conexio:0,2,10,5.0
+Conexio:0,3,10,5.0
+Conexio:0,4,10,5.0
+Conexio:0,5,10,5.0
+Conexio:6,12,2,5.0
+Conexio:7,12,2,5.0
+Conexio:8,12,2,5.0
+Conexio:9,12,2,5.0
+Conexio:10,12,2,5.0
+Conexio:11,12,2,5.0
+Conexio:1,6,1,5.0
+Conexio:1,7,1,5.0
+Conexio:1,8,1,5.0
+Conexio:1,9,1,5.0
+Conexio:1,10,1,5.0
+Conexio:1,11,1,5.0
+Conexio:2,6,1,5.0
+Conexio:2,7,1,5.0
+Conexio:2,8,1,5.0
+Conexio:2,9,1,5.0
+Conexio:2,10,1,5.0
+Conexio:2,11,1,5.0
+Conexio:3,6,1,5.0
+Conexio:3,7,1,5.0
+Conexio:3,8,1,5.0
+Conexio:3,9,1,5.0
+Conexio:3,10,1,5.0
+Conexio:3,11,1,5.0
+Conexio:4,6,1,5.0
+Conexio:4,7,1,5.0
+Conexio:4,8,1,5.0
+Conexio:4,9,1,5.0
+Conexio:4,10,1,5.0
+Conexio:4,11,1,5.0
+Conexio:5,6,1,5.0
+Conexio:5,7,1,5.0
+Conexio:5,8,1,5.0
+Conexio:5,9,1,5.0
+Conexio:5,10,1,5.0
+Conexio:5,11,1,5.0

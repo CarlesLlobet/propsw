@@ -1,0 +1,30 @@
+Nombre bases:10
+Nom base:0,s
+Nom base:1,a
+Nom base:2,b
+Nom base:3,c
+Nom base:4,d
+Nom base:5,o
+Nom base:6,p
+Nom base:7,q
+Nom base:8,r
+Nom base:9,t
+Conexio:0,1,1,5.0
+Conexio:0,2,1,5.0
+Conexio:0,3,1,5.0
+Conexio:0,4,1,5.0
+Conexio:1,5,1,5.0
+Conexio:1,6,1,5.0
+Conexio:2,9,1,5.0
+Conexio:3,9,1,5.0
+Conexio:4,9,1,5.0
+Conexio:1,9,1,5.0
+Conexio:0,5,1,5.0
+Conexio:0,6,1,5.0
+Conexio:5,6,1,5.0
+Conexio:5,7,1,5.0
+Conexio:6,8,1,5.0
+Conexio:8,9,1,5.0
+Conexio:7,8,1,5.0
+Conexio:7,9,1,5.0
+

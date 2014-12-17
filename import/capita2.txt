@@ -1,0 +1,46 @@
+Capita:tato2,tato
+Nombre rebels:5
+Nom rebel:1,ab
+Nom rebel:2,cc
+Nom rebel:3,cc
+Nom rebel:4,ee
+Nom rebel:5,es
+Nombre bases:11
+Nom base:0,s
+Nom base:1,d1
+Nom base:2,d2
+Nom base:3,d3
+Nom base:4,t1
+Nom base:5,t2
+Nom base:6,t3
+Nom base:7,t4
+Nom base:8,t5
+Nom base:9,t6
+Nom base:10,t
+Conexio:0,1,5,5.0
+Conexio:0,2,5,5.0
+Conexio:0,3,5,5.0
+Conexio:4,10,2,5.0
+Conexio:5,10,2,5.0
+Conexio:6,10,2,5.0
+Conexio:7,10,2,5.0
+Conexio:8,10,2,5.0
+Conexio:9,10,2,5.0
+Conexio:1,4,1,5.0
+Conexio:1,5,1,5.0
+Conexio:1,6,1,5.0
+Conexio:1,7,1,5.0
+Conexio:1,8,1,5.0
+Conexio:1,9,1,5.0
+Conexio:2,4,1,5.0
+Conexio:2,5,1,5.0
+Conexio:2,6,1,5.0
+Conexio:2,7,1,5.0
+Conexio:2,8,1,5.0
+Conexio:2,9,1,5.0
+Conexio:3,4,1,5.0
+Conexio:3,5,1,5.0
+Conexio:3,6,1,5.0
+Conexio:3,7,1,5.0
+Conexio:3,8,1,5.0
+Conexio:3,9,1,5.0
