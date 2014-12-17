@@ -21,8 +21,11 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import propsw.LlegirEscriureNatural;
 
 public class GalGest extends JPanelBg {
 	private JComboBox<String> box;
@@ -234,6 +237,36 @@ public class GalGest extends JPanelBg {
                 }
             }
         });
+        
+        impExp.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent arg0) {
+	    		int val = box.getSelectedIndex();
+	    		switch(val){
+	    			case 2: //importar
+	    				LlegirEscriureNatural len = new LlegirEscriureNatural(Principal.getCc());
+						try {
+							len.llegirGalaxia(ig.getText(),Principal.getCc().getCapita().getId());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(Principal.getWindow(),"Ha ocurrido un error mientras se importaba la galaxia" );
+							e1.printStackTrace();
+						}
+						ig.reset();
+	    				break;
+	    			case 3: //exportar
+	    				LlegirEscriureNatural len2 = new LlegirEscriureNatural(Principal.getCc());
+						try {
+							len2.escriureGalaxia(eg.getText(),Principal.getCc().getCapita().getId());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(Principal.getWindow(),"Ha ocurrido un error mientras se exportaba la galaxia" );
+							e1.printStackTrace();
+						}
+						eg.reset();
+	    				break;
+	    		}
+	    	}
+		});
 	}
 	
 	public void config(){
