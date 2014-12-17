@@ -209,9 +209,13 @@ public class GestioCapitans extends JPanelBg {
 						}
         				break;
         			case 5: //exportar
-        				
-        				
-        				
+        				LlegirEscriureNatural len2 = new LlegirEscriureNatural(Principal.getCc());
+						try {
+							len2.escriureCapita("provaOutCapi", Principal.getCc().getCapita().getId());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}           //es crea /export/provaOutCapi.txt
         				break;	
         			default:
         				System.out.println("huehue");
