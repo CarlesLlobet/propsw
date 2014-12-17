@@ -10,10 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class ImpExp extends JPanel{
 	private JTextPane txtpnRuta;
-	private JButton btnExaminar;
+	private JLabel lblNewLabel;
 	
 	public ImpExp() {
 				//Amb això fiquem el fondo del panel transparent.
@@ -28,34 +30,32 @@ public class ImpExp extends JPanel{
 				Component verticalStrut_1 = Box.createVerticalStrut(20);
 				verticalBox.add(verticalStrut_1);
 				
+				Box horizontalBox_1 = Box.createHorizontalBox();
+				verticalBox.add(horizontalBox_1);
+				
+				lblNewLabel = new JLabel("New label");
+				lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+				horizontalBox_1.add(lblNewLabel);
+				
 				Box horizontalBox = Box.createHorizontalBox();
 				verticalBox.add(horizontalBox);
 				
-				Component horizontalStrut = Box.createHorizontalStrut(20);
-				horizontalStrut.setMaximumSize(new Dimension(20, 20));
-				horizontalBox.add(horizontalStrut);
-				
 				txtpnRuta = new JTextPane();
-				txtpnRuta.setEditable(false);
 				txtpnRuta.setBorder(new LineBorder(new Color(0, 0, 0)));
-				txtpnRuta.setMaximumSize(new Dimension(500, 20));
+				txtpnRuta.setMaximumSize(new Dimension(300, 20));
 				horizontalBox.add(txtpnRuta);
 				txtpnRuta.setText("Ruta");
-				
-				Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-				horizontalStrut_1.setMaximumSize(new Dimension(20, 20));
-				horizontalBox.add(horizontalStrut_1);
-				
-				btnExaminar = new JButton("Examinar");
-				btnExaminar.setAlignmentX(Component.CENTER_ALIGNMENT);
-				horizontalBox.add(btnExaminar);
 				
 				Component verticalStrut = Box.createVerticalStrut(20);
 				verticalBox.add(verticalStrut);
 	}
 	
-	public String getRuta(){
+	public String getText(){
 			return txtpnRuta.getText();
+	}
+	
+	public void setText(String s){
+		lblNewLabel.setText(s);
 	}
 	
 	public void reset(){

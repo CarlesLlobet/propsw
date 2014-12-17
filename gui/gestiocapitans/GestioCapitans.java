@@ -8,13 +8,10 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javax.swing.Box;
@@ -24,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import propsw.LlegirEscriureNatural;
 
 public class GestioCapitans extends JPanelBg {
 	private JComboBox<String> box;
@@ -200,8 +199,19 @@ public class GestioCapitans extends JPanelBg {
 						}						
         				break;
         			case 4: //importar
+        		        LlegirEscriureNatural len = new LlegirEscriureNatural(Principal.getCc());
+						try {
+							String ic = len.llegirCapita(ig.getText());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							JOptionPane.showMessageDialog(Principal.getWindow(),"Ha ocurrido un error mientras importaba el capitán" );
+							e1.printStackTrace();
+						}
         				break;
         			case 5: //exportar
+        				
+        				
+        				
         				break;	
         			default:
         				System.out.println("huehue");
@@ -255,6 +265,8 @@ public class GestioCapitans extends JPanelBg {
 	                		boto.setText("Importar");
 	                		ig.reset();
 	                		//Cargamos el panel de importar
+	                		String s = "Nom de l'arxiu (sense extensió), situat a la carpeta import.";
+	                		ig.setText(s);
 	                		card.show(panel,"import");
 	                		break;
 	                	case 5: //Marcamos como visible el botón de importar/exportar y le asignamos el texto según su función
@@ -262,6 +274,8 @@ public class GestioCapitans extends JPanelBg {
 	                		boto.setVisible(true);
 	                		boto.setText("Exportar");
 	                		eg.reset();
+	                		String s2 = "Nom de l'arxiu (sense extensió), on s'exportarà el capita.";
+	                		eg.setText(s2);
 	                		//Cargamos el panel de exportar
 	                		card.show(panel,"export");
 	                		break;

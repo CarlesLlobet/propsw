@@ -154,8 +154,17 @@ public class GalGest extends JPanelBg {
         Component horizontalGlue_6 = Box.createHorizontalGlue();
         horizontalBox.add(horizontalGlue_6);
         
+        Box horizontalBox_3 = Box.createHorizontalBox();
+        verticalBox_1.add(horizontalBox_3);
+        
+        Component horizontalGlue_3 = Box.createHorizontalGlue();
+        horizontalBox_3.add(horizontalGlue_3);
+        
         impExp = new JButton("New button");
-        verticalBox_1.add(impExp);
+        horizontalBox_3.add(impExp);
+        
+        Component horizontalGlue_4 = Box.createHorizontalGlue();
+        horizontalBox_3.add(horizontalGlue_4);
         impExp.setVisible(false);
                 
         Component verticalGlue_1 = Box.createVerticalGlue();
@@ -201,6 +210,8 @@ public class GalGest extends JPanelBg {
 	                		impExp.setVisible(true);
 	                		impExp.setText("Importar");
 	                		ig.reset();
+	                		String s = "Nom de l'arxiu (sense extensió), situat a la carpeta import.";
+	                		ig.setText(s);
 	                		//Cargamos el panel de importar
 	                		card.show(panel,"import");
 	                		break;
@@ -209,6 +220,8 @@ public class GalGest extends JPanelBg {
 	                		impExp.setVisible(true);
 	                		impExp.setText("Exportar");
 	                		eg.reset();
+	                		String s2 = "Nom de l'arxiu (sense extensió), on s'exportarà la galaxia.";
+	                		eg.setText(s2);
 	                		//Cargamos el panel de exportar
 	                		card.show(panel,"export");
 	                		break;
