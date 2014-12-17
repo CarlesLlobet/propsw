@@ -116,7 +116,7 @@ public class ConsultaRebel extends JPanel{
 									JOptionPane.showMessageDialog(Principal.getWindow(), "Seleccione un rebelde");
 								}
 							}
-							else{
+							else{//HEM INICIAT SESSIO COM A REBEL
 								ArrayList<Integer> c = Principal.getEc().getCaminsExode(comboBox.getSelectedItem().toString()).get(rebel);
 								if(c!= null){
 									for(Integer i : c){
