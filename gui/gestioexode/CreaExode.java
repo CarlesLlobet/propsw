@@ -287,7 +287,7 @@ public class CreaExode extends JPanel {
 		Crear.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("CREAMOS EXODO");
+
 				creaEx();
 				reset();
 			}
@@ -305,52 +305,33 @@ public class CreaExode extends JPanel {
 		});
 	}
 	
-	/*
-	 * 	
-	 *  private HashMap<String,Integer> rebelsAfegits;
-		private ArrayList<String> rebelsCapita;
-		private Integer idInici;
-		private Integer execucio;
-		
-		private JComboBox<String> baseDesti;
-		private JComboBox<String> addreb;
-		private JComboBox<String> borrarRebelde;
-		private JComboBox<String> iniciEx;
-		private JComboBox<String> ejec;
-	*/
-	
 	//TODO CAL MIRAR BASE DESTI != INICI --> THROWS
 	private String creaEx(){
-		System.out.println("PRINTAMOS LOS REBELDES QUE PARTICIPAN");
 		String idexode = null;
 		if (idInici != null){
 			for (Map.Entry<String, Integer> entry : rebelsAfegits.entrySet()) {
-			    System.out.println("Rebelde: " + entry.getKey() + " Base: " + String.valueOf(entry.getValue()));
 			}
-			System.out.println("ID inicio: " + idInici.toString());
-			System.out.println("Ejecución: " + execucio.toString());
+
 			try {
 				idexode = Principal.getCc().crearExode(idInici);
 				for (Map.Entry<String, Integer> entry : rebelsAfegits.entrySet()) {
 					Principal.getCc().getGalaxia().getExode(idexode).afegirRebel(entry.getKey(), entry.getValue());
 					Principal.getCc().getGalaxia().getExode(idexode).setIdBaseInici(idInici);			
 				}
-				System.out.println("Se ha creado un exode con id: " + idexode + "y base inicio: " + idInici);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		else {
-			System.out.println("ID INICI NULL");
 		}
 		return idexode;
 	}
 	
 	private void ejecutaEx(String id){
 		try {
-			Principal.getEc().execucio(id, execucio);
-			System.out.println("Exodo ejecutado con ejecucion: "+ execucio);
+			if (!Principal.getEc().isExodeInvalid(id)) Principal.getEc().execucio(id, execucio);
+			else JOptionPane.showMessageDialog(Principal.getWindow(), "El éxodo es inválido,se ha creado pero debe revisar los datos.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -359,7 +340,6 @@ public class CreaExode extends JPanel {
 	
 	/*Aquesta funcio inicialitza tots els valors dels combobox i prepara les estructures de dades auxiliars*/
 	public void reset(){
-		System.out.println("REEEEEEEEEEEEEEEEEEEEEEEEEEEESET");
 		//HashMap al que s'afegiran els rebels assignats a l'exode
 		rebelsAfegits = new HashMap<String,Integer>();
 		//Array amb tots els rebels del capità

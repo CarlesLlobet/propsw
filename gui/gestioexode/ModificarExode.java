@@ -298,14 +298,14 @@ public class ModificarExode extends JPanel {
 		horizontalBox_7.add(lblRebelde);
 		
 		rebelde = new JComboBox<String>();
+		rebelde.setMaximumSize(new Dimension(200, 20));
 		rebelde.setAlignmentX(Component.LEFT_ALIGNMENT);
 		rebelde.setAlignmentY(Component.TOP_ALIGNMENT);
 		horizontalBox_7.add(rebelde);
-		rebelde.setMaximumSize(new Dimension(80, 23));
 		
 		Component horizontalStrut_11 = Box.createHorizontalStrut(20);
 		horizontalStrut_11.setMaximumSize(new Dimension(20, 20));
-		horizontalBox_6.add(horizontalStrut_11);
+		horizontalBox_7.add(horizontalStrut_11);
 		
 		Box verticalBox_3 = Box.createVerticalBox();
 		verticalBox_3.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -318,6 +318,7 @@ public class ModificarExode extends JPanel {
 		verticalBox_3.add(lblCaminoAsignado);
 		
 		list = new JList<String>();
+		list.setMinimumSize(new Dimension(30, 0));
 		list.setVisible(true);
 		m = new DefaultListModel<String>();
 		list.setModel(m);
@@ -325,8 +326,8 @@ public class ModificarExode extends JPanel {
 		verticalBox_3.add(list);
 		
 		Component horizontalStrut_12 = Box.createHorizontalStrut(20);
-		horizontalStrut_12.setMaximumSize(new Dimension(20, 20));
 		horizontalBox_6.add(horizontalStrut_12);
+		horizontalStrut_12.setMaximumSize(new Dimension(20, 20));
 		
 		Box verticalBox_5 = Box.createVerticalBox();
 		verticalBox_5.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -340,8 +341,8 @@ public class ModificarExode extends JPanel {
 		horizontalBox_8.add(lblAadirBase);
 		
 		addbasecamino = new JComboBox<String>();
+		addbasecamino.setMaximumSize(new Dimension(200, 20));
 		horizontalBox_8.add(addbasecamino);
-		addbasecamino.setMaximumSize(new Dimension(50, 23));
 		
 		Component horizontalStrut_13 = Box.createHorizontalStrut(20);
 		horizontalStrut_13.setMaximumSize(new Dimension(20, 20));
@@ -487,6 +488,12 @@ public class ModificarExode extends JPanel {
 			                		    }
 			                	  }
 		                	  }
+		                	  else { //aquest rebel no te cap cami, per tant es poden afegir totes les bases
+		                		  System.out.println("NO TIENE BASES");
+		                		  for(String x : s ){
+		                			  addbasecamino.addItem(x);
+		                		  }
+		                	  }
 	                	}
 	                	else alertRebelde();
                 	}
@@ -563,7 +570,8 @@ public class ModificarExode extends JPanel {
 				if(idEx != null){
 					if (rebelde.getSelectedIndex() > 0){
 						int index = list.getSelectedIndex();
-						if (index >= 0){
+						if (index >= 0 || m.size()==0){
+							if (m.size() == 0) index = 0;
 							String idb = addbasecamino.getSelectedItem().toString();
 							m.add(index,idb);
 							addbasecamino.removeItem(idb);							
